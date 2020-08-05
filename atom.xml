@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-05T14:50:20.623Z</updated>
+    <updated>2020-08-05T14:55:19.857Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -32,7 +32,7 @@
 <block></block>标签很好用，很多for循环都写在block标签内<br>
 其余的都和vue差不多，用了两个vue没有的声明周期onload和onshow，好像是微信小程序的生命周期。</p>
 <p>一开始一直报错没有appid，登陆了微信的开发者平台复制了appid，结果还是不行，检查发现是复制了公众号的appid，又赶紧注册了小程序，网上例子的后端接口好像不开放，有必要自己写一个，顺便复习下nodejs和koa2，或者express也行。</p>
-<p>总体而言，第一天的uniapp体验还不错，主要是语法基本都是vue的，难点在于各个组件，属性一大推，而且感觉说明不是很好，看起来很累。</p>
+<p>总体而言，第一天的uniapp体验还不错，主要是语法基本都是vue的，难点在于各个组件，属性一大推，而且感觉说明不是很好，阅读起来很累。</p>
 ]]></content>
     </entry>
     <entry>
