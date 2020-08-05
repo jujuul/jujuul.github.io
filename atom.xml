@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-05T07:17:34.827Z</updated>
+    <updated>2020-08-05T14:44:07.939Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,31 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Uniapp学习记录day1]]></title>
+        <id>https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/</id>
+        <link href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">
+        </link>
+        <updated>2020-08-05T06:31:51.000Z</updated>
+        <content type="html"><![CDATA[<p>uniapp生成小程序遇到的坑<br>
+1.小程序内不能用id选择器<br>
+2.小程序的声明周期函数不能用在子组件里，要用在父组件<br>
+3.小程序没有window对象,没有document对象等等……<br>
+4.uniapp没有vue原生的router路由，而是使用uni路由，较VUE更为方便</p>
+<p>学到的知识：<br>
+在pages.json中可以对全局进行配置，有关页面的路径、窗口样式、导航栏、底部tabbar等都在这里。<br>
+全局配置与单页配置要自己取舍。<br>
+每个对象内的最后一项都没有<strong>逗号</strong><br>
+像素单位是upx，可以设置upx与px的比值来进行转换，不过我看网上都推荐使用 rpx。<br>
+显示文字使用<text></text>标签<br>
+显示图片使用<image></image>标签<br>
+<view></view>用来取代div标签<br>
+<block></block>标签很好用，很多for循环都写在block标签内<br>
+其余的都和vue差不多，用了两个vue没有的声明周期onload和onshow，好像是微信小程序的生命周期。</p>
+<p>一开始一直报错没有appid，登陆了微信的开发者平台复制了appid，结果还是不行，检查发现是复制了公众号的appid，又赶紧注册了小程序，网上例子的后端接口好像不开放，有必要自己写一个，顺便复习下nodejs和koa2，或者express也行。</p>
+<p>总体而言，第一天的uniapp体验还不错，主要是语法基本都是vue的，难点在于各个组件，属性一大推，而且感觉说明不是很好，看起来很累。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[学习目标]]></title>
         <id>https://jujuul.github.io/post/xue-xi-mu-biao/</id>
