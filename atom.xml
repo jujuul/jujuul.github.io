@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-05T14:56:14.563Z</updated>
+    <updated>2020-08-05T16:06:53.312Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -21,10 +21,11 @@
 2.小程序的声明周期函数不能用在子组件里，要用在父组件<br>
 3.小程序没有window对象,没有document对象等等……<br>
 4.uniapp没有vue原生的router路由，而是使用uni路由，较VUE更为方便</p>
+<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1596639903545.PNG" alt="" loading="lazy"></figure>
 <p>学到的知识：<br>
 在pages.json中可以对全局进行配置，有关页面的路径、窗口样式、导航栏、底部tabbar等都在这里。<br>
 全局配置与单页配置要自己取舍。<br>
-每个对象内的最后一项都没有<strong>逗号</strong><br>
+每个对象内的最后一项都没有逗号<br>
 像素单位是upx，可以设置upx与px的比值来进行转换，不过我看网上都推荐使用 rpx。<br>
 显示文字使用<text></text>标签<br>
 显示图片使用<image></image>标签<br>
