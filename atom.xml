@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-05T14:44:07.939Z</updated>
+    <updated>2020-08-05T14:50:20.623Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -49,7 +49,7 @@ Taro<br>
 umijs<br>
 Hooks<br>
 Serverless<br>
-可视化	<br>
+可视化<br>
 SSR<br>
 Nextjs<br>
 后端  go	nodejs	java</p>
