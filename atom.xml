@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-05T16:09:07.899Z</updated>
+    <updated>2020-08-06T10:20:05.190Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Uniapp学习记录day2]]></title>
+        <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/</id>
+        <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
+        </link>
+        <updated>2020-08-06T06:30:13.000Z</updated>
+        <content type="html"><![CDATA[<p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
+<p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
+这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Uniapp学习记录day1]]></title>
         <id>https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/</id>
