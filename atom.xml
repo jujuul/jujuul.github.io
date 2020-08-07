@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-07T06:37:50.768Z</updated>
+    <updated>2020-08-07T08:14:02.573Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[收藏的一些有用的网站]]></title>
+        <id>https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/</id>
+        <link href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
+        </link>
+        <updated>2020-08-07T08:13:25.000Z</updated>
+        <content type="html"><![CDATA[<p>学习类：<br>
+B站：https://www.bilibili.com/<br>
+没错，就是B站，基本上我和同学在网上学习的编程知识很大比例来自B站，有很多教育机构或者个人上传的编程有关的视频。<br>
+掘金：https://juejin.im/<br>
+知乎：https://www.zhihu.com/<br>
+思否：https://segmentfault.com/<br>
+简书：https://www.jianshu.com/<br>
+CSDN：https://www.csdn.net/<br>
+博客园：https://www.cnblogs.com/<br>
+除了知乎、简书，剩下的都是开发者社区了，也基本是我所知的最大的了，这其中CSDN问题最大，页面又杂又乱，还有广告，而且有很多很古老的文章也都还被频繁检索出来，上次搜个数据，打开了个03年的帖子，发文章也是，明明写了原创，结果在第一行就是原文地址，信息太杂，上次有个报错，在CSDN的一篇文章里找解决方法，顺着原文地址找了3层，跑到博客园去了。还有就是知乎的网页端也过于简陋了吧，浏览文章的页面我毕设加点东西都快和它差不多了，体验很差，思否的手机端也是特不好用，登录都登录不了，是不是已经不维护了？简书最大的问题就是没多久就维护一次，而且是全站的，经常搜到信息点进去显示网站维护。博客园就是界面太老旧了，最近可能进行了UI升级？多少比之前好看些了。<br>
+看云：https://www.kancloud.cn/explore<br>
+以前学习TP5的时候，就实在看云看的文档，还有很多其他的文档，不过还是以PHP为主。<br>
+PHP中文网：https://www.php.cn/<br>
+也是以前学PHP的时候收藏的网站，但我记得网站页面比较简陋，而且站长好像说过不搞了，也不知道现在这个是以前的在搞还是换人了，也没用过了。<br>
+软件类：<br>
+3D溜溜网：https://zixue.3d66.com/<br>
+虽然是个自学网站，但是上面的视频我都没看过，但是这个网站最大的优点是所有它这里开设的课程的破解版软件它基本都有，而且很新，是个很不错的资源网站。<br>
+MSDN：http://msdn.itellyou.cn/<br>
+可以说是windows全家桶网站，windows的全部产品这里几乎都有，像是Access，Office，Visual Basic,还有不同版本的windows系统，还有一大推我听都没听过的。<br>
+设计类：<br>
+中国色：http://zhongguose.com/#shenyanhong<br>
+选修的PPT课老师推荐的网站，是一个展示配色的网站，基本都是中式配色，像是什么绀紫、靛青、景泰蓝这种名字的颜色。<br>
+站酷：https://www.zcool.com.cn/<br>
+各式各样的设计，涵盖了设计的全部种类，应该是国内最大的设计网站了。<br>
+removebg：https://www.remove.bg/zh<br>
+可以消除图片中的背景，比我自己用PS抠的好N倍，直接可以开淘宝店抠图的水平，不过我之前用没有中文版，而且也不需要登录，这中文版是要收费了吗？<br>
+Behance：https://www.behance.net/<br>
+很好的一个设计网站，好像是adobe下的，有很多有创意的作品。<br>
+游戏类：https://ygodl.com/<br>
+决斗链接中文网，是玩家自己组建的，最近随着水哥在B站的游戏王视频带来的热度，决斗链接中文网也是迎来了一大批新人，作为“老”用户也是颇感欣慰。<br>
+动漫类：<br>
+zzzfun：http://www.zzzfun.com/<br>
+D站倒了的今天，zzz还算一方净土。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[一些前端UI框架]]></title>
         <id>https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/</id>
@@ -75,6 +116,9 @@ XI、Pure.css<br>
         <updated>2020-08-07T02:04:59.000Z</updated>
         <content type="html"><![CDATA[<p>今天又是学习的一天！！！</p>
 <p>这页面没数据实在是不行啊，果然后端也要写啊</p>
+<p>切记切记，安装mongoDB一定要记得，把那个✅给去掉，太坑了！！！！<br>
+<img src="https://jujuul.github.io//post-images/1596782694203.png" alt="" loading="lazy"><br>
+安装了2个多小时，最后程序还崩溃了。</p>
 ]]></content>
     </entry>
     <entry>
