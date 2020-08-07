@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596788032044">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596811070044">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -53,7 +53,7 @@
             <p class="article-meta">
               2020-08-07
               
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
+                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
                   uniapp
                 </a>
               
@@ -67,6 +67,65 @@
 <p>切记切记，安装mongoDB一定要记得，把那个✅给去掉，太坑了！！！！<br>
 <img src="https://jujuul.github.io//post-images/1596782694203.png" alt="" loading="lazy"><br>
 安装了2个多小时，最后程序还崩溃了。</p>
+<p>哎，阿里云的MongoDB贵的有些离谱了，只能在自己服务器上搭一个了。</p>
+<p>1.先进入阿里的云服务器，然后下载安装nodejs，再远程连接服务器，把本地的mongdb安装文件传给服务器(怕服务器下载太慢)，然后等待安装，切记不要勾选安装compass</p>
+<p>2.安装好后配置环境变量，找了网上几个教程，好像版本都对不上，有要创建data文件夹的有要创建log文件夹的，但是我发现server文件夹下面有bin、log目录，把bin目录的地址放入环境变量，cmd中输入mongo还是不行，关闭后重新打开就能显示mongodb版本了。</p>
+<p>3.这配置运行环境的坑可太多了，大概记一下在放几个链接吧。<br>
+服务中创建的MongoDB server 无法启动、关闭、重启<br>
+解决办法：https://blog.csdn.net/yqwang75457/article/details/84949915<br>
+mongodb设置用户名密码权限：<br>
+https://blog.csdn.net/qq_37925422/article/details/80445591<br>
+https://www.mongodb.org.cn/manual/104.html</p>
+<p>淦，感觉出大问题了，先把服务器重置了吧。<br>
+先连本地连接数据库<br>
+安装一个mongoose：cnpm i mongoose --save<br>
+然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。<br>
+const Schema = mongoose.Schema;<br>
+// mongodb里没有表,叫做文档或者集合<br>
+// 每一个Schema对应mongodb中的一个集合<br>
+// 实例化数据模板:注册功能字段<br>
+const NameSchema = new Schema({<br>
+// 注册对象模型<br>
+name: {<br>
+type: String,<br>
+require: true,<br>
+},<br>
+password: {<br>
+type: String,<br>
+require: true,<br>
+},<br>
+openid: {<br>
+type: String,<br>
+require: true,<br>
+},<br>
+});<br>
+module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
+这个没有代码块的功能也是很烦。<br>
+教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去<br>
+router.post(&quot;/register&quot;, async (ctx) =&gt; {<br>
+console.log(&quot;这是注册&quot;);<br>
+// console.log(ctx.request.body)<br>
+// console.log(ctx.request.body.name)<br>
+let { name, password, openid } = ctx.request.body;<br>
+const user_info = new userInfo({<br>
+name: name,<br>
+password: password,<br>
+openid: openid,<br>
+});<br>
+// 存储到数据库<br>
+await user_info<br>
+.save()<br>
+.then((res) =&gt; {<br>
+console.log(&quot;success&quot;);<br>
+})<br>
+.catch((e) =&gt; {<br>
+console.log(e);<br>
+});<br>
+});<br>
+这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
+<p>服务器上的终于搞定了，再把数据库的连接从本地切换为服务器。<br>
+☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈<br>
+<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"></p>
 
             </div>
           </article>
@@ -90,7 +149,7 @@
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596788032044" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596811070044" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -170,15 +229,15 @@
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
           Gridea
         </a>
       
