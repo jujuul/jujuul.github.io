@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>一些前端UI框架 | Mark</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596782248294">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>一些前端UI框架</h1>
+            <p class="article-meta">
+              2020-08-07
+              
+            </p>
+            
+            <div class="post-content">
+              <p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
+一、WeUI<br>
+官网地址：https://weui.io/<br>
+github：https://github.com/Tencent/weui<br>
+文档地址1：https://github.com/Tencent/weui.js/tree/master/docs<br>
+文档地址2：http://old.jqweui.com/components<br>
+官网的介绍说是同微信原生视觉体验一致的样式库，然后官网地址里没有文档？还是说我没找到?然后github里好像有一个文档，但是不是很方便，还有个网上找的，不过名字是jQuery WeUI，还带着版本号，好像是别人做的，不过里面有WeUI基础组件的文档。<br>
+二、Mint UI<br>
+官网地址：https://mint-ui.github.io/#!/zh-cn<br>
+github：https://github.com/ElemeFE/mint-ui<br>
+饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示。<br>
+三、iView UI<br>
+官网地址：https://www.iviewui.com/<br>
+github：https://github.com/view-design/ViewUI<br>
+终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
+四、element UI<br>
+官网地址：https://element.eleme.cn/#/zh-CN<br>
+github：https://github.com/ElemeFE/element<br>
+也是饿了么团队出品的，也是我唯一一个大量使用过的，在国内可能也是github上星最多的吧？不过最近知乎上看到说是更新频率下降了，也不知道什么原因。<br>
+五、layUI<br>
+官网地址：https://www.layui.com/<br>
+github：https://github.com/sentsin/layui/<br>
+这个是我最早听说的UI框架了，那时我还是个懵懵懂懂的少年，也不知道什么前后端，为了完成老师的作业，网上找了个模板，就找了个layUI的，那时候也不会js，拿着这模板怎么也用不好，最后把大部分功能都删了，才终于让网页跑起来，都是泪啊。<br>
+搜了一下好像没找到公司，然后知乎上是评价作者，那应该是个人开发的，膜拜大佬。<br>
+六、Bootstrap<br>
+官网地址：https://www.bootcss.com/<br>
+github：https://github.com/twbs<br>
+文档地址v4：https://v4.bootcss.com/docs/getting-started/introduction/<br>
+文档地址v3：https://v3.bootcss.com/css/<br>
+也是大名鼎鼎的UI框架了，Twitter开发的，我是同时接触的layUI和Bootstrap，也是因为网上基本就这两个的模板。有v3和v4两个版本的文档，v4本地化还不完全，这两天在B站和youtube上看到了v5版的教学了。忘了在哪里好像看到过bootstrap-vue，npm上显示周下载量有36W，上次更新是9天前，更新频率也很高，有时间要用下试试。<br>
+七、vant<br>
+官网地址：https://youzan.github.io/vant/#/zh-CN/<br>
+github：https://github.com/youzan/vant<br>
+有赞出品，移动端框架，文档和示例都很不错，而且涵盖的组件类型也很多，前几天的demo中用过，sku这个组件稍显复杂，也用了一下新了解的骨架屏，总体体验很不错。<br>
+八、flutter<br>
+官网地址：https://flutterchina.club/<br>
+github：https://github.com/flutter/flutter<br>
+有中文网，是谷歌的移动端UI框架，听说过，不过还没学习使用，文档还可以，不过好像图示有点少？全是文字看着头大。<br>
+九、Cube-UI<br>
+官网：https://didi.github.io/cube-ui/#/zh-CN<br>
+github：https://github.com/didi/cube-ui<br>
+听说是滴滴团队开发的，是个移动端的框架。<br>
+十、at-ui<br>
+官网：https://at-ui.github.io/at-ui/#/zh<br>
+github：https://github.com/at-ui/at-ui<br>
+阿里的，不过听说已经不在维护了，可惜我还没用过。<br>
+XI、Pure.css<br>
+官网：https://www.purecss.cn/<br>
+有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
+                <h3 class="post-title">
+                  Uniapp学习记录day3
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596782248294" class="no-responsive avatar">
+    <div class="text-muted">温故而知新</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">一些前端UI框架</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">Uniapp学习记录day2</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">Uniapp学习记录day1</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/xue-xi-mu-biao/">学习目标</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/hello-gridea/">Hello Gridea</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+          uniapp
+        </a>
+      
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
+          前端
+        </a>
+      
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge success">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

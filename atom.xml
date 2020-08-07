@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-07T02:08:19.509Z</updated>
+    <updated>2020-08-07T06:37:31.598Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -11,12 +11,70 @@
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
     <entry>
+        <title type="html"><![CDATA[一些前端UI框架]]></title>
+        <id>https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/</id>
+        <link href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
+        </link>
+        <updated>2020-08-07T04:58:47.000Z</updated>
+        <content type="html"><![CDATA[<p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
+一、WeUI<br>
+官网地址：https://weui.io/<br>
+github：https://github.com/Tencent/weui<br>
+文档地址1：https://github.com/Tencent/weui.js/tree/master/docs<br>
+文档地址2：http://old.jqweui.com/components<br>
+官网的介绍说是同微信原生视觉体验一致的样式库，然后官网地址里没有文档？还是说我没找到?然后github里好像有一个文档，但是不是很方便，还有个网上找的，不过名字是jQuery WeUI，还带着版本号，好像是别人做的，不过里面有WeUI基础组件的文档。<br>
+二、Mint UI<br>
+官网地址：https://mint-ui.github.io/#!/zh-cn<br>
+github：https://github.com/ElemeFE/mint-ui<br>
+饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示。<br>
+三、iView UI<br>
+官网地址：https://www.iviewui.com/<br>
+github：https://github.com/view-design/ViewUI<br>
+终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
+四、element UI<br>
+官网地址：https://element.eleme.cn/#/zh-CN<br>
+github：https://github.com/ElemeFE/element<br>
+也是饿了么团队出品的，也是我唯一一个大量使用过的，在国内可能也是github上星最多的吧？不过最近知乎上看到说是更新频率下降了，也不知道什么原因。<br>
+五、layUI<br>
+官网地址：https://www.layui.com/<br>
+github：https://github.com/sentsin/layui/<br>
+这个是我最早听说的UI框架了，那时我还是个懵懵懂懂的少年，也不知道什么前后端，为了完成老师的作业，网上找了个模板，就找了个layUI的，那时候也不会js，拿着这模板怎么也用不好，最后把大部分功能都删了，才终于让网页跑起来，都是泪啊。<br>
+搜了一下好像没找到公司，然后知乎上是评价作者，那应该是个人开发的，膜拜大佬。<br>
+六、Bootstrap<br>
+官网地址：https://www.bootcss.com/<br>
+github：https://github.com/twbs<br>
+文档地址v4：https://v4.bootcss.com/docs/getting-started/introduction/<br>
+文档地址v3：https://v3.bootcss.com/css/<br>
+也是大名鼎鼎的UI框架了，Twitter开发的，我是同时接触的layUI和Bootstrap，也是因为网上基本就这两个的模板。有v3和v4两个版本的文档，v4本地化还不完全，这两天在B站和youtube上看到了v5版的教学了。忘了在哪里好像看到过bootstrap-vue，npm上显示周下载量有36W，上次更新是9天前，更新频率也很高，有时间要用下试试。<br>
+七、vant<br>
+官网地址：https://youzan.github.io/vant/#/zh-CN/<br>
+github：https://github.com/youzan/vant<br>
+有赞出品，移动端框架，文档和示例都很不错，而且涵盖的组件类型也很多，前几天的demo中用过，sku这个组件稍显复杂，也用了一下新了解的骨架屏，总体体验很不错。<br>
+八、flutter<br>
+官网地址：https://flutterchina.club/<br>
+github：https://github.com/flutter/flutter<br>
+有中文网，是谷歌的移动端UI框架，听说过，不过还没学习使用，文档还可以，不过好像图示有点少？全是文字看着头大。<br>
+九、Cube-UI<br>
+官网：https://didi.github.io/cube-ui/#/zh-CN<br>
+github：https://github.com/didi/cube-ui<br>
+听说是滴滴团队开发的，是个移动端的框架。<br>
+十、at-ui<br>
+官网：https://at-ui.github.io/at-ui/#/zh<br>
+github：https://github.com/at-ui/at-ui<br>
+阿里的，不过听说已经不在维护了，可惜我还没用过。<br>
+XI、Pure.css<br>
+官网：https://www.purecss.cn/<br>
+有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Uniapp学习记录day3]]></title>
         <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/</id>
         <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
         </link>
         <updated>2020-08-07T02:04:59.000Z</updated>
         <content type="html"><![CDATA[<p>今天又是学习的一天！！！</p>
+<p>这页面没数据实在是不行啊，果然后端也要写啊</p>
 ]]></content>
     </entry>
     <entry>
