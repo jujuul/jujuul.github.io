@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596709626496">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596765996312">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -53,16 +53,32 @@
             <p class="article-meta">
               2020-08-06
               
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
+                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
                   uniapp
                 </a>
               
             </p>
             
+              <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png" alt="Uniapp学习记录day2">
+            
             <div class="post-content">
               <p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
 <p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
 这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
+<p>const query = wx.createSelectorQuery()<br>
+query.select('#boxFixed').boundingClientRect()<br>
+query.selectViewport().scrollOffset()<br>
+query.exec((res) =&gt; {<br>
+this.menutop = res[0].top<br>
+})<br>
+用来返回选中节点的TOP位置</p>
+<p>wx.pageScrollTo({<br>
+scrollTop: this.menutop,<br>
+duration: 300<br>
+})<br>
+用来使页面滚动到选择的位置</p>
+<p>:catchtouchmove=&quot;true&quot;<br>
+专门用来解决小程序的事件穿透</p>
 
             </div>
           </article>
@@ -86,7 +102,7 @@
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596709626496" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596765996312" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -108,6 +124,12 @@
     </div>
     <div class="row">
       <ul>
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a>
+            </li>
+          
         
           
             <li>
@@ -148,7 +170,7 @@
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
           uniapp
         </a>
       
@@ -156,7 +178,7 @@
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
           Gridea
         </a>
       
