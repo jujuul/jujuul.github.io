@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T07:16:43.314Z</updated>
+    <updated>2020-08-08T07:18:14.812Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -11,7 +11,7 @@
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
     <entry>
-        <title type="html"><![CDATA[#防抖和节流]]></title>
+        <title type="html"><![CDATA[防抖和节流]]></title>
         <id>https://jujuul.github.io/post/fang-dou-he-jie-liu/</id>
         <link href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
         </link>
