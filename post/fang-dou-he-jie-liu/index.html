@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>前端 | Mark</title>
+<title>#防抖和节流 | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://jujuul.github.io/">Mark</a></h3>
@@ -55,64 +56,89 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: 前端</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">一些前端UI框架</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-07
-      
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
-          前端
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>#防抖和节流</h1>
+            <p class="article-meta">
+              2020-08-08
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="函数防抖">函数防抖</h2>
+<p>函数防抖是优化高频率执行js代码的一种手段<br>
+可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
+<p>作用：减少代码执行次数, 提升网页性能<br>
+应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
+<pre><code>function debounce(fn, wait) {
+            let timer
+            return function () {
+                // 改变执行函数内部this指向
+                let _this = this
+                let _args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    fn.apply(_this, _args)
+                }, wait)
+            }
+ }
+</code></pre>
+<h2 id="函数节流">函数节流</h2>
+<p>函数节流是优化高频率执行js代码的一种手段<br>
+可以减少高频调用函数的执行次数</p>
+<p>作用：减少代码执行次数, 提升网页性能<br>
+应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
+第一次不执行</p>
+<pre><code>function throttle(fn, wait) {
+            let timer
+            return function () {
+                if (timer) return
+                let _this = this
+                let _args = arguments
+                timer = setTimeout(() =&gt; {
+                    fn.apply(_this, _args)
+                    timer = null
+                }, wait)
+            }
+        }
+</code></pre>
+<p>最后一次不执行</p>
+<pre><code>function throttle(fn, wait) {
+            let timer
+            let old = 0
+            return function () {
+                let _this = this
+                let _args = arguments
+                // 获取当前的时间戳
+                let now = new Date().valueOf()
+                if (now - old &gt; wait) {
+                    fn.apply(_this, _args)
+                    // 立即执行
+                    old = now;
+                }
+            }
+        }
+</code></pre>
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/xue-xi-mu-biao/">学习目标</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-05
-      
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
-          前端
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/xue-xi-mu-biao/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
+                <h3 class="post-title">
+                  收藏的一些有用的网站
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://jujuul.github.io//images/avatar.png?v=1596871000738" class="no-responsive avatar">
@@ -201,15 +227,15 @@
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
           Gridea
         </a>
       
@@ -219,6 +245,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 

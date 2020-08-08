@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596857647593">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596871000738">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -61,7 +61,7 @@
             <p class="article-meta">
               2020-08-06
               
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
+                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
                   uniapp
                 </a>
               
@@ -73,20 +73,23 @@
               <p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
 <p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
 这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<p>const query = wx.createSelectorQuery()<br>
-query.select('#boxFixed').boundingClientRect()<br>
-query.selectViewport().scrollOffset()<br>
-query.exec((res) =&gt; {<br>
-this.menutop = res[0].top<br>
-})<br>
-用来返回选中节点的TOP位置</p>
-<p>wx.pageScrollTo({<br>
-scrollTop: this.menutop,<br>
-duration: 300<br>
-})<br>
-用来使页面滚动到选择的位置</p>
-<p>:catchtouchmove=&quot;true&quot;<br>
-专门用来解决小程序的事件穿透</p>
+<pre><code>const query = wx.createSelectorQuery()
+query.select('#boxFixed').boundingClientRect()
+query.selectViewport().scrollOffset()
+query.exec((res) =&gt; {
+    this.menutop = res[0].top
+})
+</code></pre>
+<p>用来返回选中节点的TOP位置</p>
+<pre><code>wx.pageScrollTo({
+    scrollTop: this.menutop,
+    duration: 300
+})
+</code></pre>
+<p>用来使页面滚动到选择的位置</p>
+<pre><code>:catchtouchmove=&quot;true&quot;
+</code></pre>
+<p>专门用来解决小程序的事件穿透</p>
 
             </div>
           </article>
@@ -110,7 +113,7 @@ duration: 300<br>
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596857647593" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596871000738" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -132,6 +135,12 @@ duration: 300<br>
     </div>
     <div class="row">
       <ul>
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">#防抖和节流</a>
+            </li>
+          
         
           
             <li>
@@ -190,15 +199,15 @@ duration: 300<br>
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
           Gridea
         </a>
       

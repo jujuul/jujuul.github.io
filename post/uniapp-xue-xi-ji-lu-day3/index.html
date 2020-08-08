@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596857647593">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596871000738">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -61,7 +61,7 @@
             <p class="article-meta">
               2020-08-07
               
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
                   uniapp
                 </a>
               
@@ -87,53 +87,56 @@ https://www.mongodb.org.cn/manual/104.html</p>
 <p>淦，感觉出大问题了，先把服务器重置了吧。<br>
 先连本地连接数据库<br>
 安装一个mongoose：cnpm i mongoose --save<br>
-然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。<br>
-const Schema = mongoose.Schema;<br>
-// mongodb里没有表,叫做文档或者集合<br>
-// 每一个Schema对应mongodb中的一个集合<br>
-// 实例化数据模板:注册功能字段<br>
-const NameSchema = new Schema({<br>
-// 注册对象模型<br>
-name: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-password: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-openid: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-});<br>
-module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
+然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。</p>
+<pre><code>const Schema = mongoose.Schema;
+// mongodb里没有表,叫做文档或者集合
+// 每一个Schema对应mongodb中的一个集合
+// 实例化数据模板:注册功能字段
+const NameSchema = new Schema({
+  // 注册对象模型
+  name: {
+    type: String,
+    require: true,
+  },
+  password: {
+    type: String,
+    require: true,
+  },
+  openid: {
+    type: String,
+    require: true,
+  },
+});
+</code></pre>
+<p>module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
 这个没有代码块的功能也是很烦。<br>
-教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去<br>
-router.post(&quot;/register&quot;, async (ctx) =&gt; {<br>
-console.log(&quot;这是注册&quot;);<br>
-// console.log(ctx.request.body)<br>
-// console.log(ctx.request.body.name)<br>
-let { name, password, openid } = ctx.request.body;<br>
-const user_info = new userInfo({<br>
-name: name,<br>
-password: password,<br>
-openid: openid,<br>
-});<br>
-// 存储到数据库<br>
-await user_info<br>
-.save()<br>
-.then((res) =&gt; {<br>
-console.log(&quot;success&quot;);<br>
-})<br>
-.catch((e) =&gt; {<br>
-console.log(e);<br>
-});<br>
-});<br>
-这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
+教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去</p>
+<pre><code>router.post(&quot;/register&quot;, async (ctx) =&gt; {
+  console.log(&quot;这是注册&quot;);
+  // console.log(ctx.request.body)
+  // console.log(ctx.request.body.name)
+  let { name, password, openid } = ctx.request.body;
+  const user_info = new userInfo({
+    name: name,
+    password: password,
+    openid: openid,
+  });
+  // 存储到数据库
+  await user_info
+    .save()
+    .then((res) =&gt; {
+      console.log(&quot;success&quot;);
+    })
+    .catch((e) =&gt; {
+      console.log(e);
+    });
+});
+</code></pre>
+<p>这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
 <p>服务器上的终于搞定了，再把数据库的连接从本地切换为服务器。<br>
 ☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈<br>
-<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"></p>
+<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1596861176847.PNG" alt="" loading="lazy"></p>
 
             </div>
           </article>
@@ -157,7 +160,7 @@ console.log(e);<br>
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596857647593" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596871000738" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -179,6 +182,12 @@ console.log(e);<br>
     </div>
     <div class="row">
       <ul>
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">#防抖和节流</a>
+            </li>
+          
         
           
             <li>
@@ -237,15 +246,15 @@ console.log(e);<br>
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
           Gridea
         </a>
       

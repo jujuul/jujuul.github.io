@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T03:34:40.304Z</updated>
+    <updated>2020-08-08T07:16:43.314Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,68 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[#防抖和节流]]></title>
+        <id>https://jujuul.github.io/post/fang-dou-he-jie-liu/</id>
+        <link href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
+        </link>
+        <updated>2020-08-08T04:26:34.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="函数防抖">函数防抖</h2>
+<p>函数防抖是优化高频率执行js代码的一种手段<br>
+可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
+<p>作用：减少代码执行次数, 提升网页性能<br>
+应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
+<pre><code>function debounce(fn, wait) {
+            let timer
+            return function () {
+                // 改变执行函数内部this指向
+                let _this = this
+                let _args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    fn.apply(_this, _args)
+                }, wait)
+            }
+ }
+</code></pre>
+<h2 id="函数节流">函数节流</h2>
+<p>函数节流是优化高频率执行js代码的一种手段<br>
+可以减少高频调用函数的执行次数</p>
+<p>作用：减少代码执行次数, 提升网页性能<br>
+应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
+第一次不执行</p>
+<pre><code>function throttle(fn, wait) {
+            let timer
+            return function () {
+                if (timer) return
+                let _this = this
+                let _args = arguments
+                timer = setTimeout(() =&gt; {
+                    fn.apply(_this, _args)
+                    timer = null
+                }, wait)
+            }
+        }
+</code></pre>
+<p>最后一次不执行</p>
+<pre><code>function throttle(fn, wait) {
+            let timer
+            let old = 0
+            return function () {
+                let _this = this
+                let _args = arguments
+                // 获取当前的时间戳
+                let now = new Date().valueOf()
+                if (now - old &gt; wait) {
+                    fn.apply(_this, _args)
+                    // 立即执行
+                    old = now;
+                }
+            }
+        }
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[收藏的一些有用的网站]]></title>
         <id>https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/</id>
@@ -131,53 +193,56 @@ https://www.mongodb.org.cn/manual/104.html</p>
 <p>淦，感觉出大问题了，先把服务器重置了吧。<br>
 先连本地连接数据库<br>
 安装一个mongoose：cnpm i mongoose --save<br>
-然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。<br>
-const Schema = mongoose.Schema;<br>
-// mongodb里没有表,叫做文档或者集合<br>
-// 每一个Schema对应mongodb中的一个集合<br>
-// 实例化数据模板:注册功能字段<br>
-const NameSchema = new Schema({<br>
-// 注册对象模型<br>
-name: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-password: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-openid: {<br>
-type: String,<br>
-require: true,<br>
-},<br>
-});<br>
-module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
+然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。</p>
+<pre><code>const Schema = mongoose.Schema;
+// mongodb里没有表,叫做文档或者集合
+// 每一个Schema对应mongodb中的一个集合
+// 实例化数据模板:注册功能字段
+const NameSchema = new Schema({
+  // 注册对象模型
+  name: {
+    type: String,
+    require: true,
+  },
+  password: {
+    type: String,
+    require: true,
+  },
+  openid: {
+    type: String,
+    require: true,
+  },
+});
+</code></pre>
+<p>module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
 这个没有代码块的功能也是很烦。<br>
-教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去<br>
-router.post(&quot;/register&quot;, async (ctx) =&gt; {<br>
-console.log(&quot;这是注册&quot;);<br>
-// console.log(ctx.request.body)<br>
-// console.log(ctx.request.body.name)<br>
-let { name, password, openid } = ctx.request.body;<br>
-const user_info = new userInfo({<br>
-name: name,<br>
-password: password,<br>
-openid: openid,<br>
-});<br>
-// 存储到数据库<br>
-await user_info<br>
-.save()<br>
-.then((res) =&gt; {<br>
-console.log(&quot;success&quot;);<br>
-})<br>
-.catch((e) =&gt; {<br>
-console.log(e);<br>
-});<br>
-});<br>
-这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
+教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去</p>
+<pre><code>router.post(&quot;/register&quot;, async (ctx) =&gt; {
+  console.log(&quot;这是注册&quot;);
+  // console.log(ctx.request.body)
+  // console.log(ctx.request.body.name)
+  let { name, password, openid } = ctx.request.body;
+  const user_info = new userInfo({
+    name: name,
+    password: password,
+    openid: openid,
+  });
+  // 存储到数据库
+  await user_info
+    .save()
+    .then((res) =&gt; {
+      console.log(&quot;success&quot;);
+    })
+    .catch((e) =&gt; {
+      console.log(e);
+    });
+});
+</code></pre>
+<p>这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
 <p>服务器上的终于搞定了，再把数据库的连接从本地切换为服务器。<br>
 ☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈<br>
-<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"></p>
+<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1596861176847.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
@@ -189,20 +254,23 @@ console.log(e);<br>
         <content type="html"><![CDATA[<p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
 <p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
 这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<p>const query = wx.createSelectorQuery()<br>
-query.select('#boxFixed').boundingClientRect()<br>
-query.selectViewport().scrollOffset()<br>
-query.exec((res) =&gt; {<br>
-this.menutop = res[0].top<br>
-})<br>
-用来返回选中节点的TOP位置</p>
-<p>wx.pageScrollTo({<br>
-scrollTop: this.menutop,<br>
-duration: 300<br>
-})<br>
-用来使页面滚动到选择的位置</p>
-<p>:catchtouchmove=&quot;true&quot;<br>
-专门用来解决小程序的事件穿透</p>
+<pre><code>const query = wx.createSelectorQuery()
+query.select('#boxFixed').boundingClientRect()
+query.selectViewport().scrollOffset()
+query.exec((res) =&gt; {
+    this.menutop = res[0].top
+})
+</code></pre>
+<p>用来返回选中节点的TOP位置</p>
+<pre><code>wx.pageScrollTo({
+    scrollTop: this.menutop,
+    duration: 300
+})
+</code></pre>
+<p>用来使页面滚动到选择的位置</p>
+<pre><code>:catchtouchmove=&quot;true&quot;
+</code></pre>
+<p>专门用来解决小程序的事件穿透</p>
 ]]></content>
     </entry>
     <entry>
