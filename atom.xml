@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T07:36:55.767Z</updated>
+    <updated>2020-08-08T07:49:26.028Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Uniapp学习记录day4]]></title>
+        <id>https://jujuul.github.io/post/1/</id>
+        <link href="https://jujuul.github.io/post/1/">
+        </link>
+        <updated>2020-08-08T07:48:35.000Z</updated>
+        <content type="html"><![CDATA[<p>今天的主要内容应该还是koa和数据库</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[防抖和节流]]></title>
         <id>https://jujuul.github.io/post/fang-dou-he-jie-liu/</id>
