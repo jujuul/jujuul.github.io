@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T07:18:14.812Z</updated>
+    <updated>2020-08-08T07:36:55.767Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -70,6 +70,11 @@
             }
         }
 </code></pre>
+<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
+<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
+函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
+<p>参考<br>
+https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
 ]]></content>
     </entry>
     <entry>
