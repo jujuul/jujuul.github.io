@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T15:11:15.122Z</updated>
+    <updated>2020-08-08T16:08:18.750Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[vuetify学习记录]]></title>
+        <id>https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</id>
+        <link href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
+        </link>
+        <updated>2020-08-08T15:32:17.000Z</updated>
+        <content type="html"><![CDATA[<p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与更新事件，最终还是选择先学习vuetify。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Uniapp学习记录day4]]></title>
         <id>https://jujuul.github.io/post/1/</id>
@@ -193,7 +202,11 @@ XI、Pure.css<br>
 十一、antd<br>
 官网：https://ant.design/docs/react/introduce-cn<br>
 github：https://github.com/ant-design/ant-design/<br>
-看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。</p>
+看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。<br>
+十二、Vuetify<br>
+官网：https://vuetifyjs.com/zh-Hans/<br>
+github：https://github.com/vuetifyjs/vuetify<br>
+github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最近一周下载也有35W，最重要的是官方文档还用了骨架屏，在elementUI慢慢不再维护的今天，Vuetify应该是下一个elementUI了。</p>
 ]]></content>
     </entry>
     <entry>
