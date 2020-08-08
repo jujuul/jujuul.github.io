@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T07:49:26.028Z</updated>
+    <updated>2020-08-08T15:11:15.122Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -17,6 +17,14 @@
         </link>
         <updated>2020-08-08T07:48:35.000Z</updated>
         <content type="html"><![CDATA[<p>今天的主要内容应该还是koa和数据库</p>
+<p>Robo 3T 和 Compass删除对比<br>
+<img src="https://jujuul.github.io//post-images/1596876580748.PNG" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1596876584566.PNG" alt="" loading="lazy"><br>
+都需要额外的一步</p>
+<p>koa返回状态码：ctx.status<br>
+状态码大全：http://tools.jb51.net/table/http_status_code</p>
+<p>记一个坑：<br>
+通过中间件来捕获全局异常时，要把中间件放在use的最前面,不然就会出错。</p>
 ]]></content>
     </entry>
     <entry>
@@ -143,11 +151,11 @@ github：https://github.com/Tencent/weui<br>
 二、Mint UI<br>
 官网地址：https://mint-ui.github.io/#!/zh-cn<br>
 github：https://github.com/ElemeFE/mint-ui<br>
-饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示。<br>
-三、iView UI<br>
+饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示，不过我去github上看了一下，已经不再维护了。<br>
+三、View UI<br>
 官网地址：https://www.iviewui.com/<br>
 github：https://github.com/view-design/ViewUI<br>
-终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
+终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。原名叫 iView，现已改名View UI，文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
 四、element UI<br>
 官网地址：https://element.eleme.cn/#/zh-CN<br>
 github：https://github.com/ElemeFE/element<br>
@@ -181,7 +189,11 @@ github：https://github.com/at-ui/at-ui<br>
 阿里的，不过听说已经不在维护了，可惜我还没用过。<br>
 XI、Pure.css<br>
 官网：https://www.purecss.cn/<br>
-有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。</p>
+有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。<br>
+十一、antd<br>
+官网：https://ant.design/docs/react/introduce-cn<br>
+github：https://github.com/ant-design/ant-design/<br>
+看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。</p>
 ]]></content>
     </entry>
     <entry>
