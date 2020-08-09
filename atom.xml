@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-08T16:08:18.750Z</updated>
+    <updated>2020-08-09T02:44:29.097Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—nest.js]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">
+        </link>
+        <updated>2020-08-09T02:25:18.000Z</updated>
+        <content type="html"><![CDATA[<p>Nest是一个用于构建高效，可扩展的Node.js服务器端应用程序的框架。它使用渐进式JavaScript，使用TypeScript构建（保留与纯JavaScript的兼容性），并结合了OOP（面向对象编程），FP（功能编程）和FRP（功能反应编程）的元素。<br>
+以上为官网原话，虽然写了是什么，但对于新人的我还是看的一脸懵逼，然后网上搜索了一下，知乎里有篇专栏写的很详细，然后关于Nest的提问里大家也做了很多讨论，我这里总结一下。<br>
+Nest 是 Node.js 版的 Spring 框架。Nest大量借鉴了Java Spring 框架和 Angular的特性，相比于Koa和Express，Nest更加全面，更加上层，Nest提供了一种开箱即用的应用程序体系结构，该体系结构允许开发人员和团队创建高度可测试，可伸缩，松散耦合且易于维护的应用程序。<br>
+Nest 是一种完整的解决方案<br>
+包含了认证、数据库、上传文件、验证、缓存、序列化、记录器、安全、配置、压缩、请求等开箱即用的技术。<br>
+Nest可以看作是所有Koa-xxx的功能集合，并且再nNpm上Nest也是涨势惊人，未来可期。我个人感觉可能是以后的Nodejs后端扛把子。很有学习的必要。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vuetify学习记录]]></title>
         <id>https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</id>
@@ -356,38 +370,6 @@ Serverless<br>
 SSR<br>
 Nextjs<br>
 后端  go	nodejs	java</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://jujuul.github.io/post/hello-gridea/</id>
-        <link href="https://jujuul.github.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
