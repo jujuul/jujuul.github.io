@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596967419384">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596976751083">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -68,14 +68,34 @@
             <div class="post-content">
               <p>先安装一个跨域用的</p>
 <pre><code>var cors = require('koa-cors');
- 
 app.use(cors());
- 
-app.use(route.get('/', function() {
-  this.body = { msg: 'Hello World!' };
-}));
 </code></pre>
 <p>通过这个就可以进行跨域请求了</p>
+<p>koa-multer<br>
+用来上传图片的</p>
+<pre><code>const multer = require(&quot;koa-multer&quot;);
+// const uploadSingle = multer.single(&quot;file&quot;);
+// 图片类上传到后端文件夹
+let storage = multer.diskStorage({   // diskStorage:存储
+    // 图片存储路径
+    destination:(req,file,cb) =&gt;{
+        cb(null,'public/uploads/')
+    }
+})
+// 配置multer
+let upload = multer({storage})
+module.exports = upload
+</code></pre>
+<p>在中间件中引入<br>
+<code>const forYou = require(&quot;../../models/foryou&quot;);</code><br>
+<code>upload.single(&quot;file&quot;)</code>通过这种方式可以处理上传的图片<br>
+设置路由</p>
+<pre><code>router.post(&quot;/foryou&quot;, upload.single(&quot;file&quot;), async (ctx) =&gt; {
+  console.log(&quot;foryou&quot;);
+});
+</code></pre>
+<p>可以看到图片已经上传完成<br>
+<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"></p>
 
             </div>
           </article>
@@ -99,7 +119,7 @@ app.use(route.get('/', function() {
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596967419384" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596976751083" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -197,15 +217,15 @@ app.use(route.get('/', function() {
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge success">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
           Gridea
         </a>
       

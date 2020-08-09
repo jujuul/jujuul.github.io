@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-09T10:03:41.363Z</updated>
+    <updated>2020-08-09T12:39:12.786Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -18,14 +18,34 @@
         <updated>2020-08-09T10:02:29.000Z</updated>
         <content type="html"><![CDATA[<p>先安装一个跨域用的</p>
 <pre><code>var cors = require('koa-cors');
- 
 app.use(cors());
- 
-app.use(route.get('/', function() {
-  this.body = { msg: 'Hello World!' };
-}));
 </code></pre>
 <p>通过这个就可以进行跨域请求了</p>
+<p>koa-multer<br>
+用来上传图片的</p>
+<pre><code>const multer = require(&quot;koa-multer&quot;);
+// const uploadSingle = multer.single(&quot;file&quot;);
+// 图片类上传到后端文件夹
+let storage = multer.diskStorage({   // diskStorage:存储
+    // 图片存储路径
+    destination:(req,file,cb) =&gt;{
+        cb(null,'public/uploads/')
+    }
+})
+// 配置multer
+let upload = multer({storage})
+module.exports = upload
+</code></pre>
+<p>在中间件中引入<br>
+<code>const forYou = require(&quot;../../models/foryou&quot;);</code><br>
+<code>upload.single(&quot;file&quot;)</code>通过这种方式可以处理上传的图片<br>
+设置路由</p>
+<pre><code>router.post(&quot;/foryou&quot;, upload.single(&quot;file&quot;), async (ctx) =&gt; {
+  console.log(&quot;foryou&quot;);
+});
+</code></pre>
+<p>可以看到图片已经上传完成<br>
+<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
