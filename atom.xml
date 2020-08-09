@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-09T12:39:12.786Z</updated>
+    <updated>2020-08-09T15:17:54.601Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -16,13 +16,13 @@
         <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
         </link>
         <updated>2020-08-09T10:02:29.000Z</updated>
-        <content type="html"><![CDATA[<p>先安装一个跨域用的</p>
+        <content type="html"><![CDATA[<h2 id="先安装一个跨域用的">先安装一个跨域用的</h2>
 <pre><code>var cors = require('koa-cors');
 app.use(cors());
 </code></pre>
 <p>通过这个就可以进行跨域请求了</p>
-<p>koa-multer<br>
-用来上传图片的</p>
+<h2 id="koa-multer">koa-multer</h2>
+<p>用来上传图片的</p>
 <pre><code>const multer = require(&quot;koa-multer&quot;);
 // const uploadSingle = multer.single(&quot;file&quot;);
 // 图片类上传到后端文件夹
@@ -45,7 +45,23 @@ module.exports = upload
 });
 </code></pre>
 <p>可以看到图片已经上传完成<br>
-<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"></p>
+<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"><br>
+做一下优化</p>
+<pre><code>filename: (req, file, cb) =&gt; {
+    console.log(file);
+    let fileFormat = (file.originalname).split('.')
+    console.log(fileFormat)
+    // 时间戳
+    cb(null,Date.now()+'.'+fileFormat[fileFormat.length-1])
+  },
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1596977619788.PNG" alt="" loading="lazy"><br>
+PS:做到这里不由想起今天看到的关于nest与koa的对比，提到koa是较为底层的，而nest是一整套的，以我以前用过的thinkphp为例，上传图片功能很简单，还可以自己选择图片的命名格式，而koa上传图片也需要额外的插件，还要自己写图片命名格式，两相比较还是tp的好一些，也让我对于nest有了更多的想学的冲动了。<br>
+配置一下阿里云的OSS，用来存储项目图片。<br>
+顺便买了个域名。</p>
+<h2 id="使用oss的sdk">使用OSS的SDK</h2>
+<pre><code>npm install ali-oss --save
+</code></pre>
 ]]></content>
     </entry>
     <entry>

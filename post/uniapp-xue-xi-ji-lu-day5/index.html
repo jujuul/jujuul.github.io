@@ -7,7 +7,7 @@
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596976751083">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1596986270870">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
@@ -61,18 +61,22 @@
             <p class="article-meta">
               2020-08-09
               
+                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+                  uniapp
+                </a>
+              
             </p>
             
               <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png" alt="Uniapp学习记录day5">
             
             <div class="post-content">
-              <p>先安装一个跨域用的</p>
+              <h2 id="先安装一个跨域用的">先安装一个跨域用的</h2>
 <pre><code>var cors = require('koa-cors');
 app.use(cors());
 </code></pre>
 <p>通过这个就可以进行跨域请求了</p>
-<p>koa-multer<br>
-用来上传图片的</p>
+<h2 id="koa-multer">koa-multer</h2>
+<p>用来上传图片的</p>
 <pre><code>const multer = require(&quot;koa-multer&quot;);
 // const uploadSingle = multer.single(&quot;file&quot;);
 // 图片类上传到后端文件夹
@@ -95,7 +99,23 @@ module.exports = upload
 });
 </code></pre>
 <p>可以看到图片已经上传完成<br>
-<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"></p>
+<img src="https://jujuul.github.io//post-images/1596976747126.PNG" alt="" loading="lazy"><br>
+做一下优化</p>
+<pre><code>filename: (req, file, cb) =&gt; {
+    console.log(file);
+    let fileFormat = (file.originalname).split('.')
+    console.log(fileFormat)
+    // 时间戳
+    cb(null,Date.now()+'.'+fileFormat[fileFormat.length-1])
+  },
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1596977619788.PNG" alt="" loading="lazy"><br>
+PS:做到这里不由想起今天看到的关于nest与koa的对比，提到koa是较为底层的，而nest是一整套的，以我以前用过的thinkphp为例，上传图片功能很简单，还可以自己选择图片的命名格式，而koa上传图片也需要额外的插件，还要自己写图片命名格式，两相比较还是tp的好一些，也让我对于nest有了更多的想学的冲动了。<br>
+配置一下阿里云的OSS，用来存储项目图片。<br>
+顺便买了个域名。</p>
+<h2 id="使用oss的sdk">使用OSS的SDK</h2>
+<pre><code>npm install ali-oss --save
+</code></pre>
 
             </div>
           </article>
@@ -119,7 +139,7 @@ module.exports = upload
 
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1596976751083" class="no-responsive avatar">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1596986270870" class="no-responsive avatar">
     <div class="text-muted">温故而知新</div>
     <div class="social-container">
       
@@ -217,15 +237,15 @@ module.exports = upload
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
-          前端
-        </a>
-      
         <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
+          前端
+        </a>
+      
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
           Gridea
         </a>
       
