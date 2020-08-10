@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-10T05:01:13.930Z</updated>
+    <updated>2020-08-10T09:59:53.625Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -33,19 +33,30 @@
         <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
         </link>
         <updated>2020-08-10T01:02:39.000Z</updated>
-        <content type="html"><![CDATA[<p>记一个小坑：<br>
-在创建Bucket的时候，要把权限设置为公共读，不然无法通过URL读取，这个博客也做了记载https://blog.csdn.net/wildwolf_001/article/details/83275924，不过这样设置以后打开URL也不是查看，而是直接下载，不过总比之前的XML报错好。<br>
-又一个要注意的：</p>
+        <content type="html"><![CDATA[<h2 id="记一个小坑">记一个小坑：</h2>
+<p>在创建Bucket的时候，要把权限设置为公共读，不然无法通过URL读取，这个博客也做了记载https://blog.csdn.net/wildwolf_001/article/details/83275924，不过这样设置以后打开URL也不是查看，而是直接下载，不过总比之前的XML报错好。</p>
+<h2 id="又一个要注意的">又一个要注意的：</h2>
 <pre><code>module.exports = {
   upload,
   uploadimg,
 };
 </code></pre>
-<p>这样暴露的要这样接收</p>
+<h2 id="这样暴露的要这样接收">这样暴露的要这样接收</h2>
 <pre><code>let {uploadimg} = require(&quot;../oss/oss&quot;);
 </code></pre>
 <p>关于前面提到的图片不能显示而是直接下载的问题，在阿里云的开发者社区里找到个提问帖，有人回复是需要绑定域名才可以预览图片，刚好浏览这个页面时，有个银川的短号打过来，刚好我也没有直接挂断而是接听了，那边是阿里OSS的客服，因为昨天我询问了关于这个的问题，今天有个电话回复，然后把文档发我QQ邮箱了，不得不说客服的态度很好。<br>
 可惜态度好也不能解决问题，也不知道是我没表述清楚还是什么，不过最终还是找到了https://help.aliyun.com/document_detail/142631.html，如果Bucket是在19年9月23日前创建的，是可以预览的，在那之后的使用OSS默认域名生成的文件URL从浏览器访问时会以附件形式下载，使用自有域名生成的文件URL访问时，可以预览文件内容。看来还是要绑定域名，不过这有个前提，对于图片文件（在未修改文件http头的情况下），不清楚这里的未修改文件http头是指什么，可是我详情里面看到HTTP是设置过的，针对不同文件也有不同的解析，而且我上传了一个PDF文件，解析的HTTP头里的Content-Type也是application/pdf，而且输入URL也能正常浏览无需下载，看来还是要绑定域名。</p>
+<h2 id="开始数据联调">开始数据联调</h2>
+<p><img src="https://jujuul.github.io//post-images/1597052848420.PNG" alt="" loading="lazy"><br>
+这边数据是没什么问题的<br>
+<img src="https://jujuul.github.io//post-images/1597052902526.PNG" alt="" loading="lazy"><br>
+上来就开始给我报错(ps:传图片的时候发现Gridea不允许上传同名图片)<br>
+找了个有关的帖子http://www.wxappclub.com/topic/798，如果填了小程序APPID就必须满足三个条件<br>
+1.必须是https协议<br>
+2.tls 必须在 1.2 及以上版本<br>
+3.必须在小程序的后台（不是接口的后台），配置上https请求<br>
+解决办法是取消小程序APPID<br>
+在Uniapp上解绑了，但是小程序页不跳出之前的未绑定APPID的报错，看来要在开发者工具上面操作，详情里的APPID无法修改，按网上说的该project.config.json里的，打开看这里的压根也不是我的APPID啊，改了也没用。</p>
 ]]></content>
     </entry>
     <entry>
