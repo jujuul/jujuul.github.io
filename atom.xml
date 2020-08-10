@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-10T02:51:06.610Z</updated>
+    <updated>2020-08-10T05:01:13.930Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,23 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—Taro]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
+        </link>
+        <updated>2020-08-10T04:46:23.000Z</updated>
+        <content type="html"><![CDATA[<p>Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv 等框架来开发微信/京东/百度/支付宝/字节跳动/ QQ 小程序/H5 等应用。<br>
+以上位Taro官网原文，原本我以为Vue的跨端框架解决方案是Uniapp，而React的跨端框架解决方案就是Taro，没想到Taro也是支持Vue的。两个跨端框架就官网来说，Taro要好看的多，更有设计感，不过文档示例还是以React为主。<br>
+这里还有一篇选型对比文章：https://juejin.im/post/6844903768794857480<br>
+文章写于19年1月底，还是比较有时效性的<br>
+根据文章内的对比表格可以看到，在目前(19年初)的跨端解决方案中，唯有Taro与Uniapp，两者的github上的Star数量也相差不多<br>
+另一篇写于19年4月：https://blog.csdn.net/z4909801/article/details/88943851<br>
+文章对比了5个主流跨端框架，经过文章作者从生态、多端支持度、组件库、 接入成本、开源建设这5个方面的对比，可以看出Uniapp与Taro也是各有领先，虽然不是全方位领先其他框架，但也是位于顶部。<br>
+而Taro最新版本位3.0，今年7月1日发布。<br>
+另附一篇知乎上的文章：迄今为止，大前端各种多终端、跨端，解决方案合集https://zhuanlan.zhihu.com/p/100364496</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Uniapp学习记录day6]]></title>
         <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/</id>
@@ -27,6 +44,8 @@
 <p>这样暴露的要这样接收</p>
 <pre><code>let {uploadimg} = require(&quot;../oss/oss&quot;);
 </code></pre>
+<p>关于前面提到的图片不能显示而是直接下载的问题，在阿里云的开发者社区里找到个提问帖，有人回复是需要绑定域名才可以预览图片，刚好浏览这个页面时，有个银川的短号打过来，刚好我也没有直接挂断而是接听了，那边是阿里OSS的客服，因为昨天我询问了关于这个的问题，今天有个电话回复，然后把文档发我QQ邮箱了，不得不说客服的态度很好。<br>
+可惜态度好也不能解决问题，也不知道是我没表述清楚还是什么，不过最终还是找到了https://help.aliyun.com/document_detail/142631.html，如果Bucket是在19年9月23日前创建的，是可以预览的，在那之后的使用OSS默认域名生成的文件URL从浏览器访问时会以附件形式下载，使用自有域名生成的文件URL访问时，可以预览文件内容。看来还是要绑定域名，不过这有个前提，对于图片文件（在未修改文件http头的情况下），不清楚这里的未修改文件http头是指什么，可是我详情里面看到HTTP是设置过的，针对不同文件也有不同的解析，而且我上传了一个PDF文件，解析的HTTP头里的Content-Type也是application/pdf，而且输入URL也能正常浏览无需下载，看来还是要绑定域名。</p>
 ]]></content>
     </entry>
     <entry>
@@ -368,34 +387,6 @@ const NameSchema = new Schema({
 ☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈<br>
 <img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"><br>
 <img src="https://jujuul.github.io//post-images/1596861176847.PNG" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Uniapp学习记录day2]]></title>
-        <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/</id>
-        <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
-        </link>
-        <updated>2020-08-06T06:30:13.000Z</updated>
-        <content type="html"><![CDATA[<p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
-<p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
-这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<pre><code>const query = wx.createSelectorQuery()
-query.select('#boxFixed').boundingClientRect()
-query.selectViewport().scrollOffset()
-query.exec((res) =&gt; {
-    this.menutop = res[0].top
-})
-</code></pre>
-<p>用来返回选中节点的TOP位置</p>
-<pre><code>wx.pageScrollTo({
-    scrollTop: this.menutop,
-    duration: 300
-})
-</code></pre>
-<p>用来使页面滚动到选择的位置</p>
-<pre><code>:catchtouchmove=&quot;true&quot;
-</code></pre>
-<p>专门用来解决小程序的事件穿透</p>
 ]]></content>
     </entry>
 </feed>
