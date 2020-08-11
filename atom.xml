@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-10T09:59:53.625Z</updated>
+    <updated>2020-08-11T03:18:31.605Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,77 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—UmiJS]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
+        </link>
+        <updated>2020-08-11T03:05:20.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="什么是umijs">什么是Umi.js?</h2>
+<p>Umi，中文可发音为乌米，是可扩展的企业级前端应用框架。Umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。你可以将它简单的理解为一个专注性能的类 next.js 前端框架，并通过约定、自动生成和解析代码等方式来辅助开发，减少我们开发者的代码量。<br>
+为什么使用Umi.js?<br>
+我们做react开发的时候会不会遇到以下问题？：<br>
+1.项目做大的时候，开发调试的启动和热更新时间会变得很长。<br>
+2.大应用下，网站打开很慢，有没有办法基于路由做到按需加载。<br>
+3.dva的model每次都要手写载入，能否一开始就同项目初始化好？</p>
+<p>使用乌米，即可解决以上问题，并且还能提供如下优势：</p>
+<p>开箱即用，内置 react、react-router 等<br>
+类 next.js 且功能完备的路由约定，同时支持配置的路由方式<br>
+完善的插件体系，覆盖从源码到构建产物的每个生命周期<br>
+一键兼容到 IE9<br>
+完善的 TypeScript 支持<br>
+与 dva 数据流的深入融合</p>
+<p>以上内容来源于网络，可能因为没有使用过React的原因?以上的内容听得我云里雾里，根本不知道是干什么的，后来翻到知乎上UmiJS作者发布umi 1.0的那篇文章，才大概看懂了些。</p>
+<h2 id="umi-是什么">umi 是什么？</h2>
+<p>umi 是一个类 next.js 的专注性能的前端框架，他的优势是：<br>
+? 内置的大量性能优化<br>
+? 多端，无缝支持容器和浏览器访问<br>
+? 类 webpack 的插件机制<br>
+? 针对 antd 和 dva 有友好的支持<br>
+他基于以下约定：<br>
+页面是 React 组件<br>
+在 pages 目录下新增文件即可创建页面<br>
+现在写一个 React 应用你需要掌握很多知识，比如基于路由的 code-splitting、service-worker、webpack 配置、babel 配置、aslant 配置、性能优化、HMR、redbox、jest 测试、ts 配置、tree-shaking、scope-hoist、side-effect 等等。umi 把这些枯燥的事情全都做了，而你只需负责创造性的那部分。<br>
+<code>别的没看懂，umi可以把webpack 配置、babel 配置、jest 测试、ts 配置这里还是能看的懂的，总之就是各种简化操作</code></p>
+<h2 id="性能">性能</h2>
+<p>umi 在性能上做了很多努力，这些对于开发者是无感知的。“你只管写业务代码，我会负责性能”，并且随着 umi 的迭代，我保证你的应用会越来越快。<br>
+主要有：<br>
+PWA Support<br>
+Tree Shake<br>
+antd(-mobile) 启用 ES Module<br>
+Scope Hoist<br>
+公共文件的智能提取<br>
+页面级的按需加载<br>
+Inline Critical CSS<br>
+提供 umi/dynamic 和 import() 语法，分别用于懒加载组件和模块<br>
+优化的 babel-preset-umi<br>
+静态化的 SSR 处理<br>
+link rel=preload<br>
+hash 构建及服务端支持（云凤蝶）<br>
+通过 react-constant-elements 和 react-inline-elements 提升 rerender 性能<br>
+一键切换到 preact<br>
+Progressive image loading<br>
+按需打包 umi 内置的路由代码<br>
+...<br>
+<code>都是一些优化方面的</code></p>
+<h2 id="插件机制">插件机制</h2>
+<p>webpack 的生态好，和他灵活的插件机制有很大关系。umi 也类似，他就是个架子，把坑挖好，然后通过插件让功能丰富起来，内部逻辑也是如此，由一个个插件组成。<br>
+插件能做什么？基本什么都能做，整个生命周期都能修改，包括配置、build、dev、html 和 临时文件的生成等，已全部挖好坑。<br>
+<code>现在是不是所有前端的，或者说编程有关的东西都在追求插件化?</code><br>
+最后，这篇文章发于18年2月，网上的大部分讨论也是在那个时间，看起来Umi还没有火起来。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Uniapp学习记录day7]]></title>
+        <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/</id>
+        <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
+        </link>
+        <updated>2020-08-11T01:08:08.000Z</updated>
+        <content type="html"><![CDATA[<p>试着写一下接口文档<br>
+<img src="https://jujuul.github.io//post-images/1597108862045.PNG" alt="" loading="lazy"><br>
+Gridea写不了，换成飞书写了。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[每天一个名词解释—Taro]]></title>
         <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/</id>
@@ -56,7 +127,9 @@
 2.tls 必须在 1.2 及以上版本<br>
 3.必须在小程序的后台（不是接口的后台），配置上https请求<br>
 解决办法是取消小程序APPID<br>
-在Uniapp上解绑了，但是小程序页不跳出之前的未绑定APPID的报错，看来要在开发者工具上面操作，详情里的APPID无法修改，按网上说的该project.config.json里的，打开看这里的压根也不是我的APPID啊，改了也没用。</p>
+在Uniapp上解绑了，但是小程序页不跳出之前的未绑定APPID的报错，看来要在开发者工具上面操作，详情里的APPID无法修改，按网上说的该project.config.json里的，打开看这里的压根也不是我的APPID啊，改了也没用。<br>
+排查了半天，原来是没写http，本地配置里的不校验合法域名那一条是默认勾选的(大概)。<br>
+<img src="https://jujuul.github.io//post-images/1597054724070.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
     <entry>
@@ -258,146 +331,6 @@ Behance：https://www.behance.net/<br>
 动漫类：<br>
 zzzfun：http://www.zzzfun.com/<br>
 D站倒了的今天，zzz还算一方净土。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[一些前端UI框架]]></title>
-        <id>https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/</id>
-        <link href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
-        </link>
-        <updated>2020-08-07T04:58:47.000Z</updated>
-        <content type="html"><![CDATA[<p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
-一、WeUI<br>
-官网地址：https://weui.io/<br>
-github：https://github.com/Tencent/weui<br>
-文档地址1：https://github.com/Tencent/weui.js/tree/master/docs<br>
-文档地址2：http://old.jqweui.com/components<br>
-官网的介绍说是同微信原生视觉体验一致的样式库，然后官网地址里没有文档？还是说我没找到?然后github里好像有一个文档，但是不是很方便，还有个网上找的，不过名字是jQuery WeUI，还带着版本号，好像是别人做的，不过里面有WeUI基础组件的文档。<br>
-二、Mint UI<br>
-官网地址：https://mint-ui.github.io/#!/zh-cn<br>
-github：https://github.com/ElemeFE/mint-ui<br>
-饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示，不过我去github上看了一下，已经不再维护了。<br>
-三、View UI<br>
-官网地址：https://www.iviewui.com/<br>
-github：https://github.com/view-design/ViewUI<br>
-终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。原名叫 iView，现已改名View UI，文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
-四、element UI<br>
-官网地址：https://element.eleme.cn/#/zh-CN<br>
-github：https://github.com/ElemeFE/element<br>
-也是饿了么团队出品的，也是我唯一一个大量使用过的，在国内可能也是github上星最多的吧？不过最近知乎上看到说是更新频率下降了，也不知道什么原因。<br>
-五、layUI<br>
-官网地址：https://www.layui.com/<br>
-github：https://github.com/sentsin/layui/<br>
-这个是我最早听说的UI框架了，那时我还是个懵懵懂懂的少年，也不知道什么前后端，为了完成老师的作业，网上找了个模板，就找了个layUI的，那时候也不会js，拿着这模板怎么也用不好，最后把大部分功能都删了，才终于让网页跑起来，都是泪啊。<br>
-搜了一下好像没找到公司，然后知乎上是评价作者，那应该是个人开发的，膜拜大佬。<br>
-六、Bootstrap<br>
-官网地址：https://www.bootcss.com/<br>
-github：https://github.com/twbs<br>
-文档地址v4：https://v4.bootcss.com/docs/getting-started/introduction/<br>
-文档地址v3：https://v3.bootcss.com/css/<br>
-也是大名鼎鼎的UI框架了，Twitter开发的，我是同时接触的layUI和Bootstrap，也是因为网上基本就这两个的模板。有v3和v4两个版本的文档，v4本地化还不完全，这两天在B站和youtube上看到了v5版的教学了。忘了在哪里好像看到过bootstrap-vue，npm上显示周下载量有36W，上次更新是9天前，更新频率也很高，有时间要用下试试。<br>
-七、vant<br>
-官网地址：https://youzan.github.io/vant/#/zh-CN/<br>
-github：https://github.com/youzan/vant<br>
-有赞出品，移动端框架，文档和示例都很不错，而且涵盖的组件类型也很多，前几天的demo中用过，sku这个组件稍显复杂，也用了一下新了解的骨架屏，总体体验很不错。<br>
-八、flutter<br>
-官网地址：https://flutterchina.club/<br>
-github：https://github.com/flutter/flutter<br>
-有中文网，是谷歌的移动端UI框架，听说过，不过还没学习使用，文档还可以，不过好像图示有点少？全是文字看着头大。<br>
-九、Cube-UI<br>
-官网：https://didi.github.io/cube-ui/#/zh-CN<br>
-github：https://github.com/didi/cube-ui<br>
-听说是滴滴团队开发的，是个移动端的框架。<br>
-十、at-ui<br>
-官网：https://at-ui.github.io/at-ui/#/zh<br>
-github：https://github.com/at-ui/at-ui<br>
-阿里的，不过听说已经不在维护了，可惜我还没用过。<br>
-XI、Pure.css<br>
-官网：https://www.purecss.cn/<br>
-有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。<br>
-十一、antd<br>
-官网：https://ant.design/docs/react/introduce-cn<br>
-github：https://github.com/ant-design/ant-design/<br>
-看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。<br>
-十二、Vuetify<br>
-官网：https://vuetifyjs.com/zh-Hans/<br>
-github：https://github.com/vuetifyjs/vuetify<br>
-github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最近一周下载也有35W，最重要的是官方文档还用了骨架屏，在elementUI慢慢不再维护的今天，Vuetify应该是下一个elementUI了。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Uniapp学习记录day3]]></title>
-        <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/</id>
-        <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
-        </link>
-        <updated>2020-08-07T02:04:59.000Z</updated>
-        <content type="html"><![CDATA[<p>今天又是学习的一天！！！</p>
-<p>这页面没数据实在是不行啊，果然后端也要写啊</p>
-<p>切记切记，安装mongoDB一定要记得，把那个✅给去掉，太坑了！！！！<br>
-<img src="https://jujuul.github.io//post-images/1596782694203.png" alt="" loading="lazy"><br>
-安装了2个多小时，最后程序还崩溃了。</p>
-<p>哎，阿里云的MongoDB贵的有些离谱了，只能在自己服务器上搭一个了。</p>
-<p>1.先进入阿里的云服务器，然后下载安装nodejs，再远程连接服务器，把本地的mongdb安装文件传给服务器(怕服务器下载太慢)，然后等待安装，切记不要勾选安装compass</p>
-<p>2.安装好后配置环境变量，找了网上几个教程，好像版本都对不上，有要创建data文件夹的有要创建log文件夹的，但是我发现server文件夹下面有bin、log目录，把bin目录的地址放入环境变量，cmd中输入mongo还是不行，关闭后重新打开就能显示mongodb版本了。</p>
-<p>3.这配置运行环境的坑可太多了，大概记一下在放几个链接吧。<br>
-服务中创建的MongoDB server 无法启动、关闭、重启<br>
-解决办法：https://blog.csdn.net/yqwang75457/article/details/84949915<br>
-mongodb设置用户名密码权限：<br>
-https://blog.csdn.net/qq_37925422/article/details/80445591<br>
-https://www.mongodb.org.cn/manual/104.html</p>
-<p>淦，感觉出大问题了，先把服务器重置了吧。<br>
-先连本地连接数据库<br>
-安装一个mongoose：cnpm i mongoose --save<br>
-然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。</p>
-<pre><code>const Schema = mongoose.Schema;
-// mongodb里没有表,叫做文档或者集合
-// 每一个Schema对应mongodb中的一个集合
-// 实例化数据模板:注册功能字段
-const NameSchema = new Schema({
-  // 注册对象模型
-  name: {
-    type: String,
-    require: true,
-  },
-  password: {
-    type: String,
-    require: true,
-  },
-  openid: {
-    type: String,
-    require: true,
-  },
-});
-</code></pre>
-<p>module.exports = userInfo = mongoose.model(&quot;user_info&quot;, NameSchema);<br>
-这个没有代码块的功能也是很烦。<br>
-教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去</p>
-<pre><code>router.post(&quot;/register&quot;, async (ctx) =&gt; {
-  console.log(&quot;这是注册&quot;);
-  // console.log(ctx.request.body)
-  // console.log(ctx.request.body.name)
-  let { name, password, openid } = ctx.request.body;
-  const user_info = new userInfo({
-    name: name,
-    password: password,
-    openid: openid,
-  });
-  // 存储到数据库
-  await user_info
-    .save()
-    .then((res) =&gt; {
-      console.log(&quot;success&quot;);
-    })
-    .catch((e) =&gt; {
-      console.log(e);
-    });
-});
-</code></pre>
-<p>这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库</p>
-<p>服务器上的终于搞定了，再把数据库的连接从本地切换为服务器。<br>
-☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈<br>
-<img src="https://jujuul.github.io//post-images/1596811047642.PNG" alt="" loading="lazy"><br>
-<img src="https://jujuul.github.io//post-images/1596861176847.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>

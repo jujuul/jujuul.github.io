@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>收藏的一些有用的网站 | Mark</title>
+<title>每天一个名词解释—UmiJS | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -57,46 +57,65 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>收藏的一些有用的网站</h1>
+            <h1>每天一个名词解释—UmiJS</h1>
             <p class="article-meta">
-              2020-08-07
+              2020-08-11
               
             </p>
             
             <div class="post-content">
-              <p>学习类：<br>
-B站：https://www.bilibili.com/<br>
-没错，就是B站，基本上我和同学在网上学习的编程知识很大比例来自B站，有很多教育机构或者个人上传的编程有关的视频。<br>
-掘金：https://juejin.im/<br>
-知乎：https://www.zhihu.com/<br>
-思否：https://segmentfault.com/<br>
-简书：https://www.jianshu.com/<br>
-CSDN：https://www.csdn.net/<br>
-博客园：https://www.cnblogs.com/<br>
-除了知乎、简书，剩下的都是开发者社区了，也基本是我所知的最大的了，这其中CSDN问题最大，页面又杂又乱，还有广告，而且有很多很古老的文章也都还被频繁检索出来，上次搜个数据，打开了个03年的帖子，发文章也是，明明写了原创，结果在第一行就是原文地址，信息太杂，上次有个报错，在CSDN的一篇文章里找解决方法，顺着原文地址找了3层，跑到博客园去了。还有就是知乎的网页端也过于简陋了吧，浏览文章的页面我毕设加点东西都快和它差不多了，体验很差，思否的手机端也是特不好用，登录都登录不了，是不是已经不维护了？简书最大的问题就是没多久就维护一次，而且是全站的，经常搜到信息点进去显示网站维护。博客园就是界面太老旧了，最近可能进行了UI升级？多少比之前好看些了。<br>
-看云：https://www.kancloud.cn/explore<br>
-以前学习TP5的时候，就实在看云看的文档，还有很多其他的文档，不过还是以PHP为主。<br>
-PHP中文网：https://www.php.cn/<br>
-也是以前学PHP的时候收藏的网站，但我记得网站页面比较简陋，而且站长好像说过不搞了，也不知道现在这个是以前的在搞还是换人了，也没用过了。<br>
-软件类：<br>
-3D溜溜网：https://zixue.3d66.com/<br>
-虽然是个自学网站，但是上面的视频我都没看过，但是这个网站最大的优点是所有它这里开设的课程的破解版软件它基本都有，而且很新，是个很不错的资源网站。<br>
-MSDN：http://msdn.itellyou.cn/<br>
-可以说是windows全家桶网站，windows的全部产品这里几乎都有，像是Access，Office，Visual Basic,还有不同版本的windows系统，还有一大推我听都没听过的。<br>
-设计类：<br>
-中国色：http://zhongguose.com/#shenyanhong<br>
-选修的PPT课老师推荐的网站，是一个展示配色的网站，基本都是中式配色，像是什么绀紫、靛青、景泰蓝这种名字的颜色。<br>
-站酷：https://www.zcool.com.cn/<br>
-各式各样的设计，涵盖了设计的全部种类，应该是国内最大的设计网站了。<br>
-removebg：https://www.remove.bg/zh<br>
-可以消除图片中的背景，比我自己用PS抠的好N倍，直接可以开淘宝店抠图的水平，不过我之前用没有中文版，而且也不需要登录，这中文版是要收费了吗？<br>
-Behance：https://www.behance.net/<br>
-很好的一个设计网站，好像是adobe下的，有很多有创意的作品。<br>
-游戏类：https://ygodl.com/<br>
-决斗链接中文网，是玩家自己组建的，最近随着水哥在B站的游戏王视频带来的热度，决斗链接中文网也是迎来了一大批新人，作为“老”用户也是颇感欣慰。<br>
-动漫类：<br>
-zzzfun：http://www.zzzfun.com/<br>
-D站倒了的今天，zzz还算一方净土。</p>
+              <h2 id="什么是umijs">什么是Umi.js?</h2>
+<p>Umi，中文可发音为乌米，是可扩展的企业级前端应用框架。Umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。你可以将它简单的理解为一个专注性能的类 next.js 前端框架，并通过约定、自动生成和解析代码等方式来辅助开发，减少我们开发者的代码量。<br>
+为什么使用Umi.js?<br>
+我们做react开发的时候会不会遇到以下问题？：<br>
+1.项目做大的时候，开发调试的启动和热更新时间会变得很长。<br>
+2.大应用下，网站打开很慢，有没有办法基于路由做到按需加载。<br>
+3.dva的model每次都要手写载入，能否一开始就同项目初始化好？</p>
+<p>使用乌米，即可解决以上问题，并且还能提供如下优势：</p>
+<p>开箱即用，内置 react、react-router 等<br>
+类 next.js 且功能完备的路由约定，同时支持配置的路由方式<br>
+完善的插件体系，覆盖从源码到构建产物的每个生命周期<br>
+一键兼容到 IE9<br>
+完善的 TypeScript 支持<br>
+与 dva 数据流的深入融合</p>
+<p>以上内容来源于网络，可能因为没有使用过React的原因?以上的内容听得我云里雾里，根本不知道是干什么的，后来翻到知乎上UmiJS作者发布umi 1.0的那篇文章，才大概看懂了些。</p>
+<h2 id="umi-是什么">umi 是什么？</h2>
+<p>umi 是一个类 next.js 的专注性能的前端框架，他的优势是：<br>
+? 内置的大量性能优化<br>
+? 多端，无缝支持容器和浏览器访问<br>
+? 类 webpack 的插件机制<br>
+? 针对 antd 和 dva 有友好的支持<br>
+他基于以下约定：<br>
+页面是 React 组件<br>
+在 pages 目录下新增文件即可创建页面<br>
+现在写一个 React 应用你需要掌握很多知识，比如基于路由的 code-splitting、service-worker、webpack 配置、babel 配置、aslant 配置、性能优化、HMR、redbox、jest 测试、ts 配置、tree-shaking、scope-hoist、side-effect 等等。umi 把这些枯燥的事情全都做了，而你只需负责创造性的那部分。<br>
+<code>别的没看懂，umi可以把webpack 配置、babel 配置、jest 测试、ts 配置这里还是能看的懂的，总之就是各种简化操作</code></p>
+<h2 id="性能">性能</h2>
+<p>umi 在性能上做了很多努力，这些对于开发者是无感知的。“你只管写业务代码，我会负责性能”，并且随着 umi 的迭代，我保证你的应用会越来越快。<br>
+主要有：<br>
+PWA Support<br>
+Tree Shake<br>
+antd(-mobile) 启用 ES Module<br>
+Scope Hoist<br>
+公共文件的智能提取<br>
+页面级的按需加载<br>
+Inline Critical CSS<br>
+提供 umi/dynamic 和 import() 语法，分别用于懒加载组件和模块<br>
+优化的 babel-preset-umi<br>
+静态化的 SSR 处理<br>
+link rel=preload<br>
+hash 构建及服务端支持（云凤蝶）<br>
+通过 react-constant-elements 和 react-inline-elements 提升 rerender 性能<br>
+一键切换到 preact<br>
+Progressive image loading<br>
+按需打包 umi 内置的路由代码<br>
+...<br>
+<code>都是一些优化方面的</code></p>
+<h2 id="插件机制">插件机制</h2>
+<p>webpack 的生态好，和他灵活的插件机制有很大关系。umi 也类似，他就是个架子，把坑挖好，然后通过插件让功能丰富起来，内部逻辑也是如此，由一个个插件组成。<br>
+插件能做什么？基本什么都能做，整个生命周期都能修改，包括配置、build、dev、html 和 临时文件的生成等，已全部挖好坑。<br>
+<code>现在是不是所有前端的，或者说编程有关的东西都在追求插件化?</code><br>
+最后，这篇文章发于18年2月，网上的大部分讨论也是在那个时间，看起来Umi还没有火起来。</p>
 
             </div>
           </article>
@@ -107,9 +126,9 @@ D站倒了的今天，zzz还算一方净土。</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
+              <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
                 <h3 class="post-title">
-                  一些前端UI框架
+                  Uniapp学习记录day7
                 </h3>
               </a>
             </div>
@@ -226,15 +245,15 @@ D站倒了的今天，zzz还算一方净土。</p>
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge success">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
           Gridea
         </a>
       
