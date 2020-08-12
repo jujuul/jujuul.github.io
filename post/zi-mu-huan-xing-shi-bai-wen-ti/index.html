@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>Uniapp学习记录day2 | Mark</title>
+<title>字母换行失败问题 | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -57,39 +57,14 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>Uniapp学习记录day2</h1>
+            <h1>字母换行失败问题</h1>
             <p class="article-meta">
-              2020-08-06
-              
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
-                  uniapp
-                </a>
+              2020-08-12
               
             </p>
             
-              <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png" alt="Uniapp学习记录day2">
-            
             <div class="post-content">
-              <p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
-<p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
-这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<pre><code>const query = wx.createSelectorQuery()
-query.select('#boxFixed').boundingClientRect()
-query.selectViewport().scrollOffset()
-query.exec((res) =&gt; {
-    this.menutop = res[0].top
-})
-</code></pre>
-<p>用来返回选中节点的TOP位置</p>
-<pre><code>wx.pageScrollTo({
-    scrollTop: this.menutop,
-    duration: 300
-})
-</code></pre>
-<p>用来使页面滚动到选择的位置</p>
-<pre><code>:catchtouchmove=&quot;true&quot;
-</code></pre>
-<p>专门用来解决小程序的事件穿透</p>
+              <p>今天面试问到了三栏布局，就自己尝试写一下，结果写出来中间那一栏的内容不能自动换行，试了半天也不行，换成flex也不行，最后去网上查了一下，原来超长的字母和数字是不会被自动拆开的，所以导致无法换行，解决方法就是加入<code>word-break: break-all;</code>，通过这个就可以解决换行问题了。</p>
 
             </div>
           </article>
@@ -100,9 +75,9 @@ query.exec((res) =&gt; {
               <div class="next">
                 下一篇
               </div>
-              <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">
                 <h3 class="post-title">
-                  Uniapp学习记录day1
+                  每天一个名词解释—Nuxt.js
                 </h3>
               </a>
             </div>
@@ -225,15 +200,15 @@ query.exec((res) =&gt; {
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
           Gridea
         </a>
       
