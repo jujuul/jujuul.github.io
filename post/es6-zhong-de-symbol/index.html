@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>uniapp | Mark</title>
+<title>ES6中的Symbol | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,6 +23,7 @@
 
   </head>
   <body>
+  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://jujuul.github.io/">Mark</a></h3>
@@ -55,184 +56,72 @@
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <h2 class="current-tag">标签: uniapp</h2>
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">Uniapp学习记录day7</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-11
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
+          <article class="article">
+            <h1>ES6中的Symbol</h1>
+            <p class="article-meta">
+              2020-08-11
+              
+            </p>
+            
+            <div class="post-content">
+              <p>ES6中引入了一种新的基础数据类型：<code>Symbol</code>，它的功能类似于一种标识唯一性的ID。</p>
+<pre><code>let s1 = Symbol()
+let s2 = Symbol('another symbol')
+let s3 = Symbol('another symbol')
+console.log(s1 == s2)   //false
+console.log(s1 === s2)  //false
+console.log(s2 == s3)   //false
+console.log(s2 === s3)  //false
+console.log(s1 == s1)   //true
+console.log(s1 === s1)  //true
+console.log(s2 === s2)  //true
+</code></pre>
+<p>它的值具有唯一性，除了自己它谁都不等于。<br>
+<code>console.log(typeof s1) //symbol</code><br>
+typeof的返回值为symbol</p>
+<pre><code>let obj = {
+            [Symbol('name')]: '学习Symbol',
+            age: 18,
+            sex: 'male'
+        }
+        console.log(Object.keys(obj)) // ['age', 'sex']
+        for (let p in obj) {
+            console.log(p) // 分别输出：'age' 和 'sex'
+        }
+</code></pre>
+<p>不能通过<code>Object.keys()</code>或者<code>for...in</code>来枚举<br>
+使用JSON.stringify()将对象转换成JSON字符串的时候，Symbol属性也会被排除在输出内容之外：<br>
+<code>console.log(JSON.stringify(obj)) // {&quot;age&quot;:18,&quot;sex&quot;:&quot;male&quot;}</code><br>
+我们就没办法获取以Symbol方式定义的对象属性了么？非也。还是会有一些专门针对Symbol的API，比如：</p>
+<pre><code>// 使用Object的API
+Object.getOwnPropertySymbols(obj) // [Symbol(name)]
+// 使用新增的反射API
+Reflect.ownKeys(obj) // [Symbol(name), 'age', 'title']
+</code></pre>
+<p>最后贴一下MDN的兼容表<br>
+<img src="https://jujuul.github.io//post-images/1597161891981.PNG" alt="" loading="lazy"><br>
+可以看到并不被IE浏览器支持</p>
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">Uniapp学习记录day6</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-10
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">Uniapp学习记录day5</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-09
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-08
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/1/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-07
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">Uniapp学习记录day2</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-06
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-  <article class="article">
-    <h2 class="article-title">
-      <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">Uniapp学习记录day1</a>
-    </h2>
-    <p class="article-meta">
-      2020-08-05
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
+            </div>
+          </article>
         </div>
-        <div class="row flex-edges">
-  
-  
-</div>
-
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
+                <h3 class="post-title">
+                  每天一个名词解释—UmiJS
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
       </div>
+
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://jujuul.github.io//images/avatar.png?v=1597215288029" class="no-responsive avatar">
@@ -345,15 +234,15 @@
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge warning">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge success">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
           Gridea
         </a>
       
@@ -363,6 +252,7 @@
     Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
   </div>
 </div>
+
 
     </div>
 
