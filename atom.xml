@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-12T15:52:55.245Z</updated>
+    <updated>2020-08-13T13:30:55.659Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,34 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—骨架屏(Skeleton)]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">
+        </link>
+        <updated>2020-08-13T13:14:17.000Z</updated>
+        <content type="html"><![CDATA[<p>对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。<br>
+骨架屏能让你的网页‘看起来’展现得更快，但只是看起来，实际上速度还是一样的。<br>
+<img src="https://jujuul.github.io//post-images/1597325013432.png" alt="" loading="lazy"></p>
+<h2 id="骨架屏有哪些优势">骨架屏有哪些优势</h2>
+<p>大体来说，骨架屏的优势在于：<br>
+在页面加载初期预先渲染内容，提升感官上的体验。<br>
+一般情况骨架屏和实际内容的结构是类似的，因此之后的切换不会过于突兀。这点和传统的 Loading 动图不同，可以认为是其升级版。<br>
+只需要简单的 CSS 支持 (涉及图片懒加载可能还需要 JS )，不要求 HTTPS 协议，没有额外的学习和维护成本。<br>
+如果页面采用组件化开发，每个组件可以根据自身状态定义自身的骨架屏及其切换时机，同时维持了组件之间的独立性。</p>
+<h2 id="vue实现骨架屏">Vue实现骨架屏</h2>
+<p>需要用到以下插件<br>
+vue-server-renderer<br>
+vue-skeleton-webpack-plugin<br>
+page-skeleton-webpack-plugin<br>
+<img src="https://jujuul.github.io//post-images/1597325346025.png" alt="" loading="lazy"><br>
+对比发现，就开发难度、灵活性和插件开源方来看，如果你的项目是基于vue-cli脚手架的，那么饿了么团队的page-skeleton-webpack-plugin是你的最佳选择，如果不是，那么你可以选择vue-router开源的vue-server-renderer.</p>
+<p>文章相关链接：<br>
+vue骨架屏实践：https://www.jianshu.com/p/eacac700630e<br>
+网页骨架屏自动生成方案：https://zhuanlan.zhihu.com/p/74403911<br>
+如何让你的网页“看起来”展现地更快 —— 骨架屏二三事：https://zhuanlan.zhihu.com/p/48601348</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[字母换行失败问题]]></title>
         <id>https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/</id>
@@ -300,23 +328,6 @@ Nest 是 Node.js 版的 Spring 框架。Nest大量借鉴了Java Spring 框架和
 Nest 是一种完整的解决方案<br>
 包含了认证、数据库、上传文件、验证、缓存、序列化、记录器、安全、配置、压缩、请求等开箱即用的技术。<br>
 Nest可以看作是所有Koa-xxx的功能集合，并且再nNpm上Nest也是涨势惊人，未来可期。我个人感觉可能是以后的Nodejs后端扛把子。很有学习的必要。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vuetify学习记录]]></title>
-        <id>https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</id>
-        <link href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-        </link>
-        <updated>2020-08-08T15:32:17.000Z</updated>
-        <content type="html"><![CDATA[<p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。</p>
-<p>在vue项目中安装<br>
-<code>vue add vuetify</code><br>
-查看package.json发现已经安装完成<br>
-<img src="https://jujuul.github.io//post-images/1597203946038.PNG" alt="" loading="lazy"><br>
-可以使用Vuetify的预置布局完成页面的基础布局<br>
-<img src="https://jujuul.github.io//post-images/1597211156600.PNG" alt="" loading="lazy"><br>
-除此以外，还提供了从简单到复杂的8种布局方式。<br>
-不过因为是学习，所以我打算自己组装一个页面的基本布局。</p>
 ]]></content>
     </entry>
 </feed>
