@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>防抖和节流 | Mark</title>
+<title>Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -23,7 +23,6 @@
 
   </head>
   <body>
-  
     <nav class="navbar border fixed split-nav">
   <div class="nav-brand">
     <h3><a href="https://jujuul.github.io/">Mark</a></h3>
@@ -53,100 +52,51 @@
   </div>
 </nav>
 
+
     <div id="top" class="row site">
       <div class="sm-12 md-8 col">
         <div class="paper">
-          <article class="article">
-            <h1>防抖和节流</h1>
-            <p class="article-meta">
-              2020-08-08
-              
-                <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
-                  前端
-                </a>
-              
-            </p>
-            
-            <div class="post-content">
-              <h2 id="函数防抖">函数防抖</h2>
-<p>函数防抖是优化高频率执行js代码的一种手段<br>
-可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
-<pre><code>function debounce(fn, wait) {
-            let timer
-            return function () {
-                // 改变执行函数内部this指向
-                let _this = this
-                let _args = arguments
-                clearTimeout(timer)
-                timer = setTimeout(function () {
-                    fn.apply(_this, _args)
-                }, wait)
-            }
- }
-</code></pre>
-<h2 id="函数节流">函数节流</h2>
-<p>函数节流是优化高频率执行js代码的一种手段<br>
-可以减少高频调用函数的执行次数</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
-第一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let timer
-            return function () {
-                if (timer) return
-                let _this = this
-                let _args = arguments
-                timer = setTimeout(() =&gt; {
-                    fn.apply(_this, _args)
-                    timer = null
-                }, wait)
-            }
-        }
-</code></pre>
-<p>最后一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let old = 0
-            return function () {
-                let _this = this
-                let _args = arguments
-                // 获取当前的时间戳
-                let now = new Date().valueOf()
-                if (now - old &gt; wait) {
-                    fn.apply(_this, _args)
-                    // 立即执行
-                    old = now;
-                }
-            }
-        }
-</code></pre>
-<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
-<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
-函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
-<p>参考<br>
-https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
+          
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://jujuul.github.io/post/hello-gridea/">Hello Gridea</a>
+    </h2>
+    <p class="article-meta">
+      2018-12-12
+      
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-            </div>
-          </article>
-        </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
-                <h3 class="post-title">
-                  收藏的一些有用的网站
-                </h3>
-              </a>
-            </div>
-          
+    </p>
+    <div class="row">
+      <a href="https://jujuul.github.io/post/hello-gridea/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+
         </div>
         
-      </div>
+        <div class="row flex-edges">
+  
+    <a href="https://jujuul.github.io/page/2/" class="paper-btn">
+      上一页
+    </a>
+  
+  
+</div>
 
+      </div>
+      
       <div class="sm-12 md-4 col sidebar">
   <div class="paper info-container">
     <img src="https://jujuul.github.io//images/avatar.png?v=1597377916872" class="no-responsive avatar">
@@ -269,7 +219,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
           前端
         </a>
       
@@ -284,9 +234,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
   </div>
 </div>
 
-
     </div>
-
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script type="application/javascript">

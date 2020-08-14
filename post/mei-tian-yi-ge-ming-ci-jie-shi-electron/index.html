@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>防抖和节流 | Mark</title>
+<title>每天一个名词解释—electron | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -57,75 +57,74 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>防抖和节流</h1>
+            <h1>每天一个名词解释—electron</h1>
             <p class="article-meta">
-              2020-08-08
-              
-                <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
-                  前端
-                </a>
+              2020-08-14
               
             </p>
             
             <div class="post-content">
-              <h2 id="函数防抖">函数防抖</h2>
-<p>函数防抖是优化高频率执行js代码的一种手段<br>
-可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
-<pre><code>function debounce(fn, wait) {
-            let timer
-            return function () {
-                // 改变执行函数内部this指向
-                let _this = this
-                let _args = arguments
-                clearTimeout(timer)
-                timer = setTimeout(function () {
-                    fn.apply(_this, _args)
-                }, wait)
-            }
- }
+              <h1 id="是什么">是什么</h1>
+<h2 id="定义">定义</h2>
+<p>Electron是一个能让你使用传统前端技术（Nodejs, Javascript, HTML, CSS）开发一个跨平台桌面应用的框架。这里所说的桌面应用指的是在Windows、OSX及Linux系统上运行的程序。<br>
+可以认为Electron是一种运行环境库，我们可以基于此，用HTML、JS和CSS写桌面应用。<br>
+我们熟知的一些软件都是基于electron开发的<br>
+<img src="https://jujuul.github.io//post-images/1597377289775.PNG" alt="" loading="lazy"><br>
+像是vscode，atom，还有本博客使用的Gridea</p>
+<h2 id="优点">优点：</h2>
+<p>部署、升级方便。用户通过浏览器就可以访问；<br>
+HTML/JS/CSS编写，方便且高效；<br>
+windows、linux都支持；</p>
+<h2 id="缺点">缺点：</h2>
+<p>对于开发者：浏览器适配比较繁琐；<br>
+对于开发者：有些应用，必须指定浏览器或版本。比如OCX必须是IE内核，H5要求浏览器必须是较高版本；<br>
+对于用户：传统行业中，部分用户对web应用不习惯，尤其在专业工具软件方面，觉得web应用没有桌面应用用起来踏实。<br>
+对于开发者：必须打开浏览器，输入一长串URL地址（虽然可以建立浏览器收藏夹或者创建URL的快捷方式到桌面，但大部分用户不会这么做）</p>
+<h2 id="使用">使用</h2>
+<p>安装 Electron<br>
+<code>npm install --save-dev electron</code><br>
+引入<br>
+<code>const electron = require('electron')</code><br>
+main.js配置</p>
+<pre><code>const { app, BrowserWindow } = require('electron')
+function createWindow () {   
+  // 创建浏览器窗口
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+  // 并且为你的应用加载index.html
+  win.loadFile('index.html')
+  // 打开开发者工具
+  win.webContents.openDevTools()
+}
+// Electron会在初始化完成并且准备好创建浏览器窗口时调用这个方法
+// 部分 API 在 ready 事件触发后才能使用。
+app.whenReady().then(createWindow)
+//当所有窗口都被关闭后退出
+app.on('window-all-closed', () =&gt; {
+  // 在 macOS 上，除非用户用 Cmd + Q 确定地退出，
+  // 否则绝大部分应用及其菜单栏会保持激活。
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+app.on('activate', () =&gt; {
+  // 在macOS上，当单击dock图标并且没有其他窗口打开时，
+  // 通常在应用程序中重新创建一个窗口。
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
+})
+// 您可以把应用程序其他的流程写在在此文件中
+// 代码 也可以拆分成几个文件，然后用 require 导入。
 </code></pre>
-<h2 id="函数节流">函数节流</h2>
-<p>函数节流是优化高频率执行js代码的一种手段<br>
-可以减少高频调用函数的执行次数</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
-第一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let timer
-            return function () {
-                if (timer) return
-                let _this = this
-                let _args = arguments
-                timer = setTimeout(() =&gt; {
-                    fn.apply(_this, _args)
-                    timer = null
-                }, wait)
-            }
-        }
-</code></pre>
-<p>最后一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let old = 0
-            return function () {
-                let _this = this
-                let _args = arguments
-                // 获取当前的时间戳
-                let now = new Date().valueOf()
-                if (now - old &gt; wait) {
-                    fn.apply(_this, _args)
-                    // 立即执行
-                    old = now;
-                }
-            }
-        }
-</code></pre>
-<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
-<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
-函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
-<p>参考<br>
-https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
+<p>官网地址：https://www.electronjs.org/<br>
+中文文档：https://www.w3cschool.cn/electronmanual/<br>
+官方文档：https://www.electronjs.org/docs</p>
 
             </div>
           </article>
@@ -136,9 +135,9 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">
                 <h3 class="post-title">
-                  收藏的一些有用的网站
+                  每天一个名词解释—骨架屏(Skeleton)
                 </h3>
               </a>
             </div>
@@ -265,7 +264,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
     </div>
     <div class="row">
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge success">
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
           uniapp
         </a>
       
@@ -273,7 +272,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
           前端
         </a>
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
           Gridea
         </a>
       
