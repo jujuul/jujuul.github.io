@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>vuetify学习记录 | Mark</title>
+<title>每天一个名词解释—可视化 | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -57,22 +57,26 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>vuetify学习记录</h1>
+            <h1>每天一个名词解释—可视化</h1>
             <p class="article-meta">
-              2020-08-08
+              2020-08-16
               
             </p>
             
             <div class="post-content">
-              <p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。</p>
-<p>在vue项目中安装<br>
-<code>vue add vuetify</code><br>
-查看package.json发现已经安装完成<br>
-<img src="https://jujuul.github.io//post-images/1597203946038.PNG" alt="" loading="lazy"><br>
-可以使用Vuetify的预置布局完成页面的基础布局<br>
-<img src="https://jujuul.github.io//post-images/1597211156600.PNG" alt="" loading="lazy"><br>
-除此以外，还提供了从简单到复杂的8种布局方式。<br>
-不过因为是学习，所以我打算自己组装一个页面的基本布局。</p>
+              <p>如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。<br>
+从工作内容来看，前端工程师主要负责处理内容呈现和用户交互。可视化的数据呈现，尤其是在Web端的呈现，属于前端工程师的范畴。但是，与传统的前端开发相比，可视化开发的工具、思路和方法，又和Web有着比较大的区别。</p>
+<p>首先是技术栈的不同。Web开发主要以HTML来描述结构，以CSS来描述表现，以JavaScript来描述行为。而可视化则较少涉及HTML和CSS，它更多地要同浏览器的Canvas、SVG、WebGl等其他图形API打交道。这是因为，Web开发以呈现块状内容为主，所以HTML是更合适的技术。而可视化开发则需要呈现各种各样的形状、结构，所以，形状更丰富的SVG以及更底层的Canvas2D和WebGL就是更合适的技术了。<br>
+<img src="https://jujuul.github.io//post-images/1597590510836.jpg" alt="" loading="lazy"><br>
+其次，Web开发着重于处理普通的文本和多媒体信息，渲染普通的、易于阅读的文本和多媒体内容，而可视化开发则着重于处理结构化数据，渲染各种相对复杂的图表和图形元素。两者针对的信息特征和对图形渲染的要求有所不同，所以，在细节处理上也有比较大的差异。</p>
+<p>这么说比较抽象，举个例子。在使用ECharts这样现成的图标库开发图表的时候，往往会遇到一些产品需求不能很好被满足的情况。如果想要把图表的默认布局方式从absolute改变成其他方式、把坐标轴指示线的样式换成虚线、把配色换成线性渐变，或者想要修改地图中某个点的点击范围。虽然有的问题，通过修改参数配置（EChart的每种图表可能有数十种不同的配置项）确实能解决，但还是有一些问题必须要修改库的源码才能解决。</p>
+<p>因此，像EChart等现成的图表库，尽管功能强大、配置复杂，但是在样式细节控制上，仍然无法做到如CSS那般灵活。</p>
+<p>除此之外，可视化要处理更多偏视觉方面的细节信息，尤其是在要呈现的数据细节比较丰富的时候，可能要精确地呈现大小、距离、角度、高度、光线、阴影等等。这些细节的处理，都需要你对图形绘制有更加精确的控制，这就需要较深入地掌握图形学理论知识，了解并熟悉专业的图形库和绘图的工具。简而言之，就是Web开发的前端主要还是关注内容和样式，图形的渲染和绘制是由浏览器底层来完成的，而可视化前端，则可能要深入底层渲染层，真正去控制图形的绘制和细节的呈现。</p>
+<p>尽管Web前端与可视化在工具、思路和方法上有一些区别，但二者也有相通之处。</p>
+<p>其一，可视化与Web前端一样，最终都是以图像呈现在浏览器上，因此有许多通用的方法论。</p>
+<p>其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。</p>
+<p>其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。</p>
+<p>文章来源：https://zhuanlan.zhihu.com/p/158447352</p>
 
             </div>
           </article>
@@ -83,9 +87,9 @@
               <div class="next">
                 下一篇
               </div>
-              <a href="https://jujuul.github.io/post/1/">
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
                 <h3 class="post-title">
-                  Uniapp学习记录day4
+                  每天一个名词解释—React
                 </h3>
               </a>
             </div>
@@ -220,7 +224,7 @@
           uniapp
         </a>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge ">
           前端
         </a>
       

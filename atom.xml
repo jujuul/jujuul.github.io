@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-15T15:28:06.763Z</updated>
+    <updated>2020-08-16T15:09:10.396Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—可视化]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">
+        </link>
+        <updated>2020-08-16T15:06:21.000Z</updated>
+        <content type="html"><![CDATA[<p>如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。<br>
+从工作内容来看，前端工程师主要负责处理内容呈现和用户交互。可视化的数据呈现，尤其是在Web端的呈现，属于前端工程师的范畴。但是，与传统的前端开发相比，可视化开发的工具、思路和方法，又和Web有着比较大的区别。</p>
+<p>首先是技术栈的不同。Web开发主要以HTML来描述结构，以CSS来描述表现，以JavaScript来描述行为。而可视化则较少涉及HTML和CSS，它更多地要同浏览器的Canvas、SVG、WebGl等其他图形API打交道。这是因为，Web开发以呈现块状内容为主，所以HTML是更合适的技术。而可视化开发则需要呈现各种各样的形状、结构，所以，形状更丰富的SVG以及更底层的Canvas2D和WebGL就是更合适的技术了。<br>
+<img src="https://jujuul.github.io//post-images/1597590510836.jpg" alt="" loading="lazy"><br>
+其次，Web开发着重于处理普通的文本和多媒体信息，渲染普通的、易于阅读的文本和多媒体内容，而可视化开发则着重于处理结构化数据，渲染各种相对复杂的图表和图形元素。两者针对的信息特征和对图形渲染的要求有所不同，所以，在细节处理上也有比较大的差异。</p>
+<p>这么说比较抽象，举个例子。在使用ECharts这样现成的图标库开发图表的时候，往往会遇到一些产品需求不能很好被满足的情况。如果想要把图表的默认布局方式从absolute改变成其他方式、把坐标轴指示线的样式换成虚线、把配色换成线性渐变，或者想要修改地图中某个点的点击范围。虽然有的问题，通过修改参数配置（EChart的每种图表可能有数十种不同的配置项）确实能解决，但还是有一些问题必须要修改库的源码才能解决。</p>
+<p>因此，像EChart等现成的图表库，尽管功能强大、配置复杂，但是在样式细节控制上，仍然无法做到如CSS那般灵活。</p>
+<p>除此之外，可视化要处理更多偏视觉方面的细节信息，尤其是在要呈现的数据细节比较丰富的时候，可能要精确地呈现大小、距离、角度、高度、光线、阴影等等。这些细节的处理，都需要你对图形绘制有更加精确的控制，这就需要较深入地掌握图形学理论知识，了解并熟悉专业的图形库和绘图的工具。简而言之，就是Web开发的前端主要还是关注内容和样式，图形的渲染和绘制是由浏览器底层来完成的，而可视化前端，则可能要深入底层渲染层，真正去控制图形的绘制和细节的呈现。</p>
+<p>尽管Web前端与可视化在工具、思路和方法上有一些区别，但二者也有相通之处。</p>
+<p>其一，可视化与Web前端一样，最终都是以图像呈现在浏览器上，因此有许多通用的方法论。</p>
+<p>其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。</p>
+<p>其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。</p>
+<p>文章来源：https://zhuanlan.zhihu.com/p/158447352</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[每天一个名词解释—React]]></title>
         <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/</id>
@@ -324,40 +345,6 @@ Gridea写不了，换成飞书写了。</p>
 文章对比了5个主流跨端框架，经过文章作者从生态、多端支持度、组件库、 接入成本、开源建设这5个方面的对比，可以看出Uniapp与Taro也是各有领先，虽然不是全方位领先其他框架，但也是位于顶部。<br>
 而Taro最新版本位3.0，今年7月1日发布。<br>
 另附一篇知乎上的文章：迄今为止，大前端各种多终端、跨端，解决方案合集https://zhuanlan.zhihu.com/p/100364496</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Uniapp学习记录day6]]></title>
-        <id>https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/</id>
-        <link href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
-        </link>
-        <updated>2020-08-10T01:02:39.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="记一个小坑">记一个小坑：</h2>
-<p>在创建Bucket的时候，要把权限设置为公共读，不然无法通过URL读取，这个博客也做了记载https://blog.csdn.net/wildwolf_001/article/details/83275924，不过这样设置以后打开URL也不是查看，而是直接下载，不过总比之前的XML报错好。</p>
-<h2 id="又一个要注意的">又一个要注意的：</h2>
-<pre><code>module.exports = {
-  upload,
-  uploadimg,
-};
-</code></pre>
-<h2 id="这样暴露的要这样接收">这样暴露的要这样接收</h2>
-<pre><code>let {uploadimg} = require(&quot;../oss/oss&quot;);
-</code></pre>
-<p>关于前面提到的图片不能显示而是直接下载的问题，在阿里云的开发者社区里找到个提问帖，有人回复是需要绑定域名才可以预览图片，刚好浏览这个页面时，有个银川的短号打过来，刚好我也没有直接挂断而是接听了，那边是阿里OSS的客服，因为昨天我询问了关于这个的问题，今天有个电话回复，然后把文档发我QQ邮箱了，不得不说客服的态度很好。<br>
-可惜态度好也不能解决问题，也不知道是我没表述清楚还是什么，不过最终还是找到了https://help.aliyun.com/document_detail/142631.html，如果Bucket是在19年9月23日前创建的，是可以预览的，在那之后的使用OSS默认域名生成的文件URL从浏览器访问时会以附件形式下载，使用自有域名生成的文件URL访问时，可以预览文件内容。看来还是要绑定域名，不过这有个前提，对于图片文件（在未修改文件http头的情况下），不清楚这里的未修改文件http头是指什么，可是我详情里面看到HTTP是设置过的，针对不同文件也有不同的解析，而且我上传了一个PDF文件，解析的HTTP头里的Content-Type也是application/pdf，而且输入URL也能正常浏览无需下载，看来还是要绑定域名。</p>
-<h2 id="开始数据联调">开始数据联调</h2>
-<p><img src="https://jujuul.github.io//post-images/1597052848420.PNG" alt="" loading="lazy"><br>
-这边数据是没什么问题的<br>
-<img src="https://jujuul.github.io//post-images/1597052902526.PNG" alt="" loading="lazy"><br>
-上来就开始给我报错(ps:传图片的时候发现Gridea不允许上传同名图片)<br>
-找了个有关的帖子http://www.wxappclub.com/topic/798，如果填了小程序APPID就必须满足三个条件<br>
-1.必须是https协议<br>
-2.tls 必须在 1.2 及以上版本<br>
-3.必须在小程序的后台（不是接口的后台），配置上https请求<br>
-解决办法是取消小程序APPID<br>
-在Uniapp上解绑了，但是小程序页不跳出之前的未绑定APPID的报错，看来要在开发者工具上面操作，详情里的APPID无法修改，按网上说的该project.config.json里的，打开看这里的压根也不是我的APPID啊，改了也没用。<br>
-排查了半天，原来是没写http，本地配置里的不校验合法域名那一条是默认勾选的(大概)。<br>
-<img src="https://jujuul.github.io//post-images/1597054724070.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
