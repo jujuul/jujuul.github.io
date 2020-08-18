@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>每天一个名词解释—单页应用 | Mark</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597721993734">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="learn" class="menu">
+                测试
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>每天一个名词解释—单页应用</h1>
+            <p class="article-meta">
+              2020-08-18
+              
+            </p>
+            
+            <div class="post-content">
+              <h1 id="什么是单页应用">什么是单页应用</h1>
+<p>在早期的 Web 应用中，前端的作用很弱，业务逻辑和数据处理都在后端，后端给前端返回一个 HTML 页面，前端只负责展示。在这种模式下，单个 HTML 页面被当做一个功能原件，表单提交，超链接跳转都可以用来重新请求新的 HTML 页面，从而达到给用户展示新的页面的目的。在这种方式中，你可以感觉到页面总是在不停的刷新，一个点击可能都需要等待很久，这是因为，当页面变化时，所有资源都需要重新请求。这些问题导致了用户体验不佳，也浪费了资源。单页应用便很好的解决了这些问题。</p>
+<h2 id="概念">概念</h2>
+<p>什么是单页应用呢？单页应用的全称是 single-page application，简称 SPA，它是一种网站应用的模型，它可以动态重写当前的页面来与用户交互，而不需要重新加载整个页面。单页应用的流畅性让 Web 应用更像桌面端或 Native 应用了。相对于传统的 Web 应用，单页应用做到了前后端分离，后端只负责处理数据提供接口，页面逻辑和页面渲染都交给了前端。前端发展到现在，单页应用的使用已经很广泛，目前时兴的 React、Vue、Angular 等前端框架均采用了 SPA 原则。单页应用意味着前端掌握了主动权，也让前端代码更复杂和庞大，模块化、组件化以及架构设计都变得越来越重要。<br>
+来体验一下单页应用吧，打开你的 Gmail，点击左侧的导航栏，在开发者工具的 Network 中可以看到资源是按需加载的，此时页面也并没有刷新，观察 Elements 栏下的 HTML，你会发现整个 HTML 的大框架是不变的，页面改变时，或者说路由改变时，DOM 树只是改变它需要改变的部分，也就是动态改变。</p>
+<h2 id="工作原理">工作原理</h2>
+<p>SPA 的一个重要实现就是改变路由时，页面不刷新。实现这个功能，通常有两种方式：使用 window.history 对象或 location.hash。</p>
+<h3 id="history-对象">history 对象</h3>
+<p>window.history 包含了浏览器的历史信息，它有以下几种常用方法：<br>
+• history.back()：与在浏览器点击后退按钮相同；<br>
+• history.forward()：与在浏览器中点击按钮向前相同；<br>
+• history.go(n)：接受一个整数作为参数，移动到该整数指定的页面，比如 go(1) 相当于 forward()，go(-1) 相当于 back()，go(0) 相当于刷新当前页面。<br>
+HTML5 对 history 对象新增了 pushState() 和 replaceState() 方法，这两个方法可以往历史栈中添加数据，给用户的感觉就是浏览器的 url 改变了，但是页面并没有重新加载。pushState() 是在浏览记录中添加一个新记录，replaceState() 则是修改当前的浏览器记录，这是二者的细微差别，使用时参数的字段和含义都是一样的。<br>
+<code>window.history.pushState(state, title, url)</code><br>
+• state 是状态对象，可以用 history.state 读取；<br>
+• title 表示新页面的标题，但是现在的所有浏览器都会忽略这个字段，所以可以传 null；<br>
+• url 是新页面的地址，必须是和当前页面在同一个域。</p>
+<p>当用户点击浏览器上的前进和后退按钮时，或者调用上述 window.history 的 back、forward 和 go 方法，就会触发 popstate 事件。该事件只针对同一个文档，如果浏览历史的切换导致加载了不同的文档，popstate 事件将不会被触发。popstate 事件回调函数的参数中的 state 属性指向 pushState() 和 replaceState() 方法为当前页面提供的状态，也就是 pushState() 和 replaceState() 方法使用时传的第一个参数 state。</p>
+<p>我们可以通过 pushState() 简单模拟一下浏览器的路由改变且不刷新页面。</p>
+<pre><code>&lt;a class=&quot;spa&quot;&gt;spa1.html&lt;/a&gt;
+&lt;a class=&quot;spa&quot;&gt;spa2.html&lt;/a&gt;
+
+&lt;button onclick=&quot;goBack()&quot;&gt;back&lt;/button&gt;
+&lt;button onclick=&quot;goForward()&quot;&gt;back&lt;/button&gt;
+</code></pre>
+<pre><code>document.querySelectorAll('.spa').forEach((item, index) =&gt; {
+    item.addEventListener('click', (e) =&gt; {
+        e.preventDefault();
+        let link = item.textContent;
+        window.history.pushState({name: `spa${index + 1}`}, link, link)
+        console.log(link, 'pushState')
+    }, false)
+})
+
+window.addEventListener('popstate', (e) =&gt; {
+    console.log(e.state)
+})
+
+function goBack() {
+    window.history.back()
+}
+
+function goForward() {
+    window.history.forward()
+}
+</code></pre>
+<p>通过监听点击事件，使用 pushState() 来修改 history 对象，下面的 gif 图演示了这个过程。需要注意的是，pushState() 和 replaceState() 方法只能修改路由，并不能让页面重新渲染。浏览器地址栏显示 demo/spa2.html 时，并不会跳转到 spa2.html 页面，也不会检查 spa2.html 页面是否存在，只是使其成为浏览器历史中的最新记录。<br>
+<img src="https://jujuul.github.io//post-images/1597719961545.gif" alt="" loading="lazy"></p>
+<h3 id="hash">hash</h3>
+<p>hash 是 location 对象的属性，它指的是当前 url 的锚，也就是从 # 号开始的部分。修改 location.hash 并监听 window 的 hashchange 事件，也能达到同样的目的。</p>
+<pre><code>&lt;a class=&quot;spa&quot;&gt;spa1.html&lt;/a&gt;
+&lt;a class=&quot;spa&quot;&gt;spa2.html&lt;/a&gt;
+</code></pre>
+<pre><code>document.querySelectorAll('.spa').forEach((item, index) =&gt; {
+    item.addEventListener('click', (e) =&gt; {
+        e.preventDefault();
+        location.hash = index + 1
+    }, false)
+})
+
+window.addEventListener('hashchange', (e) =&gt; {
+    console.log({ hash: location.hash })
+})
+</code></pre>
+<p>演示效果如下：<br>
+<img src="https://jujuul.github.io//post-images/1597720003223.gif" alt="" loading="lazy"></p>
+<h2 id="优缺点">优缺点</h2>
+<p>SPA 可圈可点，现在已被大家广泛使用，也得到了主流框架的支持，但是它也有局限性，我们将它的优缺点总结如下。<br>
+优点有：<br>
+• 无刷新体验，用户在切换页面过程中不会频繁被“打断”，因为界面框架都在本地，对用户的响应非常及时，因此提升了用户体验；<br>
+• 分离前后端关注点，前端负责界面显示，后端负责数据存储和计算，各司其职，不会把前后端的逻辑混杂在一起；<br>
+• 减轻服务器压力，服务器只用出数据就可以，不用管展示逻辑和页面合成，吞吐能力会提高几倍；<br>
+• API 共享，同一套后端程序代码，不用修改就可以用于Web界面、手机、平板等多种客户端；<br>
+• 完全的前端组件化，前端开发不再以页面为单位，更多地采用组件化的思想，代码结构和组织方式更加规范化，便于修改和调整。<br>
+缺点有：<br>
+• 对 SEO 不太优好，尽管可以通过 Prerender 预渲染优化等技术解决一部分，但是相对还是不容易索引到它；<br>
+• 易出错，需要使用程序管理前进、后退、地址栏等信息；<br>
+• 较高的前端开发门槛，对技术能力要求较高，需要对设计模式有一定理解，因为面对不是一个简单的页面，而是一个运行在浏览器环境里面的桌面软件。</p>
+<p>文章来源：https://www.yuque.com/fe9/basic/xvftk8</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
+                <h3 class="post-title">
+                  每天一个名词解释—Typescript
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://jujuul.github.io//images/avatar.png?v=1597721993734" class="no-responsive avatar">
+    <div class="text-muted">温故而知新</div>
+    <div class="social-container">
+      
+        
+          <a href="https://github.com/jujuul" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">每天一个名词解释—Typescript</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">每天一个名词解释—React</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">每天一个名词解释—electron</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">每天一个名词解释—骨架屏(Skeleton)</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">每天一个名词解释—Nuxt.js</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">每天一个名词解释—UmiJS</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
+          uniapp
+        </a>
+      
+        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
+          前端
+        </a>
+      
+        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
