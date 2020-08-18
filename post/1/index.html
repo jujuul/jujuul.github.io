@@ -1,76 +1,87 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>Uniapp学习记录day4 | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597721993734">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597722070997">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="learn" class="menu">
-                测试
-              </a>
-            
-          </li>
-        
-      </ul>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jujuul.github.io/">
+        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597722070997" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jujuul.github.io/">
+        <h1 class="site-title">Mark</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>Uniapp学习记录day4</h1>
-            <p class="article-meta">
-              2020-08-08
-              
-                <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-                  uniapp
-                </a>
-              
-            </p>
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="learn" class="menu purple-link">
+            测试
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png')">
+            </div>
+          
+          <h2 class="post-title">Uniapp学习记录day4</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-08-08</span>
             
-              <img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png" alt="Uniapp学习记录day4">
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://jujuul.github.io/tag/L2QA5znWB/">
+                    uniapp
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content">
-              <p>今天的主要内容应该还是koa和数据库</p>
+          </div>
+          <div class="post-content">
+            <p>今天的主要内容应该还是koa和数据库</p>
 <p>Robo 3T 和 Compass删除对比<br>
 <img src="https://jujuul.github.io//post-images/1596876580748.PNG" alt="" loading="lazy"><br>
 <img src="https://jujuul.github.io//post-images/1596876584566.PNG" alt="" loading="lazy"><br>
@@ -80,185 +91,52 @@
 <p>记一个坑：<br>
 通过中间件来捕获全局异常时，要把中间件放在use的最前面,不然就会出错。</p>
 
-            </div>
-          </article>
+          </div>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-                <h3 class="post-title">
-                  防抖和节流
-                </h3>
-              </a>
-            </div>
-          
-        </div>
+
         
+          <div class="next-post">
+            <a class="purple-link" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
+              <h3 class="post-title">
+                下一篇：防抖和节流
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1597721993734" class="no-responsive avatar">
-    <div class="text-muted">温故而知新</div>
-    <div class="social-container">
       
-        
-          <a href="https://github.com/jujuul" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-    </div>
+    
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">每天一个名词解释—Typescript</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">每天一个名词解释—React</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">每天一个名词解释—electron</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">每天一个名词解释—骨架屏(Skeleton)</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">每天一个名词解释—Nuxt.js</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">每天一个名词解释—UmiJS</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
-          前端
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge ">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
-  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
 
     </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 

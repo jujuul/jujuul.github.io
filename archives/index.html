@@ -1,542 +1,440 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
-<title>文章归档 | Mark</title>
+<title>Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597721993734">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597722070997">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="learn" class="menu">
-                测试
-              </a>
-            
-          </li>
-        
-      </ul>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jujuul.github.io/">
+        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597722070997" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jujuul.github.io/">
+        <h1 class="site-title">Mark</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-</nav>
-
-    
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          
-
-          <h2 class="archives-title">文章归档</h2>
-          <div class="archives-container">
-            
-              <h3 class="year" data-aos-delay="500">2020</h3>
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">
-                      <h4 class="post-title">
-                        每天一个名词解释—单页应用
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
-                      <h4 class="post-title">
-                        每天一个名词解释—Typescript
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">
-                      <h4 class="post-title">
-                        每天一个名词解释—可视化
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
-                      <h4 class="post-title">
-                        每天一个名词解释—React
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">
-                      <h4 class="post-title">
-                        每天一个名词解释—electron
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">
-                      <h4 class="post-title">
-                        每天一个名词解释—骨架屏(Skeleton)
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">
-                      <h4 class="post-title">
-                        字母换行失败问题
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">
-                      <h4 class="post-title">
-                        每天一个名词解释—Nuxt.js
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">
-                      <h4 class="post-title">
-                        ES6中的Symbol
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
-                      <h4 class="post-title">
-                        每天一个名词解释—UmiJS
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day7
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
-                      <h4 class="post-title">
-                        每天一个名词解释—Taro
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day6
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day5
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">
-                      <h4 class="post-title">
-                        每天一个名词解释—nest.js
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-                      <h4 class="post-title">
-                        vuetify学习记录
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/1/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day4
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-                      <h4 class="post-title">
-                        防抖和节流
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
-                      <h4 class="post-title">
-                        收藏的一些有用的网站
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
-                      <h4 class="post-title">
-                        一些前端UI框架
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day3
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day2
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">
-                      <h4 class="post-title">
-                        Uniapp学习记录day1
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/xue-xi-mu-biao/">
-                      <h4 class="post-title">
-                        学习目标
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-                
-              
-            
-              <h3 class="year" data-aos-delay="500">2018</h3>
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-              
-                
-                  <article class="post">
-                    <a href="https://jujuul.github.io/post/hello-gridea/">
-                      <h4 class="post-title">
-                        Hello Gridea
-                      </h4>
-                    </a>
-                  </article>
-                
-              
-            
-          </div>
-        </div>
-        <div class="row flex-edges">
-  
-  
 </div>
 
-      </div>
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1597721993734" class="no-responsive avatar">
-    <div class="text-muted">温故而知新</div>
-    <div class="social-container">
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
         
-          <a href="https://github.com/jujuul" target="_blank">
-            <i class="fab fa-github"></i>
+          <a href="learn" class="menu purple-link">
+            测试
           </a>
         
       
-        
-      
-        
-      
-        
-      
-        
-      
     </div>
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
+</transition>
+
+
+        <div class="content-container">
           
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a>
-            </li>
           
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">每天一个名词解释—Typescript</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">每天一个名词解释—React</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">每天一个名词解释—electron</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">每天一个名词解释—骨架屏(Skeleton)</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">每天一个名词解释—Nuxt.js</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">每天一个名词解释—UmiJS</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
+
+<div class="archives-container">
+  
+    <h2 class="year">2020</h2>
+    
       
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge warning">
-          uniapp
-        </a>
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">
+            <h2 class="post-title">
+              每天一个名词解释—单页应用
+              <small>2020-08-18</small>
+            </h2>
+          </a>
+        </article>
       
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge success">
-          前端
-        </a>
+    
       
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge success">
-          Gridea
-        </a>
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
+            <h2 class="post-title">
+              每天一个名词解释—Typescript
+              <small>2020-08-17</small>
+            </h2>
+          </a>
+        </article>
       
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
-  </div>
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">
+            <h2 class="post-title">
+              每天一个名词解释—可视化
+              <small>2020-08-16</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
+            <h2 class="post-title">
+              每天一个名词解释—React
+              <small>2020-08-15</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">
+            <h2 class="post-title">
+              每天一个名词解释—electron
+              <small>2020-08-14</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">
+            <h2 class="post-title">
+              每天一个名词解释—骨架屏(Skeleton)
+              <small>2020-08-13</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">
+            <h2 class="post-title">
+              字母换行失败问题
+              <small>2020-08-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">
+            <h2 class="post-title">
+              每天一个名词解释—Nuxt.js
+              <small>2020-08-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">
+            <h2 class="post-title">
+              ES6中的Symbol
+              <small>2020-08-11</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
+            <h2 class="post-title">
+              每天一个名词解释—UmiJS
+              <small>2020-08-11</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
+            <h2 class="post-title">
+              Uniapp学习记录day7
+              <small>2020-08-11</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
+            <h2 class="post-title">
+              每天一个名词解释—Taro
+              <small>2020-08-10</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
+            <h2 class="post-title">
+              Uniapp学习记录day6
+              <small>2020-08-10</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
+            <h2 class="post-title">
+              Uniapp学习记录day5
+              <small>2020-08-09</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">
+            <h2 class="post-title">
+              每天一个名词解释—nest.js
+              <small>2020-08-09</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
+            <h2 class="post-title">
+              vuetify学习记录
+              <small>2020-08-08</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/1/">
+            <h2 class="post-title">
+              Uniapp学习记录day4
+              <small>2020-08-08</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
+            <h2 class="post-title">
+              防抖和节流
+              <small>2020-08-08</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
+            <h2 class="post-title">
+              收藏的一些有用的网站
+              <small>2020-08-07</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
+            <h2 class="post-title">
+              一些前端UI框架
+              <small>2020-08-07</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
+            <h2 class="post-title">
+              Uniapp学习记录day3
+              <small>2020-08-07</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
+            <h2 class="post-title">
+              Uniapp学习记录day2
+              <small>2020-08-06</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">
+            <h2 class="post-title">
+              Uniapp学习记录day1
+              <small>2020-08-05</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/xue-xi-mu-biao/">
+            <h2 class="post-title">
+              学习目标
+              <small>2020-08-05</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+      
+    
+  
+    <h2 class="year">2018</h2>
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        <article class="post">
+          <a href="https://jujuul.github.io/post/hello-gridea/">
+            <h2 class="post-title">
+              Hello Gridea
+              <small>2018-12-12</small>
+            </h2>
+          </a>
+        </article>
+      
+    
+  
 </div>
 
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        </div>
 
-<script type="application/javascript">
+        <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
+</div>
 
-AOS.init();
+
+      </div>
+      <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
 
 
 
+    </div>
   </body>
 </html>

@@ -1,70 +1,74 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>每天一个名词解释—单页应用 | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597721993734">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597722070997">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="learn" class="menu">
-                测试
-              </a>
-            
-          </li>
-        
-      </ul>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jujuul.github.io/">
+        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597722070997" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jujuul.github.io/">
+        <h1 class="site-title">Mark</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>每天一个名词解释—单页应用</h1>
-            <p class="article-meta">
-              2020-08-18
-              
-            </p>
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="learn" class="menu purple-link">
+            测试
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">每天一个名词解释—单页应用</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-08-18</span>
             
-            <div class="post-content">
-              <h1 id="什么是单页应用">什么是单页应用</h1>
+          </div>
+          <div class="post-content">
+            <h1 id="什么是单页应用">什么是单页应用</h1>
 <p>在早期的 Web 应用中，前端的作用很弱，业务逻辑和数据处理都在后端，后端给前端返回一个 HTML 页面，前端只负责展示。在这种模式下，单个 HTML 页面被当做一个功能原件，表单提交，超链接跳转都可以用来重新请求新的 HTML 页面，从而达到给用户展示新的页面的目的。在这种方式中，你可以感觉到页面总是在不停的刷新，一个点击可能都需要等待很久，这是因为，当页面变化时，所有资源都需要重新请求。这些问题导致了用户体验不佳，也浪费了资源。单页应用便很好的解决了这些问题。</p>
 <h2 id="概念">概念</h2>
 <p>什么是单页应用呢？单页应用的全称是 single-page application，简称 SPA，它是一种网站应用的模型，它可以动态重写当前的页面来与用户交互，而不需要重新加载整个页面。单页应用的流畅性让 Web 应用更像桌面端或 Native 应用了。相对于传统的 Web 应用，单页应用做到了前后端分离，后端只负责处理数据提供接口，页面逻辑和页面渲染都交给了前端。前端发展到现在，单页应用的使用已经很广泛，目前时兴的 React、Vue、Angular 等前端框架均采用了 SPA 原则。单页应用意味着前端掌握了主动权，也让前端代码更复杂和庞大，模块化、组件化以及架构设计都变得越来越重要。<br>
@@ -144,185 +148,52 @@ window.addEventListener('hashchange', (e) =&gt; {
 • 较高的前端开发门槛，对技术能力要求较高，需要对设计模式有一定理解，因为面对不是一个简单的页面，而是一个运行在浏览器环境里面的桌面软件。</p>
 <p>文章来源：https://www.yuque.com/fe9/basic/xvftk8</p>
 
-            </div>
-          </article>
+          </div>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
-                <h3 class="post-title">
-                  每天一个名词解释—Typescript
-                </h3>
-              </a>
-            </div>
-          
-        </div>
+
         
+          <div class="next-post">
+            <a class="purple-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
+              <h3 class="post-title">
+                下一篇：每天一个名词解释—Typescript
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1597721993734" class="no-responsive avatar">
-    <div class="text-muted">温故而知新</div>
-    <div class="social-container">
       
-        
-          <a href="https://github.com/jujuul" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-    </div>
+    
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">每天一个名词解释—Typescript</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">每天一个名词解释—React</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">每天一个名词解释—electron</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">每天一个名词解释—骨架屏(Skeleton)</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">每天一个名词解释—Nuxt.js</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">每天一个名词解释—UmiJS</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge ">
-          uniapp
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge secondary">
-          前端
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
-  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
 
     </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 

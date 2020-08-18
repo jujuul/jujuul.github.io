@@ -1,70 +1,74 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>每天一个名词解释—Typescript | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597721993734">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597722070997">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="https://jujuul.github.io/">Mark</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="learn" class="menu">
-                测试
-              </a>
-            
-          </li>
-        
-      </ul>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://jujuul.github.io/">
+        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597722070997" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://jujuul.github.io/">
+        <h1 class="site-title">Mark</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>每天一个名词解释—Typescript</h1>
-            <p class="article-meta">
-              2020-08-17
-              
-            </p>
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="learn" class="menu purple-link">
+            测试
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">每天一个名词解释—Typescript</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-08-17</span>
             
-            <div class="post-content">
-              <h2 id="官网介绍">官网介绍</h2>
+          </div>
+          <div class="post-content">
+            <h2 id="官网介绍">官网介绍</h2>
 <p>TypeScript 是 JavaScript 的类型的超集，它可以编译成纯 JavaScript。编译出来的 JavaScript 可以运行在任何浏览器上。TypeScript 编译工具可以运行在任何服务器和任何系统上。TypeScript 是开源的。</p>
 <h2 id="他人总结">他人总结</h2>
 <p>typescript是由微软开发的一个javascript超集，本质是向javascript这门弱类型动态语言添加了静态类型和面向 对象。作者是安德斯-海尔斯伯格，C#之父。从发布至今，typescript一直倍受关注，star数直线上升，并且被越来越多的个人和组织认可，首先是默认使用ts的angular系列框架，vue在2.2开始支持ts，2.5版本以后全面支持，包括vux,vue-router，在vue-cli3.0脚手架当中，ts被加入到默认选项当中。react后续也开始支持ts，包括增加jsx式的模板引擎tsx。后续更多的开源库也开始支持，包括element-ui、iView、AntD。</p>
@@ -84,185 +88,52 @@
 <li>可能和一些库结合的不是很完美</li>
 </ul>
 
-            </div>
-          </article>
+          </div>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">
-                <h3 class="post-title">
-                  每天一个名词解释—可视化
-                </h3>
-              </a>
-            </div>
-          
-        </div>
+
         
+          <div class="next-post">
+            <a class="purple-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">
+              <h3 class="post-title">
+                下一篇：每天一个名词解释—可视化
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="https://jujuul.github.io//images/avatar.png?v=1597721993734" class="no-responsive avatar">
-    <div class="text-muted">温故而知新</div>
-    <div class="social-container">
       
-        
-          <a href="https://github.com/jujuul" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-        
+
+      <div class="site-footer">
+  <div class="slogan">温故而知新</div>
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-    </div>
+    
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">每天一个名词解释—Typescript</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">每天一个名词解释—React</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">每天一个名词解释—electron</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">每天一个名词解释—骨架屏(Skeleton)</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">每天一个名词解释—Nuxt.js</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">每天一个名词解释—UmiJS</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="badge secondary">
-          uniapp
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="badge warning">
-          前端
-        </a>
-      
-        <a href="https://jujuul.github.io/tag/_TGaS4zT9/" class="badge secondary">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
-  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
 
     </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
