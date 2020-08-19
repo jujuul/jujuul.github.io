@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-18T03:41:14.246Z</updated>
+    <updated>2020-08-19T07:03:30.644Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,44 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—webpack]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/">
+        </link>
+        <updated>2020-08-19T06:54:49.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="概念">概念</h1>
+<p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
+<p>webpack是一个打包工具，可以将项目中用到的各种文件按照一定的规则集合起来。在这个过程中可以进行诸如图片压缩、ES6语法转ES5语法、TypeScript转JavaScript等等操作。</p>
+<h2 id="与gulpgrunt等打包工具有什么区别">与gulp/grunt等打包工具有什么区别？</h2>
+<p><code>gulp 是自动化构建工具，可以配合各种插件做 js 压缩、css 压缩、less 编译、代码检查等，替代手工实现自动化工作</code><br>
+1 构建工具<br>
+2 自动化<br>
+3 提高效率用</p>
+<p><code>webpack是文件打包工具，可以把项目的各种 js、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案</code><br>
+1 打包工具<br>
+2 模块化识别<br>
+3 编译模块化代码方案用</p>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="概念">概念</h1>
+<p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
+<p>webpack是一个打包工具，可以将项目中用到的各种文件按照一定的规则集合起来。在这个过程中可以进行诸如图片压缩、ES6语法转ES5语法、TypeScript转JavaScript等等操作。</p>
+<h2 id="与gulpgrunt等打包工具有什么区别">与gulp/grunt等打包工具有什么区别？</h2>
+<p><code>gulp 是自动化构建工具，可以配合各种插件做 js 压缩、css 压缩、less 编译、代码检查等，替代手工实现自动化工作</code><br>
+1 构建工具<br>
+2 自动化<br>
+3 提高效率用</p>
+<p><code>webpack是文件打包工具，可以把项目的各种 js、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案</code><br>
+1 打包工具<br>
+2 模块化识别<br>
+3 编译模块化代码方案用</p>
+<!-- more -->
+<p>说到webpack，那还要说到 seajs / requirejs / browserify。这四个都是JS模块化的方案。其中 seajs / require 是一种类型，webpack/browserify是另一种类型。</p>
+<p>seajs / require : 是一种在线&quot;编译&quot; 模块的方案，相当于在页面上加载一个CMD/AMD解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。<br>
+webpack/browserify : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过 browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。<br>
+  总结，Gulp是一个工具，而webpack是模块化方案。Gulp 也可以配置seajs、requirejs 甚至 webpack 的插件。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[每天一个名词解释—单页应用]]></title>
         <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/</id>
@@ -358,66 +396,6 @@ Reflect.ownKeys(obj) // [Symbol(name), 'age', 'title']
 <p>最后贴一下MDN的兼容表<br>
 <img src="https://jujuul.github.io//post-images/1597161891981.PNG" alt="" loading="lazy"><br>
 可以看到并不被IE浏览器支持</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—UmiJS]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
-        </link>
-        <updated>2020-08-11T03:05:20.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="什么是umijs">什么是Umi.js?</h2>
-<p>Umi，中文可发音为乌米，是可扩展的企业级前端应用框架。Umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。你可以将它简单的理解为一个专注性能的类 next.js 前端框架，并通过约定、自动生成和解析代码等方式来辅助开发，减少我们开发者的代码量。<br>
-为什么使用Umi.js?<br>
-我们做react开发的时候会不会遇到以下问题？：<br>
-1.项目做大的时候，开发调试的启动和热更新时间会变得很长。<br>
-2.大应用下，网站打开很慢，有没有办法基于路由做到按需加载。<br>
-3.dva的model每次都要手写载入，能否一开始就同项目初始化好？</p>
-<p>使用乌米，即可解决以上问题，并且还能提供如下优势：</p>
-<p>开箱即用，内置 react、react-router 等<br>
-类 next.js 且功能完备的路由约定，同时支持配置的路由方式<br>
-完善的插件体系，覆盖从源码到构建产物的每个生命周期<br>
-一键兼容到 IE9<br>
-完善的 TypeScript 支持<br>
-与 dva 数据流的深入融合</p>
-<p>以上内容来源于网络，可能因为没有使用过React的原因?以上的内容听得我云里雾里，根本不知道是干什么的，后来翻到知乎上UmiJS作者发布umi 1.0的那篇文章，才大概看懂了些。</p>
-<h2 id="umi-是什么">umi 是什么？</h2>
-<p>umi 是一个类 next.js 的专注性能的前端框架，他的优势是：<br>
-? 内置的大量性能优化<br>
-? 多端，无缝支持容器和浏览器访问<br>
-? 类 webpack 的插件机制<br>
-? 针对 antd 和 dva 有友好的支持<br>
-他基于以下约定：<br>
-页面是 React 组件<br>
-在 pages 目录下新增文件即可创建页面<br>
-现在写一个 React 应用你需要掌握很多知识，比如基于路由的 code-splitting、service-worker、webpack 配置、babel 配置、aslant 配置、性能优化、HMR、redbox、jest 测试、ts 配置、tree-shaking、scope-hoist、side-effect 等等。umi 把这些枯燥的事情全都做了，而你只需负责创造性的那部分。<br>
-<code>别的没看懂，umi可以把webpack 配置、babel 配置、jest 测试、ts 配置这里还是能看的懂的，总之就是各种简化操作</code></p>
-<h2 id="性能">性能</h2>
-<p>umi 在性能上做了很多努力，这些对于开发者是无感知的。“你只管写业务代码，我会负责性能”，并且随着 umi 的迭代，我保证你的应用会越来越快。<br>
-主要有：<br>
-PWA Support<br>
-Tree Shake<br>
-antd(-mobile) 启用 ES Module<br>
-Scope Hoist<br>
-公共文件的智能提取<br>
-页面级的按需加载<br>
-Inline Critical CSS<br>
-提供 umi/dynamic 和 import() 语法，分别用于懒加载组件和模块<br>
-优化的 babel-preset-umi<br>
-静态化的 SSR 处理<br>
-link rel=preload<br>
-hash 构建及服务端支持（云凤蝶）<br>
-通过 react-constant-elements 和 react-inline-elements 提升 rerender 性能<br>
-一键切换到 preact<br>
-Progressive image loading<br>
-按需打包 umi 内置的路由代码<br>
-...<br>
-<code>都是一些优化方面的</code></p>
-<h2 id="插件机制">插件机制</h2>
-<p>webpack 的生态好，和他灵活的插件机制有很大关系。umi 也类似，他就是个架子，把坑挖好，然后通过插件让功能丰富起来，内部逻辑也是如此，由一个个插件组成。<br>
-插件能做什么？基本什么都能做，整个生命周期都能修改，包括配置、build、dev、html 和 临时文件的生成等，已全部挖好坑。<br>
-<code>现在是不是所有前端的，或者说编程有关的东西都在追求插件化?</code><br>
-最后，这篇文章发于18年2月，网上的大部分讨论也是在那个时间，看起来Umi还没有火起来。</p>
 ]]></content>
     </entry>
 </feed>

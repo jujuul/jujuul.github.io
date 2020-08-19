@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>每天一个名词解释—骨架屏(Skeleton) | Mark</title>
+<title>每天一个名词解释—webpack | Mark</title>
 <meta name="description" content="温故而知新">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -62,41 +62,41 @@
       <div class="content-container">
         <div class="post-detail">
           
-          <h2 class="post-title">每天一个名词解释—骨架屏(Skeleton)</h2>
+            <div class="feature-container" style="background-image: url('https://jujuul.github.io//post-images/mei-tian-yi-ge-ming-ci-jie-shi-webpack.PNG')">
+            </div>
+          
+          <h2 class="post-title">每天一个名词解释—webpack</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-08-13</span>
+            <span><i class="icon-calendar-outline"></i> 2020-08-19</span>
             
           </div>
           <div class="post-content">
-            <p>对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。<br>
-骨架屏能让你的网页‘看起来’展现得更快，但只是看起来，实际上速度还是一样的。<br>
-<img src="https://jujuul.github.io//post-images/1597325013432.png" alt="" loading="lazy"></p>
-<h2 id="骨架屏有哪些优势">骨架屏有哪些优势</h2>
-<p>大体来说，骨架屏的优势在于：<br>
-在页面加载初期预先渲染内容，提升感官上的体验。<br>
-一般情况骨架屏和实际内容的结构是类似的，因此之后的切换不会过于突兀。这点和传统的 Loading 动图不同，可以认为是其升级版。<br>
-只需要简单的 CSS 支持 (涉及图片懒加载可能还需要 JS )，不要求 HTTPS 协议，没有额外的学习和维护成本。<br>
-如果页面采用组件化开发，每个组件可以根据自身状态定义自身的骨架屏及其切换时机，同时维持了组件之间的独立性。</p>
-<h2 id="vue实现骨架屏">Vue实现骨架屏</h2>
-<p>需要用到以下插件<br>
-vue-server-renderer<br>
-vue-skeleton-webpack-plugin<br>
-page-skeleton-webpack-plugin<br>
-<img src="https://jujuul.github.io//post-images/1597325346025.png" alt="" loading="lazy"><br>
-对比发现，就开发难度、灵活性和插件开源方来看，如果你的项目是基于vue-cli脚手架的，那么饿了么团队的page-skeleton-webpack-plugin是你的最佳选择，如果不是，那么你可以选择vue-router开源的vue-server-renderer.</p>
-<p>文章相关链接：<br>
-vue骨架屏实践：https://www.jianshu.com/p/eacac700630e<br>
-网页骨架屏自动生成方案：https://zhuanlan.zhihu.com/p/74403911<br>
-如何让你的网页“看起来”展现地更快 —— 骨架屏二三事：https://zhuanlan.zhihu.com/p/48601348</p>
+            <h1 id="概念">概念</h1>
+<p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
+<p>webpack是一个打包工具，可以将项目中用到的各种文件按照一定的规则集合起来。在这个过程中可以进行诸如图片压缩、ES6语法转ES5语法、TypeScript转JavaScript等等操作。</p>
+<h2 id="与gulpgrunt等打包工具有什么区别">与gulp/grunt等打包工具有什么区别？</h2>
+<p><code>gulp 是自动化构建工具，可以配合各种插件做 js 压缩、css 压缩、less 编译、代码检查等，替代手工实现自动化工作</code><br>
+1 构建工具<br>
+2 自动化<br>
+3 提高效率用</p>
+<p><code>webpack是文件打包工具，可以把项目的各种 js、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案</code><br>
+1 打包工具<br>
+2 模块化识别<br>
+3 编译模块化代码方案用</p>
+<!-- more -->
+<p>说到webpack，那还要说到 seajs / requirejs / browserify。这四个都是JS模块化的方案。其中 seajs / require 是一种类型，webpack/browserify是另一种类型。</p>
+<p>seajs / require : 是一种在线&quot;编译&quot; 模块的方案，相当于在页面上加载一个CMD/AMD解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。<br>
+webpack/browserify : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过 browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。<br>
+  总结，Gulp是一个工具，而webpack是模块化方案。Gulp 也可以配置seajs、requirejs 甚至 webpack 的插件。</p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">
+            <a class="purple-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">
               <h3 class="post-title">
-                下一篇：字母换行失败问题
+                下一篇：每天一个名词解释—单页应用
               </h3>
             </a>
           </div>
