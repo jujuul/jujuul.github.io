@@ -1,84 +1,81 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>一些前端UI框架 | Mark</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597820588723">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597822880333">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="一些前端UI框架 | Mark - Atom Feed" href="https://jujuul.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
+    <meta name="description" content="之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。
+一、WeU..." />
+    <meta name="keywords" content="前端" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://jujuul.github.io/">
-        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597820588723" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://jujuul.github.io/">
-        <h1 class="site-title">Mark</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://jujuul.github.io/">
+  <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597822880333" alt="">
+  </a>
+  <h1 class="site-title">
+    Mark
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="learn" class="menu">
+          测试
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
 </div>
 
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="learn" class="menu purple-link">
-            测试
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
         <div class="post-detail">
-          
-          <h2 class="post-title">一些前端UI框架</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-08-07</span>
-            
+          <article class="post">
+            <h2 class="post-title">
+              一些前端UI框架
+            </h2>
+            <div class="post-info">
               <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-                    前端
-                    
-                  </a>
-                
+                2020-08-07
               </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="post-tag">
+                  # 前端
+                </a>
+              
+            </div>
             
-          </div>
-          <div class="post-content">
-            <p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
 一、WeUI<br>
 官网地址：https://weui.io/<br>
 github：https://github.com/Tencent/weui<br>
@@ -136,57 +133,76 @@ github：https://github.com/ant-design/ant-design/<br>
 github：https://github.com/vuetifyjs/vuetify<br>
 github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最近一周下载也有35W，最重要的是官方文档还用了骨架屏，在elementUI慢慢不再维护的今天，Vuetify应该是下一个elementUI了。</p>
 
-          </div>
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
+            <div class="next">下一篇</div>
+            <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">
               <h3 class="post-title">
-                下一篇：Uniapp学习记录day3
+                Uniapp学习记录day3
               </h3>
             </a>
           </div>
-          
-      </div>
+        
 
-      
+        
 
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-
+      </div>
     </div>
-    <script type="application/javascript">
 
-hljs.initHighlightingOnLoad()
+    <script>
+      hljs.initHighlightingOnLoad()
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-</script>
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
+    </script>
   </body>
 </html>

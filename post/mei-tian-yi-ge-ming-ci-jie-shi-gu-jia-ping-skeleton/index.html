@@ -1,74 +1,76 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>每天一个名词解释—骨架屏(Skeleton) | Mark</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597820588723">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597822880333">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="每天一个名词解释—骨架屏(Skeleton) | Mark - Atom Feed" href="https://jujuul.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
+    <meta name="description" content="对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render ..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://jujuul.github.io/">
-        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597820588723" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://jujuul.github.io/">
-        <h1 class="site-title">Mark</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://jujuul.github.io/">
+  <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597822880333" alt="">
+  </a>
+  <h1 class="site-title">
+    Mark
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="learn" class="menu">
+          测试
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
   </div>
 </div>
 
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="learn" class="menu purple-link">
-            测试
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
         <div class="post-detail">
-          
-          <h2 class="post-title">每天一个名词解释—骨架屏(Skeleton)</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-08-13</span>
+          <article class="post">
+            <h2 class="post-title">
+              每天一个名词解释—骨架屏(Skeleton)
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-13
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
             
-          </div>
-          <div class="post-content">
-            <p>对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。<br>
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。<br>
 骨架屏能让你的网页‘看起来’展现得更快，但只是看起来，实际上速度还是一样的。<br>
 <img src="https://jujuul.github.io//post-images/1597325013432.png" alt="" loading="lazy"></p>
 <h2 id="骨架屏有哪些优势">骨架屏有哪些优势</h2>
@@ -89,57 +91,84 @@ vue骨架屏实践：https://www.jianshu.com/p/eacac700630e<br>
 网页骨架屏自动生成方案：https://zhuanlan.zhihu.com/p/74403911<br>
 如何让你的网页“看起来”展现地更快 —— 骨架屏二三事：https://zhuanlan.zhihu.com/p/48601348</p>
 
-          </div>
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8A%BF">骨架屏有哪些优势</a></li>
+<li><a href="#vue%E5%AE%9E%E7%8E%B0%E9%AA%A8%E6%9E%B6%E5%B1%8F">Vue实现骨架屏</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">
+            <div class="next">下一篇</div>
+            <a href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">
               <h3 class="post-title">
-                下一篇：字母换行失败问题
+                字母换行失败问题
               </h3>
             </a>
           </div>
-          
-      </div>
+        
 
-      
+        
 
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
 </div>
 
-
+      </div>
     </div>
-    <script type="application/javascript">
 
-hljs.initHighlightingOnLoad()
+    <script>
+      hljs.initHighlightingOnLoad()
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-</script>
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
+    </script>
   </body>
 </html>

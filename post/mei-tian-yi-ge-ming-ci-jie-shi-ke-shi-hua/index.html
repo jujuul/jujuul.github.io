@@ -1,105 +1,44 @@
-
-<!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>每天一个名词解释—可视化 | Mark</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597820588723">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597822880333">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="每天一个名词解释—可视化 | Mark - Atom Feed" href="https://jujuul.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
+    <meta name="description" content="如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。
+从工作..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://jujuul.github.io/">
-        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597820588723" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://jujuul.github.io/">
-        <h1 class="site-title">Mark</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://jujuul.github.io/">
+  <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597822880333" alt="">
+  </a>
+  <h1 class="site-title">
+    Mark
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="learn" class="menu">
+          测试
+        </a>
+      
+    
   </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
-      
-        
-          <a href="learn" class="menu purple-link">
-            测试
-          </a>
-        
-      
-    </div>
-  </div>
-</transition>
-
-
-      <div class="content-container">
-        <div class="post-detail">
-          
-          <h2 class="post-title">每天一个名词解释—可视化</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-08-16</span>
-            
-          </div>
-          <div class="post-content">
-            <p>如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。<br>
-从工作内容来看，前端工程师主要负责处理内容呈现和用户交互。可视化的数据呈现，尤其是在Web端的呈现，属于前端工程师的范畴。但是，与传统的前端开发相比，可视化开发的工具、思路和方法，又和Web有着比较大的区别。</p>
-<p>首先是技术栈的不同。Web开发主要以HTML来描述结构，以CSS来描述表现，以JavaScript来描述行为。而可视化则较少涉及HTML和CSS，它更多地要同浏览器的Canvas、SVG、WebGl等其他图形API打交道。这是因为，Web开发以呈现块状内容为主，所以HTML是更合适的技术。而可视化开发则需要呈现各种各样的形状、结构，所以，形状更丰富的SVG以及更底层的Canvas2D和WebGL就是更合适的技术了。<br>
-<img src="https://jujuul.github.io//post-images/1597590510836.jpg" alt="" loading="lazy"><br>
-其次，Web开发着重于处理普通的文本和多媒体信息，渲染普通的、易于阅读的文本和多媒体内容，而可视化开发则着重于处理结构化数据，渲染各种相对复杂的图表和图形元素。两者针对的信息特征和对图形渲染的要求有所不同，所以，在细节处理上也有比较大的差异。</p>
-<p>这么说比较抽象，举个例子。在使用ECharts这样现成的图标库开发图表的时候，往往会遇到一些产品需求不能很好被满足的情况。如果想要把图表的默认布局方式从absolute改变成其他方式、把坐标轴指示线的样式换成虚线、把配色换成线性渐变，或者想要修改地图中某个点的点击范围。虽然有的问题，通过修改参数配置（EChart的每种图表可能有数十种不同的配置项）确实能解决，但还是有一些问题必须要修改库的源码才能解决。</p>
-<p>因此，像EChart等现成的图表库，尽管功能强大、配置复杂，但是在样式细节控制上，仍然无法做到如CSS那般灵活。</p>
-<p>除此之外，可视化要处理更多偏视觉方面的细节信息，尤其是在要呈现的数据细节比较丰富的时候，可能要精确地呈现大小、距离、角度、高度、光线、阴影等等。这些细节的处理，都需要你对图形绘制有更加精确的控制，这就需要较深入地掌握图形学理论知识，了解并熟悉专业的图形库和绘图的工具。简而言之，就是Web开发的前端主要还是关注内容和样式，图形的渲染和绘制是由浏览器底层来完成的，而可视化前端，则可能要深入底层渲染层，真正去控制图形的绘制和细节的呈现。</p>
-<p>尽管Web前端与可视化在工具、思路和方法上有一些区别，但二者也有相通之处。</p>
-<p>其一，可视化与Web前端一样，最终都是以图像呈现在浏览器上，因此有许多通用的方法论。</p>
-<p>其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。</p>
-<p>其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。</p>
-<p>文章来源：https://zhuanlan.zhihu.com/p/158447352</p>
-
-          </div>
-        </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
-              <h3 class="post-title">
-                下一篇：每天一个名词解释—React
-              </h3>
-            </a>
-          </div>
-          
-      </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
   <div class="social-container">
     
       
@@ -113,26 +52,109 @@
       
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              每天一个名词解释—可视化
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-16
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。<br>
+从工作内容来看，前端工程师主要负责处理内容呈现和用户交互。可视化的数据呈现，尤其是在Web端的呈现，属于前端工程师的范畴。但是，与传统的前端开发相比，可视化开发的工具、思路和方法，又和Web有着比较大的区别。</p>
+<p>首先是技术栈的不同。Web开发主要以HTML来描述结构，以CSS来描述表现，以JavaScript来描述行为。而可视化则较少涉及HTML和CSS，它更多地要同浏览器的Canvas、SVG、WebGl等其他图形API打交道。这是因为，Web开发以呈现块状内容为主，所以HTML是更合适的技术。而可视化开发则需要呈现各种各样的形状、结构，所以，形状更丰富的SVG以及更底层的Canvas2D和WebGL就是更合适的技术了。<br>
+<img src="https://jujuul.github.io//post-images/1597590510836.jpg" alt="" loading="lazy"><br>
+其次，Web开发着重于处理普通的文本和多媒体信息，渲染普通的、易于阅读的文本和多媒体内容，而可视化开发则着重于处理结构化数据，渲染各种相对复杂的图表和图形元素。两者针对的信息特征和对图形渲染的要求有所不同，所以，在细节处理上也有比较大的差异。</p>
+<p>这么说比较抽象，举个例子。在使用ECharts这样现成的图标库开发图表的时候，往往会遇到一些产品需求不能很好被满足的情况。如果想要把图表的默认布局方式从absolute改变成其他方式、把坐标轴指示线的样式换成虚线、把配色换成线性渐变，或者想要修改地图中某个点的点击范围。虽然有的问题，通过修改参数配置（EChart的每种图表可能有数十种不同的配置项）确实能解决，但还是有一些问题必须要修改库的源码才能解决。</p>
+<p>因此，像EChart等现成的图表库，尽管功能强大、配置复杂，但是在样式细节控制上，仍然无法做到如CSS那般灵活。</p>
+<p>除此之外，可视化要处理更多偏视觉方面的细节信息，尤其是在要呈现的数据细节比较丰富的时候，可能要精确地呈现大小、距离、角度、高度、光线、阴影等等。这些细节的处理，都需要你对图形绘制有更加精确的控制，这就需要较深入地掌握图形学理论知识，了解并熟悉专业的图形库和绘图的工具。简而言之，就是Web开发的前端主要还是关注内容和样式，图形的渲染和绘制是由浏览器底层来完成的，而可视化前端，则可能要深入底层渲染层，真正去控制图形的绘制和细节的呈现。</p>
+<p>尽管Web前端与可视化在工具、思路和方法上有一些区别，但二者也有相通之处。</p>
+<p>其一，可视化与Web前端一样，最终都是以图像呈现在浏览器上，因此有许多通用的方法论。</p>
+<p>其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。</p>
+<p>其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。</p>
+<p>文章来源：https://zhuanlan.zhihu.com/p/158447352</p>
 
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
+              <h3 class="post-title">
+                每天一个名词解释—React
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
     </div>
-    <script type="application/javascript">
 
-hljs.initHighlightingOnLoad()
+    <script>
+      hljs.initHighlightingOnLoad()
 
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
 
-</script>
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
 
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
 
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
 
-
+    </script>
   </body>
 </html>

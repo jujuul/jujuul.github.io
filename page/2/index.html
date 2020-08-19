@@ -1,311 +1,40 @@
-
 <html>
   <head>
-    
-<meta charset="utf-8" >
-
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mark</title>
-<meta name="description" content="温故而知新">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597820588723">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597822880333">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Mark - Atom Feed" href="https://jujuul.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-
-
-
+    <meta name="description" content="温故而知新" />
   </head>
   <body>
-    <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="https://jujuul.github.io/">
-        <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597820588723" alt="" width="32px" height="32px">
-      </a>
-      <a href="https://jujuul.github.io/">
-        <h1 class="site-title">Mark</h1>
-      </a>
-    </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://jujuul.github.io/">
+  <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597822880333" alt="">
+  </a>
+  <h1 class="site-title">
+    Mark
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
       
-        
-          <a href="learn" class="menu purple-link">
-            测试
-          </a>
-        
+        <a href="learn" class="menu">
+          测试
+        </a>
       
-    </div>
+    
   </div>
-</transition>
-
-
-      <div class="content-container">
-        
-        
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
-        <h2 class="post-title">每天一个名词解释—UmiJS</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-11</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
-        <h2 class="post-title">Uniapp学习记录day7</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-11</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-                uniapp
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
-        <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
-        <h2 class="post-title">每天一个名词解释—Taro</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-10</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
-        <h2 class="post-title">Uniapp学习记录day6</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-10</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-                uniapp
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
-        <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
-        <h2 class="post-title">Uniapp学习记录day5</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-09</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-                uniapp
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
-        <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">
-        <h2 class="post-title">每天一个名词解释—nest.js</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-09</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-        <h2 class="post-title">vuetify学习记录</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-08</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/1/">
-        <h2 class="post-title">Uniapp学习记录day4</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-08</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-                uniapp
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-      <a href="https://jujuul.github.io/post/1/">
-        <div class="feature-container" style="background-image: url('https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1596648853825&amp;di=6423f9f66613686add52a693e9969876&amp;imgtype=0&amp;src=http%3A%2F%2Fwww.jalon888.com%2Fzb_users%2Fupload%2F2019%2F06%2F201906041559615633214494.png')">
-        </div>
-      </a>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-        <h2 class="post-title">防抖和节流</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-08</span>
-        
-          <span>
-            <i class="icon icon-pricetags-outline"></i>
-            
-              <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-                前端
-                
-              </a>
-            
-          </span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-<section class="post-item">
-    <div class="content">
-      <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
-        <h2 class="post-title">收藏的一些有用的网站</h2>
-      </a>
-      <div class="post-abstract">
-        
-      </div>
-      <div class="post-info">
-        <span><i class="icon icon-calendar-outline"></i> 2020-08-07</span>
-        
-      </div>
-    </div>
-    
-  </section>
-
-
-<div class="pagination-container">
-  
-    <a href="https://jujuul.github.io/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
-  
-  
-    <a href="https://jujuul.github.io/page/3/" class="next">下一页 <i class="icon-arrow-ios-forward-outline"></i></a>
-  
-</div>
-
-
-      </div>
-
-      <div class="site-footer">
-  <div class="slogan">温故而知新</div>
   <div class="social-container">
     
       
@@ -319,26 +48,242 @@
       
     
   </div>
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
+    
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/">
+        <h2 class="post-title">每天一个名词解释—UmiJS</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-11
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">
+        <h2 class="post-title">Uniapp学习记录day7</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-11
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="post-tag">
+            # uniapp
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
+        <h2 class="post-title">每天一个名词解释—Taro</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-10
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">
+        <h2 class="post-title">Uniapp学习记录day6</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-10
+        </span>
+        <span>
+          3 min read
+        </span>
+        
+          <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="post-tag">
+            # uniapp
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/">
+        <h2 class="post-title">Uniapp学习记录day5</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-09
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="post-tag">
+            # uniapp
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">
+        <h2 class="post-title">每天一个名词解释—nest.js</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-09
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
+        <h2 class="post-title">vuetify学习记录</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-08
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/1/">
+        <h2 class="post-title">Uniapp学习记录day4</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-08
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="https://jujuul.github.io/tag/L2QA5znWB/" class="post-tag">
+            # uniapp
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
+        <h2 class="post-title">防抖和节流</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-08
+        </span>
+        <span>
+          2 min read
+        </span>
+        
+          <a href="https://jujuul.github.io/tag/cg2tXSp4Q/" class="post-tag">
+            # 前端
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
+        <h2 class="post-title">收藏的一些有用的网站</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-08-07
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
 
+    
+        <div class="pagination-container">
+  
+    <a href="https://jujuul.github.io/" class="prev-page">上一页</a>
+  
+  
+    <a href="https://jujuul.github.io/page/3/" class="next-page">下一页</a>
+  
+</div>
+
+    
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
     </div>
-    <script type="application/javascript">
-
-hljs.initHighlightingOnLoad()
-
-var app = new Vue({
-  el: '#app',
-  data: {
-    menuVisible: false,
-  },
-})
-
-</script>
-
-
-
-
   </body>
 </html>
