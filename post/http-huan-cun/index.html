@@ -1,0 +1,242 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HTTP缓存 | Mark</title>
+<link rel="shortcut icon" href="https://jujuul.github.io//favicon.ico?v=1597826084931">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://jujuul.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="HTTP缓存 | Mark - Atom Feed" href="https://jujuul.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="文章转载于：https://www.jianshu.com/p/227cee9c8d15
+
+前端缓存可分为两大类：http缓存和浏览器缓存。今天要讨论的就是http缓存
+什么是HTTP缓存 ？
+http缓存指的是: 当客户端向服务器请求资源..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://jujuul.github.io/">
+  <img class="avatar" src="https://jujuul.github.io//images/avatar.png?v=1597826084931" alt="">
+  </a>
+  <h1 class="site-title">
+    Mark
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="learn" class="menu">
+          测试
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              HTTP缓存
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-08-19
+              </span>
+              <span>
+                10 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><strong>文章转载于：https://www.jianshu.com/p/227cee9c8d15</strong></p>
+<!-- more -->
+<p>前端缓存可分为两大类：http缓存和浏览器缓存。今天要讨论的就是http缓存<img src="https://jujuul.github.io//post-images/1597825032998.webp" alt="" loading="lazy"></p>
+<h2 id="什么是http缓存">什么是HTTP缓存 ？</h2>
+<p>http缓存指的是: 当客户端向服务器请求资源时，会先抵达浏览器缓存，如果浏览器有“要请求资源”的副本，就可以直接从浏览器缓存中提取而不是从原始服务器中提取这个资源。</p>
+<p>常见的http缓存只能缓存get请求响应的资源，对于其他类型的响应则无能为力，所以后续说的请求缓存都是指GET请求。</p>
+<p>http缓存都是从第二次请求开始的。第一次请求资源时，服务器返回资源，并在respone header头中回传资源的缓存参数；第二次请求时，浏览器判断这些请求参数，命中强缓存就直接200，否则就把请求参数加到request header头中传给服务器，看是否命中协商缓存，命中则返回304，否则服务器会返回新的资源。</p>
+<h2 id="http缓存的分类">http缓存的分类：</h2>
+<p>根据是否需要重新向服务器发起请求来分类，可分为(强制缓存，协商缓存) 根据是否可以被单个或者多个用户使用来分类，可分为(私有缓存，共享缓存) 强制缓存如果生效，不需要再和服务器发生交互，而协商缓存不管是否生效，都需要与服务端发生交互。下面是强制缓存和协商缓存的一些对比：<br>
+<img src="https://jujuul.github.io//post-images/1597825112453.webp" alt="" loading="lazy"></p>
+<h2 id="强制缓存">强制缓存</h2>
+<p><strong>强缓存是利用Expires或者Cache-Control这两个http response header实现的，它们都用来表示资源在客户端缓存的有效期。</strong><br>
+Expires是HTTP 1.0提出的一个表示资源过期时间的header，它描述的是一个绝对时间，由服务器返回，用GMT格式的字符串表示，如：Expires:Thu, 31 Dec 2037 23:55:55 GMT，包含了Expires头标签的文件，就说明浏览器对于该文件缓存具有非常大的控制权。</p>
+<p>例如，一个文件的Expires值是2020年的1月1日，那么就代表，在2020年1月1日之前，浏览器都可以直接使用该文件的本地缓存文件，而不必去服务器再次请求该文件，哪怕服务器文件发生了变化。所以，Expires是优化中最理想的情况，因为它根本不会产生请求，所以后端也就无需考虑查询快慢。</p>
+<p>强制缓存在缓存数据未失效的情况下（即Cache-Control的max-age没有过期或者Expires的缓存时间没有过期），那么就会直接使用浏览器的缓存数据，不会再向服务器发送任何请求。强制缓存生效时，http状态码为200。</p>
+<p>这种方式页面的加载速度是最快的，性能也是很好的，但是在这期间，如果服务器端的资源修改了，页面上是拿不到的，因为它不会再向服务器发请求了。</p>
+<p>这种情况就是我们在开发种经常遇到的，比如你修改了页面上的某个样式，在页面上刷新了但没有生效，因为走的是强缓存，所以Ctrl + F5一顿操作之后就好了。 跟强制缓存相关的header头属性有（Pragma/Cache-Control/Expires）</p>
+<h2 id="协商缓存">协商缓存</h2>
+<p>当第一次请求时服务器返回的响应头中没有Cache-Control和Expires或者Cache-Control和Expires过期还或者它的属性设置为no-cache时(即不走强缓存)，那么浏览器第二次请求时就会与服务器进行协商，与服务器端对比判断资源是否进行了修改更新。如果服务器端的资源没有修改，那么就会返回304状态码，告诉浏览器可以使用缓存中的数据，这样就减少了服务器的数据传输压力。如果数据有更新就会返回200状态码，服务器就会返回更新后的资源并且将缓存信息一起返回。跟协商缓存相关的header头属性有（ETag/If-Not-Match 、Last-Modified/If-Modified-Since）请求头和响应头需要成对出现<br>
+<img src="https://jujuul.github.io//post-images/1597825700506.webp" alt="" loading="lazy"><br>
+协商缓存的执行流程是这样的：</p>
+<ol>
+<li>当浏览器第一次向服务器发送请求时，会在响应头中返回协商缓存的头属性：ETag和Last-Modified,其中ETag返回的是一个hash值，Last-Modified返回的是GMT格式的最后修改时间。</li>
+<li>然后浏览器在第二次发送请求的时候，会在请求头中带上与ETag对应的If-Not-Match，其值就是响应头中返回的ETag的值，Last-Modified对应的If-Modified-Since。</li>
+<li>服务器在接收到这两个参数后会做比较，如果返回的是304状态码，则说明请求的资源没有修改，浏览器可以直接在缓存中取数据，否则，服务器会直接返回数据。</li>
+</ol>
+<h2 id="为什么要使用http缓存">为什么要使用HTTP缓存 ？</h2>
+<ol>
+<li>减少了冗余的数据传输，节省了网费。</li>
+<li>缓解了服务器的压力， 大大提高了网站的性能</li>
+<li>加快了客户端加载网页的速度</li>
+</ol>
+<h2 id="如何使用http缓存">如何使用HTTP缓存 ？</h2>
+<p>一般需要缓存的资源有html页面和其他静态资源：<br>
+1、html页面缓存的设置主要是在<head>标签中嵌入<meta>标签，这种方式只对页面有效，对页面上的资源无效<br>
+1.1、html页面禁用缓存的设置如下：</p>
+<meta http-equiv="pragma" content="no-cache">
+// 仅有IE浏览器才识别的标签，不一定会在请求字段加上Pragma，但的确会让当前页面每次都发新请求
+<meta http-equiv="cache-control" content="no-cache">
+// 其他主流浏览器识别的标签
+<meta http-equiv="expires" content="0">
+// 仅有IE浏览器才识别的标签，该方式仅仅作为知会IE缓存时间的标记，你并不能在请求或响应报文中找到Expires字段
+<p>1.2、html设置缓存如下：<br>
+<code>&lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;max-age=7200&quot; /&gt;</code><br>
+// 其他主流浏览器识别的标签<br>
+<code>&lt;meta http-equiv=&quot;Expires&quot; content=&quot;Mon, 20 Aug 2018 23:00:00 GMT&quot; /&gt;</code><br>
+// 仅有IE浏览器才识别的标签</p>
+<p>2 静态资源的缓存一般是在web服务器上配置的，常用的web服务器有：nginx、apache。具体的配置这里不做详细介绍，大家自行查阅。</p>
+<p>3 不想使用缓存的几种方式：<br>
+3.1 Ctrl + F5强制刷新，都会直接向服务器提取数据。<br>
+3.2 按F5刷新或浏览器的刷新按钮，默认加上Cache-Control：max-age=0，即会走协商缓存。<br>
+3.2 在IE浏览器下不想使用缓存的做法：打开IE，点击工具栏上的工具-&gt;Internet选项-&gt;常规-&gt;浏览历史记录 设置. 选择“从不”，然后保存。最后点击“删除”把Internet临时文件都删掉 （IE缓存的文件就是Internet临时文件）。<br>
+3.3 还有就是上面1、2中禁用缓存的做法<br>
+3.4 对于其他浏览器也都有清除缓存的办法</p>
+<h2 id="http缓存的几个注意点">HTTP缓存的几个注意点？</h2>
+<p>1 强缓存情况下，只要缓存还没过期，就会直接从缓存中取数据，就算服务器端有数据变化，也不会从服务器端获取了，这样就无法获取到修改后的数据。决解的办法有：在修改后的资源加上随机数,确保不会从缓存中取。</p>
+<p>例如：<br>
+http://www.kimshare.club/kim/common.css?v=22324432<br>
+http://www.kimshare.club/kim/common.2312331.css</p>
+<p>2 尽量减少304的请求，因为我们知道，协商缓存每次都会与后台服务器进行交互，所以性能上不是很好。从性能上来看尽量多使用强缓存。</p>
+<p>3 在Firefox浏览器下，使用Cache-Control: no-cache 是不生效的，其识别的是no-store。这样能达到其他浏览器使用Cache-Control: no-cache的效果。所以为了兼容Firefox浏览器，经常会写成Cache-Control: no-cache，no-store。</p>
+<p>4 与缓存相关的几个header属性有：Vary、Date/Age。<br>
+Vary：<br>
+vary本身是“变化”的意思，而在http报文中更趋于是“vary from”（与。。。不同）的含义，它表示服务端会以什么基准字段来区分、筛选缓存版本。<br>
+在服务端有着这么一个地址，如果是IE用户则返回针对IE开发的内容，否则返回另一个主流浏览器版本的内容。<br>
+格式：Vary: User-Agent<br>
+知会代理服务器需要以 User-Agent 这个请求首部字段来区别缓存版本，防止传递给客户端的缓存不正确。</p>
+<p>Date/Age：<br>
+响应报文中的 Date 和 Age 字段：区分其收到的资源是否命中了代理服务器的缓存。<br>
+Date 理所当然是原服务器发送该资源响应报文的时间（GMT格式），如果你发现 Date 的时间与“当前时间”差别较大，或者连续F5刷新发现 Date 的值都没变化，则说明你当前请求是命中了代理服务器的缓存。<br>
+Age 也是响应报文中的首部字段，它表示该文件在代理服务器中存在的时间（秒），如文件被修改或替换，Age会重新由0开始累计。</p>
+<h2 id="总结">总结</h2>
+<p>1 对于强制缓存，服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行协商缓存策略。<br>
+2 对于协商缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存。</p>
+<p>再次感谢：kimshare   https://www.jianshu.com/p/227cee9c8d15<br>
+最后，附图一张<br>
+<img src="https://jujuul.github.io//post-images/1597824906056.png" alt="" loading="lazy"><br>
+图源运维社区：https://www.unixhot.com/page/cache</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFhttp%E7%BC%93%E5%AD%98">什么是HTTP缓存 ？</a></li>
+<li><a href="#http%E7%BC%93%E5%AD%98%E7%9A%84%E5%88%86%E7%B1%BB">http缓存的分类：</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E7%BC%93%E5%AD%98">强制缓存</a></li>
+<li><a href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98">协商缓存</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8http%E7%BC%93%E5%AD%98">为什么要使用HTTP缓存 ？</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8http%E7%BC%93%E5%AD%98">如何使用HTTP缓存 ？</a></li>
+<li><a href="#http%E7%BC%93%E5%AD%98%E7%9A%84%E5%87%A0%E4%B8%AA%E6%B3%A8%E6%84%8F%E7%82%B9">HTTP缓存的几个注意点？</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/">
+              <h3 class="post-title">
+                每天一个名词解释—webpack
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://jujuul.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
