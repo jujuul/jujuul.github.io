@@ -8,7 +8,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="">
-<title>每天一个名词解释—Taro | Mark</title>
+<title>仿网易云demo—day1 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1597910242697">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="每天一个名词解释—Taro" />
+  <meta name="description" content="仿网易云demo—day1" />
   <meta name="keywords" content="" />
 </head>
 
@@ -208,8 +208,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/">
-      每天一个名词解释—Taro
+    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">
+      仿网易云demo—day1
     </a>
   </h1>
   <div class="post-meta">
@@ -217,7 +217,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-10 12:46:23">2020-08-10</span>
+      <span class="publish-time" data-t="2020-08-20 10:28:45">2020-08-20</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -228,21 +228,26 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>354<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>349<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv 等框架来开发微信/京东/百度/支付宝/字节跳动/ QQ 小程序/H5 等应用。<br>
-以上位Taro官网原文，原本我以为Vue的跨端框架解决方案是Uniapp，而React的跨端框架解决方案就是Taro，没想到Taro也是支持Vue的。两个跨端框架就官网来说，Taro要好看的多，更有设计感，不过文档示例还是以React为主。<br>
-这里还有一篇选型对比文章：https://juejin.im/post/6844903768794857480<br>
-文章写于19年1月底，还是比较有时效性的<br>
-根据文章内的对比表格可以看到，在目前(19年初)的跨端解决方案中，唯有Taro与Uniapp，两者的github上的Star数量也相差不多<br>
-另一篇写于19年4月：https://blog.csdn.net/z4909801/article/details/88943851<br>
-文章对比了5个主流跨端框架，经过文章作者从生态、多端支持度、组件库、 接入成本、开源建设这5个方面的对比，可以看出Uniapp与Taro也是各有领先，虽然不是全方位领先其他框架，但也是位于顶部。<br>
-而Taro最新版本位3.0，今年7月1日发布。<br>
-另附一篇知乎上的文章：迄今为止，大前端各种多终端、跨端，解决方案合集https://zhuanlan.zhihu.com/p/100364496</p>
+              <p>一直想找个vue项目做，不知道做什么好，在B站知乎看到了同一条推送，做的网易云音乐，我之前也有做网易云音乐的打算，但是苦于没有后端数据，看了推送的项目发现原来有开源的api接口，赞美互联网。</p>
+<!-- more -->
+<p>github：https://github.com/Binaryify/NeteaseCloudMusicApi<br>
+<img src="https://jujuul.github.io//post-images/1597890809917.PNG" alt="" loading="lazy"><br>
+一共一百多条，应该是涵盖了所有功能，话不多说，开搞。<br>
+如何使用我就不赘述了，这个链接里都有https://www.jianshu.com/p/a375dd77b502<br>
+<img src="https://jujuul.github.io//post-images/1597890883922.PNG" alt="" loading="lazy"><br>
+可以看到已经跑起来了<br>
+接下来就是考虑做网易云音乐程序页面还是网页端页面了，虽然我更喜欢程序的页面，不过为了不跟视频冲突，还是决定做网页端了。<br>
+接下来是划分页面功能，我借鉴的例子是这样组装页面的<img src="https://jujuul.github.io//post-images/1597892249770.PNG" alt="" loading="lazy"><br>
+考虑到这个项目可能还要做线上展示，所以还是打算放到服务器上了，刚好之前申请的域名也下来了，直接通过域名调用接口吧(话说也是够倒霉的，遇上阿里云升级，之前做的仿美团项目都已经忘了怎么做了快)<br>
+在项目的根目录新建一个vue.config.js的文件，然后配置proxy代理<br>
+<img src="https://jujuul.github.io//post-images/1597910160351.PNG" alt="" loading="lazy"><br>
+接着在需要请求的页面发起axios请求<img src="https://jujuul.github.io//post-images/1597910235597.PNG" alt="" loading="lazy"></p>
 
             </div>
             
@@ -255,7 +260,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/" title="每天一个名词解释—Taro">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/</a>
+      <a href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/" title="仿网易云demo—day1">https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -268,15 +273,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day7" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">Uniapp学习记录day7</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day7" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day6" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">Uniapp学习记录day6</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day6" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/">下一篇</a>
+        <a class="nav-pc-next" title="HTTP缓存" href="https://jujuul.github.io/post/http-huan-cun/">HTTP缓存</a>
+        <a class="nav-mobile-next" title="HTTP缓存" href="https://jujuul.github.io/post/http-huan-cun/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

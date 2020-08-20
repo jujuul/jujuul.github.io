@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-19T11:04:24.293Z</updated>
+    <updated>2020-08-20T07:57:27.629Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,30 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[仿网易云demo—day1]]></title>
+        <id>https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/</id>
+        <link href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">
+        </link>
+        <updated>2020-08-20T02:28:45.000Z</updated>
+        <summary type="html"><![CDATA[<p>一直想找个vue项目做，不知道做什么好，在B站知乎看到了同一条推送，做的网易云音乐，我之前也有做网易云音乐的打算，但是苦于没有后端数据，看了推送的项目发现原来有开源的api接口，赞美互联网。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>一直想找个vue项目做，不知道做什么好，在B站知乎看到了同一条推送，做的网易云音乐，我之前也有做网易云音乐的打算，但是苦于没有后端数据，看了推送的项目发现原来有开源的api接口，赞美互联网。</p>
+<!-- more -->
+<p>github：https://github.com/Binaryify/NeteaseCloudMusicApi<br>
+<img src="https://jujuul.github.io//post-images/1597890809917.PNG" alt="" loading="lazy"><br>
+一共一百多条，应该是涵盖了所有功能，话不多说，开搞。<br>
+如何使用我就不赘述了，这个链接里都有https://www.jianshu.com/p/a375dd77b502<br>
+<img src="https://jujuul.github.io//post-images/1597890883922.PNG" alt="" loading="lazy"><br>
+可以看到已经跑起来了<br>
+接下来就是考虑做网易云音乐程序页面还是网页端页面了，虽然我更喜欢程序的页面，不过为了不跟视频冲突，还是决定做网页端了。<br>
+接下来是划分页面功能，我借鉴的例子是这样组装页面的<img src="https://jujuul.github.io//post-images/1597892249770.PNG" alt="" loading="lazy"><br>
+考虑到这个项目可能还要做线上展示，所以还是打算放到服务器上了，刚好之前申请的域名也下来了，直接通过域名调用接口吧(话说也是够倒霉的，遇上阿里云升级，之前做的仿美团项目都已经忘了怎么做了快)<br>
+在项目的根目录新建一个vue.config.js的文件，然后配置proxy代理<br>
+<img src="https://jujuul.github.io//post-images/1597910160351.PNG" alt="" loading="lazy"><br>
+接着在需要请求的页面发起axios请求<img src="https://jujuul.github.io//post-images/1597910235597.PNG" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[HTTP缓存]]></title>
         <id>https://jujuul.github.io/post/http-huan-cun/</id>
@@ -404,41 +428,6 @@ vue骨架屏实践：https://www.jianshu.com/p/eacac700630e<br>
         </link>
         <updated>2020-08-12T09:49:54.000Z</updated>
         <content type="html"><![CDATA[<p>今天面试问到了三栏布局，就自己尝试写一下，结果写出来中间那一栏的内容不能自动换行，试了半天也不行，换成flex也不行，最后去网上查了一下，原来超长的字母和数字是不会被自动拆开的，所以导致无法换行，解决方法就是加入<code>word-break: break-all;</code>，通过这个就可以解决换行问题了。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—Nuxt.js]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">
-        </link>
-        <updated>2020-08-12T05:25:33.000Z</updated>
-        <content type="html"><![CDATA[<p>Nuxt.js 是一个基于 Vue.js 的通用应用框架。<br>
-通过对客户端/服务端基础架构的抽象组织，Nuxt.js 主要关注的是应用的 UI 渲染。<br>
-Vue 开发一个单页面应用，相信很多前端工程师都已经学会了，但是单页面应用有一个致命的缺点，就是 SEO 极不友好。除非，vue 能在服务端渲染（ssr）并直接返回已经渲染好的页面，而并非只是一个单纯的 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>。<br>
-Nuxt.js 就是一个极简的 vue 版的 ssr 框架。基于它，我们可以快速开发一个基于 vue 的 ssr 单页面应用。<br>
-Nuxt.js 集成了以下组件/框架，用于开发完整而强大的 Web 应用：<br>
-Vue 2<br>
-Vue-Router<br>
-Vuex (当配置了 Vuex 状态树配置项 时才会引入)<br>
-Vue 服务器端渲染 (排除使用 mode: 'spa')<br>
-Vue-Meta<br>
-压缩并 gzip 后，总代码大小为：57kb （如果使用了 Vuex 特性的话为 60kb）。<br>
-另外，Nuxt.js 使用 Webpack 和 vue-loader 、 babel-loader 来处理代码的自动化构建工作（如打包、代码分层、压缩等等）。</p>
-<h2 id="特性">特性</h2>
-<p>基于 Vue.js<br>
-自动代码分层<br>
-服务端渲染<br>
-强大的路由功能，支持异步数据<br>
-静态文件服务<br>
-ES2015+ 语法支持<br>
-打包和压缩 JS 和 CSS<br>
-HTML 头部标签管理<br>
-本地开发支持热加载<br>
-集成 ESLint<br>
-支持各种样式预处理器： SASS、LESS、 Stylus 等等<br>
-支持 HTTP/2 推送<br>
-以上内容来源网络<br>
-总结:大致在网络上浏览了一下，了解了Nuxt.js的作用，服务端渲染，与其同作用的还有React的Next.js，目的就是利于SEO</p>
 ]]></content>
     </entry>
 </feed>
