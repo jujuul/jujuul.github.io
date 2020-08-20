@@ -8,7 +8,7 @@
 <meta name="keywords" content="">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="">
-<title>防抖和节流 | Mark</title>
+<title>每天一个名词解释—快应用 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1597937326042">
 <link rel="stylesheet" href="/media/css/pisces.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="防抖和节流" />
-  <meta name="keywords" content="前端" />
+  <meta name="description" content="每天一个名词解释—快应用" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -208,8 +208,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-      防抖和节流
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/">
+      每天一个名词解释—快应用
     </a>
   </h1>
   <div class="post-meta">
@@ -217,94 +217,67 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 12:26:34">2020-08-08</span>
+      <span class="publish-time" data-t="2020-08-20 21:59:25">2020-08-20</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-        <span>前端</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>355<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>865<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="函数防抖">函数防抖</h2>
-<p>函数防抖是优化高频率执行js代码的一种手段<br>
-可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
-<pre><code>function debounce(fn, wait) {
-            let timer
-            return function () {
-                // 改变执行函数内部this指向
-                let _this = this
-                let _args = arguments
-                clearTimeout(timer)
-                timer = setTimeout(function () {
-                    fn.apply(_this, _args)
-                }, wait)
-            }
- }
-</code></pre>
-<h2 id="函数节流">函数节流</h2>
-<p>函数节流是优化高频率执行js代码的一种手段<br>
-可以减少高频调用函数的执行次数</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
-第一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let timer
-            return function () {
-                if (timer) return
-                let _this = this
-                let _args = arguments
-                timer = setTimeout(() =&gt; {
-                    fn.apply(_this, _args)
-                    timer = null
-                }, wait)
-            }
-        }
-</code></pre>
-<p>最后一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let old = 0
-            return function () {
-                let _this = this
-                let _args = arguments
-                // 获取当前的时间戳
-                let now = new Date().valueOf()
-                if (now - old &gt; wait) {
-                    fn.apply(_this, _args)
-                    // 立即执行
-                    old = now;
-                }
-            }
-        }
-</code></pre>
-<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
-<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
-函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
-<p>参考<br>
-https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
+              <h2 id="背景介绍">背景介绍</h2>
+<p>快应用是一种新的应用形态，以往的手机端应用主要有两种方式：网页、原生应用；网页无需安装，却体验不是很好；原生应用体验流畅，却需要从应用商店下载安装，难以一步直达用户；快应用的出现，就是希望能够让用户无需下载安装，并且还能流畅的体验应用内容。</p>
+<p>为了达到上面的目标，快应用建立一种新的语言开发规范，同时提供一系列的开发套件辅助支持。简单来说，开发者主要利用前端知识与技能，以及对应的IDE，手机设备就可以做原型的开发。快应用使用前端技术栈开发，原生渲染，同时具备H5与原生应用的双重优点，开发者使用的前端技术栈资料多，学习成本低。</p>
+<p>2018年3月份，由小米，OPPO，VIVO，华为等10家国内主流厂商成立了快应用联盟，从技术规范层面做了统一，并保证了开发者开发的快应用可以直接在所有的联盟内厂商的手机设备上运行。</p>
+<p>快应用框架深度集成进各手机厂商的手机操作系统中，可以在操作系统层面形成用户需求与应用服务的无缝连接，很多只用在原生应用中才能使用的功能，在快应用中可以很方便的实现，享受原生应用体验，同时不用担心分发留存等问题，资源消耗也比较少。</p>
+<p>对于每台手机设备，应用可以从多个系统入口，引用用户体验产品。比如：全局搜索、负一屏、浏览器搜索等。</p>
+<p>下面，我们全面介绍一下快应用的开发流程。</p>
+<h2 id="入口场景">入口场景</h2>
+<p>快应用的部分场景入口列举如下：<br>
+<img src="https://jujuul.github.io//post-images/1597937182347.PNG" alt="" loading="lazy"></p>
+<h3 id="比如全局搜索">比如：全局搜索</h3>
+<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597937210145.gif" alt="" loading="lazy"></figure>
+<h2 id="参与流程">参与流程</h2>
+<p>开发者参与快应用开发，主要分为以下几个步骤:</p>
+<p>快应用官网注册<br>
+完善资料<br>
+绑定厂商开发者账号(至少一家)<br>
+完成以上三部，快应用开发者就可以提交快应用。</p>
+<h3 id="整体参与流程如图所示">整体参与流程如图所示:</h3>
+<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597937254951.jpg" alt="" loading="lazy"></figure>
+<h2 id="如何开发">如何开发</h2>
+<p>快应用采用前端技术栈，运行可开发效率高，学习成本低，代码可复用</p>
+<p>快应用开发需要基本基础的前端知识，如 标签， 样式， js脚本</p>
+<p>快应用使用 MVVM的设计模式进行开发，开发者无需直接操作DOM节点的增删，利用数据驱动的方式完成节点更新。</p>
+<p>当前标准的开发规范与Vue的开发方式相近，后期可能开放并接入其它的DSL开发方式，以符合开发者的开发习惯。</p>
+<h2 id="开发过程">开发过程</h2>
+<p>进行快应用开发，整体过程如下：</p>
+<ol>
+<li>
+<p>准备开发工具<br>
+快应用开发需要准备PC/笔记本，厂商手机，内网环境或者手机可连接电脑</p>
+</li>
+<li>
+<p>开发调试<br>
+开发调试过程:</p>
+<p>1.通过命令行工具，或者IDE安装并运行快应用<br>
+2.了解命令行工具生成的项目结构，编写项目代码<br>
+3.通过 toolkit，chrome devtools 进行调试</p>
+</li>
+<li>
+<p>提交上传<br>
+完成代码相关工作，我们就可以提交上传快应用。</p>
+</li>
+</ol>
 
             </div>
             
@@ -317,7 +290,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/" title="防抖和节流">https://jujuul.github.io/post/fang-dou-he-jie-liu/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/" title="每天一个名词解释—快应用">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -326,21 +299,15 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/"># 前端</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">收藏的一些有用的网站</a>
-        <a class="nav-mobile-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">下一篇</a>
+        <a class="nav-pc-next" title="仿网易云demo—day1" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">仿网易云demo—day1</a>
+        <a class="nav-mobile-next" title="仿网易云demo—day1" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
