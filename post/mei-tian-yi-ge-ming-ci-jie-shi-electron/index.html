@@ -5,18 +5,18 @@
   <meta charset="UTF-8" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="keywords" content="">
+<meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
-<meta name="theme-color" content="">
+<meta name="theme-color" content="#000">
 <title>每天一个名词解释—electron | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1597984160877">
-<link rel="stylesheet" href="/media/css/pisces.css">
+<link rel="shortcut icon" href="/favicon.ico?v=1597984476712">
+<link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
   href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Rosario:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext"
   rel="stylesheet" type="text/css">
 
-<link href="/media/hljs/styles/github.css"
+<link href="/media/hljs/styles/default.css"
   rel="stylesheet">
 
 <link rel="stylesheet" href="/styles/main.css">
@@ -46,9 +46,9 @@
   <div class="head-top-line"></div>
   <div class="header-box">
     
-<div class="pisces">
-  <header class="header  ">
-    <div class="blog-header box-shadow-wrapper bg-color " id="header">
+<div class="mist">
+  <header class="header bg-color ">
+    <div class="blog-header box-shadow-wrapper  " id="header">
       <div class="nav-toggle" id="nav_toggle">
         <div class="toggle-box">
           <div class="line line-top"></div>
@@ -59,8 +59,14 @@
       <div class="site-meta">       
         <div class="site-title">
           
-            <a href="/" class="brand">
-              <span>Mark</span>
+            <a href="/" class="">
+              <span class="logo-line-before">
+                <i class=""></i>
+              </span>
+              <span class="main-title">Mark</span>
+              <span class="logo-line-after">
+                <i class=""></i>
+              </span>
             </a>  
           
         </div>
@@ -70,6 +76,8 @@
         <ul id="nav_ul">
           
             
+            
+              
             
             <li class="nav-item ">
               
@@ -81,6 +89,22 @@
             </li>
           
           
+            
+              <li class="nav-item ">
+                <a href="/friends/" target="_self">
+                  
+                    <i class="fa fa-address-book"></i> 友情链接
+                  
+                </a>
+              </li>
+            
+          
+          
+            <li id="fa_search" class="nav-item">
+              <a href="javascript:void(0);">
+                <i class="fa fa-search"></i> <span class="language" data-lan="search">搜索</span>
+              </a>
+            </li>
           
         </ul>
       </nav>
@@ -113,15 +137,252 @@
   <div class="main-continer">
     
     <div
-      class="section-layout pisces ">
+      class="section-layout mist bg-color">
       <div class="section-layout-wrapper">
         
 
 <div class="sidebar">
   
-    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+    <div class="sidebar-box box-shadow-wrapper  right-motion" id="sidebar">
       
-      <div class="sidebar-body pisces" id="sidebar_body">
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active language" data-lan="index">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item language" data-lan="preview">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body mist" id="sidebar_body">
+        
+          
+            <div class="post-side-meta" id="post_side_meta">
+              
+<div class="sidebar-wrapper box-shadow-wrapper ">
+  <div class="sidebar-item">
+    <img class="site-author-image right-motion" src="/images/avatar.png"/>
+    <p class="site-author-name">适用 Gemini,Pisces 布局,版权说明需配置</p>
+    
+  </div>
+  <div class="sidebar-item side-item-stat right-motion">
+    <div class="sidebar-item-box">
+      <a href="/archives/">
+        
+        <span class="site-item-stat-count">30</span>
+        <span class="site-item-stat-name language" data-lan="article">文章</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="">
+        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-name language" data-lan="category">分类</span>
+      </a>
+    </div>
+    <div class="sidebar-item-box">
+      <a href="/tags/">
+        <span class="site-item-stat-count">3</span>
+        <span class="site-item-stat-name language" data-lan="tag">标签</span>
+      </a>
+    </div>
+  </div>
+  
+  
+
+
+
+</div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E6%98%AF%E4%BB%80%E4%B9%88">是什么</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
+<li><a href="#%E4%BC%98%E7%82%B9">优点：</a></li>
+<li><a href="#%E7%BC%BA%E7%82%B9">缺点：</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
+          
         
       </div>
     </div>
@@ -303,7 +564,7 @@ app.on('activate', () =&gt; {
   <ul class="post-copyright">
     <li class="post-copyright-author">
       <strong class="language" data-lan="author">本文作者：</strong>
-      
+      适用 Gemini,Pisces 布局,版权说明需配置
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
@@ -354,22 +615,18 @@ app.on('activate', () =&gt; {
   </footer>
   
   
-  <div class="pisces back-to-top" id="back_to_top">
+  <div class="drawer-box left" id="drawer_box">
+    <span class="muse-line muse-line-first"></span>
+    <span class="muse-line muse-line-middle"></span>
+    <span class="muse-line muse-line-last"></span>
+  </div>
+  
+  <div class="mist back-to-top" id="back_to_top">
     <i class="fa fa-arrow-up"></i>
-    
-    <span class="scrollpercent">
-      <span id="back_to_top_text">0</span>%
-    </span>
     
   </div>
   
   
-  
-  
-  
-  
-  
-
   
 </div>
 <script>
@@ -499,7 +756,7 @@ app.on('activate', () =&gt; {
   }
 
   // 链接跳转
-  let newWindow = ''
+  let newWindow = 'false'
   if (newWindow === 'true') {
     let links = document.querySelectorAll('.post-body a')
     links.forEach(item => {
@@ -573,8 +830,8 @@ app.on('activate', () =&gt; {
           
         </div>
       </div>
-      <p class="reward-word"></p>
-      <p class="reward-tip"></p>
+      <p class="reward-word">扫码打赏，你说多少就多少</p>
+      <p class="reward-tip">打开微信扫一扫，即可进行扫码打赏哦</p>
     </div>
     <div class="bottom">
       
@@ -781,6 +1038,1234 @@ app.on('activate', () =&gt; {
   </div>
 </body>
 
+<div class="search-mask" id="search_mask" style="display: none;">
+  <div class="search-box">
+    <div class="search-title">
+      <i class="fa fa-search"></i>
+      <div class="input-box">
+        <input id="search" type="text" class="language" data-lan="search" placeholder="搜索">
+      </div>
+      <i id="close" class="fa fa-times-circle"></i>
+    </div>
+    <div class="stat-box">
+      <span id="stat_count">0</span><span class="language" data-lan="stat">条相关条目，使用了</span><span id="stat_times">0</span><span class="language" data-lan="stat-time">毫秒</span>
+      <hr>
+    </div>
+    <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/"" data-c="
+          &lt;p&gt;今天逛思否的时候，发现一个推荐vscode插件的文章，里面推荐了8个插件，竟然有6个是我没用过的，也借这个机会，整理一下自己用的插件&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Beautify&lt;br&gt;
+听名字就能猜到功能了，整理代码用的，500W+的下载量足以证明其强大。&lt;/li&gt;
+&lt;li&gt;Auto Close Tag&lt;br&gt;
+也是个听名字就能猜到功能的，320W+下载量。&lt;/li&gt;
+&lt;li&gt;Auto Rename Tag&lt;br&gt;
+跟上面的是同一个作者开发的，可以在更改标签名的时候做到更改一边而两边都被更改的效果，340W+。&lt;/li&gt;
+&lt;li&gt;Bracket Pair Colorizer&lt;br&gt;
+我个人强力推荐，没完没了的函数中看代码真的是一种折磨，有了它就能清晰的看出(){}[]是否闭合，再也不用担心少个)}]了，340W+。&lt;/li&gt;
+&lt;li&gt;Chinese (Simplified) Language Pack for Visual Studio Code&lt;br&gt;
+简中语言包，600W+足以证明，另外我去看了下繁中版，也有270W+，中文开发者真的多啊。&lt;/li&gt;
+&lt;li&gt;Code Runner&lt;br&gt;
+可以直接运行其他语言，使Vs Code成为一个IDE?我是之前毕设项目后端使用PHP才安装的这个插件，不过好像没什么用，话说我在Vscode上配置过java和python的运行环境，效果都不是很理想啊，编辑器和IDE还是有很大区别的啊，466W+。&lt;/li&gt;
+&lt;li&gt;CSS Peek&lt;br&gt;
+今天被安利的插件，鼠标悬停在类名或者ID上能直接看到CSS规则，100W+。&lt;/li&gt;
+&lt;li&gt;Debugger for Chrome&lt;br&gt;
+就是在vscode中启动chrome控制台，需要一些比较繁琐的配置，我只是安装了，但从没用过，620W+。&lt;/li&gt;
+&lt;li&gt;indent-rainbow&lt;br&gt;
+可以和前面第四个联用，这个是在缩进的地方用彩色填充，也是起到一个很好的查看代码的效果,100W+。&lt;/li&gt;
+&lt;li&gt;JavaScript (ES6) code snippets&lt;br&gt;
+今天受的安利之一，可以生成ES6的代码片段，原来VSCODE不可以的吗？我只生成过VUE的代码片段，但是vue不是使用的ES6语法吗？不是很理解，380W+。&lt;/li&gt;
+&lt;li&gt;Live Server&lt;br&gt;
+好像可以用来做服务器？而且是自动刷新(热插拔)的那种？也是没有使用过，服务器都是自己用nodejs搭的，原来还有这么方便的，67W+。&lt;/li&gt;
+&lt;li&gt;open in browser&lt;br&gt;
+在浏览器中打开，还可以选择浏览器，非常实用的功能，220W+。&lt;/li&gt;
+&lt;li&gt;Prettier - Code formatter&lt;br&gt;
+也是一个代码格式的插件，我记得使用时有要求选择alt+thift+f做出选择，我选了Beautify，我原本以为是冲突的，但今天看了很多介绍用它们两个整理格式的，好像并不冲突？有时间去配置一下，790W+。&lt;/li&gt;
+&lt;li&gt;Quokka.js&lt;br&gt;
+今天的安利之一，直接放图吧&lt;img src=&#34;https://jujuul.github.io//post-images/1597983693060.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;76W+。&lt;/li&gt;
+&lt;li&gt;REST Client&lt;br&gt;
+REST Client 扩展工具允许你发送 HTTP 请求并直接在 VSCode 中查看响应。再也不需要使用外部应用程序向服务器发送 HTTP 请求，还没用，不过看了动图我觉得可以试试&lt;img src=&#34;https://jujuul.github.io//post-images/1597983840428.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;100W+。&lt;/li&gt;
+&lt;li&gt;TabNine&lt;br&gt;
+一个代码补全工具，基于人工智能，自动补全时会给出每个候选项的概率，并且按照概率大小进行排序，此外，会给出候选项的来源及地址，这样更加方便查询和阅读，31W+。&lt;/li&gt;
+&lt;li&gt;Vetur&lt;br&gt;
+vue开发必装，之前不知道干嘛的，今天看了一下，是对于vue文件中的语法检查、语法高亮还有自动补全，530W+。&lt;/li&gt;
+&lt;li&gt;ESLint&lt;br&gt;
+JS代码检测工具，配合之前的几个代码检测，写出的代码将无敌，可惜不会写，配置比较繁琐，1000W+。&lt;/li&gt;
+&lt;/ol&gt;
+">我自用的一些vscode插件分享</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/"" data-c="
+          &lt;h2 id=&#34;背景介绍&#34;&gt;背景介绍&lt;/h2&gt;
+&lt;p&gt;快应用是一种新的应用形态，以往的手机端应用主要有两种方式：网页、原生应用；网页无需安装，却体验不是很好；原生应用体验流畅，却需要从应用商店下载安装，难以一步直达用户；快应用的出现，就是希望能够让用户无需下载安装，并且还能流畅的体验应用内容。&lt;/p&gt;
+&lt;p&gt;为了达到上面的目标，快应用建立一种新的语言开发规范，同时提供一系列的开发套件辅助支持。简单来说，开发者主要利用前端知识与技能，以及对应的IDE，手机设备就可以做原型的开发。快应用使用前端技术栈开发，原生渲染，同时具备H5与原生应用的双重优点，开发者使用的前端技术栈资料多，学习成本低。&lt;/p&gt;
+&lt;p&gt;2018年3月份，由小米，OPPO，VIVO，华为等10家国内主流厂商成立了快应用联盟，从技术规范层面做了统一，并保证了开发者开发的快应用可以直接在所有的联盟内厂商的手机设备上运行。&lt;/p&gt;
+&lt;p&gt;快应用框架深度集成进各手机厂商的手机操作系统中，可以在操作系统层面形成用户需求与应用服务的无缝连接，很多只用在原生应用中才能使用的功能，在快应用中可以很方便的实现，享受原生应用体验，同时不用担心分发留存等问题，资源消耗也比较少。&lt;/p&gt;
+&lt;p&gt;对于每台手机设备，应用可以从多个系统入口，引用用户体验产品。比如：全局搜索、负一屏、浏览器搜索等。&lt;/p&gt;
+&lt;p&gt;下面，我们全面介绍一下快应用的开发流程。&lt;/p&gt;
+&lt;h2 id=&#34;入口场景&#34;&gt;入口场景&lt;/h2&gt;
+&lt;p&gt;快应用的部分场景入口列举如下：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597937182347.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;比如全局搜索&#34;&gt;比如：全局搜索&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1597937210145.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;参与流程&#34;&gt;参与流程&lt;/h2&gt;
+&lt;p&gt;开发者参与快应用开发，主要分为以下几个步骤:&lt;/p&gt;
+&lt;p&gt;快应用官网注册&lt;br&gt;
+完善资料&lt;br&gt;
+绑定厂商开发者账号(至少一家)&lt;br&gt;
+完成以上三部，快应用开发者就可以提交快应用。&lt;/p&gt;
+&lt;h3 id=&#34;整体参与流程如图所示&#34;&gt;整体参与流程如图所示:&lt;/h3&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1597937254951.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;如何开发&#34;&gt;如何开发&lt;/h2&gt;
+&lt;p&gt;快应用采用前端技术栈，运行可开发效率高，学习成本低，代码可复用&lt;/p&gt;
+&lt;p&gt;快应用开发需要基本基础的前端知识，如 标签， 样式， js脚本&lt;/p&gt;
+&lt;p&gt;快应用使用 MVVM的设计模式进行开发，开发者无需直接操作DOM节点的增删，利用数据驱动的方式完成节点更新。&lt;/p&gt;
+&lt;p&gt;当前标准的开发规范与Vue的开发方式相近，后期可能开放并接入其它的DSL开发方式，以符合开发者的开发习惯。&lt;/p&gt;
+&lt;h2 id=&#34;开发过程&#34;&gt;开发过程&lt;/h2&gt;
+&lt;p&gt;进行快应用开发，整体过程如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;准备开发工具&lt;br&gt;
+快应用开发需要准备PC/笔记本，厂商手机，内网环境或者手机可连接电脑&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;开发调试&lt;br&gt;
+开发调试过程:&lt;/p&gt;
+&lt;p&gt;1.通过命令行工具，或者IDE安装并运行快应用&lt;br&gt;
+2.了解命令行工具生成的项目结构，编写项目代码&lt;br&gt;
+3.通过 toolkit，chrome devtools 进行调试&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;提交上传&lt;br&gt;
+完成代码相关工作，我们就可以提交上传快应用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+">每天一个名词解释—快应用</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/"" data-c="
+          &lt;p&gt;一直想找个vue项目做，不知道做什么好，在B站知乎看到了同一条推送，做的网易云音乐，我之前也有做网易云音乐的打算，但是苦于没有后端数据，看了推送的项目发现原来有开源的api接口，赞美互联网。&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;github：https://github.com/Binaryify/NeteaseCloudMusicApi&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597890809917.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+一共一百多条，应该是涵盖了所有功能，话不多说，开搞。&lt;br&gt;
+如何使用我就不赘述了，这个链接里都有https://www.jianshu.com/p/a375dd77b502&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597890883922.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+可以看到已经跑起来了&lt;br&gt;
+接下来就是考虑做网易云音乐程序页面还是网页端页面了，虽然我更喜欢程序的页面，不过为了不跟视频冲突，还是决定做网页端了。&lt;br&gt;
+接下来是划分页面功能，我借鉴的例子是这样组装页面的&lt;img src=&#34;https://jujuul.github.io//post-images/1597892249770.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+考虑到这个项目可能还要做线上展示，所以还是打算放到服务器上了，刚好之前申请的域名也下来了，直接通过域名调用接口吧(话说也是够倒霉的，遇上阿里云升级，之前做的仿美团项目都已经忘了怎么做了快)&lt;br&gt;
+在项目的根目录新建一个vue.config.js的文件，然后配置proxy代理&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597910160351.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+接着在需要请求的页面发起axios请求&lt;img src=&#34;https://jujuul.github.io//post-images/1597910235597.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">仿网易云demo—day1</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/http-huan-cun/"" data-c="
+          &lt;p&gt;&lt;strong&gt;文章转载于：https://www.jianshu.com/p/227cee9c8d15&lt;/strong&gt;&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;前端缓存可分为两大类：http缓存和浏览器缓存。今天要讨论的就是http缓存&lt;img src=&#34;https://jujuul.github.io//post-images/1597825032998.webp&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;什么是http缓存&#34;&gt;什么是HTTP缓存 ？&lt;/h2&gt;
+&lt;p&gt;http缓存指的是: 当客户端向服务器请求资源时，会先抵达浏览器缓存，如果浏览器有“要请求资源”的副本，就可以直接从浏览器缓存中提取而不是从原始服务器中提取这个资源。&lt;/p&gt;
+&lt;p&gt;常见的http缓存只能缓存get请求响应的资源，对于其他类型的响应则无能为力，所以后续说的请求缓存都是指GET请求。&lt;/p&gt;
+&lt;p&gt;http缓存都是从第二次请求开始的。第一次请求资源时，服务器返回资源，并在respone header头中回传资源的缓存参数；第二次请求时，浏览器判断这些请求参数，命中强缓存就直接200，否则就把请求参数加到request header头中传给服务器，看是否命中协商缓存，命中则返回304，否则服务器会返回新的资源。&lt;/p&gt;
+&lt;h2 id=&#34;http缓存的分类&#34;&gt;http缓存的分类：&lt;/h2&gt;
+&lt;p&gt;根据是否需要重新向服务器发起请求来分类，可分为(强制缓存，协商缓存) 根据是否可以被单个或者多个用户使用来分类，可分为(私有缓存，共享缓存) 强制缓存如果生效，不需要再和服务器发生交互，而协商缓存不管是否生效，都需要与服务端发生交互。下面是强制缓存和协商缓存的一些对比：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597825112453.webp&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;强制缓存&#34;&gt;强制缓存&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;强缓存是利用Expires或者Cache-Control这两个http response header实现的，它们都用来表示资源在客户端缓存的有效期。&lt;/strong&gt;&lt;br&gt;
+Expires是HTTP 1.0提出的一个表示资源过期时间的header，它描述的是一个绝对时间，由服务器返回，用GMT格式的字符串表示，如：Expires:Thu, 31 Dec 2037 23:55:55 GMT，包含了Expires头标签的文件，就说明浏览器对于该文件缓存具有非常大的控制权。&lt;/p&gt;
+&lt;p&gt;例如，一个文件的Expires值是2020年的1月1日，那么就代表，在2020年1月1日之前，浏览器都可以直接使用该文件的本地缓存文件，而不必去服务器再次请求该文件，哪怕服务器文件发生了变化。所以，Expires是优化中最理想的情况，因为它根本不会产生请求，所以后端也就无需考虑查询快慢。&lt;/p&gt;
+&lt;p&gt;强制缓存在缓存数据未失效的情况下（即Cache-Control的max-age没有过期或者Expires的缓存时间没有过期），那么就会直接使用浏览器的缓存数据，不会再向服务器发送任何请求。强制缓存生效时，http状态码为200。&lt;/p&gt;
+&lt;p&gt;这种方式页面的加载速度是最快的，性能也是很好的，但是在这期间，如果服务器端的资源修改了，页面上是拿不到的，因为它不会再向服务器发请求了。&lt;/p&gt;
+&lt;p&gt;这种情况就是我们在开发种经常遇到的，比如你修改了页面上的某个样式，在页面上刷新了但没有生效，因为走的是强缓存，所以Ctrl + F5一顿操作之后就好了。 跟强制缓存相关的header头属性有（Pragma/Cache-Control/Expires）&lt;/p&gt;
+&lt;h2 id=&#34;协商缓存&#34;&gt;协商缓存&lt;/h2&gt;
+&lt;p&gt;当第一次请求时服务器返回的响应头中没有Cache-Control和Expires或者Cache-Control和Expires过期还或者它的属性设置为no-cache时(即不走强缓存)，那么浏览器第二次请求时就会与服务器进行协商，与服务器端对比判断资源是否进行了修改更新。如果服务器端的资源没有修改，那么就会返回304状态码，告诉浏览器可以使用缓存中的数据，这样就减少了服务器的数据传输压力。如果数据有更新就会返回200状态码，服务器就会返回更新后的资源并且将缓存信息一起返回。跟协商缓存相关的header头属性有（ETag/If-Not-Match 、Last-Modified/If-Modified-Since）请求头和响应头需要成对出现&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597825700506.webp&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+协商缓存的执行流程是这样的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;当浏览器第一次向服务器发送请求时，会在响应头中返回协商缓存的头属性：ETag和Last-Modified,其中ETag返回的是一个hash值，Last-Modified返回的是GMT格式的最后修改时间。&lt;/li&gt;
+&lt;li&gt;然后浏览器在第二次发送请求的时候，会在请求头中带上与ETag对应的If-Not-Match，其值就是响应头中返回的ETag的值，Last-Modified对应的If-Modified-Since。&lt;/li&gt;
+&lt;li&gt;服务器在接收到这两个参数后会做比较，如果返回的是304状态码，则说明请求的资源没有修改，浏览器可以直接在缓存中取数据，否则，服务器会直接返回数据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;为什么要使用http缓存&#34;&gt;为什么要使用HTTP缓存 ？&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;减少了冗余的数据传输，节省了网费。&lt;/li&gt;
+&lt;li&gt;缓解了服务器的压力， 大大提高了网站的性能&lt;/li&gt;
+&lt;li&gt;加快了客户端加载网页的速度&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;如何使用http缓存&#34;&gt;如何使用HTTP缓存 ？&lt;/h2&gt;
+&lt;p&gt;一般需要缓存的资源有html页面和其他静态资源：&lt;br&gt;
+1、html页面缓存的设置主要是在&lt;head&gt;标签中嵌入&lt;meta&gt;标签，这种方式只对页面有效，对页面上的资源无效&lt;br&gt;
+1.1、html页面禁用缓存的设置如下：&lt;/p&gt;
+&lt;meta http-equiv=&#34;pragma&#34; content=&#34;no-cache&#34;&gt;
+// 仅有IE浏览器才识别的标签，不一定会在请求字段加上Pragma，但的确会让当前页面每次都发新请求
+&lt;meta http-equiv=&#34;cache-control&#34; content=&#34;no-cache&#34;&gt;
+// 其他主流浏览器识别的标签
+&lt;meta http-equiv=&#34;expires&#34; content=&#34;0&#34;&gt;
+// 仅有IE浏览器才识别的标签，该方式仅仅作为知会IE缓存时间的标记，你并不能在请求或响应报文中找到Expires字段
+&lt;p&gt;1.2、html设置缓存如下：&lt;br&gt;
+&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Cache-Control&amp;quot; content=&amp;quot;max-age=7200&amp;quot; /&amp;gt;&lt;/code&gt;&lt;br&gt;
+// 其他主流浏览器识别的标签&lt;br&gt;
+&lt;code&gt;&amp;lt;meta http-equiv=&amp;quot;Expires&amp;quot; content=&amp;quot;Mon, 20 Aug 2018 23:00:00 GMT&amp;quot; /&amp;gt;&lt;/code&gt;&lt;br&gt;
+// 仅有IE浏览器才识别的标签&lt;/p&gt;
+&lt;p&gt;2 静态资源的缓存一般是在web服务器上配置的，常用的web服务器有：nginx、apache。具体的配置这里不做详细介绍，大家自行查阅。&lt;/p&gt;
+&lt;p&gt;3 不想使用缓存的几种方式：&lt;br&gt;
+3.1 Ctrl + F5强制刷新，都会直接向服务器提取数据。&lt;br&gt;
+3.2 按F5刷新或浏览器的刷新按钮，默认加上Cache-Control：max-age=0，即会走协商缓存。&lt;br&gt;
+3.2 在IE浏览器下不想使用缓存的做法：打开IE，点击工具栏上的工具-&amp;gt;Internet选项-&amp;gt;常规-&amp;gt;浏览历史记录 设置. 选择“从不”，然后保存。最后点击“删除”把Internet临时文件都删掉 （IE缓存的文件就是Internet临时文件）。&lt;br&gt;
+3.3 还有就是上面1、2中禁用缓存的做法&lt;br&gt;
+3.4 对于其他浏览器也都有清除缓存的办法&lt;/p&gt;
+&lt;h2 id=&#34;http缓存的几个注意点&#34;&gt;HTTP缓存的几个注意点？&lt;/h2&gt;
+&lt;p&gt;1 强缓存情况下，只要缓存还没过期，就会直接从缓存中取数据，就算服务器端有数据变化，也不会从服务器端获取了，这样就无法获取到修改后的数据。决解的办法有：在修改后的资源加上随机数,确保不会从缓存中取。&lt;/p&gt;
+&lt;p&gt;例如：&lt;br&gt;
+http://www.kimshare.club/kim/common.css?v=22324432&lt;br&gt;
+http://www.kimshare.club/kim/common.2312331.css&lt;/p&gt;
+&lt;p&gt;2 尽量减少304的请求，因为我们知道，协商缓存每次都会与后台服务器进行交互，所以性能上不是很好。从性能上来看尽量多使用强缓存。&lt;/p&gt;
+&lt;p&gt;3 在Firefox浏览器下，使用Cache-Control: no-cache 是不生效的，其识别的是no-store。这样能达到其他浏览器使用Cache-Control: no-cache的效果。所以为了兼容Firefox浏览器，经常会写成Cache-Control: no-cache，no-store。&lt;/p&gt;
+&lt;p&gt;4 与缓存相关的几个header属性有：Vary、Date/Age。&lt;br&gt;
+Vary：&lt;br&gt;
+vary本身是“变化”的意思，而在http报文中更趋于是“vary from”（与。。。不同）的含义，它表示服务端会以什么基准字段来区分、筛选缓存版本。&lt;br&gt;
+在服务端有着这么一个地址，如果是IE用户则返回针对IE开发的内容，否则返回另一个主流浏览器版本的内容。&lt;br&gt;
+格式：Vary: User-Agent&lt;br&gt;
+知会代理服务器需要以 User-Agent 这个请求首部字段来区别缓存版本，防止传递给客户端的缓存不正确。&lt;/p&gt;
+&lt;p&gt;Date/Age：&lt;br&gt;
+响应报文中的 Date 和 Age 字段：区分其收到的资源是否命中了代理服务器的缓存。&lt;br&gt;
+Date 理所当然是原服务器发送该资源响应报文的时间（GMT格式），如果你发现 Date 的时间与“当前时间”差别较大，或者连续F5刷新发现 Date 的值都没变化，则说明你当前请求是命中了代理服务器的缓存。&lt;br&gt;
+Age 也是响应报文中的首部字段，它表示该文件在代理服务器中存在的时间（秒），如文件被修改或替换，Age会重新由0开始累计。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;1 对于强制缓存，服务器通知浏览器一个缓存时间，在缓存时间内，下次请求，直接用缓存，不在时间内，执行协商缓存策略。&lt;br&gt;
+2 对于协商缓存，将缓存信息中的Etag和Last-Modified通过请求发送给服务器，由服务器校验，返回304状态码时，浏览器直接使用缓存。&lt;/p&gt;
+&lt;p&gt;再次感谢：kimshare   https://www.jianshu.com/p/227cee9c8d15&lt;br&gt;
+最后，附图一张&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597824906056.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+图源运维社区：https://www.unixhot.com/page/cache&lt;/p&gt;
+">HTTP缓存</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/"" data-c="
+          &lt;h1 id=&#34;概念&#34;&gt;概念&lt;/h1&gt;
+&lt;p&gt;本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。&lt;/p&gt;
+&lt;p&gt;webpack是一个打包工具，可以将项目中用到的各种文件按照一定的规则集合起来。在这个过程中可以进行诸如图片压缩、ES6语法转ES5语法、TypeScript转JavaScript等等操作。&lt;/p&gt;
+&lt;h2 id=&#34;与gulpgrunt等打包工具有什么区别&#34;&gt;与gulp/grunt等打包工具有什么区别？&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;gulp 是自动化构建工具，可以配合各种插件做 js 压缩、css 压缩、less 编译、代码检查等，替代手工实现自动化工作&lt;/code&gt;&lt;br&gt;
+1 构建工具&lt;br&gt;
+2 自动化&lt;br&gt;
+3 提高效率用&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;webpack是文件打包工具，可以把项目的各种 js、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案&lt;/code&gt;&lt;br&gt;
+1 打包工具&lt;br&gt;
+2 模块化识别&lt;br&gt;
+3 编译模块化代码方案用&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;说到webpack，那还要说到 seajs / requirejs / browserify。这四个都是JS模块化的方案。其中 seajs / require 是一种类型，webpack/browserify是另一种类型。&lt;/p&gt;
+&lt;p&gt;seajs / require : 是一种在线&amp;quot;编译&amp;quot; 模块的方案，相当于在页面上加载一个CMD/AMD解释器。这样浏览器就认识了 define、exports、module 这些东西。也就实现了模块化。&lt;br&gt;
+webpack/browserify : 是一个预编译模块的方案，相比于上面 ，这个方案更加智能。没用过 browserify，这里以webpack为例。首先，它是预编译的，不需要在浏览器中加载解释器。另外，你在本地直接写JS，不管是 AMD / CMD / ES6 风格的模块化，它都能认识，并且编译成浏览器认识的JS。&lt;br&gt;
+  总结，Gulp是一个工具，而webpack是模块化方案。Gulp 也可以配置seajs、requirejs 甚至 webpack 的插件。&lt;/p&gt;
+">每天一个名词解释—webpack</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/"" data-c="
+          &lt;h1 id=&#34;什么是单页应用&#34;&gt;什么是单页应用&lt;/h1&gt;
+&lt;p&gt;在早期的 Web 应用中，前端的作用很弱，业务逻辑和数据处理都在后端，后端给前端返回一个 HTML 页面，前端只负责展示。在这种模式下，单个 HTML 页面被当做一个功能原件，表单提交，超链接跳转都可以用来重新请求新的 HTML 页面，从而达到给用户展示新的页面的目的。在这种方式中，你可以感觉到页面总是在不停的刷新，一个点击可能都需要等待很久，这是因为，当页面变化时，所有资源都需要重新请求。这些问题导致了用户体验不佳，也浪费了资源。单页应用便很好的解决了这些问题。&lt;/p&gt;
+&lt;h2 id=&#34;概念&#34;&gt;概念&lt;/h2&gt;
+&lt;p&gt;什么是单页应用呢？单页应用的全称是 single-page application，简称 SPA，它是一种网站应用的模型，它可以动态重写当前的页面来与用户交互，而不需要重新加载整个页面。单页应用的流畅性让 Web 应用更像桌面端或 Native 应用了。相对于传统的 Web 应用，单页应用做到了前后端分离，后端只负责处理数据提供接口，页面逻辑和页面渲染都交给了前端。前端发展到现在，单页应用的使用已经很广泛，目前时兴的 React、Vue、Angular 等前端框架均采用了 SPA 原则。单页应用意味着前端掌握了主动权，也让前端代码更复杂和庞大，模块化、组件化以及架构设计都变得越来越重要。&lt;br&gt;
+来体验一下单页应用吧，打开你的 Gmail，点击左侧的导航栏，在开发者工具的 Network 中可以看到资源是按需加载的，此时页面也并没有刷新，观察 Elements 栏下的 HTML，你会发现整个 HTML 的大框架是不变的，页面改变时，或者说路由改变时，DOM 树只是改变它需要改变的部分，也就是动态改变。&lt;/p&gt;
+&lt;h2 id=&#34;工作原理&#34;&gt;工作原理&lt;/h2&gt;
+&lt;p&gt;SPA 的一个重要实现就是改变路由时，页面不刷新。实现这个功能，通常有两种方式：使用 window.history 对象或 location.hash。&lt;/p&gt;
+&lt;h3 id=&#34;history-对象&#34;&gt;history 对象&lt;/h3&gt;
+&lt;p&gt;window.history 包含了浏览器的历史信息，它有以下几种常用方法：&lt;br&gt;
+• history.back()：与在浏览器点击后退按钮相同；&lt;br&gt;
+• history.forward()：与在浏览器中点击按钮向前相同；&lt;br&gt;
+• history.go(n)：接受一个整数作为参数，移动到该整数指定的页面，比如 go(1) 相当于 forward()，go(-1) 相当于 back()，go(0) 相当于刷新当前页面。&lt;br&gt;
+HTML5 对 history 对象新增了 pushState() 和 replaceState() 方法，这两个方法可以往历史栈中添加数据，给用户的感觉就是浏览器的 url 改变了，但是页面并没有重新加载。pushState() 是在浏览记录中添加一个新记录，replaceState() 则是修改当前的浏览器记录，这是二者的细微差别，使用时参数的字段和含义都是一样的。&lt;br&gt;
+&lt;code&gt;window.history.pushState(state, title, url)&lt;/code&gt;&lt;br&gt;
+• state 是状态对象，可以用 history.state 读取；&lt;br&gt;
+• title 表示新页面的标题，但是现在的所有浏览器都会忽略这个字段，所以可以传 null；&lt;br&gt;
+• url 是新页面的地址，必须是和当前页面在同一个域。&lt;/p&gt;
+&lt;p&gt;当用户点击浏览器上的前进和后退按钮时，或者调用上述 window.history 的 back、forward 和 go 方法，就会触发 popstate 事件。该事件只针对同一个文档，如果浏览历史的切换导致加载了不同的文档，popstate 事件将不会被触发。popstate 事件回调函数的参数中的 state 属性指向 pushState() 和 replaceState() 方法为当前页面提供的状态，也就是 pushState() 和 replaceState() 方法使用时传的第一个参数 state。&lt;/p&gt;
+&lt;p&gt;我们可以通过 pushState() 简单模拟一下浏览器的路由改变且不刷新页面。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a class=&amp;quot;spa&amp;quot;&amp;gt;spa1.html&amp;lt;/a&amp;gt;
+&amp;lt;a class=&amp;quot;spa&amp;quot;&amp;gt;spa2.html&amp;lt;/a&amp;gt;
+
+&amp;lt;button onclick=&amp;quot;goBack()&amp;quot;&amp;gt;back&amp;lt;/button&amp;gt;
+&amp;lt;button onclick=&amp;quot;goForward()&amp;quot;&amp;gt;back&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;document.querySelectorAll(&#39;.spa&#39;).forEach((item, index) =&amp;gt; {
+    item.addEventListener(&#39;click&#39;, (e) =&amp;gt; {
+        e.preventDefault();
+        let link = item.textContent;
+        window.history.pushState({name: `spa${index + 1}`}, link, link)
+        console.log(link, &#39;pushState&#39;)
+    }, false)
+})
+
+window.addEventListener(&#39;popstate&#39;, (e) =&amp;gt; {
+    console.log(e.state)
+})
+
+function goBack() {
+    window.history.back()
+}
+
+function goForward() {
+    window.history.forward()
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过监听点击事件，使用 pushState() 来修改 history 对象，下面的 gif 图演示了这个过程。需要注意的是，pushState() 和 replaceState() 方法只能修改路由，并不能让页面重新渲染。浏览器地址栏显示 demo/spa2.html 时，并不会跳转到 spa2.html 页面，也不会检查 spa2.html 页面是否存在，只是使其成为浏览器历史中的最新记录。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597719961545.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;hash&#34;&gt;hash&lt;/h3&gt;
+&lt;p&gt;hash 是 location 对象的属性，它指的是当前 url 的锚，也就是从 # 号开始的部分。修改 location.hash 并监听 window 的 hashchange 事件，也能达到同样的目的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a class=&amp;quot;spa&amp;quot;&amp;gt;spa1.html&amp;lt;/a&amp;gt;
+&amp;lt;a class=&amp;quot;spa&amp;quot;&amp;gt;spa2.html&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;document.querySelectorAll(&#39;.spa&#39;).forEach((item, index) =&amp;gt; {
+    item.addEventListener(&#39;click&#39;, (e) =&amp;gt; {
+        e.preventDefault();
+        location.hash = index + 1
+    }, false)
+})
+
+window.addEventListener(&#39;hashchange&#39;, (e) =&amp;gt; {
+    console.log({ hash: location.hash })
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;演示效果如下：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597720003223.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;优缺点&#34;&gt;优缺点&lt;/h2&gt;
+&lt;p&gt;SPA 可圈可点，现在已被大家广泛使用，也得到了主流框架的支持，但是它也有局限性，我们将它的优缺点总结如下。&lt;br&gt;
+优点有：&lt;br&gt;
+• 无刷新体验，用户在切换页面过程中不会频繁被“打断”，因为界面框架都在本地，对用户的响应非常及时，因此提升了用户体验；&lt;br&gt;
+• 分离前后端关注点，前端负责界面显示，后端负责数据存储和计算，各司其职，不会把前后端的逻辑混杂在一起；&lt;br&gt;
+• 减轻服务器压力，服务器只用出数据就可以，不用管展示逻辑和页面合成，吞吐能力会提高几倍；&lt;br&gt;
+• API 共享，同一套后端程序代码，不用修改就可以用于Web界面、手机、平板等多种客户端；&lt;br&gt;
+• 完全的前端组件化，前端开发不再以页面为单位，更多地采用组件化的思想，代码结构和组织方式更加规范化，便于修改和调整。&lt;br&gt;
+缺点有：&lt;br&gt;
+• 对 SEO 不太优好，尽管可以通过 Prerender 预渲染优化等技术解决一部分，但是相对还是不容易索引到它；&lt;br&gt;
+• 易出错，需要使用程序管理前进、后退、地址栏等信息；&lt;br&gt;
+• 较高的前端开发门槛，对技术能力要求较高，需要对设计模式有一定理解，因为面对不是一个简单的页面，而是一个运行在浏览器环境里面的桌面软件。&lt;/p&gt;
+&lt;p&gt;文章来源：https://www.yuque.com/fe9/basic/xvftk8&lt;/p&gt;
+">每天一个名词解释—单页应用</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/"" data-c="
+          &lt;h2 id=&#34;官网介绍&#34;&gt;官网介绍&lt;/h2&gt;
+&lt;p&gt;TypeScript 是 JavaScript 的类型的超集，它可以编译成纯 JavaScript。编译出来的 JavaScript 可以运行在任何浏览器上。TypeScript 编译工具可以运行在任何服务器和任何系统上。TypeScript 是开源的。&lt;/p&gt;
+&lt;h2 id=&#34;他人总结&#34;&gt;他人总结&lt;/h2&gt;
+&lt;p&gt;typescript是由微软开发的一个javascript超集，本质是向javascript这门弱类型动态语言添加了静态类型和面向对象。作者是安德斯-海尔斯伯格，C#之父。从发布至今，typescript一直倍受关注，star数直线上升，并且被越来越多的个人和组织认可，首先是默认使用ts的angular系列框架，vue在2.2开始支持ts，2.5版本以后全面支持，包括vux,vue-router，在vue-cli3.0脚手架当中，ts被加入到默认选项当中。react后续也开始支持ts，包括增加jsx式的模板引擎tsx。后续更多的开源库也开始支持，包括element-ui、iView、AntD。&lt;/p&gt;
+&lt;h2 id=&#34;优点&#34;&gt;优点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;提高代码质量，降低bug率，隐式类型转换带来大量不可预知的类型错误&lt;/li&gt;
+&lt;li&gt;静态类型检测，减少编译阶段引起的错误&lt;/li&gt;
+&lt;li&gt;模块化，es6已支持&lt;/li&gt;
+&lt;li&gt;让代码更加清晰易读&lt;/li&gt;
+&lt;li&gt;语法糖 ()=&amp;gt;，接口，枚举，泛型，方法重载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;缺点&#34;&gt;缺点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型（Enums）等前端工程师可能不是很熟悉的概念&lt;/li&gt;
+&lt;li&gt;短期可能会增加一些开发成本，毕竟要多写一些类型的定义，不过对于一个需要长期维护的项目，TypeScript 能够减少其维护成本&lt;/li&gt;
+&lt;li&gt;集成到构建流程需要一些工作量&lt;/li&gt;
+&lt;li&gt;可能和一些库结合的不是很完美&lt;/li&gt;
+&lt;/ul&gt;
+">每天一个名词解释—Typescript</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/"" data-c="
+          &lt;p&gt;如果要给可视化下一个定义，应该是这样的：可视化是将数据组织成易于为人所理解和认知的结构，然后用图形的方式形象地呈现出来的理论、方法和技术。实现可视化有两个关键要素，一个是数据，另一个是图形。如果要考虑在计算机上呈现，那还要加上交互。&lt;br&gt;
+从工作内容来看，前端工程师主要负责处理内容呈现和用户交互。可视化的数据呈现，尤其是在Web端的呈现，属于前端工程师的范畴。但是，与传统的前端开发相比，可视化开发的工具、思路和方法，又和Web有着比较大的区别。&lt;/p&gt;
+&lt;p&gt;首先是技术栈的不同。Web开发主要以HTML来描述结构，以CSS来描述表现，以JavaScript来描述行为。而可视化则较少涉及HTML和CSS，它更多地要同浏览器的Canvas、SVG、WebGl等其他图形API打交道。这是因为，Web开发以呈现块状内容为主，所以HTML是更合适的技术。而可视化开发则需要呈现各种各样的形状、结构，所以，形状更丰富的SVG以及更底层的Canvas2D和WebGL就是更合适的技术了。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597590510836.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+其次，Web开发着重于处理普通的文本和多媒体信息，渲染普通的、易于阅读的文本和多媒体内容，而可视化开发则着重于处理结构化数据，渲染各种相对复杂的图表和图形元素。两者针对的信息特征和对图形渲染的要求有所不同，所以，在细节处理上也有比较大的差异。&lt;/p&gt;
+&lt;p&gt;这么说比较抽象，举个例子。在使用ECharts这样现成的图标库开发图表的时候，往往会遇到一些产品需求不能很好被满足的情况。如果想要把图表的默认布局方式从absolute改变成其他方式、把坐标轴指示线的样式换成虚线、把配色换成线性渐变，或者想要修改地图中某个点的点击范围。虽然有的问题，通过修改参数配置（EChart的每种图表可能有数十种不同的配置项）确实能解决，但还是有一些问题必须要修改库的源码才能解决。&lt;/p&gt;
+&lt;p&gt;因此，像EChart等现成的图表库，尽管功能强大、配置复杂，但是在样式细节控制上，仍然无法做到如CSS那般灵活。&lt;/p&gt;
+&lt;p&gt;除此之外，可视化要处理更多偏视觉方面的细节信息，尤其是在要呈现的数据细节比较丰富的时候，可能要精确地呈现大小、距离、角度、高度、光线、阴影等等。这些细节的处理，都需要你对图形绘制有更加精确的控制，这就需要较深入地掌握图形学理论知识，了解并熟悉专业的图形库和绘图的工具。简而言之，就是Web开发的前端主要还是关注内容和样式，图形的渲染和绘制是由浏览器底层来完成的，而可视化前端，则可能要深入底层渲染层，真正去控制图形的绘制和细节的呈现。&lt;/p&gt;
+&lt;p&gt;尽管Web前端与可视化在工具、思路和方法上有一些区别，但二者也有相通之处。&lt;/p&gt;
+&lt;p&gt;其一，可视化与Web前端一样，最终都是以图像呈现在浏览器上，因此有许多通用的方法论。&lt;/p&gt;
+&lt;p&gt;其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。&lt;/p&gt;
+&lt;p&gt;其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。&lt;/p&gt;
+&lt;p&gt;文章来源：https://zhuanlan.zhihu.com/p/158447352&lt;/p&gt;
+">每天一个名词解释—可视化</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/"" data-c="
+          &lt;h2 id=&#34;什么是react&#34;&gt;什么是React&lt;/h2&gt;
+&lt;p&gt;React是一个简单的javascript UI库，用于构建高效、快速的用户界面。它是一个轻量级库，因此很受欢迎。它遵循组件设计模式、声明式编程范式和函数式编程概念，以使前端应用程序更高效。它使用虚拟DOM来有效地操作DOM。它遵循从高阶组件到低阶组件的单向数据流。&lt;br&gt;
+狭义来讲 React 是 Facebook 内部开源出来的一个前端 UI 开发框架，广义来讲 React 不仅仅是 js 框架本身，更是一套完整的前端开发生态体系，这套体系包括：&lt;br&gt;
+React.js&lt;br&gt;
+ReactRenders: ReactDOM / ReactServer / ReactCanvas&lt;br&gt;
+Flux 模式及其实现（Redux , Fluxxor）&lt;br&gt;
+React 开源组件&lt;br&gt;
+React Native&lt;br&gt;
+GraphQl + Relay&lt;/p&gt;
+&lt;h2 id=&#34;什么是声明式编程&#34;&gt;什么是声明式编程&lt;/h2&gt;
+&lt;p&gt;声明式编程是一种编程范式，它关注的是你要做什么，而不是如何做。它表达逻辑而不显式地定义步骤。这意味着我们需要根据逻辑的计算来声明要显示的组件。它没有描述控制流步骤。声明式编程的例子有HTML、SQL等&lt;/p&gt;
+&lt;h2 id=&#34;什么是函数式编程&#34;&gt;什么是函数式编程&lt;/h2&gt;
+&lt;p&gt;函数式编程是声明式编程的一部分。javascript中的函数是第一类公民，这意味着函数是数据，你可以像保存变量一样在应用程序中保存、检索和传递这些函数。&lt;br&gt;
+函数式编程有些核心的概念，如下：&lt;br&gt;
+不可变性(Immutability)&lt;br&gt;
+纯函数(Pure Functions)&lt;br&gt;
+数据转换(Data Transformations)&lt;br&gt;
+高阶函数 (Higher-Order Functions)&lt;br&gt;
+递归&lt;br&gt;
+组合&lt;br&gt;
+React 中一切都是组件。 我们通常将应用程序的整个逻辑分解为小的单个部分。 我们将每个单独的部分称为组件。 通常，组件是一个javascript函数，它接受输入，处理它并返回在UI中呈现的React元素。&lt;/p&gt;
+">每天一个名词解释—React</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/"" data-c="
+          &lt;h1 id=&#34;是什么&#34;&gt;是什么&lt;/h1&gt;
+&lt;h2 id=&#34;定义&#34;&gt;定义&lt;/h2&gt;
+&lt;p&gt;Electron是一个能让你使用传统前端技术（Nodejs, Javascript, HTML, CSS）开发一个跨平台桌面应用的框架。这里所说的桌面应用指的是在Windows、OSX及Linux系统上运行的程序。&lt;br&gt;
+可以认为Electron是一种运行环境库，我们可以基于此，用HTML、JS和CSS写桌面应用。&lt;br&gt;
+我们熟知的一些软件都是基于electron开发的&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597377289775.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+像是vscode，atom，还有本博客使用的Gridea&lt;/p&gt;
+&lt;h2 id=&#34;优点&#34;&gt;优点：&lt;/h2&gt;
+&lt;p&gt;部署、升级方便。用户通过浏览器就可以访问；&lt;br&gt;
+HTML/JS/CSS编写，方便且高效；&lt;br&gt;
+windows、linux都支持；&lt;/p&gt;
+&lt;h2 id=&#34;缺点&#34;&gt;缺点：&lt;/h2&gt;
+&lt;p&gt;对于开发者：浏览器适配比较繁琐；&lt;br&gt;
+对于开发者：有些应用，必须指定浏览器或版本。比如OCX必须是IE内核，H5要求浏览器必须是较高版本；&lt;br&gt;
+对于用户：传统行业中，部分用户对web应用不习惯，尤其在专业工具软件方面，觉得web应用没有桌面应用用起来踏实。&lt;br&gt;
+对于开发者：必须打开浏览器，输入一长串URL地址（虽然可以建立浏览器收藏夹或者创建URL的快捷方式到桌面，但大部分用户不会这么做）&lt;/p&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;安装 Electron&lt;br&gt;
+&lt;code&gt;npm install --save-dev electron&lt;/code&gt;&lt;br&gt;
+引入&lt;br&gt;
+&lt;code&gt;const electron = require(&#39;electron&#39;)&lt;/code&gt;&lt;br&gt;
+main.js配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const { app, BrowserWindow } = require(&#39;electron&#39;)
+function createWindow () {   
+  // 创建浏览器窗口
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
+  // 并且为你的应用加载index.html
+  win.loadFile(&#39;index.html&#39;)
+  // 打开开发者工具
+  win.webContents.openDevTools()
+}
+// Electron会在初始化完成并且准备好创建浏览器窗口时调用这个方法
+// 部分 API 在 ready 事件触发后才能使用。
+app.whenReady().then(createWindow)
+//当所有窗口都被关闭后退出
+app.on(&#39;window-all-closed&#39;, () =&amp;gt; {
+  // 在 macOS 上，除非用户用 Cmd + Q 确定地退出，
+  // 否则绝大部分应用及其菜单栏会保持激活。
+  if (process.platform !== &#39;darwin&#39;) {
+    app.quit()
+  }
+})
+app.on(&#39;activate&#39;, () =&amp;gt; {
+  // 在macOS上，当单击dock图标并且没有其他窗口打开时，
+  // 通常在应用程序中重新创建一个窗口。
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow()
+  }
+})
+// 您可以把应用程序其他的流程写在在此文件中
+// 代码 也可以拆分成几个文件，然后用 require 导入。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;官网地址：https://www.electronjs.org/&lt;br&gt;
+中文文档：https://www.w3cschool.cn/electronmanual/&lt;br&gt;
+官方文档：https://www.electronjs.org/docs&lt;/p&gt;
+">每天一个名词解释—electron</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/"" data-c="
+          &lt;p&gt;对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。&lt;br&gt;
+骨架屏能让你的网页‘看起来’展现得更快，但只是看起来，实际上速度还是一样的。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597325013432.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;骨架屏有哪些优势&#34;&gt;骨架屏有哪些优势&lt;/h2&gt;
+&lt;p&gt;大体来说，骨架屏的优势在于：&lt;br&gt;
+在页面加载初期预先渲染内容，提升感官上的体验。&lt;br&gt;
+一般情况骨架屏和实际内容的结构是类似的，因此之后的切换不会过于突兀。这点和传统的 Loading 动图不同，可以认为是其升级版。&lt;br&gt;
+只需要简单的 CSS 支持 (涉及图片懒加载可能还需要 JS )，不要求 HTTPS 协议，没有额外的学习和维护成本。&lt;br&gt;
+如果页面采用组件化开发，每个组件可以根据自身状态定义自身的骨架屏及其切换时机，同时维持了组件之间的独立性。&lt;/p&gt;
+&lt;h2 id=&#34;vue实现骨架屏&#34;&gt;Vue实现骨架屏&lt;/h2&gt;
+&lt;p&gt;需要用到以下插件&lt;br&gt;
+vue-server-renderer&lt;br&gt;
+vue-skeleton-webpack-plugin&lt;br&gt;
+page-skeleton-webpack-plugin&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597325346025.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+对比发现，就开发难度、灵活性和插件开源方来看，如果你的项目是基于vue-cli脚手架的，那么饿了么团队的page-skeleton-webpack-plugin是你的最佳选择，如果不是，那么你可以选择vue-router开源的vue-server-renderer.&lt;/p&gt;
+&lt;p&gt;文章相关链接：&lt;br&gt;
+vue骨架屏实践：https://www.jianshu.com/p/eacac700630e&lt;br&gt;
+网页骨架屏自动生成方案：https://zhuanlan.zhihu.com/p/74403911&lt;br&gt;
+如何让你的网页“看起来”展现地更快 —— 骨架屏二三事：https://zhuanlan.zhihu.com/p/48601348&lt;/p&gt;
+">每天一个名词解释—骨架屏(Skeleton)</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/"" data-c="
+          &lt;p&gt;今天面试问到了三栏布局，就自己尝试写一下，结果写出来中间那一栏的内容不能自动换行，试了半天也不行，换成flex也不行，最后去网上查了一下，原来超长的字母和数字是不会被自动拆开的，所以导致无法换行，解决方法就是加入&lt;code&gt;word-break: break-all;&lt;/code&gt;，通过这个就可以解决换行问题了。&lt;/p&gt;
+">字母换行失败问题</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/"" data-c="
+          &lt;p&gt;Nuxt.js 是一个基于 Vue.js 的通用应用框架。&lt;br&gt;
+通过对客户端/服务端基础架构的抽象组织，Nuxt.js 主要关注的是应用的 UI 渲染。&lt;br&gt;
+Vue 开发一个单页面应用，相信很多前端工程师都已经学会了，但是单页面应用有一个致命的缺点，就是 SEO 极不友好。除非，vue 能在服务端渲染（ssr）并直接返回已经渲染好的页面，而并非只是一个单纯的 &lt;code&gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/code&gt;。&lt;br&gt;
+Nuxt.js 就是一个极简的 vue 版的 ssr 框架。基于它，我们可以快速开发一个基于 vue 的 ssr 单页面应用。&lt;br&gt;
+Nuxt.js 集成了以下组件/框架，用于开发完整而强大的 Web 应用：&lt;br&gt;
+Vue 2&lt;br&gt;
+Vue-Router&lt;br&gt;
+Vuex (当配置了 Vuex 状态树配置项 时才会引入)&lt;br&gt;
+Vue 服务器端渲染 (排除使用 mode: &#39;spa&#39;)&lt;br&gt;
+Vue-Meta&lt;br&gt;
+压缩并 gzip 后，总代码大小为：57kb （如果使用了 Vuex 特性的话为 60kb）。&lt;br&gt;
+另外，Nuxt.js 使用 Webpack 和 vue-loader 、 babel-loader 来处理代码的自动化构建工作（如打包、代码分层、压缩等等）。&lt;/p&gt;
+&lt;h2 id=&#34;特性&#34;&gt;特性&lt;/h2&gt;
+&lt;p&gt;基于 Vue.js&lt;br&gt;
+自动代码分层&lt;br&gt;
+服务端渲染&lt;br&gt;
+强大的路由功能，支持异步数据&lt;br&gt;
+静态文件服务&lt;br&gt;
+ES2015+ 语法支持&lt;br&gt;
+打包和压缩 JS 和 CSS&lt;br&gt;
+HTML 头部标签管理&lt;br&gt;
+本地开发支持热加载&lt;br&gt;
+集成 ESLint&lt;br&gt;
+支持各种样式预处理器： SASS、LESS、 Stylus 等等&lt;br&gt;
+支持 HTTP/2 推送&lt;br&gt;
+以上内容来源网络&lt;br&gt;
+总结:大致在网络上浏览了一下，了解了Nuxt.js的作用，服务端渲染，与其同作用的还有React的Next.js，目的就是利于SEO&lt;/p&gt;
+">每天一个名词解释—Nuxt.js</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/es6-zhong-de-symbol/"" data-c="
+          &lt;p&gt;ES6中引入了一种新的基础数据类型：&lt;code&gt;Symbol&lt;/code&gt;，它的功能类似于一种标识唯一性的ID。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let s1 = Symbol()
+let s2 = Symbol(&#39;another symbol&#39;)
+let s3 = Symbol(&#39;another symbol&#39;)
+console.log(s1 == s2)   //false
+console.log(s1 === s2)  //false
+console.log(s2 == s3)   //false
+console.log(s2 === s3)  //false
+console.log(s1 == s1)   //true
+console.log(s1 === s1)  //true
+console.log(s2 === s2)  //true
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;它的值具有唯一性，除了自己它谁都不等于。&lt;br&gt;
+&lt;code&gt;console.log(typeof s1) //symbol&lt;/code&gt;&lt;br&gt;
+typeof的返回值为symbol&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let obj = {
+            [Symbol(&#39;name&#39;)]: &#39;学习Symbol&#39;,
+            age: 18,
+            sex: &#39;male&#39;
+        }
+        console.log(Object.keys(obj)) // [&#39;age&#39;, &#39;sex&#39;]
+        for (let p in obj) {
+            console.log(p) // 分别输出：&#39;age&#39; 和 &#39;sex&#39;
+        }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;不能通过&lt;code&gt;Object.keys()&lt;/code&gt;或者&lt;code&gt;for...in&lt;/code&gt;来枚举&lt;br&gt;
+使用JSON.stringify()将对象转换成JSON字符串的时候，Symbol属性也会被排除在输出内容之外：&lt;br&gt;
+&lt;code&gt;console.log(JSON.stringify(obj)) // {&amp;quot;age&amp;quot;:18,&amp;quot;sex&amp;quot;:&amp;quot;male&amp;quot;}&lt;/code&gt;&lt;br&gt;
+我们就没办法获取以Symbol方式定义的对象属性了么？非也。还是会有一些专门针对Symbol的API，比如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 使用Object的API
+Object.getOwnPropertySymbols(obj) // [Symbol(name)]
+// 使用新增的反射API
+Reflect.ownKeys(obj) // [Symbol(name), &#39;age&#39;, &#39;title&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后贴一下MDN的兼容表&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597161891981.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+可以看到并不被IE浏览器支持&lt;/p&gt;
+">ES6中的Symbol</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-umijs/"" data-c="
+          &lt;h2 id=&#34;什么是umijs&#34;&gt;什么是Umi.js?&lt;/h2&gt;
+&lt;p&gt;Umi，中文可发音为乌米，是可扩展的企业级前端应用框架。Umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。然后配以生命周期完善的插件体系，覆盖从源码到构建产物的每个生命周期，支持各种功能扩展和业务需求。你可以将它简单的理解为一个专注性能的类 next.js 前端框架，并通过约定、自动生成和解析代码等方式来辅助开发，减少我们开发者的代码量。&lt;br&gt;
+为什么使用Umi.js?&lt;br&gt;
+我们做react开发的时候会不会遇到以下问题？：&lt;br&gt;
+1.项目做大的时候，开发调试的启动和热更新时间会变得很长。&lt;br&gt;
+2.大应用下，网站打开很慢，有没有办法基于路由做到按需加载。&lt;br&gt;
+3.dva的model每次都要手写载入，能否一开始就同项目初始化好？&lt;/p&gt;
+&lt;p&gt;使用乌米，即可解决以上问题，并且还能提供如下优势：&lt;/p&gt;
+&lt;p&gt;开箱即用，内置 react、react-router 等&lt;br&gt;
+类 next.js 且功能完备的路由约定，同时支持配置的路由方式&lt;br&gt;
+完善的插件体系，覆盖从源码到构建产物的每个生命周期&lt;br&gt;
+一键兼容到 IE9&lt;br&gt;
+完善的 TypeScript 支持&lt;br&gt;
+与 dva 数据流的深入融合&lt;/p&gt;
+&lt;p&gt;以上内容来源于网络，可能因为没有使用过React的原因?以上的内容听得我云里雾里，根本不知道是干什么的，后来翻到知乎上UmiJS作者发布umi 1.0的那篇文章，才大概看懂了些。&lt;/p&gt;
+&lt;h2 id=&#34;umi-是什么&#34;&gt;umi 是什么？&lt;/h2&gt;
+&lt;p&gt;umi 是一个类 next.js 的专注性能的前端框架，他的优势是：&lt;br&gt;
+? 内置的大量性能优化&lt;br&gt;
+? 多端，无缝支持容器和浏览器访问&lt;br&gt;
+? 类 webpack 的插件机制&lt;br&gt;
+? 针对 antd 和 dva 有友好的支持&lt;br&gt;
+他基于以下约定：&lt;br&gt;
+页面是 React 组件&lt;br&gt;
+在 pages 目录下新增文件即可创建页面&lt;br&gt;
+现在写一个 React 应用你需要掌握很多知识，比如基于路由的 code-splitting、service-worker、webpack 配置、babel 配置、aslant 配置、性能优化、HMR、redbox、jest 测试、ts 配置、tree-shaking、scope-hoist、side-effect 等等。umi 把这些枯燥的事情全都做了，而你只需负责创造性的那部分。&lt;br&gt;
+&lt;code&gt;别的没看懂，umi可以把webpack 配置、babel 配置、jest 测试、ts 配置这里还是能看的懂的，总之就是各种简化操作&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;性能&#34;&gt;性能&lt;/h2&gt;
+&lt;p&gt;umi 在性能上做了很多努力，这些对于开发者是无感知的。“你只管写业务代码，我会负责性能”，并且随着 umi 的迭代，我保证你的应用会越来越快。&lt;br&gt;
+主要有：&lt;br&gt;
+PWA Support&lt;br&gt;
+Tree Shake&lt;br&gt;
+antd(-mobile) 启用 ES Module&lt;br&gt;
+Scope Hoist&lt;br&gt;
+公共文件的智能提取&lt;br&gt;
+页面级的按需加载&lt;br&gt;
+Inline Critical CSS&lt;br&gt;
+提供 umi/dynamic 和 import() 语法，分别用于懒加载组件和模块&lt;br&gt;
+优化的 babel-preset-umi&lt;br&gt;
+静态化的 SSR 处理&lt;br&gt;
+link rel=preload&lt;br&gt;
+hash 构建及服务端支持（云凤蝶）&lt;br&gt;
+通过 react-constant-elements 和 react-inline-elements 提升 rerender 性能&lt;br&gt;
+一键切换到 preact&lt;br&gt;
+Progressive image loading&lt;br&gt;
+按需打包 umi 内置的路由代码&lt;br&gt;
+...&lt;br&gt;
+&lt;code&gt;都是一些优化方面的&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;插件机制&#34;&gt;插件机制&lt;/h2&gt;
+&lt;p&gt;webpack 的生态好，和他灵活的插件机制有很大关系。umi 也类似，他就是个架子，把坑挖好，然后通过插件让功能丰富起来，内部逻辑也是如此，由一个个插件组成。&lt;br&gt;
+插件能做什么？基本什么都能做，整个生命周期都能修改，包括配置、build、dev、html 和 临时文件的生成等，已全部挖好坑。&lt;br&gt;
+&lt;code&gt;现在是不是所有前端的，或者说编程有关的东西都在追求插件化?&lt;/code&gt;&lt;br&gt;
+最后，这篇文章发于18年2月，网上的大部分讨论也是在那个时间，看起来Umi还没有火起来。&lt;/p&gt;
+">每天一个名词解释—UmiJS</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day7/"" data-c="
+          &lt;p&gt;试着写一下接口文档&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597136017703.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+Gridea写不了，换成飞书写了。&lt;/p&gt;
+&lt;p&gt;接下来打算先把小程序上线一下，然后把后端放到服务器上，再把代码上传到github。&lt;br&gt;
+因为之前的种种原因，最终服务器被我重置了，所以还要重新安装nodejs，然后把服务器的3000接口开放，接着用postman请求了一下&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597139974398.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+正常返回，看来是成功了。&lt;br&gt;
+接下来打开小程序检测&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597140174788.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597140180203.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+一切正常，看来是成功了。&lt;br&gt;
+在小程序内扫码预览，无法加载数据，看来小程序还有需要设置的地方。&lt;br&gt;
+找了半天，发现如果想要加载数据，必须要对小程序域名进行设置，但我域名买下来还不到两天，还无法进行备案，估计还得再等几天才行了。&lt;br&gt;
+借鉴了一下这篇文章https://www.cnblogs.com/zmdComeOn/archive/2019/08/20/11383572.html&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597141634414.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+成功上传到github。&lt;/p&gt;
+">Uniapp学习记录day7</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-taro/"" data-c="
+          &lt;p&gt;Taro 是一个开放式跨端跨框架解决方案，支持使用 React/Vue/Nerv 等框架来开发微信/京东/百度/支付宝/字节跳动/ QQ 小程序/H5 等应用。&lt;br&gt;
+以上位Taro官网原文，原本我以为Vue的跨端框架解决方案是Uniapp，而React的跨端框架解决方案就是Taro，没想到Taro也是支持Vue的。两个跨端框架就官网来说，Taro要好看的多，更有设计感，不过文档示例还是以React为主。&lt;br&gt;
+这里还有一篇选型对比文章：https://juejin.im/post/6844903768794857480&lt;br&gt;
+文章写于19年1月底，还是比较有时效性的&lt;br&gt;
+根据文章内的对比表格可以看到，在目前(19年初)的跨端解决方案中，唯有Taro与Uniapp，两者的github上的Star数量也相差不多&lt;br&gt;
+另一篇写于19年4月：https://blog.csdn.net/z4909801/article/details/88943851&lt;br&gt;
+文章对比了5个主流跨端框架，经过文章作者从生态、多端支持度、组件库、 接入成本、开源建设这5个方面的对比，可以看出Uniapp与Taro也是各有领先，虽然不是全方位领先其他框架，但也是位于顶部。&lt;br&gt;
+而Taro最新版本位3.0，今年7月1日发布。&lt;br&gt;
+另附一篇知乎上的文章：迄今为止，大前端各种多终端、跨端，解决方案合集https://zhuanlan.zhihu.com/p/100364496&lt;/p&gt;
+">每天一个名词解释—Taro</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day6/"" data-c="
+          &lt;h2 id=&#34;记一个小坑&#34;&gt;记一个小坑：&lt;/h2&gt;
+&lt;p&gt;在创建Bucket的时候，要把权限设置为公共读，不然无法通过URL读取，这个博客也做了记载https://blog.csdn.net/wildwolf_001/article/details/83275924，不过这样设置以后打开URL也不是查看，而是直接下载，不过总比之前的XML报错好。&lt;/p&gt;
+&lt;h2 id=&#34;又一个要注意的&#34;&gt;又一个要注意的：&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;module.exports = {
+  upload,
+  uploadimg,
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;这样暴露的要这样接收&#34;&gt;这样暴露的要这样接收&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;let {uploadimg} = require(&amp;quot;../oss/oss&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;关于前面提到的图片不能显示而是直接下载的问题，在阿里云的开发者社区里找到个提问帖，有人回复是需要绑定域名才可以预览图片，刚好浏览这个页面时，有个银川的短号打过来，刚好我也没有直接挂断而是接听了，那边是阿里OSS的客服，因为昨天我询问了关于这个的问题，今天有个电话回复，然后把文档发我QQ邮箱了，不得不说客服的态度很好。&lt;br&gt;
+可惜态度好也不能解决问题，也不知道是我没表述清楚还是什么，不过最终还是找到了https://help.aliyun.com/document_detail/142631.html，如果Bucket是在19年9月23日前创建的，是可以预览的，在那之后的使用OSS默认域名生成的文件URL从浏览器访问时会以附件形式下载，使用自有域名生成的文件URL访问时，可以预览文件内容。看来还是要绑定域名，不过这有个前提，对于图片文件（在未修改文件http头的情况下），不清楚这里的未修改文件http头是指什么，可是我详情里面看到HTTP是设置过的，针对不同文件也有不同的解析，而且我上传了一个PDF文件，解析的HTTP头里的Content-Type也是application/pdf，而且输入URL也能正常浏览无需下载，看来还是要绑定域名。&lt;/p&gt;
+&lt;h2 id=&#34;开始数据联调&#34;&gt;开始数据联调&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1597052848420.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+这边数据是没什么问题的&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597052902526.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+上来就开始给我报错(ps:传图片的时候发现Gridea不允许上传同名图片)&lt;br&gt;
+找了个有关的帖子http://www.wxappclub.com/topic/798，如果填了小程序APPID就必须满足三个条件&lt;br&gt;
+1.必须是https协议&lt;br&gt;
+2.tls 必须在 1.2 及以上版本&lt;br&gt;
+3.必须在小程序的后台（不是接口的后台），配置上https请求&lt;br&gt;
+解决办法是取消小程序APPID&lt;br&gt;
+在Uniapp上解绑了，但是小程序页不跳出之前的未绑定APPID的报错，看来要在开发者工具上面操作，详情里的APPID无法修改，按网上说的该project.config.json里的，打开看这里的压根也不是我的APPID啊，改了也没用。&lt;br&gt;
+排查了半天，原来是没写http，本地配置里的不校验合法域名那一条是默认勾选的(大概)。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597054724070.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">Uniapp学习记录day6</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day5/"" data-c="
+          &lt;h2 id=&#34;先安装一个跨域用的&#34;&gt;先安装一个跨域用的&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;var cors = require(&#39;koa-cors&#39;);
+app.use(cors());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过这个就可以进行跨域请求了&lt;/p&gt;
+&lt;h2 id=&#34;koa-multer&#34;&gt;koa-multer&lt;/h2&gt;
+&lt;p&gt;用来上传图片的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const multer = require(&amp;quot;koa-multer&amp;quot;);
+// const uploadSingle = multer.single(&amp;quot;file&amp;quot;);
+// 图片类上传到后端文件夹
+let storage = multer.diskStorage({   // diskStorage:存储
+    // 图片存储路径
+    destination:(req,file,cb) =&amp;gt;{
+        cb(null,&#39;public/uploads/&#39;)
+    }
+})
+// 配置multer
+let upload = multer({storage})
+module.exports = upload
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在中间件中引入&lt;br&gt;
+&lt;code&gt;const forYou = require(&amp;quot;../../models/foryou&amp;quot;);&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;upload.single(&amp;quot;file&amp;quot;)&lt;/code&gt;通过这种方式可以处理上传的图片&lt;br&gt;
+设置路由&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;router.post(&amp;quot;/foryou&amp;quot;, upload.single(&amp;quot;file&amp;quot;), async (ctx) =&amp;gt; {
+  console.log(&amp;quot;foryou&amp;quot;);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以看到图片已经上传完成&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596976747126.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+做一下优化&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;filename: (req, file, cb) =&amp;gt; {
+    console.log(file);
+    let fileFormat = (file.originalname).split(&#39;.&#39;)
+    console.log(fileFormat)
+    // 时间戳
+    cb(null,Date.now()+&#39;.&#39;+fileFormat[fileFormat.length-1])
+  },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1596977619788.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+PS:做到这里不由想起今天看到的关于nest与koa的对比，提到koa是较为底层的，而nest是一整套的，以我以前用过的thinkphp为例，上传图片功能很简单，还可以自己选择图片的命名格式，而koa上传图片也需要额外的插件，还要自己写图片命名格式，两相比较还是tp的好一些，也让我对于nest有了更多的想学的冲动了。&lt;br&gt;
+配置一下阿里云的OSS，用来存储项目图片。&lt;br&gt;
+顺便买了个域名。&lt;/p&gt;
+&lt;h2 id=&#34;使用oss的sdk&#34;&gt;使用OSS的SDK&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;npm install ali-oss --save
+&lt;/code&gt;&lt;/pre&gt;
+">Uniapp学习记录day5</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/"" data-c="
+          &lt;p&gt;Nest是一个用于构建高效，可扩展的Node.js服务器端应用程序的框架。它使用渐进式JavaScript，使用TypeScript构建（保留与纯JavaScript的兼容性），并结合了OOP（面向对象编程），FP（功能编程）和FRP（功能反应编程）的元素。&lt;br&gt;
+以上为官网原话，虽然写了是什么，但对于新人的我还是看的一脸懵逼，然后网上搜索了一下，知乎里有篇专栏写的很详细，然后关于Nest的提问里大家也做了很多讨论，我这里总结一下。&lt;br&gt;
+Nest 是 Node.js 版的 Spring 框架。Nest大量借鉴了Java Spring 框架和 Angular的特性，相比于Koa和Express，Nest更加全面，更加上层，Nest提供了一种开箱即用的应用程序体系结构，该体系结构允许开发人员和团队创建高度可测试，可伸缩，松散耦合且易于维护的应用程序。&lt;br&gt;
+Nest 是一种完整的解决方案&lt;br&gt;
+包含了认证、数据库、上传文件、验证、缓存、序列化、记录器、安全、配置、压缩、请求等开箱即用的技术。&lt;br&gt;
+Nest可以看作是所有Koa-xxx的功能集合，并且再nNpm上Nest也是涨势惊人，未来可期。我个人感觉可能是以后的Nodejs后端扛把子。很有学习的必要。&lt;/p&gt;
+">每天一个名词解释—nest.js</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/"" data-c="
+          &lt;p&gt;elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。&lt;/p&gt;
+&lt;p&gt;在vue项目中安装&lt;br&gt;
+&lt;code&gt;vue add vuetify&lt;/code&gt;&lt;br&gt;
+查看package.json发现已经安装完成&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597203946038.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+可以使用Vuetify的预置布局完成页面的基础布局&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1597211156600.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+除此以外，还提供了从简单到复杂的8种布局方式。&lt;br&gt;
+不过因为是学习，所以我打算自己组装一个页面的基本布局。&lt;/p&gt;
+">vuetify学习记录</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/1/"" data-c="
+          &lt;p&gt;今天的主要内容应该还是koa和数据库&lt;/p&gt;
+&lt;p&gt;Robo 3T 和 Compass删除对比&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596876580748.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596876584566.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+都需要额外的一步&lt;/p&gt;
+&lt;p&gt;koa返回状态码：ctx.status&lt;br&gt;
+状态码大全：http://tools.jb51.net/table/http_status_code&lt;/p&gt;
+&lt;p&gt;记一个坑：&lt;br&gt;
+通过中间件来捕获全局异常时，要把中间件放在use的最前面,不然就会出错。&lt;/p&gt;
+">Uniapp学习记录day4</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/"" data-c="
+          &lt;h2 id=&#34;函数防抖&#34;&gt;函数防抖&lt;/h2&gt;
+&lt;p&gt;函数防抖是优化高频率执行js代码的一种手段&lt;br&gt;
+可以让被调用的函数在一次连续的高频操作中只被调用一次&lt;/p&gt;
+&lt;p&gt;作用：减少代码执行次数, 提升网页性能&lt;br&gt;
+应用场景：oninput / onmousemove / onscroll / onresize 等事件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function debounce(fn, wait) {
+            let timer
+            return function () {
+                // 改变执行函数内部this指向
+                let _this = this
+                let _args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    fn.apply(_this, _args)
+                }, wait)
+            }
+ }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;函数节流&#34;&gt;函数节流&lt;/h2&gt;
+&lt;p&gt;函数节流是优化高频率执行js代码的一种手段&lt;br&gt;
+可以减少高频调用函数的执行次数&lt;/p&gt;
+&lt;p&gt;作用：减少代码执行次数, 提升网页性能&lt;br&gt;
+应用场景：oninput / onmousemove / onscroll / onresize 等事件&lt;br&gt;
+第一次不执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function throttle(fn, wait) {
+            let timer
+            return function () {
+                if (timer) return
+                let _this = this
+                let _args = arguments
+                timer = setTimeout(() =&amp;gt; {
+                    fn.apply(_this, _args)
+                    timer = null
+                }, wait)
+            }
+        }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后一次不执行&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function throttle(fn, wait) {
+            let old = 0
+            return function () {
+                let _this = this
+                let _args = arguments
+                // 获取当前的时间戳
+                let now = new Date().valueOf()
+                if (now - old &amp;gt; wait) {
+                    fn.apply(_this, _args)
+                    // 立即执行
+                    old = now;
+                }
+            }
+        }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;函数节流和函数防抖区别&#34;&gt;函数节流和函数防抖区别&lt;/h2&gt;
+&lt;p&gt;函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)&lt;br&gt;
+函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)&lt;/p&gt;
+&lt;p&gt;参考&lt;br&gt;
+https://www.bilibili.com/video/BV1pQ4y1M71e?p=1&lt;/p&gt;
+">防抖和节流</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/"" data-c="
+          &lt;p&gt;学习类：&lt;br&gt;
+B站：https://www.bilibili.com/&lt;br&gt;
+没错，就是B站，基本上我和同学在网上学习的编程知识很大比例来自B站，有很多教育机构或者个人上传的编程有关的视频。&lt;br&gt;
+掘金：https://juejin.im/&lt;br&gt;
+知乎：https://www.zhihu.com/&lt;br&gt;
+思否：https://segmentfault.com/&lt;br&gt;
+简书：https://www.jianshu.com/&lt;br&gt;
+CSDN：https://www.csdn.net/&lt;br&gt;
+博客园：https://www.cnblogs.com/&lt;br&gt;
+除了知乎、简书，剩下的都是开发者社区了，也基本是我所知的最大的了，这其中CSDN问题最大，页面又杂又乱，还有广告，而且有很多很古老的文章也都还被频繁检索出来，上次搜个数据，打开了个03年的帖子，发文章也是，明明写了原创，结果在第一行就是原文地址，信息太杂，上次有个报错，在CSDN的一篇文章里找解决方法，顺着原文地址找了3层，跑到博客园去了。还有就是知乎的网页端也过于简陋了吧，浏览文章的页面我毕设加点东西都快和它差不多了，体验很差，思否的手机端也是特不好用，登录都登录不了，是不是已经不维护了？简书最大的问题就是没多久就维护一次，而且是全站的，经常搜到信息点进去显示网站维护。博客园就是界面太老旧了，最近可能进行了UI升级？多少比之前好看些了。&lt;br&gt;
+看云：https://www.kancloud.cn/explore&lt;br&gt;
+以前学习TP5的时候，就实在看云看的文档，还有很多其他的文档，不过还是以PHP为主。&lt;br&gt;
+PHP中文网：https://www.php.cn/&lt;br&gt;
+也是以前学PHP的时候收藏的网站，但我记得网站页面比较简陋，而且站长好像说过不搞了，也不知道现在这个是以前的在搞还是换人了，也没用过了。&lt;br&gt;
+软件类：&lt;br&gt;
+3D溜溜网：https://zixue.3d66.com/&lt;br&gt;
+虽然是个自学网站，但是上面的视频我都没看过，但是这个网站最大的优点是所有它这里开设的课程的破解版软件它基本都有，而且很新，是个很不错的资源网站。&lt;br&gt;
+MSDN：http://msdn.itellyou.cn/&lt;br&gt;
+可以说是windows全家桶网站，windows的全部产品这里几乎都有，像是Access，Office，Visual Basic,还有不同版本的windows系统，还有一大推我听都没听过的。&lt;br&gt;
+设计类：&lt;br&gt;
+中国色：http://zhongguose.com/#shenyanhong&lt;br&gt;
+选修的PPT课老师推荐的网站，是一个展示配色的网站，基本都是中式配色，像是什么绀紫、靛青、景泰蓝这种名字的颜色。&lt;br&gt;
+站酷：https://www.zcool.com.cn/&lt;br&gt;
+各式各样的设计，涵盖了设计的全部种类，应该是国内最大的设计网站了。&lt;br&gt;
+removebg：https://www.remove.bg/zh&lt;br&gt;
+可以消除图片中的背景，比我自己用PS抠的好N倍，直接可以开淘宝店抠图的水平，不过我之前用没有中文版，而且也不需要登录，这中文版是要收费了吗？&lt;br&gt;
+Behance：https://www.behance.net/&lt;br&gt;
+很好的一个设计网站，好像是adobe下的，有很多有创意的作品。&lt;br&gt;
+游戏类：https://ygodl.com/&lt;br&gt;
+决斗链接中文网，是玩家自己组建的，最近随着水哥在B站的游戏王视频带来的热度，决斗链接中文网也是迎来了一大批新人，作为“老”用户也是颇感欣慰。&lt;br&gt;
+动漫类：&lt;br&gt;
+zzzfun：http://www.zzzfun.com/&lt;br&gt;
+D站倒了的今天，zzz还算一方净土。&lt;/p&gt;
+">收藏的一些有用的网站</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/"" data-c="
+          &lt;p&gt;之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。&lt;br&gt;
+一、WeUI&lt;br&gt;
+官网地址：https://weui.io/&lt;br&gt;
+github：https://github.com/Tencent/weui&lt;br&gt;
+文档地址1：https://github.com/Tencent/weui.js/tree/master/docs&lt;br&gt;
+文档地址2：http://old.jqweui.com/components&lt;br&gt;
+官网的介绍说是同微信原生视觉体验一致的样式库，然后官网地址里没有文档？还是说我没找到?然后github里好像有一个文档，但是不是很方便，还有个网上找的，不过名字是jQuery WeUI，还带着版本号，好像是别人做的，不过里面有WeUI基础组件的文档。&lt;br&gt;
+二、Mint UI&lt;br&gt;
+官网地址：https://mint-ui.github.io/#!/zh-cn&lt;br&gt;
+github：https://github.com/ElemeFE/mint-ui&lt;br&gt;
+饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示，不过我去github上看了一下，已经不再维护了。&lt;br&gt;
+三、View UI&lt;br&gt;
+官网地址：https://www.iviewui.com/&lt;br&gt;
+github：https://github.com/view-design/ViewUI&lt;br&gt;
+终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。原名叫 iView，现已改名View UI，文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。&lt;br&gt;
+四、element UI&lt;br&gt;
+官网地址：https://element.eleme.cn/#/zh-CN&lt;br&gt;
+github：https://github.com/ElemeFE/element&lt;br&gt;
+也是饿了么团队出品的，也是我唯一一个大量使用过的，在国内可能也是github上星最多的吧？不过最近知乎上看到说是更新频率下降了，也不知道什么原因。&lt;br&gt;
+五、layUI&lt;br&gt;
+官网地址：https://www.layui.com/&lt;br&gt;
+github：https://github.com/sentsin/layui/&lt;br&gt;
+这个是我最早听说的UI框架了，那时我还是个懵懵懂懂的少年，也不知道什么前后端，为了完成老师的作业，网上找了个模板，就找了个layUI的，那时候也不会js，拿着这模板怎么也用不好，最后把大部分功能都删了，才终于让网页跑起来，都是泪啊。&lt;br&gt;
+搜了一下好像没找到公司，然后知乎上是评价作者，那应该是个人开发的，膜拜大佬。&lt;br&gt;
+六、Bootstrap&lt;br&gt;
+官网地址：https://www.bootcss.com/&lt;br&gt;
+github：https://github.com/twbs&lt;br&gt;
+文档地址v4：https://v4.bootcss.com/docs/getting-started/introduction/&lt;br&gt;
+文档地址v3：https://v3.bootcss.com/css/&lt;br&gt;
+也是大名鼎鼎的UI框架了，Twitter开发的，我是同时接触的layUI和Bootstrap，也是因为网上基本就这两个的模板。有v3和v4两个版本的文档，v4本地化还不完全，这两天在B站和youtube上看到了v5版的教学了。忘了在哪里好像看到过bootstrap-vue，npm上显示周下载量有36W，上次更新是9天前，更新频率也很高，有时间要用下试试。&lt;br&gt;
+七、vant&lt;br&gt;
+官网地址：https://youzan.github.io/vant/#/zh-CN/&lt;br&gt;
+github：https://github.com/youzan/vant&lt;br&gt;
+有赞出品，移动端框架，文档和示例都很不错，而且涵盖的组件类型也很多，前几天的demo中用过，sku这个组件稍显复杂，也用了一下新了解的骨架屏，总体体验很不错。&lt;br&gt;
+八、flutter&lt;br&gt;
+官网地址：https://flutterchina.club/&lt;br&gt;
+github：https://github.com/flutter/flutter&lt;br&gt;
+有中文网，是谷歌的移动端UI框架，听说过，不过还没学习使用，文档还可以，不过好像图示有点少？全是文字看着头大。&lt;br&gt;
+九、Cube-UI&lt;br&gt;
+官网：https://didi.github.io/cube-ui/#/zh-CN&lt;br&gt;
+github：https://github.com/didi/cube-ui&lt;br&gt;
+听说是滴滴团队开发的，是个移动端的框架。&lt;br&gt;
+十、at-ui&lt;br&gt;
+官网：https://at-ui.github.io/at-ui/#/zh&lt;br&gt;
+github：https://github.com/at-ui/at-ui&lt;br&gt;
+阿里的，不过听说已经不在维护了，可惜我还没用过。&lt;br&gt;
+XI、Pure.css&lt;br&gt;
+官网：https://www.purecss.cn/&lt;br&gt;
+有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。&lt;br&gt;
+十一、antd&lt;br&gt;
+官网：https://ant.design/docs/react/introduce-cn&lt;br&gt;
+github：https://github.com/ant-design/ant-design/&lt;br&gt;
+看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。&lt;br&gt;
+十二、Vuetify&lt;br&gt;
+官网：https://vuetifyjs.com/zh-Hans/&lt;br&gt;
+github：https://github.com/vuetifyjs/vuetify&lt;br&gt;
+github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最近一周下载也有35W，最重要的是官方文档还用了骨架屏，在elementUI慢慢不再维护的今天，Vuetify应该是下一个elementUI了。&lt;/p&gt;
+">一些前端UI框架</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/"" data-c="
+          &lt;p&gt;今天又是学习的一天！！！&lt;/p&gt;
+&lt;p&gt;这页面没数据实在是不行啊，果然后端也要写啊&lt;/p&gt;
+&lt;p&gt;切记切记，安装mongoDB一定要记得，把那个✅给去掉，太坑了！！！！&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596782694203.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+安装了2个多小时，最后程序还崩溃了。&lt;/p&gt;
+&lt;p&gt;哎，阿里云的MongoDB贵的有些离谱了，只能在自己服务器上搭一个了。&lt;/p&gt;
+&lt;p&gt;1.先进入阿里的云服务器，然后下载安装nodejs，再远程连接服务器，把本地的mongdb安装文件传给服务器(怕服务器下载太慢)，然后等待安装，切记不要勾选安装compass&lt;/p&gt;
+&lt;p&gt;2.安装好后配置环境变量，找了网上几个教程，好像版本都对不上，有要创建data文件夹的有要创建log文件夹的，但是我发现server文件夹下面有bin、log目录，把bin目录的地址放入环境变量，cmd中输入mongo还是不行，关闭后重新打开就能显示mongodb版本了。&lt;/p&gt;
+&lt;p&gt;3.这配置运行环境的坑可太多了，大概记一下在放几个链接吧。&lt;br&gt;
+服务中创建的MongoDB server 无法启动、关闭、重启&lt;br&gt;
+解决办法：https://blog.csdn.net/yqwang75457/article/details/84949915&lt;br&gt;
+mongodb设置用户名密码权限：&lt;br&gt;
+https://blog.csdn.net/qq_37925422/article/details/80445591&lt;br&gt;
+https://www.mongodb.org.cn/manual/104.html&lt;/p&gt;
+&lt;p&gt;淦，感觉出大问题了，先把服务器重置了吧。&lt;br&gt;
+先连本地连接数据库&lt;br&gt;
+安装一个mongoose：cnpm i mongoose --save&lt;br&gt;
+然后配置连接，然后因为它是一个promise，所以可以then和catch，不过还是不太明白是怎么操作的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const Schema = mongoose.Schema;
+// mongodb里没有表,叫做文档或者集合
+// 每一个Schema对应mongodb中的一个集合
+// 实例化数据模板:注册功能字段
+const NameSchema = new Schema({
+  // 注册对象模型
+  name: {
+    type: String,
+    require: true,
+  },
+  password: {
+    type: String,
+    require: true,
+  },
+  openid: {
+    type: String,
+    require: true,
+  },
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;module.exports = userInfo = mongoose.model(&amp;quot;user_info&amp;quot;, NameSchema);&lt;br&gt;
+这个没有代码块的功能也是很烦。&lt;br&gt;
+教程里是定义了一个Schema对象，然后它的实例里有name、password等字段，有个type属性来限定数据类型，有个require属性来限定是否为空？不知道是不是可以这么理解，这里还是能通过mysql来类比一下的，就是mysql的数据类型和是否为空，然后以userInfo的名字暴露出去&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;router.post(&amp;quot;/register&amp;quot;, async (ctx) =&amp;gt; {
+  console.log(&amp;quot;这是注册&amp;quot;);
+  // console.log(ctx.request.body)
+  // console.log(ctx.request.body.name)
+  let { name, password, openid } = ctx.request.body;
+  const user_info = new userInfo({
+    name: name,
+    password: password,
+    openid: openid,
+  });
+  // 存储到数据库
+  await user_info
+    .save()
+    .then((res) =&amp;gt; {
+      console.log(&amp;quot;success&amp;quot;);
+    })
+    .catch((e) =&amp;gt; {
+      console.log(e);
+    });
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这一边是通过前面暴露的userInfo作为实例对象，把前端传来的值赋给它，然后通过.save()方法存储到数据库&lt;/p&gt;
+&lt;p&gt;服务器上的终于搞定了，再把数据库的连接从本地切换为服务器。&lt;br&gt;
+☀️☀️✨✨⚡️成功联通⚡️🌈🌈🏳️‍🌈🏳️‍🌈&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596811047642.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1596861176847.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">Uniapp学习记录day3</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/"" data-c="
+          &lt;p&gt;开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1596709131676.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+这个图标切换和阴影背景的显示隐藏真是够麻烦的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const query = wx.createSelectorQuery()
+query.select(&#39;#boxFixed&#39;).boundingClientRect()
+query.selectViewport().scrollOffset()
+query.exec((res) =&amp;gt; {
+    this.menutop = res[0].top
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用来返回选中节点的TOP位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wx.pageScrollTo({
+    scrollTop: this.menutop,
+    duration: 300
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用来使页面滚动到选择的位置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;:catchtouchmove=&amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;专门用来解决小程序的事件穿透&lt;/p&gt;
+">Uniapp学习记录day2</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/"" data-c="
+          &lt;p&gt;uniapp生成小程序遇到的坑&lt;br&gt;
+1.小程序内不能用id选择器&lt;br&gt;
+2.小程序的声明周期函数不能用在子组件里，要用在父组件&lt;br&gt;
+3.小程序没有window对象,没有document对象等等……&lt;br&gt;
+4.uniapp没有vue原生的router路由，而是使用uni路由，较VUE更为方便&lt;/p&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1596643726837.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;p&gt;学到的知识：&lt;br&gt;
+在pages.json中可以对全局进行配置，有关页面的路径、窗口样式、导航栏、底部tabbar等都在这里。&lt;br&gt;
+全局配置与单页配置要自己取舍。&lt;br&gt;
+每个对象内的最后一项都没有逗号&lt;br&gt;
+像素单位是upx，可以设置upx与px的比值来进行转换，不过我看网上都推荐使用 rpx。&lt;br&gt;
+显示文字使用&lt;text&gt;&lt;/text&gt;标签&lt;br&gt;
+显示图片使用&lt;image&gt;&lt;/image&gt;标签&lt;br&gt;
+&lt;view&gt;&lt;/view&gt;用来取代div标签&lt;br&gt;
+&lt;block&gt;&lt;/block&gt;标签很好用，很多for循环都写在block标签内&lt;br&gt;
+其余的都和vue差不多，用了两个vue没有的声明周期onload和onshow，好像是微信小程序的生命周期。&lt;/p&gt;
+&lt;p&gt;一开始一直报错没有appid，登陆了微信的开发者平台复制了appid，结果还是不行，检查发现是复制了公众号的appid，又赶紧注册了小程序，网上例子的后端接口好像不开放，有必要自己写一个，顺便复习下nodejs和koa2，或者express也行。&lt;/p&gt;
+&lt;p&gt;总体而言，第一天的uniapp体验还不错，主要是语法基本都是vue的，难点在于各个组件，属性一大推，而且感觉说明不是很好，阅读起来很累。&lt;/p&gt;
+">Uniapp学习记录day1</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/xue-xi-mu-biao/"" data-c="
+          &lt;p&gt;在这里记录一下接下来要学习的东西&lt;/p&gt;
+&lt;p&gt;TypeScript&lt;br&gt;
+Flutter	uniapp	跨端&lt;br&gt;
+React&lt;br&gt;
+Taro&lt;br&gt;
+umijs&lt;br&gt;
+Hooks&lt;br&gt;
+Serverless&lt;br&gt;
+可视化&lt;br&gt;
+SSR&lt;br&gt;
+Nextjs&lt;br&gt;
+后端  go	nodejs	java&lt;/p&gt;
+">学习目标</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/about/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;欢迎来到我的小站呀，很高兴遇见你！🤝&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;关于本站&#34;&gt;🏠 关于本站&lt;/h2&gt;
+&lt;h2 id=&#34;博主是谁&#34;&gt;👨‍💻 博主是谁&lt;/h2&gt;
+&lt;h2 id=&#34;兴趣爱好&#34;&gt;⛹ 兴趣爱好&lt;/h2&gt;
+&lt;h2 id=&#34;联系我呀&#34;&gt;📬 联系我呀&lt;/h2&gt;
+">关于</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/hello-gridea/"" data-c="
+          &lt;p&gt;👏  欢迎使用 &lt;strong&gt;Gridea&lt;/strong&gt; ！&lt;br&gt;
+✍️  &lt;strong&gt;Gridea&lt;/strong&gt; 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/getgridea/gridea&#34;&gt;Github&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://gridea.dev/&#34;&gt;Gridea 主页&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;http://fehey.com/&#34;&gt;示例网站&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;特性&#34;&gt;特性👇&lt;/h2&gt;
+&lt;p&gt;📝  你可以使用最酷的 &lt;strong&gt;Markdown&lt;/strong&gt; 语法，进行快速创作&lt;/p&gt;
+&lt;p&gt;🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片&lt;/p&gt;
+&lt;p&gt;🏷️  你可以对文章进行标签分组&lt;/p&gt;
+&lt;p&gt;📋  你可以自定义菜单，甚至可以创建外部链接菜单&lt;/p&gt;
+&lt;p&gt;💻  你可以在 &lt;strong&gt;Windows&lt;/strong&gt;，&lt;strong&gt;MacOS&lt;/strong&gt; 或 &lt;strong&gt;Linux&lt;/strong&gt; 设备上使用此客户端&lt;/p&gt;
+&lt;p&gt;🌎  你可以使用 &lt;strong&gt;𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌&lt;/strong&gt; 或 &lt;strong&gt;Coding Pages&lt;/strong&gt; 向世界展示，未来将支持更多平台&lt;/p&gt;
+&lt;p&gt;💬  你可以进行简单的配置，接入 &lt;a href=&#34;https://github.com/gitalk/gitalk&#34;&gt;Gitalk&lt;/a&gt; 或 &lt;a href=&#34;https://github.com/SukkaW/DisqusJS&#34;&gt;DisqusJS&lt;/a&gt; 评论系统&lt;/p&gt;
+&lt;p&gt;🇬🇧  你可以使用&lt;strong&gt;中文简体&lt;/strong&gt;或&lt;strong&gt;英语&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力&lt;/p&gt;
+&lt;p&gt;🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步&lt;/p&gt;
+&lt;p&gt;🌱 当然 &lt;strong&gt;Gridea&lt;/strong&gt; 还很年轻，有很多不足，但请相信，它会不停向前 🏃&lt;/p&gt;
+&lt;p&gt;未来，它一定会成为你离不开的伙伴&lt;/p&gt;
+&lt;p&gt;尽情发挥你的才华吧！&lt;/p&gt;
+&lt;p&gt;😘 Enjoy~&lt;/p&gt;
+">Hello Gridea</a>
+      </div>
+      
+    </div>
+    <div class="page">
+      <div id="page_ul"></div>
+    </div>
+  </div>
+</div>
+<script>
+  !function () {
+    let searchMask = document.querySelector('#search_mask');
+    let result = document.querySelector('#result');
+    let items = document.querySelectorAll('.item');
+    let searchBox = document.querySelector('#search');
+    let statCount = document.querySelector('#stat_count');
+    let statTimes = document.querySelector('#stat_times');
+    let pageUl = document.querySelector('#page_ul');
+    let close = document.querySelector('#close');
+    
+    close.addEventListener('click', function() {
+      searchMask.style = 'display: none;'
+    })
+
+    let finds = [];
+    let contents = [];
+    let pageSize = 10;
+    items.forEach(item => {
+      let a = item.querySelector('a');
+      contents.push({
+        title: a.innerText,
+        details: a.dataset.c,
+        link: a.href
+      })
+      item.remove();
+    })
+
+    function insertStr(soure, start, count) {
+      let newStr = soure.substr(start, count);
+      return soure.slice(0, start) + '<em>' + newStr + '</em>' + soure.slice(start + count);
+    }
+
+    pageUl.addEventListener('click', function(event) {
+      let target = event.target;
+      if (target.__proto__ === HTMLSpanElement.prototype) {
+        appendResults(parseInt(target.dataset.i));
+      }
+    })
+
+    function appendResults(index) {
+      let htmlResult = '';
+      let start = index || 0;
+      let end = Math.min(start + pageSize, finds.length);
+      for (let i = start; i < end; i++) {
+        const current = finds[i];
+        let html = current.title;
+        let sum = 0;
+        let positions = current.positions;
+        positions.forEach(position => {
+          html = insertStr(html, position.start + sum, position.count);
+          sum += 9;
+        })
+        htmlResult += `<div class="item"><a class="result-title" href="${current.link}">${html}</a></div>`;
+      }
+      result.innerHTML = htmlResult;
+      pageUl.innerHTML = '';
+      let count = finds.length / pageSize;
+      let lis = '';
+      if (start !== 0) {
+        lis += `<span class="fa fa-angle-left" data-i='${start - 1}'></span>`;
+      }
+      for (let i = 0; i < count; i++) {
+        lis += `<span class='${i === start?'current':''}' data-i='${i}'>${i+1}</span>`;     
+      }
+      if (start+1 < count) {
+        lis += `<span class="fa fa-angle-right" data-i='${start+1}'></span>`;  
+      }
+      pageUl.innerHTML = lis;
+    }
+
+    function search(delay) {
+      let timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          let start = Date.now();
+          let segments = searchBox.value.split(' ').filter(c => c != '');
+          if (segments.length <= 0) {
+            return;
+          }
+          finds = [];
+          let htmlResult = '';
+          contents.forEach(content => {
+            let title = content.title;
+            let positions = [];
+            let find = false;
+            segments.forEach((segment) => {
+              if (content.title.includes(segment)) {
+                find = true;
+                positions.push({
+                  start: content.title.indexOf(segment),
+                  count: segment.length
+                })
+              } else if (content.details.includes(segment)) {
+                find = true;
+              }
+            });
+            if (find) {
+              finds.push({
+                title: content.title,
+                link: content.link,
+                positions
+              });
+            }
+          })
+          appendResults(0);
+          statCount.textContent = finds.length;
+          statTimes.textContent = Date.now() - start;
+        }, delay)
+      }
+    }
+    searchBox.addEventListener('input', search(200));
+  }()
+</script>
+
 <input hidden id="copy" />
 <script>
   !function () {
@@ -952,5 +2437,7 @@ app.on('activate', () =&gt; {
 
 
 
+
+<script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script>
 
 </html>
