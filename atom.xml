@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-21T04:34:40.258Z</updated>
+    <updated>2020-08-21T07:11:21.787Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,104 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[TIOBE - 2020年8月编程语言排行]]></title>
+        <id>https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/</id>
+        <link href="https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/">
+        </link>
+        <updated>2020-08-21T07:09:34.000Z</updated>
+        <summary type="html"><![CDATA[<p>本月 TIOBE 排行榜总体变化不大。R 语言自上个月迎来史无前例的高光时刻后，本月依旧保持增长势头，并有望成为 2020 年的年度编程语言。</p>
+<p>除此之外，Go、Swift、SQL 三种语言在第 10 名这个位置的角逐也十分有趣。其中 Swift 在本月下降 2 个名次，从第 10 名降到了第 12 名。SQL 将其取而代之，成为第 10 名。同样值得注意的是，Groovy 重新进入了排行榜的前 20名，并且 Hack 在第 44 位，也成功进入了前 50 名。</p>
+<h3 id="编程语言排行榜-top-20-榜单">编程语言排行榜 TOP 20 榜单：</h3>
+<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597993815737.webp" alt="" loading="lazy"></figure>
+<h3 id="前-10-名编程语言长期走势图">前 10 名编程语言长期走势图：</h3>
+<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597993834133.webp" alt="" loading="lazy"></figure>
+<h3 id="以下是-21-50-编程语言排名">以下是 21-50 编程语言排名：</h3>
+<figure data-type="image" tabindex="3"><img src="https://jujuul.github.io//post-images/1597993848553.webp" alt="" loading="lazy"></figure>
+]]></summary>
+        <content type="html"><![CDATA[<p>本月 TIOBE 排行榜总体变化不大。R 语言自上个月迎来史无前例的高光时刻后，本月依旧保持增长势头，并有望成为 2020 年的年度编程语言。</p>
+<p>除此之外，Go、Swift、SQL 三种语言在第 10 名这个位置的角逐也十分有趣。其中 Swift 在本月下降 2 个名次，从第 10 名降到了第 12 名。SQL 将其取而代之，成为第 10 名。同样值得注意的是，Groovy 重新进入了排行榜的前 20名，并且 Hack 在第 44 位，也成功进入了前 50 名。</p>
+<h3 id="编程语言排行榜-top-20-榜单">编程语言排行榜 TOP 20 榜单：</h3>
+<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597993815737.webp" alt="" loading="lazy"></figure>
+<h3 id="前-10-名编程语言长期走势图">前 10 名编程语言长期走势图：</h3>
+<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597993834133.webp" alt="" loading="lazy"></figure>
+<h3 id="以下是-21-50-编程语言排名">以下是 21-50 编程语言排名：</h3>
+<figure data-type="image" tabindex="3"><img src="https://jujuul.github.io//post-images/1597993848553.webp" alt="" loading="lazy"></figure>
+<!-- more -->
+<p>原文链接：https://www.hangge.com/blog/cache/detail_2989.html</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—Swift]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-swift/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-swift/">
+        </link>
+        <updated>2020-08-21T07:03:47.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="swift介绍">Swift介绍</h2>
+<ul>
+<li>
+<p>Swift是苹果于2014年WWDC（苹果开发者大会）发布的新开发语言，可与Objective-C共同运行于MAC OS和iOS平台，用于搭建基于苹果平台的应用程序。</p>
+</li>
+<li>
+<p>Swift 使用自动引用计数（Automatic Reference Counting, ARC）来简化内存管理</p>
+</li>
+<li>
+<p>Swift Foundation框架可无缝对接现有的 Cocoa 框架，并且兼容 Objective-C 代码，支持面向过程编程和面向对象编程，Swift也是一门类型安全的语言。</p>
+</li>
+<li>
+<p>Swift中范型是用来使代码能安全工作，可以在函数数据和普通数据类型中使用，例如类、结构体或枚举。范型可以解决代码复用的问题</p>
+</li>
+</ul>
+<h2 id="swift优点">Swift优点</h2>
+<ol>
+<li>
+<p>简洁的语法，性能较好<br>
+swift语言比OC精简，整个项目中丢掉了.h头文件，以及头文件的引入。性能是Objective-C的1.3倍</p>
+</li>
+<li>
+<p>报错精准<br>
+报错的时候直接显示报错行。</p>
+</li>
+<li>
+<p>定义变量简单<br>
+定义变量不用区分整型，浮点型等等，变量使用var，常量使用let。</p>
+</li>
+<li>
+<p>可视化互动效果<br>
+开发工具带来了Xcode Playgrounds功能，该功能提供强大的互动效果，能让Swift源代码在撰写过程中实时显示出其运行结果。</p>
+</li>
+<li>
+<p>函数式编程的支持（Map、FlatMap、Filter、Reduce等函数方法）<br>
+Swift 语言本身提供了对函数式编程的支持；<br>
+Objc 本身是不支持的，通过引入 ReactiveCocoa 这个库才可支持。</p>
+</li>
+</ol>
+<h2 id="swift缺点">Swift缺点</h2>
+<ol>
+<li>
+<p>推广度还不全面，资源少<br>
+很多大公司，以及一些老的项目，仍然使用OC语言进行开发。当遇到一些问题的时候，解决问题的方案很少，网上的资源也很稀缺。</p>
+</li>
+<li>
+<p>还不稳定<br>
+从swift2.0到swift3.0再到现在的swift4.0区别很大，每次升级都会有几十甚至上百个错误提示，难免急出一身冷汗。</p>
+</li>
+<li>
+<p>第三方库的支持不够多<br>
+现在swift版本的第三方库是非常稀有的，有时需要导入OC版本的第三方来进行混合开发，而有的·兼容性·并不好，而且使项目变大，运行速度也会变慢。</p>
+</li>
+<li>
+<p>App体积变大<br>
+使用 Swift 后， App 体积大概增加 5-8 M左右，对体积大小敏感的慎用。（体积变大的原因是因为 Swift 还在变化，所以 Apple 没有在 iOS 系统里放入 Swift 的运行库，反而是每个 App 里都要包含其对应的 Swift 运行库。）</p>
+</li>
+<li>
+<p>上线方式改变<br>
+不能使用application Loader上传包文件，会提示你丢失了swift support files，只能使用xcode直接上传。</p>
+</li>
+</ol>
+<p>官网地址：https://www.apple.com.cn/swift/</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[我自用的一些vscode插件分享]]></title>
         <id>https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/</id>
@@ -392,104 +490,6 @@ window.addEventListener('hashchange', (e) =&gt; {
 <p>其二，二者都使用JavaScript，而且都是浏览器端的JavaScript。所以，就JavaScript的应用而言，这一块差别并不大。不过，可视化应用面对的数据和渲染的图形元素都比传统的Web应用更复杂一些，所以也就更加依赖JavaScript一些。</p>
 <p>其三，Web前端领域有许多成熟的工具，包括响应式框架（比如，三大框架Vue、React、Angular）、设计系统（比如Ant Design、ElementUI）、函数库（比如，Underscore、Lodash）等等。与Web前端一样，可视化领域也有丰富的JavaScript工具和活跃的生态，通常这些各种“开箱即用”的工具，就能够帮助你完成可视化开发。</p>
 <p>文章来源：https://zhuanlan.zhihu.com/p/158447352</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—React]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-/">
-        </link>
-        <updated>2020-08-15T15:13:56.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="什么是react">什么是React</h2>
-<p>React是一个简单的javascript UI库，用于构建高效、快速的用户界面。它是一个轻量级库，因此很受欢迎。它遵循组件设计模式、声明式编程范式和函数式编程概念，以使前端应用程序更高效。它使用虚拟DOM来有效地操作DOM。它遵循从高阶组件到低阶组件的单向数据流。<br>
-狭义来讲 React 是 Facebook 内部开源出来的一个前端 UI 开发框架，广义来讲 React 不仅仅是 js 框架本身，更是一套完整的前端开发生态体系，这套体系包括：<br>
-React.js<br>
-ReactRenders: ReactDOM / ReactServer / ReactCanvas<br>
-Flux 模式及其实现（Redux , Fluxxor）<br>
-React 开源组件<br>
-React Native<br>
-GraphQl + Relay</p>
-<h2 id="什么是声明式编程">什么是声明式编程</h2>
-<p>声明式编程是一种编程范式，它关注的是你要做什么，而不是如何做。它表达逻辑而不显式地定义步骤。这意味着我们需要根据逻辑的计算来声明要显示的组件。它没有描述控制流步骤。声明式编程的例子有HTML、SQL等</p>
-<h2 id="什么是函数式编程">什么是函数式编程</h2>
-<p>函数式编程是声明式编程的一部分。javascript中的函数是第一类公民，这意味着函数是数据，你可以像保存变量一样在应用程序中保存、检索和传递这些函数。<br>
-函数式编程有些核心的概念，如下：<br>
-不可变性(Immutability)<br>
-纯函数(Pure Functions)<br>
-数据转换(Data Transformations)<br>
-高阶函数 (Higher-Order Functions)<br>
-递归<br>
-组合<br>
-React 中一切都是组件。 我们通常将应用程序的整个逻辑分解为小的单个部分。 我们将每个单独的部分称为组件。 通常，组件是一个javascript函数，它接受输入，处理它并返回在UI中呈现的React元素。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—electron]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-electron/">
-        </link>
-        <updated>2020-08-14T03:46:34.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="是什么">是什么</h1>
-<h2 id="定义">定义</h2>
-<p>Electron是一个能让你使用传统前端技术（Nodejs, Javascript, HTML, CSS）开发一个跨平台桌面应用的框架。这里所说的桌面应用指的是在Windows、OSX及Linux系统上运行的程序。<br>
-可以认为Electron是一种运行环境库，我们可以基于此，用HTML、JS和CSS写桌面应用。<br>
-我们熟知的一些软件都是基于electron开发的<br>
-<img src="https://jujuul.github.io//post-images/1597377289775.PNG" alt="" loading="lazy"><br>
-像是vscode，atom，还有本博客使用的Gridea</p>
-<h2 id="优点">优点：</h2>
-<p>部署、升级方便。用户通过浏览器就可以访问；<br>
-HTML/JS/CSS编写，方便且高效；<br>
-windows、linux都支持；</p>
-<h2 id="缺点">缺点：</h2>
-<p>对于开发者：浏览器适配比较繁琐；<br>
-对于开发者：有些应用，必须指定浏览器或版本。比如OCX必须是IE内核，H5要求浏览器必须是较高版本；<br>
-对于用户：传统行业中，部分用户对web应用不习惯，尤其在专业工具软件方面，觉得web应用没有桌面应用用起来踏实。<br>
-对于开发者：必须打开浏览器，输入一长串URL地址（虽然可以建立浏览器收藏夹或者创建URL的快捷方式到桌面，但大部分用户不会这么做）</p>
-<h2 id="使用">使用</h2>
-<p>安装 Electron<br>
-<code>npm install --save-dev electron</code><br>
-引入<br>
-<code>const electron = require('electron')</code><br>
-main.js配置</p>
-<pre><code>const { app, BrowserWindow } = require('electron')
-function createWindow () {   
-  // 创建浏览器窗口
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
-  // 并且为你的应用加载index.html
-  win.loadFile('index.html')
-  // 打开开发者工具
-  win.webContents.openDevTools()
-}
-// Electron会在初始化完成并且准备好创建浏览器窗口时调用这个方法
-// 部分 API 在 ready 事件触发后才能使用。
-app.whenReady().then(createWindow)
-//当所有窗口都被关闭后退出
-app.on('window-all-closed', () =&gt; {
-  // 在 macOS 上，除非用户用 Cmd + Q 确定地退出，
-  // 否则绝大部分应用及其菜单栏会保持激活。
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
-app.on('activate', () =&gt; {
-  // 在macOS上，当单击dock图标并且没有其他窗口打开时，
-  // 通常在应用程序中重新创建一个窗口。
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
-// 您可以把应用程序其他的流程写在在此文件中
-// 代码 也可以拆分成几个文件，然后用 require 导入。
-</code></pre>
-<p>官网地址：https://www.electronjs.org/<br>
-中文文档：https://www.w3cschool.cn/electronmanual/<br>
-官方文档：https://www.electronjs.org/docs</p>
 ]]></content>
     </entry>
 </feed>
