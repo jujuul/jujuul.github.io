@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-20T15:28:53.102Z</updated>
+    <updated>2020-08-21T04:29:27.267Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,53 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[我自用的一些vscode插件分享]]></title>
+        <id>https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/</id>
+        <link href="https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/">
+        </link>
+        <updated>2020-08-21T03:44:20.000Z</updated>
+        <content type="html"><![CDATA[<p>今天逛思否的时候，发现一个推荐vscode插件的文章，里面推荐了8个插件，竟然有6个是我没用过的，也借这个机会，整理一下自己用的插件</p>
+<ol>
+<li>Beautify<br>
+听名字就能猜到功能了，整理代码用的，500W+的下载量足以证明其强大。</li>
+<li>Auto Close Tag<br>
+也是个听名字就能猜到功能的，320W+下载量。</li>
+<li>Auto Rename Tag<br>
+跟上面的是同一个作者开发的，可以在更改标签名的时候做到更改一边而两边都被更改的效果，340W+。</li>
+<li>Bracket Pair Colorizer<br>
+我个人强力推荐，没完没了的函数中看代码真的是一种折磨，有了它就能清晰的看出(){}[]是否闭合，再也不用担心少个)}]了，340W+。</li>
+<li>Chinese (Simplified) Language Pack for Visual Studio Code<br>
+简中语言包，600W+足以证明，另外我去看了下繁中版，也有270W+，中文开发者真的多啊。</li>
+<li>Code Runner<br>
+可以直接运行其他语言，使Vs Code成为一个IDE?我是之前毕设项目后端使用PHP才安装的这个插件，不过好像没什么用，话说我在Vscode上配置过java和python的运行环境，效果都不是很理想啊，编辑器和IDE还是有很大区别的啊，466W+。</li>
+<li>CSS Peek<br>
+今天被安利的插件，鼠标悬停在类名或者ID上能直接看到CSS规则，100W+。</li>
+<li>Debugger for Chrome<br>
+就是在vscode中启动chrome控制台，需要一些比较繁琐的配置，我只是安装了，但从没用过，620W+。</li>
+<li>indent-rainbow<br>
+可以和前面第四个联用，这个是在缩进的地方用彩色填充，也是起到一个很好的查看代码的效果,100W+。</li>
+<li>JavaScript (ES6) code snippets<br>
+今天受的安利之一，可以生成ES6的代码片段，原来VSCODE不可以的吗？我只生成过VUE的代码片段，但是vue不是使用的ES6语法吗？不是很理解，380W+。</li>
+<li>Live Server<br>
+好像可以用来做服务器？而且是自动刷新(热插拔)的那种？也是没有使用过，服务器都是自己用nodejs搭的，原来还有这么方便的，67W+。</li>
+<li>open in browser<br>
+在浏览器中打开，还可以选择浏览器，非常实用的功能，220W+。</li>
+<li>Prettier - Code formatter<br>
+也是一个代码格式的插件，我记得使用时有要求选择alt+thift+f做出选择，我选了Beautify，我原本以为是冲突的，但今天看了很多介绍用它们两个整理格式的，好像并不冲突？有时间去配置一下，790W+。</li>
+<li>Quokka.js<br>
+今天的安利之一，直接放图吧<img src="https://jujuul.github.io//post-images/1597983693060.gif" alt="" loading="lazy">76W+。</li>
+<li>REST Client<br>
+REST Client 扩展工具允许你发送 HTTP 请求并直接在 VSCode 中查看响应。再也不需要使用外部应用程序向服务器发送 HTTP 请求，还没用，不过看了动图我觉得可以试试<img src="https://jujuul.github.io//post-images/1597983840428.gif" alt="" loading="lazy">100W+。</li>
+<li>TabNine<br>
+一个代码补全工具，基于人工智能，自动补全时会给出每个候选项的概率，并且按照概率大小进行排序，此外，会给出候选项的来源及地址，这样更加方便查询和阅读，31W+。</li>
+<li>Vetur<br>
+vue开发必装，之前不知道干嘛的，今天看了一下，是对于vue文件中的语法检查、语法高亮还有自动补全，530W+。</li>
+<li>ESLint<br>
+JS代码检测工具，配合之前的几个代码检测，写出的代码将无敌，可惜不会写，配置比较繁琐，1000W+。</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[每天一个名词解释—快应用]]></title>
         <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/</id>
@@ -443,34 +490,6 @@ app.on('activate', () =&gt; {
 <p>官网地址：https://www.electronjs.org/<br>
 中文文档：https://www.w3cschool.cn/electronmanual/<br>
 官方文档：https://www.electronjs.org/docs</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—骨架屏(Skeleton)]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-gu-jia-ping-skeleton/">
-        </link>
-        <updated>2020-08-13T13:14:17.000Z</updated>
-        <content type="html"><![CDATA[<p>对于前端来讲，最重要的莫过于用户体验了，而从19年下半年开始，骨架屏这种提高用于体验的技术就开始被企业大量使用，我们平常对于需要请求加载的内容，可能用的比较多的是loading动画，比如在内容区域放一个菊花图，当请求结束，并且render tree构造完成后，将菊花图移除，展示用户想看的内容。虽然这种方式没啥缺点，但是现在更多的网站开始使用骨架屏代替，因为它能带过来更好的用户体验。<br>
-骨架屏能让你的网页‘看起来’展现得更快，但只是看起来，实际上速度还是一样的。<br>
-<img src="https://jujuul.github.io//post-images/1597325013432.png" alt="" loading="lazy"></p>
-<h2 id="骨架屏有哪些优势">骨架屏有哪些优势</h2>
-<p>大体来说，骨架屏的优势在于：<br>
-在页面加载初期预先渲染内容，提升感官上的体验。<br>
-一般情况骨架屏和实际内容的结构是类似的，因此之后的切换不会过于突兀。这点和传统的 Loading 动图不同，可以认为是其升级版。<br>
-只需要简单的 CSS 支持 (涉及图片懒加载可能还需要 JS )，不要求 HTTPS 协议，没有额外的学习和维护成本。<br>
-如果页面采用组件化开发，每个组件可以根据自身状态定义自身的骨架屏及其切换时机，同时维持了组件之间的独立性。</p>
-<h2 id="vue实现骨架屏">Vue实现骨架屏</h2>
-<p>需要用到以下插件<br>
-vue-server-renderer<br>
-vue-skeleton-webpack-plugin<br>
-page-skeleton-webpack-plugin<br>
-<img src="https://jujuul.github.io//post-images/1597325346025.png" alt="" loading="lazy"><br>
-对比发现，就开发难度、灵活性和插件开源方来看，如果你的项目是基于vue-cli脚手架的，那么饿了么团队的page-skeleton-webpack-plugin是你的最佳选择，如果不是，那么你可以选择vue-router开源的vue-server-renderer.</p>
-<p>文章相关链接：<br>
-vue骨架屏实践：https://www.jianshu.com/p/eacac700630e<br>
-网页骨架屏自动生成方案：https://zhuanlan.zhihu.com/p/74403911<br>
-如何让你的网页“看起来”展现地更快 —— 骨架屏二三事：https://zhuanlan.zhihu.com/p/48601348</p>
 ]]></content>
     </entry>
 </feed>
