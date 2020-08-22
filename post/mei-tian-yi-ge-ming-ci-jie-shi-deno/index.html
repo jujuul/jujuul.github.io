@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>一些前端UI框架 | Mark</title>
+<title>每天一个名词解释—Deno | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598106253296">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="一些前端UI框架" />
-  <meta name="keywords" content="前端" />
+  <meta name="description" content="每天一个名词解释—Deno" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,197 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a>
+<ul>
+<li><a href="#%E5%8A%9F%E8%83%BD%E4%BA%AE%E7%82%B9">功能亮点</a></li>
+<li><a href="#%E7%9B%AE%E6%A0%87">目标</a></li>
+<li><a href="#%E4%B8%8E-nodejs-%E7%9A%84%E6%AF%94%E8%BE%83">与 Node.js 的比较</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +468,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">
-      一些前端UI框架
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/">
+      每天一个名词解释—Deno
     </a>
   </h1>
   <div class="post-meta">
@@ -285,93 +477,90 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-07 12:58:47">2020-08-07</span>
+      <span class="publish-time" data-t="2020-08-22 22:06:47">2020-08-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-        <span>前端</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>5<span class="language" data-lan="minute">分钟</span></span>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>1195<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>455<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>之前做毕设的时候也大概看了几个UI框架，不过是在项目已经进行到一半以后才开始的，所以也没有使用的机会，前几天做的移动端的小demo用了下有赞的Vant，感觉很不错，就又整理了一下，找了一些目前比较流行的前端UI框架，做一个汇总。<br>
-一、WeUI<br>
-官网地址：https://weui.io/<br>
-github：https://github.com/Tencent/weui<br>
-文档地址1：https://github.com/Tencent/weui.js/tree/master/docs<br>
-文档地址2：http://old.jqweui.com/components<br>
-官网的介绍说是同微信原生视觉体验一致的样式库，然后官网地址里没有文档？还是说我没找到?然后github里好像有一个文档，但是不是很方便，还有个网上找的，不过名字是jQuery WeUI，还带着版本号，好像是别人做的，不过里面有WeUI基础组件的文档。<br>
-二、Mint UI<br>
-官网地址：https://mint-ui.github.io/#!/zh-cn<br>
-github：https://github.com/ElemeFE/mint-ui<br>
-饿了么的移动端UI库，不论是文档还是示例都很好，很直观的就能看到效果，左边代码右边图示，不过我去github上看了一下，已经不再维护了。<br>
-三、View UI<br>
-官网地址：https://www.iviewui.com/<br>
-github：https://github.com/view-design/ViewUI<br>
-终于有个PC端的，虽然移动端的UI各个小巧精妙，但是我还是更喜欢PC端的UI。原名叫 iView，现已改名View UI，文档写的也很好，去网上找了下是TalkingData开发的，没听过的公司。<br>
-四、element UI<br>
-官网地址：https://element.eleme.cn/#/zh-CN<br>
-github：https://github.com/ElemeFE/element<br>
-也是饿了么团队出品的，也是我唯一一个大量使用过的，在国内可能也是github上星最多的吧？不过最近知乎上看到说是更新频率下降了，也不知道什么原因。<br>
-五、layUI<br>
-官网地址：https://www.layui.com/<br>
-github：https://github.com/sentsin/layui/<br>
-这个是我最早听说的UI框架了，那时我还是个懵懵懂懂的少年，也不知道什么前后端，为了完成老师的作业，网上找了个模板，就找了个layUI的，那时候也不会js，拿着这模板怎么也用不好，最后把大部分功能都删了，才终于让网页跑起来，都是泪啊。<br>
-搜了一下好像没找到公司，然后知乎上是评价作者，那应该是个人开发的，膜拜大佬。<br>
-六、Bootstrap<br>
-官网地址：https://www.bootcss.com/<br>
-github：https://github.com/twbs<br>
-文档地址v4：https://v4.bootcss.com/docs/getting-started/introduction/<br>
-文档地址v3：https://v3.bootcss.com/css/<br>
-也是大名鼎鼎的UI框架了，Twitter开发的，我是同时接触的layUI和Bootstrap，也是因为网上基本就这两个的模板。有v3和v4两个版本的文档，v4本地化还不完全，这两天在B站和youtube上看到了v5版的教学了。忘了在哪里好像看到过bootstrap-vue，npm上显示周下载量有36W，上次更新是9天前，更新频率也很高，有时间要用下试试。<br>
-七、vant<br>
-官网地址：https://youzan.github.io/vant/#/zh-CN/<br>
-github：https://github.com/youzan/vant<br>
-有赞出品，移动端框架，文档和示例都很不错，而且涵盖的组件类型也很多，前几天的demo中用过，sku这个组件稍显复杂，也用了一下新了解的骨架屏，总体体验很不错。<br>
-八、flutter<br>
-官网地址：https://flutterchina.club/<br>
-github：https://github.com/flutter/flutter<br>
-有中文网，是谷歌的移动端UI框架，听说过，不过还没学习使用，文档还可以，不过好像图示有点少？全是文字看着头大。<br>
-九、Cube-UI<br>
-官网：https://didi.github.io/cube-ui/#/zh-CN<br>
-github：https://github.com/didi/cube-ui<br>
-听说是滴滴团队开发的，是个移动端的框架。<br>
-十、at-ui<br>
-官网：https://at-ui.github.io/at-ui/#/zh<br>
-github：https://github.com/at-ui/at-ui<br>
-阿里的，不过听说已经不在维护了，可惜我还没用过。<br>
-XI、Pure.css<br>
-官网：https://www.purecss.cn/<br>
-有中文站，雅虎出品，应该不算UI框架，不过我个人十分喜欢，尤其是它的配色，特别好看。<br>
-十一、antd<br>
-官网：https://ant.design/docs/react/introduce-cn<br>
-github：https://github.com/ant-design/ant-design/<br>
-看名字就知道这是阿里系的，蚂蚁金服出品，主要用于中后台，不过这个是react的UI组件库，还要先学习react才能使用。<br>
-十二、Vuetify<br>
-官网：https://vuetifyjs.com/zh-Hans/<br>
-github：https://github.com/vuetifyjs/vuetify<br>
-github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最近一周下载也有35W，最重要的是官方文档还用了骨架屏，在elementUI慢慢不再维护的今天，Vuetify应该是下一个elementUI了。</p>
+              <h1 id="介绍">介绍</h1>
+<p>Deno 是一个 JavaScript/TypeScript 的运行时，默认使用安全环境执行代码，有着卓越的开发体验。</p>
+<p>Deno 建立在 V8、Rust 和 Tokio 的基础上。</p>
+<h2 id="功能亮点">功能亮点</h2>
+<ul>
+<li>
+<p>默认安全。外部代码没有文件系统、网络、环境的访问权限，除非显式开启。</p>
+</li>
+<li>
+<p>支持开箱即用的 TypeScript 的环境。</p>
+</li>
+<li>
+<p>只分发一个独立的可执行文件 (deno)。</p>
+</li>
+<li>
+<p>有着内建的工具箱，比如一个依赖信息查看器 (deno info) 和一个代码格式化工具 (deno fmt)。</p>
+</li>
+<li>
+<p>有一组经过审计的 标准模块，保证能在 Deno 上工作。</p>
+</li>
+<li>
+<p>脚本代码能被打包为一个单独的 JavaScript 文件。</p>
+</li>
+</ul>
+<h2 id="目标">目标</h2>
+<ul>
+<li>
+<p>只分发一个独立的可执行文件 (deno)。</p>
+</li>
+<li>
+<p>默认安全。外部代码没有文件系统、网络、环境的访问权限，除非显式开启。</p>
+</li>
+<li>
+<p>浏览器兼容：完全用 JavaScript 编写且不使用全局Deno命名空间(或功能测试)的程序是 Deno 程序的子集，应该能够直接在现代浏览器中运行而无需更改。</p>
+</li>
+<li>
+<p>提供内置工具来提升开发体验，比如单元测试、代码格式化、代码检查。</p>
+</li>
+<li>
+<p>不把 V8 的概念泄露到用户空间。</p>
+</li>
+<li>
+<p>能够高效地提供 HTTP 服务</p>
+</li>
+</ul>
+<h2 id="与-nodejs-的比较">与 Node.js 的比较</h2>
+<ul>
+<li>
+<p>Deno 不使用 npm，而是使用 URL 或文件路径引用模块。</p>
+</li>
+<li>
+<p>Deno 在模块解析算法中不使用 package.json。</p>
+</li>
+<li>
+<p>Deno 中的所有异步操作返回 promise，因此 Deno 提供与 Node 不同的 API。</p>
+</li>
+<li>
+<p>Deno 需要显式指定文件、网络和环境权限。</p>
+</li>
+<li>
+<p>当未捕获的错误发生时，Deno 总是会异常退出。</p>
+</li>
+<li>
+<p>使用 ES 模块，不支持 require()。第三方模块通过 URL 导入。<br>
+<code>import * as log from &quot;https://deno.land/std@$STD_VERSION/log/mod.ts&quot;;</code></p>
+</li>
+</ul>
 
             </div>
             
@@ -384,7 +573,7 @@ github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/" title="一些前端UI框架">https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/" title="每天一个名词解释—Deno">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -393,21 +582,15 @@ github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/"># 前端</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">收藏的一些有用的网站</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">下一篇</a>
+        <a class="nav-pc-next" title="仿网易云demo—day3" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">仿网易云demo—day3</a>
+        <a class="nav-mobile-next" title="仿网易云demo—day3" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
