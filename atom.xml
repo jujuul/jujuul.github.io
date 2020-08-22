@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-21T12:02:42.968Z</updated>
+    <updated>2020-08-22T12:23:24.801Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[仿网易云demo—day3]]></title>
+        <id>https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/</id>
+        <link href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">
+        </link>
+        <updated>2020-08-22T09:08:24.000Z</updated>
+        <content type="html"><![CDATA[<p>还是换做客户端了，网页端的界面实在是不好看，而且布局也不够灵活，最终还是换成做客户端，还是先创建项目，引入各种依赖，鉴于首页的跑马灯使用elementUI能直接符合效果，就又引入了elementUI<img src="https://jujuul.github.io//post-images/1598087573125.PNG" alt="" loading="lazy">其实关于封装还不能说是完全弄懂，只能是按照网上的模仿一下，教程里还用到了拦截器，我不知道有什么使用场景，所以就先注释掉了，以我对于封装的理解就是定义各个功能的方法，然后暴露出去，另一个文件调用，然后把不同文件暴露的功能拼接到一起，再暴露给其他页面调用。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[仿网易云demo—day2]]></title>
         <id>https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/</id>
@@ -454,33 +463,6 @@ window.addEventListener('hashchange', (e) =&gt; {
 • 易出错，需要使用程序管理前进、后退、地址栏等信息；<br>
 • 较高的前端开发门槛，对技术能力要求较高，需要对设计模式有一定理解，因为面对不是一个简单的页面，而是一个运行在浏览器环境里面的桌面软件。</p>
 <p>文章来源：https://www.yuque.com/fe9/basic/xvftk8</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—Typescript]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
-        </link>
-        <updated>2020-08-17T13:49:02.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="官网介绍">官网介绍</h2>
-<p>TypeScript 是 JavaScript 的类型的超集，它可以编译成纯 JavaScript。编译出来的 JavaScript 可以运行在任何浏览器上。TypeScript 编译工具可以运行在任何服务器和任何系统上。TypeScript 是开源的。</p>
-<h2 id="他人总结">他人总结</h2>
-<p>typescript是由微软开发的一个javascript超集，本质是向javascript这门弱类型动态语言添加了静态类型和面向对象。作者是安德斯-海尔斯伯格，C#之父。从发布至今，typescript一直倍受关注，star数直线上升，并且被越来越多的个人和组织认可，首先是默认使用ts的angular系列框架，vue在2.2开始支持ts，2.5版本以后全面支持，包括vux,vue-router，在vue-cli3.0脚手架当中，ts被加入到默认选项当中。react后续也开始支持ts，包括增加jsx式的模板引擎tsx。后续更多的开源库也开始支持，包括element-ui、iView、AntD。</p>
-<h2 id="优点">优点</h2>
-<ul>
-<li>提高代码质量，降低bug率，隐式类型转换带来大量不可预知的类型错误</li>
-<li>静态类型检测，减少编译阶段引起的错误</li>
-<li>模块化，es6已支持</li>
-<li>让代码更加清晰易读</li>
-<li>语法糖 ()=&gt;，接口，枚举，泛型，方法重载</li>
-</ul>
-<h2 id="缺点">缺点</h2>
-<ul>
-<li>有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型（Enums）等前端工程师可能不是很熟悉的概念</li>
-<li>短期可能会增加一些开发成本，毕竟要多写一些类型的定义，不过对于一个需要长期维护的项目，TypeScript 能够减少其维护成本</li>
-<li>集成到构建流程需要一些工作量</li>
-<li>可能和一些库结合的不是很完美</li>
-</ul>
 ]]></content>
     </entry>
 </feed>
