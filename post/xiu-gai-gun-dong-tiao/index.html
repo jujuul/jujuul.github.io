@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>TIOBE - 2020年8月编程语言排行 | Mark</title>
+<title>修改滚动条 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598107465233">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="TIOBE - 2020年8月编程语言排行" />
+  <meta name="description" content="修改滚动条" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,8 +155,7 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            <div class="post-side-meta" id="post_side_meta">
-              
+            
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -190,201 +189,6 @@
 
 
 </div>
-            </div>
-            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
-              <div class="toc-box right-motion">
-  <div class="toc-wrapper auto-number auto"
-    id="toc_wrapper">
-    <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E6%8E%92%E8%A1%8C%E6%A6%9C-top-20-%E6%A6%9C%E5%8D%95">编程语言排行榜 TOP 20 榜单：</a></li>
-<li><a href="#%E5%89%8D-10-%E5%90%8D%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E9%95%BF%E6%9C%9F%E8%B5%B0%E5%8A%BF%E5%9B%BE">前 10 名编程语言长期走势图：</a></li>
-<li><a href="#%E4%BB%A5%E4%B8%8B%E6%98%AF-21-50-%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E6%8E%92%E5%90%8D">以下是 21-50 编程语言排名：</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-</div>
-
-<script>
-
-  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
-  let active = 'active-show', activeClass = 'active-current';
-  let tocWrapper = document.querySelector('#toc_wrapper');
-  let tocContent = tocWrapper.children[0];
-  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
-
-  function addTocNumber(elem, deep) {
-    if (!elem) {
-      return;
-    }
-    let prop = elem.__proto__;
-
-    if (prop === HTMLUListElement.prototype) {
-      for (let i = 0; i < elem.children.length; i++) {
-        addTocNumber(elem.children[i], deep + (i + 1) + '.');
-      }
-    } else if (prop === HTMLLIElement.prototype) {
-      // 保存li元素
-      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
-        lList.push(elem);
-      }
-      for (let i = 0; i < elem.children.length; i++) {
-        let cur = elem.children[i];
-        if (cur.__proto__ === HTMLAnchorElement.prototype) {
-          if (autoNumber) {
-            cur.text = deep + ' ' + cur.text;
-          }
-        } else if (cur.__proto__ === HTMLUListElement.prototype) {
-          addTocNumber(cur, deep);
-        }
-      }
-    }
-  }
-
-  function removeParentActiveClass() {
-    let parents = tocContent.querySelectorAll('.' + active)
-    parents.forEach(function (elem) {
-      elem.classList.remove(active);
-    });
-  }
-
-  function addActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.add(activeClass);
-    }
-  }
-
-  function removeActiveClass(index) {
-    if (index >= 0 && index < hList.length) {
-      lList[index].classList.remove(activeClass);
-    }
-  }
-
-  function addActiveLiElemment(elem, parent) {
-    if (!elem || elem === parent) {
-      return;
-    } else {
-      if (elem.__proto__ === HTMLLIElement.prototype) {
-        elem.classList.add(active);
-      }
-      addActiveLiElemment(elem.parentElement, parent);
-    }
-  }
-
-  function showToc() {
-    if (tocWrapper) {
-      postBody = document.querySelector('#post_body');
-      for (let i = 0; i < postBody.children.length; i++) {
-        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
-          hList.push(postBody.children[i]);
-        }
-      }
-      if (tocWrapper.classList.contains('compress')) {
-        tocContent.classList.add('closed');
-      } else if (tocWrapper.classList.contains('no_compress')) {
-        tocContent.classList.add('expanded');
-      } else {
-        if (hList.length > 10) {
-          active = 'active-hidden'
-          tocContent.classList.add('closed');
-        } else {
-          tocContent.classList.add('expanded');
-        }
-      }
-    }
-  }
-
-  (function () {
-    // 处理不是从#一级标题开始目录
-    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
-      let con = tocContent.children[0].children[0];
-      tocContent.innerHTML = con.innerHTML;
-    }
-    let markdownItTOC = document.querySelector('.markdownIt-TOC');
-    let innerHeight = window.innerHeight;
-    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
-    addTocNumber(tocContent, '');
-  })();
-
-  document.addEventListener('scroll', function (e) {
-    if (lList.length <= 0) {
-      return;
-    }
-    let scrollTop = document.scrollingElement.scrollTop + 10;
-    let dir;
-
-    if (lastTop - scrollTop > 0) {
-      dir = 'up';
-    } else {
-      dir = 'down';
-    }
-
-    lastTop = scrollTop;
-    if (scrollTop <= 0) {
-      if (lastIndex >= 0 && lastIndex < hList.length) {
-        lList[lastIndex].classList.remove(activeClass);
-      }
-      return;
-    }
-
-    let current = 0, hasFind = false;
-    for (let i = 0; i < hList.length; i++) {
-      if (hList[i].offsetTop > scrollTop) {
-        current = i;
-        hasFind = true;
-        break;
-      }
-    }
-    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
-      current = hList.length - 1;
-    } else {
-      current--;
-    }
-    if (dir === 'down') {
-      if (current > lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex)
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    } else {
-      if (current < lastIndex) {
-        addActiveClass(current);
-        removeActiveClass(lastIndex);
-        lastIndex = current;
-        removeParentActiveClass();
-        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
-      }
-    }
-  });
-
-
-  window.addEventListener('load', function () {
-    showToc();
-    document.querySelector('#sidebar').style = 'display: block;';
-    tocWrapper.classList.add('toc-active');
-    setTimeout(function () {
-      if ("createEvent" in document) {
-        let evt = document.createEvent("HTMLEvents");
-        evt.initEvent("scroll", false, true);
-        document.dispatchEvent(evt);
-      }
-      else {
-        document.fireEvent("scroll");
-      }
-    }, 500)
-  })
-
-</script>
-            </div>
           
         
       </div>
@@ -472,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/">
-      TIOBE - 2020年8月编程语言排行
+    <a class="post-title-link" href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/">
+      修改滚动条
     </a>
   </h1>
   <div class="post-meta">
@@ -481,7 +285,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-21 15:09:34">2020-08-21</span>
+      <span class="publish-time" data-t="2020-08-22 22:43:26">2020-08-22</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -492,22 +296,27 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>199<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>35<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>本月 TIOBE 排行榜总体变化不大。R 语言自上个月迎来史无前例的高光时刻后，本月依旧保持增长势头，并有望成为 2020 年的年度编程语言。</p>
-<p>除此之外，Go、Swift、SQL 三种语言在第 10 名这个位置的角逐也十分有趣。其中 Swift 在本月下降 2 个名次，从第 10 名降到了第 12 名。SQL 将其取而代之，成为第 10 名。同样值得注意的是，Groovy 重新进入了排行榜的前 20名，并且 Hack 在第 44 位，也成功进入了前 50 名。</p>
-<h3 id="编程语言排行榜-top-20-榜单">编程语言排行榜 TOP 20 榜单：</h3>
-<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597993815737.webp" alt="" loading="lazy"></figure>
-<h3 id="前-10-名编程语言长期走势图">前 10 名编程语言长期走势图：</h3>
-<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597993834133.webp" alt="" loading="lazy"></figure>
-<h3 id="以下是-21-50-编程语言排名">以下是 21-50 编程语言排名：</h3>
-<figure data-type="image" tabindex="3"><img src="https://jujuul.github.io//post-images/1597993848553.webp" alt="" loading="lazy"></figure>
-<!-- more -->
-<p>原文链接：https://www.hangge.com/blog/cache/detail_2989.html</p>
+              <pre><code>.main::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+/*滚动条滑块*/
+.main::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #ccc;
+}
+/*滚动条轨道*/
+.main::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #fff;
+}
+</code></pre>
 
             </div>
             
@@ -520,7 +329,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/" title="TIOBE - 2020年8月编程语言排行">https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/</a>
+      <a href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/" title="修改滚动条">https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -533,15 +342,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="仿网易云demo—day2" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/">仿网易云demo—day2</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="仿网易云demo—day2" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="每天一个名词解释—Swift" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-swift/">每天一个名词解释—Swift</a>
-        <a class="nav-mobile-next" title="每天一个名词解释—Swift" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-swift/">下一篇</a>
+        <a class="nav-pc-next" title="每天一个名词解释—Deno" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/">每天一个名词解释—Deno</a>
+        <a class="nav-mobile-next" title="每天一个名词解释—Deno" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
