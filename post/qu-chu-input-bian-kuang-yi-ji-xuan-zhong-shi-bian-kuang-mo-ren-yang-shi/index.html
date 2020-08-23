@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vuetify学习记录 | Mark</title>
+<title>去除input边框以及选中时边框 默认样式 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598150690058">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vuetify学习记录" />
+  <meta name="description" content="去除input边框以及选中时边框 默认样式" />
   <meta name="keywords" content="" />
 </head>
 
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-      vuetify学习记录
+    <a class="post-title-link" href="https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/">
+      去除input边框以及选中时边框 默认样式
     </a>
   </h1>
   <div class="post-meta">
@@ -285,7 +285,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 23:32:17">2020-08-08</span>
+      <span class="publish-time" data-t="2020-08-23 10:44:18">2020-08-23</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -296,21 +296,19 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>160<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>40<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。</p>
-<p>在vue项目中安装<br>
-<code>vue add vuetify</code><br>
-查看package.json发现已经安装完成<br>
-<img src="https://jujuul.github.io//post-images/1597203946038.PNG" alt="" loading="lazy"><br>
-可以使用Vuetify的预置布局完成页面的基础布局<br>
-<img src="https://jujuul.github.io//post-images/1597211156600.PNG" alt="" loading="lazy"><br>
-除此以外，还提供了从简单到复杂的8种布局方式。<br>
-不过因为是学习，所以我打算自己组装一个页面的基本布局。</p>
+              <p><code>&lt;input type=&quot;text&quot; &gt;</code></p>
+<pre><code> input {
+        border: 0;  // 去除未选中状态边框
+        outline: none; // 去除选中状态边框
+        background-color: rgba(0, 0, 0, 0);// 透明背景
+    }
+</code></pre>
 
             </div>
             
@@ -323,7 +321,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/" title="vuetify学习记录">https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</a>
+      <a href="https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/" title="去除input边框以及选中时边框 默认样式">https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -336,15 +334,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">每天一个名词解释—nest.js</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">下一篇</a>
+        <a class="nav-pc-next" title="修改滚动条" href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/">修改滚动条</a>
+        <a class="nav-mobile-next" title="修改滚动条" href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
