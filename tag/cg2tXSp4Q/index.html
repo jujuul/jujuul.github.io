@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598150690058">
+<link rel="shortcut icon" href="/favicon.ico?v=1598266285985">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">37</span>
+        <span class="site-item-stat-count">38</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -198,6 +198,8 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
       
       
       
@@ -539,6 +541,31 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/"" data-c="
+          &lt;p&gt;都在说API，API到底是什么？对于很多非IT人士而言，API ≈ 听不懂。&lt;/p&gt;
+&lt;p&gt;其实日常生活中，我们有很多类似API的场景，比如：&lt;br&gt;
+电脑需要调用手机里面的信息，这时候你会拿一根数据线将电脑手机连接起来，电脑和手机上连接数据线的接口就是传说中的API接口。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1598266112897.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;但比喻到底是比喻并非本质-想要真正理解api还得老老实实去理解api的使用场景&#34;&gt;但比喻到底是比喻，并非本质。想要真正理解API，还得老老实实去理解API的使用场景。&lt;/h3&gt;
+&lt;p&gt;先来一段按惯例放上、但可跳过不看的百科介绍：&lt;br&gt;
+API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。——百度百科&lt;br&gt;
+我们不妨把API的诞生过程用一个小故事展示出来：&lt;br&gt;
+研发人员A开发了软件A，研发人员B正在研发软件B。有一天，研发人员B想要调用软件A的部分功能来用，但是他又不想从头看一遍软件A的源码和功能实现过程，怎么办呢？研发人员A想了一个好主意：我把软件A里你需要的功能打包好，写成一个函数；你按照我说的流程，把这个函数放在软件B里，就能直接用我的功能了！其中，API就是研发人员A说的那个函数。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1598266195467.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+那么API在实际工作中是如何使用的呢？这里借一下我们的客户案例（此处感谢国银通宝的大数据总监郑斌先生友情给我们提供素材）：&lt;br&gt;
+大家所在的企业应该用过一些办公软件，比如在国银通宝，他们的办公软件主要是用于管理仓库货物的ERP软件，但是这个ERP系统却不支持手机上报销。怎么办？了解的朋友知道，简道云是一个支持企业搭建个性化应用的平台，国银通宝可以在简道云上直接搭建一个报销管理系统。但总不可能报销系统在简道云上，货物管理在ERP系统上。此时API接口就派上了大用场，通过简道云开放的API接口，国银通宝把简道云和ERP系统对接起来。相当于国银通宝同时用了两个软件的功能，但数据又是彻底打通的。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1598266222441.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+到这里，大家对API的含义应该有所了解，但对接API的过程对于非IT人员而言，却不是那么简单，因为其中涉及到服务器搭建等问题，所以一般我们都比较希望使用API的企业有信息部门。不过近期我们发现了一个国外软件zapier，通过这个整合Slack、Trello、Excel、Gmail等1000+知名软件的平台上，对接API的过程被极大程度地简化了。同样的例子，如果说API是电脑和手机上的接口，那么zapier就相当于一根标准的安卓数据线。&lt;br&gt;
+通过zapier可以将很多常见的软件对接起来，产生新的功能。如果你有一个开通了API接口的简道云账号，那么就能将简道云和slack、trello这些知名软件对接起来。比如以下就是一个将简道云和Gmail通过zapier对接的场景：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1598266248380.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+原本的表单使用模式：用户打开外链，在表单中录入数据，提交完事。&lt;/p&gt;
+&lt;p&gt;现在对接了Gmail功能：用户打开外链，在表单中录入数据和邮箱地址，提交后，自己邮箱将会收到一封邮件。（如上图）&lt;/p&gt;
+&lt;p&gt;作者：简道云&lt;br&gt;
+链接：https://www.zhihu.com/question/38594466/answer/487039892&lt;/p&gt;
+">每天一个名词解释—Dart</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/"" data-c="

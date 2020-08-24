@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>仿网易云demo—day3 | Mark</title>
+<title>每天一个名词解释—Dart | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598266285985">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="仿网易云demo—day3" />
+  <meta name="description" content="每天一个名词解释—Dart" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,199 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#%E4%BD%86%E6%AF%94%E5%96%BB%E5%88%B0%E5%BA%95%E6%98%AF%E6%AF%94%E5%96%BB%E5%B9%B6%E9%9D%9E%E6%9C%AC%E8%B4%A8-%E6%83%B3%E8%A6%81%E7%9C%9F%E6%AD%A3%E7%90%86%E8%A7%A3api%E8%BF%98%E5%BE%97%E8%80%81%E8%80%81%E5%AE%9E%E5%AE%9E%E5%8E%BB%E7%90%86%E8%A7%A3api%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF">但比喻到底是比喻，并非本质。想要真正理解API，还得老老实实去理解API的使用场景。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +470,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">
-      仿网易云demo—day3
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/">
+      每天一个名词解释—Dart
     </a>
   </h1>
   <div class="post-meta">
@@ -285,24 +479,43 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-22 17:08:24">2020-08-22</span>
+      <span class="publish-time" data-t="2020-08-24 18:43:42">2020-08-24</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>192<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>998<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>还是换做客户端了，网页端的界面实在是不好看，而且布局也不够灵活，最终还是换成做客户端，还是先创建项目，引入各种依赖，鉴于首页的跑马灯使用elementUI能直接符合效果，就又引入了elementUI<img src="https://jujuul.github.io//post-images/1598087573125.PNG" alt="" loading="lazy">其实关于封装还不能说是完全弄懂，只能是按照网上的模仿一下，教程里还用到了拦截器，我不知道有什么使用场景，所以就先注释掉了，以我对于封装的理解就是定义各个功能的方法，然后暴露出去，另一个文件调用，然后把不同文件暴露的功能拼接到一起，再暴露给其他页面调用。</p>
+              <p>都在说API，API到底是什么？对于很多非IT人士而言，API ≈ 听不懂。</p>
+<p>其实日常生活中，我们有很多类似API的场景，比如：<br>
+电脑需要调用手机里面的信息，这时候你会拿一根数据线将电脑手机连接起来，电脑和手机上连接数据线的接口就是传说中的API接口。<br>
+<img src="https://jujuul.github.io//post-images/1598266112897.jpg" alt="" loading="lazy"></p>
+<h3 id="但比喻到底是比喻并非本质-想要真正理解api还得老老实实去理解api的使用场景">但比喻到底是比喻，并非本质。想要真正理解API，还得老老实实去理解API的使用场景。</h3>
+<p>先来一段按惯例放上、但可跳过不看的百科介绍：<br>
+API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。——百度百科<br>
+我们不妨把API的诞生过程用一个小故事展示出来：<br>
+研发人员A开发了软件A，研发人员B正在研发软件B。有一天，研发人员B想要调用软件A的部分功能来用，但是他又不想从头看一遍软件A的源码和功能实现过程，怎么办呢？研发人员A想了一个好主意：我把软件A里你需要的功能打包好，写成一个函数；你按照我说的流程，把这个函数放在软件B里，就能直接用我的功能了！其中，API就是研发人员A说的那个函数。<br>
+<img src="https://jujuul.github.io//post-images/1598266195467.jpg" alt="" loading="lazy"><br>
+那么API在实际工作中是如何使用的呢？这里借一下我们的客户案例（此处感谢国银通宝的大数据总监郑斌先生友情给我们提供素材）：<br>
+大家所在的企业应该用过一些办公软件，比如在国银通宝，他们的办公软件主要是用于管理仓库货物的ERP软件，但是这个ERP系统却不支持手机上报销。怎么办？了解的朋友知道，简道云是一个支持企业搭建个性化应用的平台，国银通宝可以在简道云上直接搭建一个报销管理系统。但总不可能报销系统在简道云上，货物管理在ERP系统上。此时API接口就派上了大用场，通过简道云开放的API接口，国银通宝把简道云和ERP系统对接起来。相当于国银通宝同时用了两个软件的功能，但数据又是彻底打通的。<br>
+<img src="https://jujuul.github.io//post-images/1598266222441.png" alt="" loading="lazy"><br>
+到这里，大家对API的含义应该有所了解，但对接API的过程对于非IT人员而言，却不是那么简单，因为其中涉及到服务器搭建等问题，所以一般我们都比较希望使用API的企业有信息部门。不过近期我们发现了一个国外软件zapier，通过这个整合Slack、Trello、Excel、Gmail等1000+知名软件的平台上，对接API的过程被极大程度地简化了。同样的例子，如果说API是电脑和手机上的接口，那么zapier就相当于一根标准的安卓数据线。<br>
+通过zapier可以将很多常见的软件对接起来，产生新的功能。如果你有一个开通了API接口的简道云账号，那么就能将简道云和slack、trello这些知名软件对接起来。比如以下就是一个将简道云和Gmail通过zapier对接的场景：<br>
+<img src="https://jujuul.github.io//post-images/1598266248380.jpg" alt="" loading="lazy"><br>
+原本的表单使用模式：用户打开外链，在表单中录入数据，提交完事。</p>
+<p>现在对接了Gmail功能：用户打开外链，在表单中录入数据和邮箱地址，提交后，自己邮箱将会收到一封邮件。（如上图）</p>
+<p>作者：简道云<br>
+链接：https://www.zhihu.com/question/38594466/answer/487039892</p>
 
             </div>
             
@@ -315,7 +528,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/" title="仿网易云demo—day3">https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/" title="每天一个名词解释—Dart">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -328,15 +541,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—Deno" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/">每天一个名词解释—Deno</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—Deno" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-deno/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="仿网易云demo—day2" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/">仿网易云demo—day2</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day2" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/">下一篇</a>
+        <a class="nav-pc-next" title="去除input边框以及选中时边框 默认样式" href="https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/">去除input边框以及选中时边框 默认样式</a>
+        <a class="nav-mobile-next" title="去除input边框以及选中时边框 默认样式" href="https://jujuul.github.io/post/qu-chu-input-bian-kuang-yi-ji-xuan-zhong-shi-bian-kuang-mo-ren-yang-shi/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
