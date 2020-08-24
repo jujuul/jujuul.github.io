@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598279043547">
+<link rel="shortcut icon" href="/favicon.ico?v=1598281726967">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -209,12 +209,12 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>528<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>954<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
@@ -1248,6 +1248,45 @@ duration ：获取媒体文件的播放时长，以秒为单位，如果无法�
       this.current = `${minutes}:${seconds}`;
     },
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;设置音量大小&lt;br&gt;
+&lt;code&gt;voiceDown: true, voiceUp: false,&lt;/code&gt;通过这两个控制音量开关&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Icon v-show=&amp;quot;voiceDown&amp;quot; @click=&amp;quot;volumDown&amp;quot; size=&amp;quot;20&amp;quot; type=&amp;quot;md-volume-up&amp;quot; /&amp;gt;
+&amp;lt;Icon v-show=&amp;quot;voiceUp&amp;quot; @click=&amp;quot;volumUp&amp;quot; size=&amp;quot;20&amp;quot; type=&amp;quot;md-volume-off&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过v-show来切换状态，添加点击事件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;volumDown() {
+      this.lastVoice = this.$refs.audio.volume;
+      this.$refs.audio.volume = 0;
+      this.voiceDown = false;
+      this.voiceUp = true;
+      this.voiceLength = this.$refs.voiceOpt.style.width;
+      this.$refs.voiceOpt.style.width = 0;
+    },
+    volumUp() {
+      this.$refs.audio.volume = this.lastVoice;
+      this.$refs.voiceOpt.style.width = this.voiceLength;
+      this.voiceUp = false;
+      this.voiceDown = true;
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;两个点击事件分别控制状态的切换以及保存静音前音量控制条的进度&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div @click=&amp;quot;changeVoice&amp;quot; class=&amp;quot;voice-bbb&amp;quot;&amp;gt;
+        &amp;lt;div class=&amp;quot;voice-background&amp;quot;&amp;gt;
+          &amp;lt;div ref=&amp;quot;voiceOpt&amp;quot; class=&amp;quot;voice-front&amp;quot; :style=&amp;quot;{width: operatewidth + &#39;px&#39;}&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+        &amp;lt;/div&amp;gt;
+      &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;再给最外层的div添加点击事件，因为内部第一层div用作背景，所以需要和进度条同高度，最内层div用于展示进度条，所以设置的比较细，如果在这一层加事件，则必须改变自身高度，不然点击较为不易。在最内层绑定了动态属性，用于通过点击事件控制div宽度，达到根据点击位置切换宽度的效果。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;changeVoice(val) {
+      var length = val.clientX - this.$refs.voiceOpt.offsetLeft;
+      this.$refs.audio.volume = length / 130;
+      this.operatewidth = 130 - (130 - length);
+      console.log(this.$refs.audio.volume);
+      this.voiceUp = false;
+      this.voiceDown = true;
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为采用百分比无法计算，所以进度条采用固定宽度的方式，根据当前进度条和背景宽度的比值求出当前音量大小并赋给audio的volume属性，来达到控制音量的目的。&lt;/p&gt;
 ">仿网易云项目的播放器组件</a>
       </div>
       
