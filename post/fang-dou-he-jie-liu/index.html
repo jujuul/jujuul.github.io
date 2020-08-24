@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>防抖和节流 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598266285985">
+<link rel="shortcut icon" href="/favicon.ico?v=1598278942003">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">38</span>
+        <span class="site-item-stat-count">39</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1063,6 +1063,65 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fang-wang-yi-yun-xiang-mu-de-bo-fang-qi-zu-jian/"" data-c="
+          &lt;p&gt;目前为止，这个项目中比较费时的就是播放器组件了，因为要尽量还原网易云的样式，所以不能使用HTML5的Audio的默认样式，需要自己写，这样的话就需要自己写播放/暂停按钮、上一首/下一首、显示歌曲总时长以及歌曲当前播放时长、歌曲播放进度条、声音大小进度条、播放模式等等功能，这里写篇文章记录一下，方便以后查找。&lt;/p&gt;
+&lt;p&gt;controls ：用来控制Audio播放器的显示与隐藏&lt;br&gt;
+volume ：当前音量&lt;br&gt;
+currentTime ：以秒为单位返回播放时长&lt;br&gt;
+loop ：设置为循环播放或查询是否为循环播放&lt;br&gt;
+autoplay ：自动播放&lt;br&gt;
+autobuffer ：媒体文件播放前是否进行缓冲加载，如果设置了autoplay，则忽略此特性&lt;br&gt;
+duration ：获取媒体文件的播放时长，以秒为单位，如果无法获取，则为 NaN&lt;/p&gt;
+&lt;p&gt;暂且先完成播放、暂停、总时长与播放时长、音量切换、进度切换功能&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;audio ref=&amp;quot;audio&amp;quot; :src=&amp;quot;songUrl&amp;quot;&amp;gt;&amp;lt;/audio&amp;gt;&lt;/code&gt;&lt;br&gt;
+通过ref获取audio&lt;br&gt;
+&lt;code&gt;&amp;lt;div @click=&amp;quot;play&amp;quot; class=&amp;quot;play-btn&amp;quot;&amp;gt; &amp;lt;Icon v-show=&amp;quot;playMusic&amp;quot; size=&amp;quot;28&amp;quot; color=&amp;quot;white&amp;quot; type=&amp;quot;ios-pause&amp;quot; /&amp;gt; &amp;lt;Icon v-show=&amp;quot;pauseMusic&amp;quot; size=&amp;quot;28&amp;quot; color=&amp;quot;white&amp;quot; type=&amp;quot;ios-play&amp;quot; /&amp;gt; &amp;lt;/div&amp;gt;&lt;/code&gt;给播放/暂停按钮绑定事件&lt;br&gt;
+&lt;code&gt;isStore: &amp;quot;false&amp;quot;,&lt;/code&gt;通过isStore判断播放与暂停状态&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-play()&#34;&gt;      if (this.isStore) {
+        this.$refs.audio.play();
+      } else {
+        this.$refs.audio.pause();
+      }
+      this.isStore = !this.isStore;
+      this.pauseMusic = !this.pauseMusic;
+      this.playMusic = !this.playMusic;
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;切换事件，其实命名为toogle更好&lt;br&gt;
+获取播放时长并转为 00 - 00 形式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;durationTime() {
+      var minute = this.$refs.audio.duration / 60;
+      var minutes = parseInt(minute);
+      if (minutes &amp;lt; 10) {
+        minutes = &amp;quot;0&amp;quot; + minutes;
+      }
+      var second = this.$refs.audio.duration % 60;
+      var seconds = Math.round(second);
+      if (seconds &amp;lt; 10) {
+        seconds = &amp;quot;0&amp;quot; + seconds;
+      }
+      this.duration = `${parseInt(minute)}:${parseInt(second)}`;
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;获取当前播放时长 也转换为 00 - 00 形式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;currendTime() {
+      var minute = this.$refs.audio.currentTime / 60;
+      var minutes = parseInt(minute);
+      if (minutes &amp;lt; 10) {
+        minutes = &amp;quot;0&amp;quot; + minutes;
+      }
+      var second = this.$refs.audio.currentTime % 60;
+      var seconds = Math.round(second);
+      if (seconds &amp;lt; 10) {
+        seconds = &amp;quot;0&amp;quot; + seconds;
+      }
+      this.current = `${minutes}:${seconds}`;
+    },
+&lt;/code&gt;&lt;/pre&gt;
+">仿网易云项目的播放器组件</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/"" data-c="
