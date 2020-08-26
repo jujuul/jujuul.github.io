@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-08-24T15:08:52.722Z</updated>
+    <updated>2020-08-26T06:25:42.679Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[各种实用技巧]]></title>
+        <id>https://jujuul.github.io/post/ge-chong-shi-yong-ji-qiao/</id>
+        <link href="https://jujuul.github.io/post/ge-chong-shi-yong-ji-qiao/">
+        </link>
+        <updated>2020-08-26T05:28:45.000Z</updated>
+        <content type="html"><![CDATA[<p>文字截断</p>
+<pre><code>white-space: nowrap;/*保证文本内容不会自动换行，如果多余的内容会在水平方向撑破单元格*/ 
+overflow: hidden; /*隐藏超出单元格的部分*/
+text-overflow: ellipsis; /*将被隐藏的那部分用省略号代替*/
+</code></pre>
+<p>去除input边框<br>
+<code>&lt;input type=&quot;text&quot; &gt;</code></p>
+<pre><code> input {
+        border: 0;  // 去除未选中状态边框
+        outline: none; // 去除选中状态边框
+        background-color: rgba(0, 0, 0, 0);// 透明背景
+    }
+</code></pre>
+<p>修改滚动条样式</p>
+<pre><code>.main::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+/*滚动条滑块*/
+.main::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #ccc;
+}
+/*滚动条轨道*/
+.main::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #fff;
+}
+</code></pre>
+<p>字母换行<br>
+<code>word-break: break-all;</code><br>
+去除图片下空隙<br>
+<code>display:block</code></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[仿网易云项目的播放器组件]]></title>
         <id>https://jujuul.github.io/post/fang-wang-yi-yun-xiang-mu-de-bo-fang-qi-zu-jian/</id>
@@ -369,53 +410,6 @@ Objc 本身是不支持的，通过引入 ReactiveCocoa 这个库才可支持。
 </li>
 </ol>
 <p>官网地址：https://www.apple.com.cn/swift/</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[我自用的一些vscode插件分享]]></title>
-        <id>https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/</id>
-        <link href="https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/">
-        </link>
-        <updated>2020-08-21T03:44:20.000Z</updated>
-        <content type="html"><![CDATA[<p>今天逛思否的时候，发现一个推荐vscode插件的文章，里面推荐了8个插件，竟然有6个是我没用过的，也借这个机会，整理一下自己用的插件</p>
-<ol>
-<li>Beautify<br>
-听名字就能猜到功能了，整理代码用的，500W+的下载量足以证明其强大。</li>
-<li>Auto Close Tag<br>
-也是个听名字就能猜到功能的，320W+下载量。</li>
-<li>Auto Rename Tag<br>
-跟上面的是同一个作者开发的，可以在更改标签名的时候做到更改一边而两边都被更改的效果，340W+。</li>
-<li>Bracket Pair Colorizer<br>
-我个人强力推荐，没完没了的函数中看代码真的是一种折磨，有了它就能清晰的看出(){}[]是否闭合，再也不用担心少个)}]了，340W+。</li>
-<li>Chinese (Simplified) Language Pack for Visual Studio Code<br>
-简中语言包，600W+足以证明，另外我去看了下繁中版，也有270W+，中文开发者真的多啊。</li>
-<li>Code Runner<br>
-可以直接运行其他语言，使Vs Code成为一个IDE?我是之前毕设项目后端使用PHP才安装的这个插件，不过好像没什么用，话说我在Vscode上配置过java和python的运行环境，效果都不是很理想啊，编辑器和IDE还是有很大区别的啊，466W+。</li>
-<li>CSS Peek<br>
-今天被安利的插件，鼠标悬停在类名或者ID上能直接看到CSS规则，100W+。</li>
-<li>Debugger for Chrome<br>
-就是在vscode中启动chrome控制台，需要一些比较繁琐的配置，我只是安装了，但从没用过，620W+。</li>
-<li>indent-rainbow<br>
-可以和前面第四个联用，这个是在缩进的地方用彩色填充，也是起到一个很好的查看代码的效果,100W+。</li>
-<li>JavaScript (ES6) code snippets<br>
-今天受的安利之一，可以生成ES6的代码片段，原来VSCODE不可以的吗？我只生成过VUE的代码片段，但是vue不是使用的ES6语法吗？不是很理解，380W+。</li>
-<li>Live Server<br>
-好像可以用来做服务器？而且是自动刷新(热插拔)的那种？也是没有使用过，服务器都是自己用nodejs搭的，原来还有这么方便的，67W+。</li>
-<li>open in browser<br>
-在浏览器中打开，还可以选择浏览器，非常实用的功能，220W+。</li>
-<li>Prettier - Code formatter<br>
-也是一个代码格式的插件，我记得使用时有要求选择alt+thift+f做出选择，我选了Beautify，我原本以为是冲突的，但今天看了很多介绍用它们两个整理格式的，好像并不冲突？有时间去配置一下，790W+。</li>
-<li>Quokka.js<br>
-今天的安利之一，直接放图吧<img src="https://jujuul.github.io//post-images/1597983693060.gif" alt="" loading="lazy">76W+。</li>
-<li>REST Client<br>
-REST Client 扩展工具允许你发送 HTTP 请求并直接在 VSCode 中查看响应。再也不需要使用外部应用程序向服务器发送 HTTP 请求，还没用，不过看了动图我觉得可以试试<img src="https://jujuul.github.io//post-images/1597983840428.gif" alt="" loading="lazy">100W+。</li>
-<li>TabNine<br>
-一个代码补全工具，基于人工智能，自动补全时会给出每个候选项的概率，并且按照概率大小进行排序，此外，会给出候选项的来源及地址，这样更加方便查询和阅读，31W+。</li>
-<li>Vetur<br>
-vue开发必装，之前不知道干嘛的，今天看了一下，是对于vue文件中的语法检查、语法高亮还有自动补全，530W+。</li>
-<li>ESLint<br>
-JS代码检测工具，配合之前的几个代码检测，写出的代码将无敌，可惜不会写，配置比较繁琐，1000W+。</li>
-</ol>
 ]]></content>
     </entry>
 </feed>
