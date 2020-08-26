@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598423136804">
+<link rel="shortcut icon" href="/favicon.ico?v=1598448419738">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">40</span>
+        <span class="site-item-stat-count">41</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -198,6 +198,8 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
       
       
       
@@ -547,6 +549,91 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/"" data-c="
+          &lt;h2 id=&#34;设置路由懒加载&#34;&gt;设置路由懒加载&lt;/h2&gt;
+&lt;p&gt;先放一段定义用法&lt;br&gt;
+vue中的懒加载和按需加载&lt;br&gt;
+懒加载&lt;/p&gt;
+&lt;p&gt;（1）定义：懒加载也叫延迟加载，即在需要的时候进行加载，随用随载。&lt;/p&gt;
+&lt;p&gt;（2）异步加载的三种表示方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1.  resolve =&amp;gt; require([URL], resolve),支持性好
+2.  () =&amp;gt; system.import(URL) , webpack2官网上已经声明将逐渐废除,不推荐使用 
+3.  () =&amp;gt; import(URL), webpack2官网推荐使用,属于es7范畴,需要配合babel的syntax-dynamic- 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;import插件使用。&lt;br&gt;
+（3）vue中懒加载的流程：&lt;br&gt;
+（4）Vue中懒加载的各种使用地方：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;路由懒加载：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;export default new Router({
+  routes:[
+    {
+     path: &#39;/my&#39;,
+     name: &#39;my&#39;,
+      //懒加载
+     component: resolve =&amp;gt; require([&#39;../page/my/my.vue&#39;], resolve),
+    },
+  ]
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;组件懒加载：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;components: {
+  historyTab:resolve =&amp;gt; {
+  require([&#39;../../component/historyTab/historyTab.vue&#39;],resolve)
+  },   
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;全局懒加载：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;Vue.component(&#39;mideaHeader&#39;, () =&amp;gt; {
+System.import(&#39;./component/header/header.vue&#39;)
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我自己的路由懒加载&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const routes = [
+  {
+    path: &amp;quot;/main&amp;quot;,
+    component: (resolve) =&amp;gt; require([&amp;quot;@/components/main&amp;quot;], resolve),
+  },
+  {
+    path: &amp;quot;/ranklist&amp;quot;,
+    component: (resolve) =&amp;gt; require([&amp;quot;@/components/main/Ranklist&amp;quot;], resolve),
+  },
+  {
+    path: &amp;quot;/recommendlist&amp;quot;,
+    component: (resolve) =&amp;gt; require([&amp;quot;@/components/recommend-list&amp;quot;], resolve),
+  },
+  {
+    path: &amp;quot;/newestmusic&amp;quot;,
+    component: (resolve) =&amp;gt; require([&amp;quot;@/components/newest-music&amp;quot;], resolve),
+  },
+  {
+    path: &amp;quot;/mv&amp;quot;,
+    component: (resolve) =&amp;gt; require([&amp;quot;@/components/mv&amp;quot;], resolve),
+  },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;设置图片懒加载&#34;&gt;设置图片懒加载&lt;/h2&gt;
+&lt;p&gt;cnpm引入：cnpm i vue-lazyload --save&lt;br&gt;
+main.js中引入&lt;code&gt;import VueLazyload from &#39;vue-lazyload&#39;&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: &amp;quot;dist/error.png&amp;quot;,
+  loading: &amp;quot;dist/loading.gif&amp;quot;,
+  attempt: 1,
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在页面中使用，替换原本的:src为v-lazy&lt;br&gt;
+&lt;code&gt;&amp;lt;img v-lazy=&amp;quot;item.album.blurPicUrl&amp;quot; alt /&amp;gt;&lt;/code&gt;&lt;br&gt;
+不过在使用了路由和图片懒加载后还是有卡顿的现象，我看到网上说的优化方法里，还有按需引入和减少图片，减少图片引用应该是不行了，按需引入可以考虑，毕竟项目使用了两个UI组件库，而且基本只使用了图标功能，可以考虑按需引入，之前使用阿里ICON的时候没注意还有个复制svg的选项，有这个项目里都不需要引入UI框架了。不过这个应该也算是对网络资源的请求吧？&lt;/p&gt;
+">仿网易云demo—day4</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/ge-chong-shi-yong-ji-qiao/"" data-c="
           &lt;p&gt;文字截断&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;white-space: nowrap;/*保证文本内容不会自动换行，如果多余的内容会在水平方向撑破单元格*/ 
@@ -580,7 +667,9 @@ text-overflow: ellipsis; /*将被隐藏的那部分用省略号代替*/
 &lt;p&gt;字母换行&lt;br&gt;
 &lt;code&gt;word-break: break-all;&lt;/code&gt;&lt;br&gt;
 去除图片下空隙&lt;br&gt;
-&lt;code&gt;display:block&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;display:block&lt;/code&gt;&lt;br&gt;
+设置模糊&lt;br&gt;
+&lt;code&gt;filter: blur(16px);&lt;/code&gt;&lt;/p&gt;
 ">各种实用技巧</a>
       </div>
       
