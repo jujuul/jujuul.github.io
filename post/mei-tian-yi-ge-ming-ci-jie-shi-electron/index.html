@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—electron | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598448419738">
+<link rel="shortcut icon" href="/favicon.ico?v=1598590199419">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">41</span>
+        <span class="site-item-stat-count">42</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1054,6 +1054,58 @@ app.on('activate', () =&gt; {
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/"" data-c="
+          &lt;p&gt;今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;npm install moment --save&lt;/code&gt;|&lt;code&gt;cnpm install moment --save&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;引入&#34;&gt;引入&lt;/h2&gt;
+&lt;p&gt;在main中全局引入，并且定义全局的时间过滤器&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 定义全局时间戳过滤器
+Vue.filter(&amp;quot;formatDate&amp;quot;, function(value) {
+  return Moment(value).format(&amp;quot;YYYY-MM-DD&amp;quot;);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置&lt;br&gt;
+日期格式化&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;moment().format(&#39;MMMM Do YYYY, h:mm:ss a&#39;); // 四月 16日 2019, 12:24:48 中午
+moment().format(&#39;dddd&#39;);                    // 星期二
+moment().format(&amp;quot;MMM Do YY&amp;quot;);               // 4月 16日 19
+moment().format(&#39;YYYY [escaped] YYYY&#39;);     // 2019 escaped 2019
+moment().format();                          // 2019-04-16T12:24:48+08:00
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;相对时间&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;moment(&amp;quot;20111031&amp;quot;, &amp;quot;YYYYMMDD&amp;quot;).fromNow(); // 7 年前
+moment(&amp;quot;20120620&amp;quot;, &amp;quot;YYYYMMDD&amp;quot;).fromNow(); // 7 年前
+moment().startOf(&#39;day&#39;).fromNow();        // 12 小时前
+moment().endOf(&#39;day&#39;).fromNow();          // 12 小时内
+moment().startOf(&#39;hour&#39;).fromNow();       // 28 分钟前
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;日历时间&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;moment().subtract(10, &#39;days&#39;).calendar(); // 2019年4月6日
+moment().subtract(6, &#39;days&#39;).calendar();  // 上周三中午12点28
+moment().subtract(3, &#39;days&#39;).calendar();  // 上周六中午12点28
+moment().subtract(1, &#39;days&#39;).calendar();  // 昨天中午12点28分
+moment().calendar();                      // 今天中午12点28分
+moment().add(1, &#39;days&#39;).calendar();       // 明天中午12点28分
+moment().add(3, &#39;days&#39;).calendar();       // 本周五中午12点28
+moment().add(10, &#39;days&#39;).calendar();      // 2019年4月26日
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;多语言支持&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;moment().format(&#39;L&#39;);    // 2019-04-16
+moment().format(&#39;l&#39;);    // 2019-04-16
+moment().format(&#39;LL&#39;);   // 2019年4月16日
+moment().format(&#39;ll&#39;);   // 2019年4月16日
+moment().format(&#39;LLL&#39;);  // 2019年4月16日中午12点28分
+moment().format(&#39;lll&#39;);  // 2019年4月16日中午12点28分
+moment().format(&#39;LLLL&#39;); // 2019年4月16日星期二中午12点28分
+moment().format(&#39;llll&#39;); // 2019年4月16日星期二中午12点28分
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;文档地址：http://momentjs.cn/&lt;br&gt;
+不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。&lt;/p&gt;
+">vue中使用moment.js格式化时间戳</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/"" data-c="
           &lt;h2 id=&#34;设置路由懒加载&#34;&gt;设置路由懒加载&lt;/h2&gt;
 &lt;p&gt;先放一段定义用法&lt;br&gt;
@@ -1144,6 +1196,14 @@ main.js中引入&lt;code&gt;import VueLazyload from &#39;vue-lazyload&#39;&lt;/c
 &lt;pre&gt;&lt;code&gt;white-space: nowrap;/*保证文本内容不会自动换行，如果多余的内容会在水平方向撑破单元格*/ 
 overflow: hidden; /*隐藏超出单元格的部分*/
 text-overflow: ellipsis; /*将被隐藏的那部分用省略号代替*/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;👆单行👇多行 &lt;code&gt;-webkit-line-clamp: 2;&lt;/code&gt;切换行数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  white-space: pre-wrap;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;去除input边框&lt;br&gt;
 &lt;code&gt;&amp;lt;input type=&amp;quot;text&amp;quot; &amp;gt;&lt;/code&gt;&lt;/p&gt;

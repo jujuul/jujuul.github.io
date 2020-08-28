@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>仿网易云demo—day1 | Mark</title>
+<title>vue中使用moment.js格式化时间戳 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598590199419">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="仿网易云demo—day1" />
+  <meta name="description" content="vue中使用moment.js格式化时间戳" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,196 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +467,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">
-      仿网易云demo—day1
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
+      vue中使用moment.js格式化时间戳
     </a>
   </h1>
   <div class="post-meta">
@@ -285,37 +476,70 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-20 10:28:45">2020-08-20</span>
+      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>349<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>575<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>一直想找个vue项目做，不知道做什么好，在B站知乎看到了同一条推送，做的网易云音乐，我之前也有做网易云音乐的打算，但是苦于没有后端数据，看了推送的项目发现原来有开源的api接口，赞美互联网。</p>
-<!-- more -->
-<p>github：https://github.com/Binaryify/NeteaseCloudMusicApi<br>
-<img src="https://jujuul.github.io//post-images/1597890809917.PNG" alt="" loading="lazy"><br>
-一共一百多条，应该是涵盖了所有功能，话不多说，开搞。<br>
-如何使用我就不赘述了，这个链接里都有https://www.jianshu.com/p/a375dd77b502<br>
-<img src="https://jujuul.github.io//post-images/1597890883922.PNG" alt="" loading="lazy"><br>
-可以看到已经跑起来了<br>
-接下来就是考虑做网易云音乐程序页面还是网页端页面了，虽然我更喜欢程序的页面，不过为了不跟视频冲突，还是决定做网页端了。<br>
-接下来是划分页面功能，我借鉴的例子是这样组装页面的<img src="https://jujuul.github.io//post-images/1597892249770.PNG" alt="" loading="lazy"><br>
-考虑到这个项目可能还要做线上展示，所以还是打算放到服务器上了，刚好之前申请的域名也下来了，直接通过域名调用接口吧(话说也是够倒霉的，遇上阿里云升级，之前做的仿美团项目都已经忘了怎么做了快)<br>
-在项目的根目录新建一个vue.config.js的文件，然后配置proxy代理<br>
-<img src="https://jujuul.github.io//post-images/1597910160351.PNG" alt="" loading="lazy"><br>
-接着在需要请求的页面发起axios请求<img src="https://jujuul.github.io//post-images/1597910235597.PNG" alt="" loading="lazy"></p>
+              <p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
+<h2 id="安装">安装</h2>
+<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
+<h2 id="引入">引入</h2>
+<p>在main中全局引入，并且定义全局的时间过滤器</p>
+<pre><code>// 定义全局时间戳过滤器
+Vue.filter(&quot;formatDate&quot;, function(value) {
+  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
+});
+</code></pre>
+<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
+日期格式化</p>
+<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
+moment().format('dddd');                    // 星期二
+moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
+moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
+moment().format();                          // 2019-04-16T12:24:48+08:00
+</code></pre>
+<p>相对时间</p>
+<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
+moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
+moment().startOf('day').fromNow();        // 12 小时前
+moment().endOf('day').fromNow();          // 12 小时内
+moment().startOf('hour').fromNow();       // 28 分钟前
+</code></pre>
+<p>日历时间</p>
+<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
+moment().subtract(6, 'days').calendar();  // 上周三中午12点28
+moment().subtract(3, 'days').calendar();  // 上周六中午12点28
+moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
+moment().calendar();                      // 今天中午12点28分
+moment().add(1, 'days').calendar();       // 明天中午12点28分
+moment().add(3, 'days').calendar();       // 本周五中午12点28
+moment().add(10, 'days').calendar();      // 2019年4月26日
+</code></pre>
+<p>多语言支持</p>
+<pre><code>moment().format('L');    // 2019-04-16
+moment().format('l');    // 2019-04-16
+moment().format('LL');   // 2019年4月16日
+moment().format('ll');   // 2019年4月16日
+moment().format('LLL');  // 2019年4月16日中午12点28分
+moment().format('lll');  // 2019年4月16日中午12点28分
+moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
+moment().format('llll'); // 2019年4月16日星期二中午12点28分
+</code></pre>
+<p>文档地址：http://momentjs.cn/<br>
+不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
 
             </div>
             
@@ -328,7 +552,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/" title="仿网易云demo—day1">https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/</a>
+      <a href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" title="vue中使用moment.js格式化时间戳">https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -341,15 +565,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—快应用" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/">每天一个名词解释—快应用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—快应用" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="HTTP缓存" href="https://jujuul.github.io/post/http-huan-cun/">HTTP缓存</a>
-        <a class="nav-mobile-next" title="HTTP缓存" href="https://jujuul.github.io/post/http-huan-cun/">下一篇</a>
+        <a class="nav-pc-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">仿网易云demo—day4</a>
+        <a class="nav-mobile-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
