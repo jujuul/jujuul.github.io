@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vuetify学习记录 | Mark</title>
+<title>视频播放器插件的使用 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598851447064">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vuetify学习记录" />
+  <meta name="description" content="视频播放器插件的使用" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,203 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8">在项目中使用</a>
+<ul>
+<li><a href="#html%E9%83%A8%E5%88%86">HTML部分</a></li>
+<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%A7%86%E9%A2%91%E6%96%B9%E6%B3%95">初始化视频方法</a></li>
+<li><a href="#%E5%9C%A8%E6%8C%82%E8%BD%BD%E9%92%A9%E5%AD%90%E5%86%85%E6%89%A7%E8%A1%8C">在挂载钩子内执行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +474,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-      vuetify学习记录
+    <a class="post-title-link" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">
+      视频播放器插件的使用
     </a>
   </h1>
   <div class="post-meta">
@@ -285,32 +483,68 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 23:32:17">2020-08-08</span>
+      <span class="publish-time" data-t="2020-08-29 10:44:20">2020-08-29</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>160<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>428<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。</p>
-<p>在vue项目中安装<br>
-<code>vue add vuetify</code><br>
-查看package.json发现已经安装完成<br>
-<img src="https://jujuul.github.io//post-images/1597203946038.PNG" alt="" loading="lazy"><br>
-可以使用Vuetify的预置布局完成页面的基础布局<br>
-<img src="https://jujuul.github.io//post-images/1597211156600.PNG" alt="" loading="lazy"><br>
-除此以外，还提供了从简单到复杂的8种布局方式。<br>
-不过因为是学习，所以我打算自己组装一个页面的基本布局。</p>
+              <p>其实看的好几个demo都是用的原生的Video标签，但是我感觉不是很好看，就去网上找了几个，分别有vue-video和vue-video-player，还有个HTML5的video.js，vue-video已经三年多没更新了，所以直接pass，然后就是vue-video-player与video.js对比，原本我是打算使用vue-video-player的，毕竟github上3.3k的star数，但是发现使用过程中过于繁琐，而且样式也不是很好，声音没法做到改变大小，只能是开启或静音，这样还要额外写一个切换声音的功能，并且它的倍速播放功能也不是很有必要，而且我在github上看到它有29k的star，所以最后选择了video.js。</p>
+<h2 id="安装">安装</h2>
+<p><code>$ npm install video.js</code></p>
+<h2 id="引入">引入</h2>
+<pre><code>import Video from 'video.js' 
+import 'video.js/dist/video-js.css'
+
+Vue.prototype.$video = Video  //挂载到原型上
+</code></pre>
+<h2 id="在项目中使用">在项目中使用</h2>
+<h3 id="html部分">HTML部分</h3>
+<pre><code> &lt;video id=&quot;myVideo&quot; class=&quot;video-js&quot;&gt;
+      &lt;source
+        src=&quot;http://vodkgeyttp8.vod.126.net/cloudmusic/
+        5805/core/a70e/407418faf42d67b7f0a095fc137dbc
+        8e.mp4?wsSecret=49d2d403360b1ce82d0c12432a
+        4c395e&amp;wsTime=1598668903&quot;
+        type=&quot;video/mp4&quot;
+      /&gt;
+    &lt;/video&gt;
+</code></pre>
+<h3 id="初始化视频方法">初始化视频方法</h3>
+<pre><code>methods: {
+    initVideo() {
+      //初始化视频方法
+      let myPlayer = this.$video(myVideo, {
+        //确定播放器是否具有用户可以与之交互的控件。
+        //没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
+        controls: true,
+        //自动播放属性,muted:静音播放
+        autoplay: &quot;muted&quot;,
+        //建议浏览器是否应在&lt;video&gt;加载元素后立即开始下载视频数据。
+        preload: &quot;auto&quot;,
+        //设置视频播放器的显示宽度
+        width: &quot;800px&quot;,
+        //设置视频播放器的显示高度
+        height: &quot;400px&quot;,
+      });
+    },
+</code></pre>
+<h3 id="在挂载钩子内执行">在挂载钩子内执行</h3>
+<pre><code>mounted() { 
+        this.initVideo();
+    },
+</code></pre>
 
             </div>
             
@@ -323,7 +557,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/" title="vuetify学习记录">https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</a>
+      <a href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/" title="视频播放器插件的使用">https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -337,14 +571,14 @@
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">每天一个名词解释—nest.js</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">上一篇</a>
+        <a class="nav-pc-next" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">Vue同路由跳转传参</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">下一篇</a>
+        <a class="nav-pc-next" title="vue中使用moment.js格式化时间戳" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">vue中使用moment.js格式化时间戳</a>
+        <a class="nav-mobile-next" title="vue中使用moment.js格式化时间戳" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

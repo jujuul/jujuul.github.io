@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—Typescript | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598590199419">
+<link rel="shortcut icon" href="/favicon.ico?v=1598851447064">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">42</span>
+        <span class="site-item-stat-count">44</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1010,6 +1010,78 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/"" data-c="
+          &lt;p&gt;之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err =&amp;gt; err)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以用来屏蔽掉路由重复的报错，虽然报错没了，但是也没跳转啊，不是很明白这个的具体用处，我路由就是为了切换页面，同路径的传参路由就是为了切换数据，用这个虽然屏蔽了同页面路由的报错，但是也没能切换数据啊，意义不明。最后找到了3种方法，第一：使用watch监听路由变化，手动更新数据；第二：使用router-view；第三：使用provide-inject。最终选择了第一种watch监听。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;watch: {
+    $route(n, o) {
+      if (n.fullPath !== o.fullPath) {
+        //监听路由参数是否变化
+        location.reload(); //强制刷新页面
+      }
+    },
+  },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;一开始是监听到路由参数改变直接强制刷新页面，问题在于用户体验太差，后面改成了刷新各个函数的调用，这样就不会有屏幕刷新的问题，可惜事与愿违，video.js组件一个生命周期内只能被声明一次，所以最后还是只能强制刷新页面。&lt;/p&gt;
+">Vue同路由跳转传参</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/"" data-c="
+          &lt;p&gt;其实看的好几个demo都是用的原生的Video标签，但是我感觉不是很好看，就去网上找了几个，分别有vue-video和vue-video-player，还有个HTML5的video.js，vue-video已经三年多没更新了，所以直接pass，然后就是vue-video-player与video.js对比，原本我是打算使用vue-video-player的，毕竟github上3.3k的star数，但是发现使用过程中过于繁琐，而且样式也不是很好，声音没法做到改变大小，只能是开启或静音，这样还要额外写一个切换声音的功能，并且它的倍速播放功能也不是很有必要，而且我在github上看到它有29k的star，所以最后选择了video.js。&lt;/p&gt;
+&lt;h2 id=&#34;安装&#34;&gt;安装&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;$ npm install video.js&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;引入&#34;&gt;引入&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;import Video from &#39;video.js&#39; 
+import &#39;video.js/dist/video-js.css&#39;
+
+Vue.prototype.$video = Video  //挂载到原型上
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;在项目中使用&#34;&gt;在项目中使用&lt;/h2&gt;
+&lt;h3 id=&#34;html部分&#34;&gt;HTML部分&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt; &amp;lt;video id=&amp;quot;myVideo&amp;quot; class=&amp;quot;video-js&amp;quot;&amp;gt;
+      &amp;lt;source
+        src=&amp;quot;http://vodkgeyttp8.vod.126.net/cloudmusic/
+        5805/core/a70e/407418faf42d67b7f0a095fc137dbc
+        8e.mp4?wsSecret=49d2d403360b1ce82d0c12432a
+        4c395e&amp;amp;wsTime=1598668903&amp;quot;
+        type=&amp;quot;video/mp4&amp;quot;
+      /&amp;gt;
+    &amp;lt;/video&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;初始化视频方法&#34;&gt;初始化视频方法&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;methods: {
+    initVideo() {
+      //初始化视频方法
+      let myPlayer = this.$video(myVideo, {
+        //确定播放器是否具有用户可以与之交互的控件。
+        //没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
+        controls: true,
+        //自动播放属性,muted:静音播放
+        autoplay: &amp;quot;muted&amp;quot;,
+        //建议浏览器是否应在&amp;lt;video&amp;gt;加载元素后立即开始下载视频数据。
+        preload: &amp;quot;auto&amp;quot;,
+        //设置视频播放器的显示宽度
+        width: &amp;quot;800px&amp;quot;,
+        //设置视频播放器的显示高度
+        height: &amp;quot;400px&amp;quot;,
+      });
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;在挂载钩子内执行&#34;&gt;在挂载钩子内执行&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;mounted() { 
+        this.initVideo();
+    },
+&lt;/code&gt;&lt;/pre&gt;
+">视频播放器插件的使用</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/"" data-c="

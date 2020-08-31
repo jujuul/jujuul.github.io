@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vuetify学习记录 | Mark</title>
+<title>Vue同路由跳转传参 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1598851447064">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vuetify学习记录" />
+  <meta name="description" content="Vue同路由跳转传参" />
   <meta name="keywords" content="" />
 </head>
 
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">
-      vuetify学习记录
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
+      Vue同路由跳转传参
     </a>
   </h1>
   <div class="post-meta">
@@ -285,32 +285,40 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 23:32:17">2020-08-08</span>
+      <span class="publish-time" data-t="2020-08-31 11:02:39">2020-08-31</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>160<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>377<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>elementUI已经慢慢不再维护的今天，学习一个新的UI框架对我来说就尤为重要了，对比了下iview和vuetify的官方文档和npm上的周下载量以及迭代的版本与最近更新时间，最终还是选择先学习vuetify。</p>
-<p>在vue项目中安装<br>
-<code>vue add vuetify</code><br>
-查看package.json发现已经安装完成<br>
-<img src="https://jujuul.github.io//post-images/1597203946038.PNG" alt="" loading="lazy"><br>
-可以使用Vuetify的预置布局完成页面的基础布局<br>
-<img src="https://jujuul.github.io//post-images/1597211156600.PNG" alt="" loading="lazy"><br>
-除此以外，还提供了从简单到复杂的8种布局方式。<br>
-不过因为是学习，所以我打算自己组装一个页面的基本布局。</p>
+              <p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
+<pre><code>const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err =&gt; err)
+}
+</code></pre>
+<p>可以用来屏蔽掉路由重复的报错，虽然报错没了，但是也没跳转啊，不是很明白这个的具体用处，我路由就是为了切换页面，同路径的传参路由就是为了切换数据，用这个虽然屏蔽了同页面路由的报错，但是也没能切换数据啊，意义不明。最后找到了3种方法，第一：使用watch监听路由变化，手动更新数据；第二：使用router-view；第三：使用provide-inject。最终选择了第一种watch监听。</p>
+<pre><code>watch: {
+    $route(n, o) {
+      if (n.fullPath !== o.fullPath) {
+        //监听路由参数是否变化
+        location.reload(); //强制刷新页面
+      }
+    },
+  },
+</code></pre>
+<p>一开始是监听到路由参数改变直接强制刷新页面，问题在于用户体验太差，后面改成了刷新各个函数的调用，这样就不会有屏幕刷新的问题，可惜事与愿违，video.js组件一个生命周期内只能被声明一次，所以最后还是只能强制刷新页面。</p>
 
             </div>
             
@@ -323,7 +331,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/" title="vuetify学习记录">https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/</a>
+      <a href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/" title="Vue同路由跳转传参">https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -336,15 +344,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">每天一个名词解释—nest.js</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—nest.js" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nestjs/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">下一篇</a>
+        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a>
+        <a class="nav-mobile-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
