@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598851447064">
+<link rel="shortcut icon" href="/favicon.ico?v=1598958367475">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">44</span>
+        <span class="site-item-stat-count">45</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -196,6 +196,8 @@
   <div class="tag-cloud-list" id="tags">
     
       
+      
+        
       
         
       
@@ -372,6 +374,8 @@
         
       
         
+      
+        
           
         
       
@@ -428,6 +432,8 @@
       <a class="cloud-tag" href="https://jujuul.github.io/tag/cg2tXSp4Q/" rel="3">前端</a>
     
       
+      
+        
       
         
       
@@ -805,6 +811,35 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/"" data-c="
+          &lt;p&gt;今天写demo的搜索框，因为使用的是ElementUI的input组件，所以需要更改默认样式，但是直接在style内定义样式无效，需要使用样式穿透。&lt;br&gt;
+正常的样式穿透(stylus适用)：&amp;gt;&amp;gt;&amp;gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.search-wrap &amp;gt;&amp;gt;&amp;gt; .el-input__inner {
+  background: #a82828;
+  width: 220px;
+  height: 24px;
+  border-radius: 20px;
+  color: #c77373;
+  border: none;
+  margin-left: 20px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;sass/less中的样式穿透：/deep/&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.search-wrap /deep/ .el-input__inner {
+  background: #a82828;
+  width: 220px;
+  height: 24px;
+  border-radius: 20px;
+  color: #c77373;
+  border: none;
+  margin-left: 20px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为我的项目使用了less，所以使用第二种做样式穿透。&lt;/p&gt;
+">Vue样式穿透</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/"" data-c="
           &lt;p&gt;之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;const originalPush = Router.prototype.push
@@ -1019,6 +1054,11 @@ main.js中引入&lt;code&gt;import VueLazyload from &#39;vue-lazyload&#39;&lt;/c
 &lt;pre&gt;&lt;code&gt;white-space: nowrap;/*保证文本内容不会自动换行，如果多余的内容会在水平方向撑破单元格*/ 
 overflow: hidden; /*隐藏超出单元格的部分*/
 text-overflow: ellipsis; /*将被隐藏的那部分用省略号代替*/
+
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;👆单行👇多行 &lt;code&gt;-webkit-line-clamp: 2;&lt;/code&gt;切换行数&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;overflow: hidden;
