@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Uniapp学习记录day1 | Mark</title>
+<title>转载：首个 Vue 3 组件库发布 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599028016492">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Uniapp学习记录day1" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="转载：首个 Vue 3 组件库发布" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,206 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%BC%BA%E5%A4%A7%E9%98%B5%E5%AE%B9%E5%92%8C%E8%83%8C%E6%99%AF">强大阵容和背景</a></li>
+<li><a href="#%E6%94%AF%E6%8C%81-vite-typescript%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C%E6%AF%94%E5%BE%B7%E8%8A%99%E8%BF%98%E8%A6%81%E4%B8%9D%E6%BB%91">支持 Vite &amp; TypeScript，开发体验比德芙还要丝滑</a></li>
+<li><a href="#%E6%9B%B4%E5%8A%A0%E6%98%93%E7%94%A8">更加易用</a></li>
+<li><a href="#%E7%A0%B4%E5%9D%8F%E6%80%A7%E6%9B%B4%E6%96%B0">破坏性更新</a></li>
+<li><a href="#20-%E4%B8%BB%E8%A6%81%E5%8F%98%E5%8C%96">2.0 主要变化</a>
+<ul>
+<li><a href="#%E8%AE%BE%E8%AE%A1%E8%A7%84%E8%8C%83%E8%B0%83%E6%95%B4">设计规范调整</a></li>
+<li><a href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E8%B0%83%E6%95%B4">兼容性调整</a></li>
+<li><a href="#%E8%B0%83%E6%95%B4%E7%9A%84-api">调整的 API</a></li>
+<li><a href="#%E5%9B%BE%E6%A0%87%E5%8D%87%E7%BA%A7">图标升级</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +477,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">
-      Uniapp学习记录day1
+    <a class="post-title-link" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/">
+      转载：首个 Vue 3 组件库发布
     </a>
   </h1>
   <div class="post-meta">
@@ -285,54 +486,115 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-05 14:31:51">2020-08-05</span>
+      <span class="publish-time" data-t="2020-09-02 14:21:43">2020-09-02</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-        <span>uniapp</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>7<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>401<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1547<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>uniapp生成小程序遇到的坑<br>
-1.小程序内不能用id选择器<br>
-2.小程序的声明周期函数不能用在子组件里，要用在父组件<br>
-3.小程序没有window对象,没有document对象等等……<br>
-4.uniapp没有vue原生的router路由，而是使用uni路由，较VUE更为方便</p>
-<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1596643726837.PNG" alt="" loading="lazy"></figure>
-<p>学到的知识：<br>
-在pages.json中可以对全局进行配置，有关页面的路径、窗口样式、导航栏、底部tabbar等都在这里。<br>
-全局配置与单页配置要自己取舍。<br>
-每个对象内的最后一项都没有逗号<br>
-像素单位是upx，可以设置upx与px的比值来进行转换，不过我看网上都推荐使用 rpx。<br>
-显示文字使用<text></text>标签<br>
-显示图片使用<image></image>标签<br>
-<view></view>用来取代div标签<br>
-<block></block>标签很好用，很多for循环都写在block标签内<br>
-其余的都和vue差不多，用了两个vue没有的声明周期onload和onshow，好像是微信小程序的生命周期。</p>
-<p>一开始一直报错没有appid，登陆了微信的开发者平台复制了appid，结果还是不行，检查发现是复制了公众号的appid，又赶紧注册了小程序，网上例子的后端接口好像不开放，有必要自己写一个，顺便复习下nodejs和koa2，或者express也行。</p>
-<p>总体而言，第一天的uniapp体验还不错，主要是语法基本都是vue的，难点在于各个组件，属性一大推，而且感觉说明不是很好，阅读起来很累。</p>
+              <h2 id="强大阵容和背景">强大阵容和背景</h2>
+<p>· 联合 vuejs member、antd member、社区大佬，共同打造<br>
+· 阿里巴巴、蚂蚁金服倾力支持<br>
+· nuxtjs 官方示例组件库<br>
+· 万星 Github 项目，欢迎 Star<br>
+· 没错，就是 Ant Design Vue 2.0</p>
+<h2 id="支持-vite-typescript开发体验比德芙还要丝滑">支持 Vite &amp; TypeScript，开发体验比德芙还要丝滑</h2>
+<p>不对 Vite 做过多评价和解析了，总之这玩意真的有点吊，丝滑的程度不是抹点油就能达到的级别，研发提效nn%不是梦。</p>
+<h2 id="更加易用">更加易用</h2>
+<p>一直被吐槽，很少做改变，不得不说，我们一直站在自己的角度去思考，去设计 API，总认为我们提供的就是最好的。<br>
+在重构 2.0 的时候，我们深刻的反思这个问题，我们期望给大家带来更加易用的组件库，将组件库当作一个真正的产品去打磨，而不是去秀技术。降低心智成本，快速开发项目，将作为接下来产品打磨的主要原则。<br>
+同样对于文档使用手册也将作为接下来的主要发力点，目前已经做了一部分的优化。<br>
+你不用再考虑 defaultValue、value 的区别；<br>
+也不用在去学习 v-decorator 是个啥；<br>
+也不用去学习 JSX；<br>
+......</p>
+<h2 id="破坏性更新">破坏性更新</h2>
+<p>很遗憾的是，在更加易用的同时，2.0 会有少许破坏性更新，一个原因是历史包袱问题，另一个原因是 Vue3 的改动调整。<br>
+历史包袱：<br>
+1、1.x 版本的作用域插槽参数是支持多参数的，因为在模板语法中是无法支持多参数的，Vue 最开始也并没有想到会有多参数的场景，因为组件库的底层是使用的render函数，是可以使用多参数的，所以在1.x版本就支持了多参数，但是对于模版开发中，多参数就会变得不是很友好。<br>
+2、1.x 版本的一共提供了两个表单组件(Form、FormModel)，对于 Form 我们参考了 React 版本的表单实现方式，是通过上下文进行强制刷新，在 Vue 3 中如果还是这种方式，将无法享受到 patchFlag 带来的性能优化，而且它也带来了一定的心智成本，所以在 2.0 中，我们将 Form、FormModel 进行了合并，将 Form 强大的功能，和 FormModel 易用的特征结合，形成了新版的 Form。<br>
+Vue 3 的改动：<br>
+1、双向绑定 v-model 和 .sync 合并<br>
+2、组件参数扁平化，如<code>{ props: {type: 'xxx'}</code>, on:<code>{click: this.handleClick}}</code>改成<code>{ type: 'xxx', onClick: this.handleClick }</code> 这个涉及组件并不多，改动成本并不大，详细可见下方说明。</p>
+<h2 id="20-主要变化">2.0 主要变化</h2>
+<h3 id="设计规范调整">设计规范调整</h3>
+<p>· 行高从 1.5(21px) 调整为 1.5715(22px)。<br>
+· 基础圆角调整，由4px 改为 2px。<br>
+· 分割线颜色明度降低，由 #E8E8E8 改为 #F0F0F0。<br>
+· Table 默认背景颜色从透明修改为白色。</p>
+<h3 id="兼容性调整">兼容性调整</h3>
+<p>· IE 最低支持版本为 IE 11。<br>
+· Vue 最低支持版本为 Vue 3.0。</p>
+<h3 id="调整的-api">调整的 API</h3>
+<p>移除了 LocaleProvider，请使用 ConfigProvider 替代。<br>
+移除了 Tag 的 afterClose 属性。<br>
+合并了 FormModel、Form，详见下方的 Form 重构部分。<br>
+tabIndex、maxLength、readOnly、autoComplete、autoFocus 更改为全小写。<br>
+为了在 template 语法中更友好的使用插槽，所有涉及到 xxxRender, renderXxxx 的均改成单参数，涉及到 itemRender、renderItem、customRender、dropdownRender、dateCellRender、dateFullCellRender、monthCellRender、monthFullCellRender、renderTabBar。<br>
+所有配置 scopedSlots 的地方统一改成 slots。<br>
+<code>{ on, props, attrs, ... }</code>配置进行扁平化处理，如<code>{ props: {type: 'xxx'}</code>, on: <code>{click: this.handleClick}}</code>改成<code>{ type: 'xxx', onClick: this.handleClick }</code>, 涉及相关字段：okButtonProps、cancelButtonProps。<br>
+xxx.sync 改成 v-model:xxx<br>
+v-model 更改成 v-model:xxx，具体涉及组件：<br>
+v-model 改成 v-model:checked 的组件有: CheckableTag、Checkbox、Switch<br>
+v-model 改成 v-model:value 的组件有: Radio、Mentions、CheckboxGroup、Rate、DatePicker<br>
+v-model 改成 v-model:visible 的组件有: Tag、Popconfirm、Popove、Tooltip、Moda、Dropdown<br>
+v-model 改成 v-model:activeKey 的组件有: Collaps、Tabs<br>
+v-model 改成 v-model:current 的组件有: Steps<br>
+v-model 改成 v-model:selectedKeys 的组件有: Menu</p>
+<h3 id="图标升级">图标升级</h3>
+<p>在 ant-design-vue@1.2.0 中，我们引入了 svg 图标（为何使用 svg 图标？）。使用了字符串命名的图标 API 无法做到按需加载，因而全量引入了 svg 图标文件，这大大增加了打包产物的尺寸。在 2.0 中，我们调整了图标的使用 API 从而支持 tree shaking，减少默认包体积约 150 KB(Gzipped)。<br>
+旧版 Icon 使用方式将被废弃：</p>
+<p><code>&lt;a-icon type=&quot;smile&quot; /&gt; &lt;a-button icon=&quot;smile&quot; /&gt;</code></p>
+<p>2.0 中会采用按需引入的方式：</p>
+<pre><code>&lt;template&gt;
+  &lt;smile-outlined /&gt;
+  &lt;a-button&gt;
+    &lt;template v-slot:icon&gt;&lt;smile-outlined /&gt;&lt;/template&gt;
+  &lt;/a-button&gt;
+&lt;/template&gt;
+&lt;script&gt;
+import SmileOutlined from '@ant-design/icons/SmileOutlined';
+export default {
+  components: {
+    SmileOutlined
+  }
+}
+&lt;/script&gt;
+</code></pre>
+<p>组件重构<br>
+在 1.x 中我们提供了 Form、FormModel 两个表单组件，原有的 Form 组件使用 v-decorator 进行数据绑定，在 Vue2 中我们通过上下文进行强制更新组件，但是在 Vue3 中，由于引入 patchFlag 等优化方式，强制刷新会破坏 patchFlag 带来的性能优势。所以在 2.0 版本中我们将 Form、FormModel 进行合并，保留了 FormModel 的使用方式，丰富了相关功能，并改名成 Form。<br>
+涉及改动：<br>
+Form 新增 scrollToFirstError,name,validateTrigger 属性，新增 finish、finishFailed 事件，新增 scrollToField 方法。<br>
+Form.Item 新增 validateFirst, validateTrigger, 废弃 prop 属性，使用 name 替换。<br>
+嵌套字段路径使用数组，过去版本我们通过 . 代表嵌套路径（诸如 user.name 来代表<code>{ user: { name: '' } }）</code>。然而在一些后台系统中，变量名中也会带上 .。这造成用户需要额外的代码进行转化，因而新版中，嵌套路径通过数组来表示以避免错误的处理行为（如 ['user', 'name']）。<br>
+validateFields 不再支持 callback。validateFields 会返回 Promise 对象，因而你可以通过 async/await 或者 then/catch 来执行对应的错误处理。不再需要判断 errors 是否为空：</p>
+<pre><code>// v1
+validateFields((err, value) =&gt; {
+  if (!err) {
+    // Do something with value
+  }
+});
+</code></pre>
+<p>改成</p>
+<pre><code>// v2
+validateFields().then(values =&gt; {
+  // Do something with value
+});
+</code></pre>
+<p>作者：zeka<br>
+链接：https://juejin.im/post/6867515263672123399<br>
+来源：掘金</p>
 
             </div>
             
@@ -345,7 +607,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/" title="Uniapp学习记录day1">https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/</a>
+      <a href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/" title="转载：首个 Vue 3 组件库发布">https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -354,21 +616,15 @@
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/"># uniapp</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day2" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">Uniapp学习记录day2</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day2" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="学习目标" href="https://jujuul.github.io/post/xue-xi-mu-biao/">学习目标</a>
-        <a class="nav-mobile-next" title="学习目标" href="https://jujuul.github.io/post/xue-xi-mu-biao/">下一篇</a>
+        <a class="nav-pc-next" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">Vue样式穿透</a>
+        <a class="nav-mobile-next" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

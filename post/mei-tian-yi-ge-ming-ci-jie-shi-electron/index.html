@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—electron | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1598958367475">
+<link rel="shortcut icon" href="/favicon.ico?v=1599028016492">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">45</span>
+        <span class="site-item-stat-count">46</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1052,6 +1052,103 @@ app.on('activate', () =&gt; {
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/"" data-c="
+          &lt;h2 id=&#34;强大阵容和背景&#34;&gt;强大阵容和背景&lt;/h2&gt;
+&lt;p&gt;· 联合 vuejs member、antd member、社区大佬，共同打造&lt;br&gt;
+· 阿里巴巴、蚂蚁金服倾力支持&lt;br&gt;
+· nuxtjs 官方示例组件库&lt;br&gt;
+· 万星 Github 项目，欢迎 Star&lt;br&gt;
+· 没错，就是 Ant Design Vue 2.0&lt;/p&gt;
+&lt;h2 id=&#34;支持-vite-typescript开发体验比德芙还要丝滑&#34;&gt;支持 Vite &amp;amp; TypeScript，开发体验比德芙还要丝滑&lt;/h2&gt;
+&lt;p&gt;不对 Vite 做过多评价和解析了，总之这玩意真的有点吊，丝滑的程度不是抹点油就能达到的级别，研发提效nn%不是梦。&lt;/p&gt;
+&lt;h2 id=&#34;更加易用&#34;&gt;更加易用&lt;/h2&gt;
+&lt;p&gt;一直被吐槽，很少做改变，不得不说，我们一直站在自己的角度去思考，去设计 API，总认为我们提供的就是最好的。&lt;br&gt;
+在重构 2.0 的时候，我们深刻的反思这个问题，我们期望给大家带来更加易用的组件库，将组件库当作一个真正的产品去打磨，而不是去秀技术。降低心智成本，快速开发项目，将作为接下来产品打磨的主要原则。&lt;br&gt;
+同样对于文档使用手册也将作为接下来的主要发力点，目前已经做了一部分的优化。&lt;br&gt;
+你不用再考虑 defaultValue、value 的区别；&lt;br&gt;
+也不用在去学习 v-decorator 是个啥；&lt;br&gt;
+也不用去学习 JSX；&lt;br&gt;
+......&lt;/p&gt;
+&lt;h2 id=&#34;破坏性更新&#34;&gt;破坏性更新&lt;/h2&gt;
+&lt;p&gt;很遗憾的是，在更加易用的同时，2.0 会有少许破坏性更新，一个原因是历史包袱问题，另一个原因是 Vue3 的改动调整。&lt;br&gt;
+历史包袱：&lt;br&gt;
+1、1.x 版本的作用域插槽参数是支持多参数的，因为在模板语法中是无法支持多参数的，Vue 最开始也并没有想到会有多参数的场景，因为组件库的底层是使用的render函数，是可以使用多参数的，所以在1.x版本就支持了多参数，但是对于模版开发中，多参数就会变得不是很友好。&lt;br&gt;
+2、1.x 版本的一共提供了两个表单组件(Form、FormModel)，对于 Form 我们参考了 React 版本的表单实现方式，是通过上下文进行强制刷新，在 Vue 3 中如果还是这种方式，将无法享受到 patchFlag 带来的性能优化，而且它也带来了一定的心智成本，所以在 2.0 中，我们将 Form、FormModel 进行了合并，将 Form 强大的功能，和 FormModel 易用的特征结合，形成了新版的 Form。&lt;br&gt;
+Vue 3 的改动：&lt;br&gt;
+1、双向绑定 v-model 和 .sync 合并&lt;br&gt;
+2、组件参数扁平化，如&lt;code&gt;{ props: {type: &#39;xxx&#39;}&lt;/code&gt;, on:&lt;code&gt;{click: this.handleClick}}&lt;/code&gt;改成&lt;code&gt;{ type: &#39;xxx&#39;, onClick: this.handleClick }&lt;/code&gt; 这个涉及组件并不多，改动成本并不大，详细可见下方说明。&lt;/p&gt;
+&lt;h2 id=&#34;20-主要变化&#34;&gt;2.0 主要变化&lt;/h2&gt;
+&lt;h3 id=&#34;设计规范调整&#34;&gt;设计规范调整&lt;/h3&gt;
+&lt;p&gt;· 行高从 1.5(21px) 调整为 1.5715(22px)。&lt;br&gt;
+· 基础圆角调整，由4px 改为 2px。&lt;br&gt;
+· 分割线颜色明度降低，由 #E8E8E8 改为 #F0F0F0。&lt;br&gt;
+· Table 默认背景颜色从透明修改为白色。&lt;/p&gt;
+&lt;h3 id=&#34;兼容性调整&#34;&gt;兼容性调整&lt;/h3&gt;
+&lt;p&gt;· IE 最低支持版本为 IE 11。&lt;br&gt;
+· Vue 最低支持版本为 Vue 3.0。&lt;/p&gt;
+&lt;h3 id=&#34;调整的-api&#34;&gt;调整的 API&lt;/h3&gt;
+&lt;p&gt;移除了 LocaleProvider，请使用 ConfigProvider 替代。&lt;br&gt;
+移除了 Tag 的 afterClose 属性。&lt;br&gt;
+合并了 FormModel、Form，详见下方的 Form 重构部分。&lt;br&gt;
+tabIndex、maxLength、readOnly、autoComplete、autoFocus 更改为全小写。&lt;br&gt;
+为了在 template 语法中更友好的使用插槽，所有涉及到 xxxRender, renderXxxx 的均改成单参数，涉及到 itemRender、renderItem、customRender、dropdownRender、dateCellRender、dateFullCellRender、monthCellRender、monthFullCellRender、renderTabBar。&lt;br&gt;
+所有配置 scopedSlots 的地方统一改成 slots。&lt;br&gt;
+&lt;code&gt;{ on, props, attrs, ... }&lt;/code&gt;配置进行扁平化处理，如&lt;code&gt;{ props: {type: &#39;xxx&#39;}&lt;/code&gt;, on: &lt;code&gt;{click: this.handleClick}}&lt;/code&gt;改成&lt;code&gt;{ type: &#39;xxx&#39;, onClick: this.handleClick }&lt;/code&gt;, 涉及相关字段：okButtonProps、cancelButtonProps。&lt;br&gt;
+xxx.sync 改成 v-model:xxx&lt;br&gt;
+v-model 更改成 v-model:xxx，具体涉及组件：&lt;br&gt;
+v-model 改成 v-model:checked 的组件有: CheckableTag、Checkbox、Switch&lt;br&gt;
+v-model 改成 v-model:value 的组件有: Radio、Mentions、CheckboxGroup、Rate、DatePicker&lt;br&gt;
+v-model 改成 v-model:visible 的组件有: Tag、Popconfirm、Popove、Tooltip、Moda、Dropdown&lt;br&gt;
+v-model 改成 v-model:activeKey 的组件有: Collaps、Tabs&lt;br&gt;
+v-model 改成 v-model:current 的组件有: Steps&lt;br&gt;
+v-model 改成 v-model:selectedKeys 的组件有: Menu&lt;/p&gt;
+&lt;h3 id=&#34;图标升级&#34;&gt;图标升级&lt;/h3&gt;
+&lt;p&gt;在 ant-design-vue@1.2.0 中，我们引入了 svg 图标（为何使用 svg 图标？）。使用了字符串命名的图标 API 无法做到按需加载，因而全量引入了 svg 图标文件，这大大增加了打包产物的尺寸。在 2.0 中，我们调整了图标的使用 API 从而支持 tree shaking，减少默认包体积约 150 KB(Gzipped)。&lt;br&gt;
+旧版 Icon 使用方式将被废弃：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;a-icon type=&amp;quot;smile&amp;quot; /&amp;gt; &amp;lt;a-button icon=&amp;quot;smile&amp;quot; /&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;2.0 中会采用按需引入的方式：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+  &amp;lt;smile-outlined /&amp;gt;
+  &amp;lt;a-button&amp;gt;
+    &amp;lt;template v-slot:icon&amp;gt;&amp;lt;smile-outlined /&amp;gt;&amp;lt;/template&amp;gt;
+  &amp;lt;/a-button&amp;gt;
+&amp;lt;/template&amp;gt;
+&amp;lt;script&amp;gt;
+import SmileOutlined from &#39;@ant-design/icons/SmileOutlined&#39;;
+export default {
+  components: {
+    SmileOutlined
+  }
+}
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;组件重构&lt;br&gt;
+在 1.x 中我们提供了 Form、FormModel 两个表单组件，原有的 Form 组件使用 v-decorator 进行数据绑定，在 Vue2 中我们通过上下文进行强制更新组件，但是在 Vue3 中，由于引入 patchFlag 等优化方式，强制刷新会破坏 patchFlag 带来的性能优势。所以在 2.0 版本中我们将 Form、FormModel 进行合并，保留了 FormModel 的使用方式，丰富了相关功能，并改名成 Form。&lt;br&gt;
+涉及改动：&lt;br&gt;
+Form 新增 scrollToFirstError,name,validateTrigger 属性，新增 finish、finishFailed 事件，新增 scrollToField 方法。&lt;br&gt;
+Form.Item 新增 validateFirst, validateTrigger, 废弃 prop 属性，使用 name 替换。&lt;br&gt;
+嵌套字段路径使用数组，过去版本我们通过 . 代表嵌套路径（诸如 user.name 来代表&lt;code&gt;{ user: { name: &#39;&#39; } }）&lt;/code&gt;。然而在一些后台系统中，变量名中也会带上 .。这造成用户需要额外的代码进行转化，因而新版中，嵌套路径通过数组来表示以避免错误的处理行为（如 [&#39;user&#39;, &#39;name&#39;]）。&lt;br&gt;
+validateFields 不再支持 callback。validateFields 会返回 Promise 对象，因而你可以通过 async/await 或者 then/catch 来执行对应的错误处理。不再需要判断 errors 是否为空：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// v1
+validateFields((err, value) =&amp;gt; {
+  if (!err) {
+    // Do something with value
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;改成&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// v2
+validateFields().then(values =&amp;gt; {
+  // Do something with value
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;作者：zeka&lt;br&gt;
+链接：https://juejin.im/post/6867515263672123399&lt;br&gt;
+来源：掘金&lt;/p&gt;
+">转载：首个 Vue 3 组件库发布</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/"" data-c="
