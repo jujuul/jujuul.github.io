@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Uniapp学习记录day4 | Mark</title>
+<title>搜索组件 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599038673186">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Uniapp学习记录day4" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="搜索组件" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/1/">
-      Uniapp学习记录day4
+    <a class="post-title-link" href="https://jujuul.github.io/post/sou-suo-zu-jian/">
+      搜索组件
     </a>
   </h1>
   <div class="post-meta">
@@ -285,45 +285,76 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 15:48:35">2020-08-08</span>
+      <span class="publish-time" data-t="2020-09-02 16:45:32">2020-09-02</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-        <span>uniapp</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>86<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>683<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天的主要内容应该还是koa和数据库</p>
-<p>Robo 3T 和 Compass删除对比<br>
-<img src="https://jujuul.github.io//post-images/1596876580748.PNG" alt="" loading="lazy"><br>
-<img src="https://jujuul.github.io//post-images/1596876584566.PNG" alt="" loading="lazy"><br>
-都需要额外的一步</p>
-<p>koa返回状态码：ctx.status<br>
-状态码大全：http://tools.jb51.net/table/http_status_code</p>
-<p>记一个坑：<br>
-通过中间件来捕获全局异常时，要把中间件放在use的最前面,不然就会出错。</p>
+              <p>做到了搜索功能，因为之前没做过，在这里卡了一下，所以记录一下。<br>
+一开始是打算做成网易云的样式的，就是input聚焦以后弹出弹出层，然后里面列出推荐关键词，如果有历史搜索记录也列出来，但是这样效果很平常，所以就换了一个样式，换成点击搜索图标，整个页面模糊，弹出层内显示一个搜索框，下面列出推荐关键词。<br>
+先是实现背景模糊</p>
+<pre><code>.cover {
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: default;
+  z-index: 9;
+}
+</code></pre>
+<p>这里不知道为什么，整个背景的cursor都是Pointer，所以后面为了显示的效果，我将在其之上的search部分的curcor都设置为了default。使用backdrop-filter属性让它呈现模糊的效果，fixed是为了定位它的位置，因为是要显示在上面的，所以把它的层级提高了。</p>
+<pre><code>.top::after {
+      content: &quot;&quot;;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url(&quot;https://163musicloud.oss-cn-beijing.aliyuncs.com/backImage.jpg&quot;);
+      background-position: center;
+      filter: blur(10px);
+      z-index: -1;
+    }
+</code></pre>
+<p>这里是为了达到搜索框背景部分模糊的效果，借鉴了《css揭秘》这本书中对于毛玻璃的用法，filter与backdrop-filter的区别在于backdrop-filte可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）。 因为它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。而filter是出现毛玻璃效果，内容和背景都会模糊，为了不遮挡搜索框，所以这里的z-index层级需设置为负数。<br>
+👆为css部分<br>
+👇为js部分<br>
+因为要实现点击除弹出层外任意位置关闭弹出层的效果，所以这里要用到event，而vue中使用event就需要使用$event，在文档的事件处理那一节也有写。<br>
+在要触发事件的那一层添加点击事件</p>
+<pre><code>&lt;div class=&quot;cover&quot; v-show=&quot;isShow&quot; @click=&quot;closeMsg($event)&quot;&gt;
+</code></pre>
+<pre><code>closeMsg(event) {
+      let btn = document.querySelector(&quot;.search&quot;);
+      if (btn) {
+        if (!btn.contains(event.target)) {
+          this.isShow = false;
+        }
+      }
+    },
+</code></pre>
+<p>在事件里对它进行判断。<br>
+这里之所以被卡了很久就是因为不知道$event，之前竟然没有用到过，看文档的时候也不够仔细。<br>
+它的使用还有两个要注意的点<br>
+注意两点<br>
+1.不使用圆括号，event被自动当作实参传入<br>
+2.使用圆括号，必须显式的传入event对象，如果不传入可能最终找到的是全局的window .event<br>
+最后贴一下效果图<br>
+<img src="https://jujuul.github.io//post-images/1599038569224.PNG" alt="" loading="lazy"></p>
 
             </div>
             
@@ -336,7 +367,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/1/" title="Uniapp学习记录day4">https://jujuul.github.io/post/1/</a>
+      <a href="https://jujuul.github.io/post/sou-suo-zu-jian/" title="搜索组件">https://jujuul.github.io/post/sou-suo-zu-jian/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -345,21 +376,15 @@
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/"># uniapp</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="vuetify学习记录" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">vuetify学习记录</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="vuetify学习记录" href="https://jujuul.github.io/post/vuetify-xue-xi-ji-lu/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="防抖和节流" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">防抖和节流</a>
-        <a class="nav-mobile-next" title="防抖和节流" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">下一篇</a>
+        <a class="nav-pc-next" title="转载：首个 Vue 3 组件库发布" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/">转载：首个 Vue 3 组件库发布</a>
+        <a class="nav-mobile-next" title="转载：首个 Vue 3 组件库发布" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

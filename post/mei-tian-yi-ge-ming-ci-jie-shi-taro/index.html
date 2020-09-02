@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—Taro | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1599028016492">
+<link rel="shortcut icon" href="/favicon.ico?v=1599038673186">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">46</span>
+        <span class="site-item-stat-count">47</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -807,6 +807,64 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/sou-suo-zu-jian/"" data-c="
+          &lt;p&gt;做到了搜索功能，因为之前没做过，在这里卡了一下，所以记录一下。&lt;br&gt;
+一开始是打算做成网易云的样式的，就是input聚焦以后弹出弹出层，然后里面列出推荐关键词，如果有历史搜索记录也列出来，但是这样效果很平常，所以就换了一个样式，换成点击搜索图标，整个页面模糊，弹出层内显示一个搜索框，下面列出推荐关键词。&lt;br&gt;
+先是实现背景模糊&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.cover {
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: default;
+  z-index: 9;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里不知道为什么，整个背景的cursor都是Pointer，所以后面为了显示的效果，我将在其之上的search部分的curcor都设置为了default。使用backdrop-filter属性让它呈现模糊的效果，fixed是为了定位它的位置，因为是要显示在上面的，所以把它的层级提高了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.top::after {
+      content: &amp;quot;&amp;quot;;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url(&amp;quot;https://163musicloud.oss-cn-beijing.aliyuncs.com/backImage.jpg&amp;quot;);
+      background-position: center;
+      filter: blur(10px);
+      z-index: -1;
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里是为了达到搜索框背景部分模糊的效果，借鉴了《css揭秘》这本书中对于毛玻璃的用法，filter与backdrop-filter的区别在于backdrop-filte可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）。 因为它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。而filter是出现毛玻璃效果，内容和背景都会模糊，为了不遮挡搜索框，所以这里的z-index层级需设置为负数。&lt;br&gt;
+👆为css部分&lt;br&gt;
+👇为js部分&lt;br&gt;
+因为要实现点击除弹出层外任意位置关闭弹出层的效果，所以这里要用到event，而vue中使用event就需要使用$event，在文档的事件处理那一节也有写。&lt;br&gt;
+在要触发事件的那一层添加点击事件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&amp;quot;cover&amp;quot; v-show=&amp;quot;isShow&amp;quot; @click=&amp;quot;closeMsg($event)&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;closeMsg(event) {
+      let btn = document.querySelector(&amp;quot;.search&amp;quot;);
+      if (btn) {
+        if (!btn.contains(event.target)) {
+          this.isShow = false;
+        }
+      }
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在事件里对它进行判断。&lt;br&gt;
+这里之所以被卡了很久就是因为不知道$event，之前竟然没有用到过，看文档的时候也不够仔细。&lt;br&gt;
+它的使用还有两个要注意的点&lt;br&gt;
+注意两点&lt;br&gt;
+1.不使用圆括号，event被自动当作实参传入&lt;br&gt;
+2.使用圆括号，必须显式的传入event对象，如果不传入可能最终找到的是全局的window .event&lt;br&gt;
+最后贴一下效果图&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1599038569224.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">搜索组件</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/"" data-c="
