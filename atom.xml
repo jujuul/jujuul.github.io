@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-02T09:25:04.490Z</updated>
+    <updated>2020-09-05T08:46:52.330Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,87 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[播放器进度条改进]]></title>
+        <id>https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/</id>
+        <link href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">
+        </link>
+        <updated>2020-09-05T08:16:30.000Z</updated>
+        <content type="html"><![CDATA[<p>因为不满意之前的进度条样式，所以决定更换进度条，在参考多个其他项目之后，我发现还是elementUI的进度条比较合适，所以就换成了elementUI的slider组件，因为组件默认的颜色是蓝色，所以这里使用样式穿透更改组件颜色以及组件的高度，宽度等显示效果。</p>
+<pre><code>.slider /deep/ .el-slider {
+  margin: 2px 4px;
+  .el-slider__runway {
+    height: 4px;
+    margin: 4px 0px;
+    // border: 1px solid red;
+    .el-slider__bar {
+      background: #fa2800;
+      height: 4px;
+    }
+    .el-slider__button-wrapper {
+      top: -7px;
+      height: 0;
+      .el-slider__button {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #fa2800;
+      }
+    }
+  }
+}
+</code></pre>
+<p>这样进度条就符合了我的要求，然后遇到了一个问题，因为使用的是elementUI的el-slider组件+我自己写的其他代码组合而成的Slider组件，这里就有着父子组件传值的问题，而$emit的方式还是会报错，或者我把props里面的value值赋给子组件定义的counter，然后给le-slider组件v-model绑定为counter，这样虽然不会报错但是会使父组件的监听播放时间改变进度条位置的效果无效，所以最后采取了对象的方式处理</p>
+<pre><code>return{
+    value: {},
+}
+</code></pre>
+<p>将要传给子组件的值设置为对象类型，然后在赋值的时候添加一个属性接收参数</p>
+<pre><code> this.value.data =
+        (this.$refs.audio.currentTime / this.$refs.audio.duration) * 100;
+</code></pre>
+<p>最后在传递的时候将整个对象传递过去</p>
+<pre><code>&lt;Slider
+      @showCurrent=&quot;changeCurrent&quot;
+      :value=&quot;value&quot;
+      :duration=&quot;duration&quot;
+      :songName=&quot;songName&quot;
+      :currentTime=&quot;currentTime&quot;
+    &gt;&lt;/Slider&gt;
+</code></pre>
+<p>然后在子组件赋值时采用对象属性的方式</p>
+<pre><code>&lt;el-slider @change=&quot;changCurrent&quot; :show-tooltip=&quot;false&quot; v-model=&quot;value.data&quot;&gt;&lt;/el-slider&gt;
+</code></pre>
+<p>在它绑定的change事件上绑定方法，通过$emit的方式提交给父组件，</p>
+<pre><code>changCurrent() {
+      this.$emit(&quot;showCurrent&quot;, this.value.data);
+    },
+</code></pre>
+<p>将值传递过去，父组件接收以后再更改自己的value.data的值，再传递给子组件，子组件再更改自己进度条滑块的位置，完成操作。</p>
+<pre><code>changeCurrent(data) {
+      this.$refs.audio.currentTime = (data / 100) * (this.duration / 1000);
+},
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[uniapp生态下的UI框架—uView]]></title>
+        <id>https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/</id>
+        <link href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/">
+        </link>
+        <updated>2020-09-04T06:56:59.000Z</updated>
+        <content type="html"><![CDATA[<p>项目名称：uView项目作者：亡灵叙曲开源许可协议：MIT项目地址：https://gitee.com/xuqu/uView项目简介uView UI，是 uni-app 生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。项目特性兼容安卓，iOS，微信小程序，H5，QQ小程序，百度小程序，支付宝小程序，头条小程序60+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用众多贴心的JS利器，让您飞镖在手，召之即来，百步穿杨众多的常用页面和布局，让您专注逻辑，事半功倍详尽的文档支持，现代化的演示效果按需引入，精简打包体积</p>
+<h2 id="项目截图">项目截图</h2>
+<p><img src="https://jujuul.github.io//post-images/1599202752683.jpg" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1599202765911.jpg" alt="" loading="lazy"></p>
+<h2 id="开发者说">开发者说</h2>
+<p>uView 的目标是做成 uniapp 生态的标杆，自由且免费开源。对此，uView 有清晰且明确的计划安排，uView 将会全面兼容 nvue，适配暗黑模式，整合unicloud，加入更多组件和模板等。但是，一个人的力量是不够的：为了开源，理想和自由，您可以加入 uView 的研发工作组，我们一起并肩奋战。如果您是做 UI 开发的同学，uView 同样欢迎，因为 uView 需要内外兼修。如果您是个积极活跃的人，那么也欢迎您加入 uView 的QQ群成为管理员。所有加入 uView 贡献的同学，都会在官网声明，并且有自己的个人专属页。</p>
+<p>作者：码云 Gitee<br>
+链接：https://zhuanlan.zhihu.com/p/215456248<br>
+来源：知乎<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>ps：我去官方文档看了下，组件功能很完善，文档也很详细，码云上才53(算上我)个star(不过码云上uniapp也才2.1K的star)，说到码云，最近知乎上看有几个大佬都在说码云，不知道是收了费还是单纯的觉得码云好用，就我个人而言，码云的使用体验还是不错的，毕竟访问速度上比github快多了，而且码云的开发者都是使用中文的，再配合在各个社区孜孜不倦的推荐开源项目的码云官方号，使用体验真的很好，就这10几天就看到了不少像是这个uView还有之前的一个chart组件一样的开源作品。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[搜索组件]]></title>
         <id>https://jujuul.github.io/post/sou-suo-zu-jian/</id>
@@ -478,135 +559,6 @@ text-overflow:ellipsis;
 <code>display:block</code><br>
 设置模糊<br>
 <code>filter: blur(16px);</code></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[仿网易云项目的播放器组件]]></title>
-        <id>https://jujuul.github.io/post/fang-wang-yi-yun-xiang-mu-de-bo-fang-qi-zu-jian/</id>
-        <link href="https://jujuul.github.io/post/fang-wang-yi-yun-xiang-mu-de-bo-fang-qi-zu-jian/">
-        </link>
-        <updated>2020-08-24T12:54:06.000Z</updated>
-        <content type="html"><![CDATA[<p>目前为止，这个项目中比较费时的就是播放器组件了，因为要尽量还原网易云的样式，所以不能使用HTML5的Audio的默认样式，需要自己写，这样的话就需要自己写播放/暂停按钮、上一首/下一首、显示歌曲总时长以及歌曲当前播放时长、歌曲播放进度条、声音大小进度条、播放模式等等功能，这里写篇文章记录一下，方便以后查找。</p>
-<p>controls ：用来控制Audio播放器的显示与隐藏<br>
-volume ：当前音量<br>
-currentTime ：以秒为单位返回播放时长<br>
-loop ：设置为循环播放或查询是否为循环播放<br>
-autoplay ：自动播放<br>
-autobuffer ：媒体文件播放前是否进行缓冲加载，如果设置了autoplay，则忽略此特性<br>
-duration ：获取媒体文件的播放时长，以秒为单位，如果无法获取，则为 NaN</p>
-<p>暂且先完成播放、暂停、总时长与播放时长、音量切换、进度切换功能</p>
-<p><code>&lt;audio ref=&quot;audio&quot; :src=&quot;songUrl&quot;&gt;&lt;/audio&gt;</code><br>
-通过ref获取audio<br>
-<code>&lt;div @click=&quot;play&quot; class=&quot;play-btn&quot;&gt; &lt;Icon v-show=&quot;playMusic&quot; size=&quot;28&quot; color=&quot;white&quot; type=&quot;ios-pause&quot; /&gt; &lt;Icon v-show=&quot;pauseMusic&quot; size=&quot;28&quot; color=&quot;white&quot; type=&quot;ios-play&quot; /&gt; &lt;/div&gt;</code>给播放/暂停按钮绑定事件<br>
-<code>isStore: &quot;false&quot;,</code>通过isStore判断播放与暂停状态</p>
-<pre><code class="language-play()">      if (this.isStore) {
-        this.$refs.audio.play();
-      } else {
-        this.$refs.audio.pause();
-      }
-      this.isStore = !this.isStore;
-      this.pauseMusic = !this.pauseMusic;
-      this.playMusic = !this.playMusic;
-    },
-</code></pre>
-<p>切换事件，其实命名为toogle更好<br>
-获取播放时长并转为 00 - 00 形式</p>
-<pre><code>durationTime() {
-      var minute = this.$refs.audio.duration / 60;
-      var minutes = parseInt(minute);
-      if (minutes &lt; 10) {
-        minutes = &quot;0&quot; + minutes;
-      }
-      var second = this.$refs.audio.duration % 60;
-      var seconds = Math.round(second);
-      if (seconds &lt; 10) {
-        seconds = &quot;0&quot; + seconds;
-      }
-      this.duration = `${parseInt(minute)}:${parseInt(second)}`;
-    },
-</code></pre>
-<p>获取当前播放时长 也转换为 00 - 00 形式</p>
-<pre><code>currendTime() {
-      var minute = this.$refs.audio.currentTime / 60;
-      var minutes = parseInt(minute);
-      if (minutes &lt; 10) {
-        minutes = &quot;0&quot; + minutes;
-      }
-      var second = this.$refs.audio.currentTime % 60;
-      var seconds = Math.round(second);
-      if (seconds &lt; 10) {
-        seconds = &quot;0&quot; + seconds;
-      }
-      this.current = `${minutes}:${seconds}`;
-    },
-</code></pre>
-<p>设置音量大小<br>
-<code>voiceDown: true, voiceUp: false,</code>通过这两个控制音量开关</p>
-<pre><code>&lt;Icon v-show=&quot;voiceDown&quot; @click=&quot;volumDown&quot; size=&quot;20&quot; type=&quot;md-volume-up&quot; /&gt;
-&lt;Icon v-show=&quot;voiceUp&quot; @click=&quot;volumUp&quot; size=&quot;20&quot; type=&quot;md-volume-off&quot; /&gt;
-</code></pre>
-<p>通过v-show来切换状态，添加点击事件</p>
-<pre><code>volumDown() {
-      this.lastVoice = this.$refs.audio.volume;
-      this.$refs.audio.volume = 0;
-      this.voiceDown = false;
-      this.voiceUp = true;
-      this.voiceLength = this.$refs.voiceOpt.style.width;
-      this.$refs.voiceOpt.style.width = 0;
-    },
-    volumUp() {
-      this.$refs.audio.volume = this.lastVoice;
-      this.$refs.voiceOpt.style.width = this.voiceLength;
-      this.voiceUp = false;
-      this.voiceDown = true;
-    },
-</code></pre>
-<p>两个点击事件分别控制状态的切换以及保存静音前音量控制条的进度</p>
-<pre><code>&lt;div @click=&quot;changeVoice&quot; class=&quot;voice-bbb&quot;&gt;
-        &lt;div class=&quot;voice-background&quot;&gt;
-          &lt;div ref=&quot;voiceOpt&quot; class=&quot;voice-front&quot; :style=&quot;{width: operatewidth + 'px'}&quot;&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-</code></pre>
-<p>再给最外层的div添加点击事件，因为内部第一层div用作背景，所以需要和进度条同高度，最内层div用于展示进度条，所以设置的比较细，如果在这一层加事件，则必须改变自身高度，不然点击较为不易。在最内层绑定了动态属性，用于通过点击事件控制div宽度，达到根据点击位置切换宽度的效果。</p>
-<pre><code>changeVoice(val) {
-      var length = val.clientX - this.$refs.voiceOpt.offsetLeft;
-      this.$refs.audio.volume = length / 130;
-      this.operatewidth = 130 - (130 - length);
-      console.log(this.$refs.audio.volume);
-      this.voiceUp = false;
-      this.voiceDown = true;
-    },
-</code></pre>
-<p>因为采用百分比无法计算，所以进度条采用固定宽度的方式，根据当前进度条和背景宽度的比值求出当前音量大小并赋给audio的volume属性，来达到控制音量的目的。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—Api]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dart/">
-        </link>
-        <updated>2020-08-24T10:43:42.000Z</updated>
-        <content type="html"><![CDATA[<p>都在说API，API到底是什么？对于很多非IT人士而言，API ≈ 听不懂。</p>
-<p>其实日常生活中，我们有很多类似API的场景，比如：<br>
-电脑需要调用手机里面的信息，这时候你会拿一根数据线将电脑手机连接起来，电脑和手机上连接数据线的接口就是传说中的API接口。<br>
-<img src="https://jujuul.github.io//post-images/1598266112897.jpg" alt="" loading="lazy"></p>
-<h3 id="但比喻到底是比喻并非本质-想要真正理解api还得老老实实去理解api的使用场景">但比喻到底是比喻，并非本质。想要真正理解API，还得老老实实去理解API的使用场景。</h3>
-<p>先来一段按惯例放上、但可跳过不看的百科介绍：<br>
-API，英文全称Application Programming Interface，翻译为“应用程序编程接口”。是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，或理解内部工作机制的细节。——百度百科<br>
-我们不妨把API的诞生过程用一个小故事展示出来：<br>
-研发人员A开发了软件A，研发人员B正在研发软件B。有一天，研发人员B想要调用软件A的部分功能来用，但是他又不想从头看一遍软件A的源码和功能实现过程，怎么办呢？研发人员A想了一个好主意：我把软件A里你需要的功能打包好，写成一个函数；你按照我说的流程，把这个函数放在软件B里，就能直接用我的功能了！其中，API就是研发人员A说的那个函数。<br>
-<img src="https://jujuul.github.io//post-images/1598266195467.jpg" alt="" loading="lazy"><br>
-那么API在实际工作中是如何使用的呢？这里借一下我们的客户案例（此处感谢国银通宝的大数据总监郑斌先生友情给我们提供素材）：<br>
-大家所在的企业应该用过一些办公软件，比如在国银通宝，他们的办公软件主要是用于管理仓库货物的ERP软件，但是这个ERP系统却不支持手机上报销。怎么办？了解的朋友知道，简道云是一个支持企业搭建个性化应用的平台，国银通宝可以在简道云上直接搭建一个报销管理系统。但总不可能报销系统在简道云上，货物管理在ERP系统上。此时API接口就派上了大用场，通过简道云开放的API接口，国银通宝把简道云和ERP系统对接起来。相当于国银通宝同时用了两个软件的功能，但数据又是彻底打通的。<br>
-<img src="https://jujuul.github.io//post-images/1598266222441.png" alt="" loading="lazy"><br>
-到这里，大家对API的含义应该有所了解，但对接API的过程对于非IT人员而言，却不是那么简单，因为其中涉及到服务器搭建等问题，所以一般我们都比较希望使用API的企业有信息部门。不过近期我们发现了一个国外软件zapier，通过这个整合Slack、Trello、Excel、Gmail等1000+知名软件的平台上，对接API的过程被极大程度地简化了。同样的例子，如果说API是电脑和手机上的接口，那么zapier就相当于一根标准的安卓数据线。<br>
-通过zapier可以将很多常见的软件对接起来，产生新的功能。如果你有一个开通了API接口的简道云账号，那么就能将简道云和slack、trello这些知名软件对接起来。比如以下就是一个将简道云和Gmail通过zapier对接的场景：<br>
-<img src="https://jujuul.github.io//post-images/1598266248380.jpg" alt="" loading="lazy"><br>
-原本的表单使用模式：用户打开外链，在表单中录入数据，提交完事。</p>
-<p>现在对接了Gmail功能：用户打开外链，在表单中录入数据和邮箱地址，提交后，自己邮箱将会收到一封邮件。（如上图）</p>
-<p>作者：简道云<br>
-链接：https://www.zhihu.com/question/38594466/answer/487039892</p>
 ]]></content>
     </entry>
 </feed>

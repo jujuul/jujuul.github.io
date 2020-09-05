@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1599038673186">
+<link rel="shortcut icon" href="/favicon.ico?v=1599295603150">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">47</span>
+        <span class="site-item-stat-count">49</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -198,6 +198,10 @@
           <small class="language" data-lan="tag">标签</small>
         </h2>
       </div>
+      
+      
+      
+      
       
       
       
@@ -537,6 +541,81 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/"" data-c="
+          &lt;p&gt;因为不满意之前的进度条样式，所以决定更换进度条，在参考多个其他项目之后，我发现还是elementUI的进度条比较合适，所以就换成了elementUI的slider组件，因为组件默认的颜色是蓝色，所以这里使用样式穿透更改组件颜色以及组件的高度，宽度等显示效果。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;.slider /deep/ .el-slider {
+  margin: 2px 4px;
+  .el-slider__runway {
+    height: 4px;
+    margin: 4px 0px;
+    // border: 1px solid red;
+    .el-slider__bar {
+      background: #fa2800;
+      height: 4px;
+    }
+    .el-slider__button-wrapper {
+      top: -7px;
+      height: 0;
+      .el-slider__button {
+        width: 12px;
+        height: 12px;
+        border: 2px solid #fa2800;
+      }
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样进度条就符合了我的要求，然后遇到了一个问题，因为使用的是elementUI的el-slider组件+我自己写的其他代码组合而成的Slider组件，这里就有着父子组件传值的问题，而$emit的方式还是会报错，或者我把props里面的value值赋给子组件定义的counter，然后给le-slider组件v-model绑定为counter，这样虽然不会报错但是会使父组件的监听播放时间改变进度条位置的效果无效，所以最后采取了对象的方式处理&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;return{
+    value: {},
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;将要传给子组件的值设置为对象类型，然后在赋值的时候添加一个属性接收参数&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; this.value.data =
+        (this.$refs.audio.currentTime / this.$refs.audio.duration) * 100;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后在传递的时候将整个对象传递过去&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Slider
+      @showCurrent=&amp;quot;changeCurrent&amp;quot;
+      :value=&amp;quot;value&amp;quot;
+      :duration=&amp;quot;duration&amp;quot;
+      :songName=&amp;quot;songName&amp;quot;
+      :currentTime=&amp;quot;currentTime&amp;quot;
+    &amp;gt;&amp;lt;/Slider&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后在子组件赋值时采用对象属性的方式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;el-slider @change=&amp;quot;changCurrent&amp;quot; :show-tooltip=&amp;quot;false&amp;quot; v-model=&amp;quot;value.data&amp;quot;&amp;gt;&amp;lt;/el-slider&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在它绑定的change事件上绑定方法，通过$emit的方式提交给父组件，&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;changCurrent() {
+      this.$emit(&amp;quot;showCurrent&amp;quot;, this.value.data);
+    },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;将值传递过去，父组件接收以后再更改自己的value.data的值，再传递给子组件，子组件再更改自己进度条滑块的位置，完成操作。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;changeCurrent(data) {
+      this.$refs.audio.currentTime = (data / 100) * (this.duration / 1000);
+},
+&lt;/code&gt;&lt;/pre&gt;
+">播放器进度条改进</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/"" data-c="
+          &lt;p&gt;项目名称：uView项目作者：亡灵叙曲开源许可协议：MIT项目地址：https://gitee.com/xuqu/uView项目简介uView UI，是 uni-app 生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。项目特性兼容安卓，iOS，微信小程序，H5，QQ小程序，百度小程序，支付宝小程序，头条小程序60+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用众多贴心的JS利器，让您飞镖在手，召之即来，百步穿杨众多的常用页面和布局，让您专注逻辑，事半功倍详尽的文档支持，现代化的演示效果按需引入，精简打包体积&lt;/p&gt;
+&lt;h2 id=&#34;项目截图&#34;&gt;项目截图&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1599202752683.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1599202765911.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;开发者说&#34;&gt;开发者说&lt;/h2&gt;
+&lt;p&gt;uView 的目标是做成 uniapp 生态的标杆，自由且免费开源。对此，uView 有清晰且明确的计划安排，uView 将会全面兼容 nvue，适配暗黑模式，整合unicloud，加入更多组件和模板等。但是，一个人的力量是不够的：为了开源，理想和自由，您可以加入 uView 的研发工作组，我们一起并肩奋战。如果您是做 UI 开发的同学，uView 同样欢迎，因为 uView 需要内外兼修。如果您是个积极活跃的人，那么也欢迎您加入 uView 的QQ群成为管理员。所有加入 uView 贡献的同学，都会在官网声明，并且有自己的个人专属页。&lt;/p&gt;
+&lt;p&gt;作者：码云 Gitee&lt;br&gt;
+链接：https://zhuanlan.zhihu.com/p/215456248&lt;br&gt;
+来源：知乎&lt;br&gt;
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。&lt;/p&gt;
+&lt;p&gt;ps：我去官方文档看了下，组件功能很完善，文档也很详细，码云上才53(算上我)个star(不过码云上uniapp也才2.1K的star)，说到码云，最近知乎上看有几个大佬都在说码云，不知道是收了费还是单纯的觉得码云好用，就我个人而言，码云的使用体验还是不错的，毕竟访问速度上比github快多了，而且码云的开发者都是使用中文的，再配合在各个社区孜孜不倦的推荐开源项目的码云官方号，使用体验真的很好，就这10几天就看到了不少像是这个uView还有之前的一个chart组件一样的开源作品。&lt;/p&gt;
+">uniapp生态下的UI框架—uView</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/sou-suo-zu-jian/"" data-c="

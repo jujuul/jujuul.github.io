@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>收藏的一些有用的网站 | Mark</title>
+<title>uniapp生态下的UI框架—uView | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599295603150">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="收藏的一些有用的网站" />
+  <meta name="description" content="uniapp生态下的UI框架—uView" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,196 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE">项目截图</a></li>
+<li><a href="#%E5%BC%80%E5%8F%91%E8%80%85%E8%AF%B4">开发者说</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +467,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">
-      收藏的一些有用的网站
+    <a class="post-title-link" href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/">
+      uniapp生态下的UI框架—uView
     </a>
   </h1>
   <div class="post-meta">
@@ -285,56 +476,34 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-07 16:13:25">2020-08-07</span>
+      <span class="publish-time" data-t="2020-09-04 14:56:59">2020-09-04</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>4<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>906<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>621<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>学习类：<br>
-B站：https://www.bilibili.com/<br>
-没错，就是B站，基本上我和同学在网上学习的编程知识很大比例来自B站，有很多教育机构或者个人上传的编程有关的视频。<br>
-掘金：https://juejin.im/<br>
-知乎：https://www.zhihu.com/<br>
-思否：https://segmentfault.com/<br>
-简书：https://www.jianshu.com/<br>
-CSDN：https://www.csdn.net/<br>
-博客园：https://www.cnblogs.com/<br>
-除了知乎、简书，剩下的都是开发者社区了，也基本是我所知的最大的了，这其中CSDN问题最大，页面又杂又乱，还有广告，而且有很多很古老的文章也都还被频繁检索出来，上次搜个数据，打开了个03年的帖子，发文章也是，明明写了原创，结果在第一行就是原文地址，信息太杂，上次有个报错，在CSDN的一篇文章里找解决方法，顺着原文地址找了3层，跑到博客园去了。还有就是知乎的网页端也过于简陋了吧，浏览文章的页面我毕设加点东西都快和它差不多了，体验很差，思否的手机端也是特不好用，登录都登录不了，是不是已经不维护了？简书最大的问题就是没多久就维护一次，而且是全站的，经常搜到信息点进去显示网站维护。博客园就是界面太老旧了，最近可能进行了UI升级？多少比之前好看些了。<br>
-看云：https://www.kancloud.cn/explore<br>
-以前学习TP5的时候，就实在看云看的文档，还有很多其他的文档，不过还是以PHP为主。<br>
-PHP中文网：https://www.php.cn/<br>
-也是以前学PHP的时候收藏的网站，但我记得网站页面比较简陋，而且站长好像说过不搞了，也不知道现在这个是以前的在搞还是换人了，也没用过了。<br>
-软件类：<br>
-3D溜溜网：https://zixue.3d66.com/<br>
-虽然是个自学网站，但是上面的视频我都没看过，但是这个网站最大的优点是所有它这里开设的课程的破解版软件它基本都有，而且很新，是个很不错的资源网站。<br>
-MSDN：http://msdn.itellyou.cn/<br>
-可以说是windows全家桶网站，windows的全部产品这里几乎都有，像是Access，Office，Visual Basic,还有不同版本的windows系统，还有一大推我听都没听过的。<br>
-设计类：<br>
-中国色：http://zhongguose.com/#shenyanhong<br>
-选修的PPT课老师推荐的网站，是一个展示配色的网站，基本都是中式配色，像是什么绀紫、靛青、景泰蓝这种名字的颜色。<br>
-站酷：https://www.zcool.com.cn/<br>
-各式各样的设计，涵盖了设计的全部种类，应该是国内最大的设计网站了。<br>
-removebg：https://www.remove.bg/zh<br>
-可以消除图片中的背景，比我自己用PS抠的好N倍，直接可以开淘宝店抠图的水平，不过我之前用没有中文版，而且也不需要登录，这中文版是要收费了吗？<br>
-Behance：https://www.behance.net/<br>
-很好的一个设计网站，好像是adobe下的，有很多有创意的作品。<br>
-游戏类：https://ygodl.com/<br>
-决斗链接中文网，是玩家自己组建的，最近随着水哥在B站的游戏王视频带来的热度，决斗链接中文网也是迎来了一大批新人，作为“老”用户也是颇感欣慰。<br>
-动漫类：<br>
-zzzfun：http://www.zzzfun.com/<br>
-D站倒了的今天，zzz还算一方净土。</p>
+              <p>项目名称：uView项目作者：亡灵叙曲开源许可协议：MIT项目地址：https://gitee.com/xuqu/uView项目简介uView UI，是 uni-app 生态优秀的UI框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。项目特性兼容安卓，iOS，微信小程序，H5，QQ小程序，百度小程序，支付宝小程序，头条小程序60+精选组件，功能丰富，多端兼容，让您快速集成，开箱即用众多贴心的JS利器，让您飞镖在手，召之即来，百步穿杨众多的常用页面和布局，让您专注逻辑，事半功倍详尽的文档支持，现代化的演示效果按需引入，精简打包体积</p>
+<h2 id="项目截图">项目截图</h2>
+<p><img src="https://jujuul.github.io//post-images/1599202752683.jpg" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1599202765911.jpg" alt="" loading="lazy"></p>
+<h2 id="开发者说">开发者说</h2>
+<p>uView 的目标是做成 uniapp 生态的标杆，自由且免费开源。对此，uView 有清晰且明确的计划安排，uView 将会全面兼容 nvue，适配暗黑模式，整合unicloud，加入更多组件和模板等。但是，一个人的力量是不够的：为了开源，理想和自由，您可以加入 uView 的研发工作组，我们一起并肩奋战。如果您是做 UI 开发的同学，uView 同样欢迎，因为 uView 需要内外兼修。如果您是个积极活跃的人，那么也欢迎您加入 uView 的QQ群成为管理员。所有加入 uView 贡献的同学，都会在官网声明，并且有自己的个人专属页。</p>
+<p>作者：码云 Gitee<br>
+链接：https://zhuanlan.zhihu.com/p/215456248<br>
+来源：知乎<br>
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>ps：我去官方文档看了下，组件功能很完善，文档也很详细，码云上才53(算上我)个star(不过码云上uniapp也才2.1K的star)，说到码云，最近知乎上看有几个大佬都在说码云，不知道是收了费还是单纯的觉得码云好用，就我个人而言，码云的使用体验还是不错的，毕竟访问速度上比github快多了，而且码云的开发者都是使用中文的，再配合在各个社区孜孜不倦的推荐开源项目的码云官方号，使用体验真的很好，就这10几天就看到了不少像是这个uView还有之前的一个chart组件一样的开源作品。</p>
 
             </div>
             
@@ -347,7 +516,7 @@ D站倒了的今天，zzz还算一方净土。</p>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/" title="收藏的一些有用的网站">https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/</a>
+      <a href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/" title="uniapp生态下的UI框架—uView">https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -361,14 +530,14 @@ D站倒了的今天，zzz还算一方净土。</p>
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="防抖和节流" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">防抖和节流</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="防抖和节流" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">上一篇</a>
+        <a class="nav-pc-next" title="播放器进度条改进" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">播放器进度条改进</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="播放器进度条改进" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="一些前端UI框架" href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">一些前端UI框架</a>
-        <a class="nav-mobile-next" title="一些前端UI框架" href="https://jujuul.github.io/post/yi-xie-qian-duan-ui-kuang-jia/">下一篇</a>
+        <a class="nav-pc-next" title="搜索组件" href="https://jujuul.github.io/post/sou-suo-zu-jian/">搜索组件</a>
+        <a class="nav-mobile-next" title="搜索组件" href="https://jujuul.github.io/post/sou-suo-zu-jian/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
