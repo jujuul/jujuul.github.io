@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-05T08:46:52.330Z</updated>
+    <updated>2020-09-06T15:29:07.882Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[B站播放器的一个小BUG]]></title>
+        <id>https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/</id>
+        <link href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">
+        </link>
+        <updated>2020-09-06T15:25:25.000Z</updated>
+        <content type="html"><![CDATA[<p>其实这个bug已经有好几天了，但是迟迟没修让我不禁怀疑是不是只有我遇到了这个bug，前几天的时候是打开新视频，当音量大于50%的时候，不论怎么调节，只要不使音量&lt;=50%都不显示音量图标，静音的情况没有测试，今晚使用发现当音量&lt; 50%的时候，会出现跟之前上面一样的情况(切换到静音状态再调节就好了)，不知道是不是修了旧bug又有了新bug。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[播放器进度条改进]]></title>
         <id>https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/</id>
@@ -503,62 +512,6 @@ main.js中引入<code>import VueLazyload from 'vue-lazyload'</code></p>
 <p>在页面中使用，替换原本的:src为v-lazy<br>
 <code>&lt;img v-lazy=&quot;item.album.blurPicUrl&quot; alt /&gt;</code><br>
 不过在使用了路由和图片懒加载后还是有卡顿的现象，我看到网上说的优化方法里，还有按需引入和减少图片，减少图片引用应该是不行了，按需引入可以考虑，毕竟项目使用了两个UI组件库，而且基本只使用了图标功能，可以考虑按需引入，之前使用阿里ICON的时候没注意还有个复制svg的选项，有这个项目里都不需要引入UI框架了。不过这个应该也算是对网络资源的请求吧？</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[各种实用技巧]]></title>
-        <id>https://jujuul.github.io/post/ge-chong-shi-yong-ji-qiao/</id>
-        <link href="https://jujuul.github.io/post/ge-chong-shi-yong-ji-qiao/">
-        </link>
-        <updated>2020-08-26T05:28:45.000Z</updated>
-        <content type="html"><![CDATA[<p>文字截断</p>
-<pre><code>white-space: nowrap;/*保证文本内容不会自动换行，如果多余的内容会在水平方向撑破单元格*/ 
-overflow: hidden; /*隐藏超出单元格的部分*/
-text-overflow: ellipsis; /*将被隐藏的那部分用省略号代替*/
-
-
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
-</code></pre>
-<p>👆单行👇多行 <code>-webkit-line-clamp: 2;</code>切换行数</p>
-<pre><code>overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  white-space: pre-wrap;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-</code></pre>
-<p>去除input边框<br>
-<code>&lt;input type=&quot;text&quot; &gt;</code></p>
-<pre><code> input {
-        border: 0;  // 去除未选中状态边框
-        outline: none; // 去除选中状态边框
-        background-color: rgba(0, 0, 0, 0);// 透明背景
-    }
-</code></pre>
-<p>修改滚动条样式</p>
-<pre><code>.main::-webkit-scrollbar {
-  width: 8px;
-  height: 1px;
-}
-/*滚动条滑块*/
-.main::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background: #ccc;
-}
-/*滚动条轨道*/
-.main::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background: #fff;
-}
-</code></pre>
-<p>字母换行<br>
-<code>word-break: break-all;</code><br>
-去除图片下空隙<br>
-<code>display:block</code><br>
-设置模糊<br>
-<code>filter: blur(16px);</code></p>
 ]]></content>
     </entry>
 </feed>

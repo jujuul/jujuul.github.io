@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Vue样式穿透 | Mark</title>
+<title>B站播放器的一个小BUG | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599406141157">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Vue样式穿透" />
+  <meta name="description" content="B站播放器的一个小BUG" />
   <meta name="keywords" content="" />
 </head>
 
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">
-      Vue样式穿透
+    <a class="post-title-link" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">
+      B站播放器的一个小BUG
     </a>
   </h1>
   <div class="post-meta">
@@ -285,7 +285,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-31 15:48:41">2020-08-31</span>
+      <span class="publish-time" data-t="2020-09-06 23:25:25">2020-09-06</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -296,36 +296,13 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>137<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>142<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天写demo的搜索框，因为使用的是ElementUI的input组件，所以需要更改默认样式，但是直接在style内定义样式无效，需要使用样式穿透。<br>
-正常的样式穿透(stylus适用)：&gt;&gt;&gt;</p>
-<pre><code>.search-wrap &gt;&gt;&gt; .el-input__inner {
-  background: #a82828;
-  width: 220px;
-  height: 24px;
-  border-radius: 20px;
-  color: #c77373;
-  border: none;
-  margin-left: 20px;
-}
-</code></pre>
-<p>sass/less中的样式穿透：/deep/</p>
-<pre><code>.search-wrap /deep/ .el-input__inner {
-  background: #a82828;
-  width: 220px;
-  height: 24px;
-  border-radius: 20px;
-  color: #c77373;
-  border: none;
-  margin-left: 20px;
-}
-</code></pre>
-<p>因为我的项目使用了less，所以使用第二种做样式穿透。</p>
+              <p>其实这个bug已经有好几天了，但是迟迟没修让我不禁怀疑是不是只有我遇到了这个bug，前几天的时候是打开新视频，当音量大于50%的时候，不论怎么调节，只要不使音量&lt;=50%都不显示音量图标，静音的情况没有测试，今晚使用发现当音量&lt; 50%的时候，会出现跟之前上面一样的情况(切换到静音状态再调节就好了)，不知道是不是修了旧bug又有了新bug。</p>
 
             </div>
             
@@ -338,7 +315,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/" title="Vue样式穿透">https://jujuul.github.io/post/vue-yang-shi-chuan-tou/</a>
+      <a href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/" title="B站播放器的一个小BUG">https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -351,15 +328,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="转载：首个 Vue 3 组件库发布" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/">转载：首个 Vue 3 组件库发布</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="转载：首个 Vue 3 组件库发布" href="https://jujuul.github.io/post/zhuan-zai-shou-ge-vue-3-zu-jian-ku-fa-bu/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">Vue同路由跳转传参</a>
-        <a class="nav-mobile-next" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">下一篇</a>
+        <a class="nav-pc-next" title="播放器进度条改进" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">播放器进度条改进</a>
+        <a class="nav-mobile-next" title="播放器进度条改进" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
