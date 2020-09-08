@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-06T16:54:22.510Z</updated>
+    <updated>2020-09-08T13:19:00.074Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,67 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[vuex遇到的一个错误]]></title>
+        <id>https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/</id>
+        <link href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">
+        </link>
+        <updated>2020-09-08T13:09:41.000Z</updated>
+        <content type="html"><![CDATA[<p>使用vuex的mutations时遇到的一个错误，找了一下没找到答案，换个方法就规避了这个错误，这个应该不算是错误，因为报错提示<code>handler: &quot;Error: [vuex] expects string as the type, but found undefined.&quot;</code>是需要字符串，我这边传递的是对象，之前的使用中也是传递的字符串，所以错误应该是这个原因。<br>
+错误代码</p>
+<pre><code>...mapMutations({
+    setNewSong: &quot;SET_NEWSONG&quot;,
+    }),
+
+fn(){
+    this.$store.commit(this.setNewSong(item));
+}
+</code></pre>
+<p>正常代码</p>
+<pre><code>...mapMutations([&quot;SET_NEWSONG&quot;]),
+fn(){
+    this.$store.commit(&quot;SET_NEWSONG&quot;, item);
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—amis]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/">
+        </link>
+        <updated>2020-09-07T06:40:59.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="什么是-amis">什么是 amis</h2>
+<p>amis 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。</p>
+<h2 id="为什么要做-amis">为什么要做 amis？</h2>
+<p>在经历了十几年的发展后，前端开发变得越来越复杂，门槛也越来越高，要使用当下流行的 UI 组件库，你必须懂 npm、webpack、react/vue，必须熟悉 ES6 语法，最好还了解状态管理，比如 Redux，如果没接触过函数式编程，光入门都很费劲，而入门之后会发现它还有巨大的 生态，相关的库有 2347 个，很多功能相似，挑选成本高。</p>
+<p>然而前端技术的发展不会停滞，等学完这些后可能会发现大家都用 Hooks 了、某个打包工具取代 Webpack 了……</p>
+<h2 id="用-json-写页面有什么好处">用 JSON 写页面有什么好处</h2>
+<p>为了实现用最简单方式来生成大部分页面，amis 的解决方案是基于 JSON 来配置，它的独特好处是：</p>
+<ol>
+<li>不需要懂前端：在百度内部，大部分 amis 用户之前从来没写过前端页面，也不会 JavaScript，却能做出专业且复杂的后台界面，这是所有其他前端 UI 库都无法做到的；</li>
+<li>不受前端技术更新的影响：百度内部最老的 amis 页面是 4 年多前创建的，至今还在使用，而当年的 Angular/Vue/React 版本现在都废弃了，当年流行的 Gulp 也被 Webpack 取代了，如果这些页面不是用 amis，现在的维护成本会很高；</li>
+<li>享受 amis 的不断升级：amis 一直在提升细节交互体验，比如表格首行冻结、下拉框大数据下不卡顿等，之前的 JSON 配置完全不需要修改；</li>
+<li>可以 完全 使用 可视化页面编辑器 来制作页面：一般前端可视化编辑器只能用来做静态原型，而 amis 可视化编辑器做出的页面是可以直接上线的。</li>
+</ol>
+<p>##amis 的其它亮点</p>
+<ol>
+<li>提供完整的界面解决方案：其它 UI 框架必须使用 JavaScript 来组装业务逻辑，而 amis 只需 JSON 配置就能完成完整功能开发，包括数据获取、表单提交及验证等功能，做出来的页面不需要经过二次开发就能直接上线；</li>
+<li>内置 100+ 种 UI 组件：包括其它 UI 框架都不会提供的富文本编辑器、条件组合等，能满足各种页面组件展现的需求，而且对于特殊的展现形式还可以通过 自定义组件 来扩充；</li>
+<li>容器支持无限级嵌套：可以通过组合来满足各种布局需求；</li>
+<li>经历了长时间的实战考验：amis 在百度内部得到了广泛使用，在 4 年多的时间里创建了 3 万+ 页面，从内容审核到机器管理，从数据分析到模型训练，amis 满足了各种各样的页面需求，最复杂的页面有超过 1 万行 JSON 配置。</li>
+</ol>
+<h2 id="amis-不适合做什么">amis 不适合做什么？</h2>
+<p>使用 JSON 有优点但也有明显缺点，在以下场合并不适合 amis：</p>
+<ol>
+<li>大量定制 UI：JSON 配置使得 amis 更适合做有大量常见 UI 组件的页面，但对于面向普通客户（toC）的页面，往往追求个性化的视觉效果，这种情况下用 amis 就不合适，实际上绝大部分前端 UI 组件库也都不适合，只能定制开发。</li>
+<li>极为复杂或特殊的交互：<br>
+1. 有些复杂的前端功能，比如 可视化编辑器，其中有大量定制的拖拽操作，这种需要依赖原生            DOM 实现的功能无法使用 amis。<br>
+2. 但对于某些交互固定的领域，比如图连线，amis 后续会有专门的组件来实现。</li>
+</ol>
+<p>这个系列也是好久没写，关键是之前把前端领域比较有影响力的种种写出来以后，就不知道该写些什么了，几天码云更新的这篇文章算是让我知道了该写什么，虽然以后可能用不到amis，但是了解一下也是好的，amis有两种使用方法，npm与JS SDK，其中npm适合在react项目中，sdk适合对前端或是react不了解的开发者，但是sdk的方式难以自定义组件，通过这些天做项目的经验，自定义组件在我看来还是相当重要的，所以这个只能在学了react后使用，官方文档上各个组件倒是不少，但是没有react的经验，也没法立即使用，码云上400+的star数说明这个项目目前还不是很好，可以留意一下。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[B站播放器的一个小BUG]]></title>
         <id>https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/</id>
@@ -369,149 +430,6 @@ Vue.prototype.$video = Video  //挂载到原型上
         this.initVideo();
     },
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue中使用moment.js格式化时间戳]]></title>
-        <id>https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</id>
-        <link href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
-        </link>
-        <updated>2020-08-28T04:39:09.000Z</updated>
-        <content type="html"><![CDATA[<p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
-<h2 id="安装">安装</h2>
-<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
-<h2 id="引入">引入</h2>
-<p>在main中全局引入，并且定义全局的时间过滤器</p>
-<pre><code>// 定义全局时间戳过滤器
-Vue.filter(&quot;formatDate&quot;, function(value) {
-  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
-});
-</code></pre>
-<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
-日期格式化</p>
-<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
-moment().format('dddd');                    // 星期二
-moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
-moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
-moment().format();                          // 2019-04-16T12:24:48+08:00
-</code></pre>
-<p>相对时间</p>
-<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment().startOf('day').fromNow();        // 12 小时前
-moment().endOf('day').fromNow();          // 12 小时内
-moment().startOf('hour').fromNow();       // 28 分钟前
-</code></pre>
-<p>日历时间</p>
-<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
-moment().subtract(6, 'days').calendar();  // 上周三中午12点28
-moment().subtract(3, 'days').calendar();  // 上周六中午12点28
-moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
-moment().calendar();                      // 今天中午12点28分
-moment().add(1, 'days').calendar();       // 明天中午12点28分
-moment().add(3, 'days').calendar();       // 本周五中午12点28
-moment().add(10, 'days').calendar();      // 2019年4月26日
-</code></pre>
-<p>多语言支持</p>
-<pre><code>moment().format('L');    // 2019-04-16
-moment().format('l');    // 2019-04-16
-moment().format('LL');   // 2019年4月16日
-moment().format('ll');   // 2019年4月16日
-moment().format('LLL');  // 2019年4月16日中午12点28分
-moment().format('lll');  // 2019年4月16日中午12点28分
-moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
-moment().format('llll'); // 2019年4月16日星期二中午12点28分
-</code></pre>
-<p>文档地址：http://momentjs.cn/<br>
-不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[仿网易云demo—day4]]></title>
-        <id>https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/</id>
-        <link href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">
-        </link>
-        <updated>2020-08-26T13:08:12.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="设置路由懒加载">设置路由懒加载</h2>
-<p>先放一段定义用法<br>
-vue中的懒加载和按需加载<br>
-懒加载</p>
-<p>（1）定义：懒加载也叫延迟加载，即在需要的时候进行加载，随用随载。</p>
-<p>（2）异步加载的三种表示方法：</p>
-<pre><code>1.  resolve =&gt; require([URL], resolve),支持性好
-2.  () =&gt; system.import(URL) , webpack2官网上已经声明将逐渐废除,不推荐使用 
-3.  () =&gt; import(URL), webpack2官网推荐使用,属于es7范畴,需要配合babel的syntax-dynamic- 
-</code></pre>
-<p>import插件使用。<br>
-（3）vue中懒加载的流程：<br>
-（4）Vue中懒加载的各种使用地方：</p>
-<ol>
-<li>路由懒加载：</li>
-</ol>
-<pre><code>export default new Router({
-  routes:[
-    {
-     path: '/my',
-     name: 'my',
-      //懒加载
-     component: resolve =&gt; require(['../page/my/my.vue'], resolve),
-    },
-  ]
-})
-</code></pre>
-<ol start="2">
-<li>组件懒加载：</li>
-</ol>
-<pre><code>components: {
-  historyTab:resolve =&gt; {
-  require(['../../component/historyTab/historyTab.vue'],resolve)
-  },   
-},
-</code></pre>
-<ol start="3">
-<li>全局懒加载：</li>
-</ol>
-<pre><code>Vue.component('mideaHeader', () =&gt; {
-System.import('./component/header/header.vue')
-})
-</code></pre>
-<p>我自己的路由懒加载</p>
-<pre><code>const routes = [
-  {
-    path: &quot;/main&quot;,
-    component: (resolve) =&gt; require([&quot;@/components/main&quot;], resolve),
-  },
-  {
-    path: &quot;/ranklist&quot;,
-    component: (resolve) =&gt; require([&quot;@/components/main/Ranklist&quot;], resolve),
-  },
-  {
-    path: &quot;/recommendlist&quot;,
-    component: (resolve) =&gt; require([&quot;@/components/recommend-list&quot;], resolve),
-  },
-  {
-    path: &quot;/newestmusic&quot;,
-    component: (resolve) =&gt; require([&quot;@/components/newest-music&quot;], resolve),
-  },
-  {
-    path: &quot;/mv&quot;,
-    component: (resolve) =&gt; require([&quot;@/components/mv&quot;], resolve),
-  },
-];
-</code></pre>
-<h2 id="设置图片懒加载">设置图片懒加载</h2>
-<p>cnpm引入：cnpm i vue-lazyload --save<br>
-main.js中引入<code>import VueLazyload from 'vue-lazyload'</code></p>
-<pre><code>Vue.use(VueLazyload, {
-  preLoad: 1.3,
-  error: &quot;dist/error.png&quot;,
-  loading: &quot;dist/loading.gif&quot;,
-  attempt: 1,
-});
-</code></pre>
-<p>在页面中使用，替换原本的:src为v-lazy<br>
-<code>&lt;img v-lazy=&quot;item.album.blurPicUrl&quot; alt /&gt;</code><br>
-不过在使用了路由和图片懒加载后还是有卡顿的现象，我看到网上说的优化方法里，还有按需引入和减少图片，减少图片引用应该是不行了，按需引入可以考虑，毕竟项目使用了两个UI组件库，而且基本只使用了图标功能，可以考虑按需引入，之前使用阿里ICON的时候没注意还有个复制svg的选项，有这个项目里都不需要引入UI框架了。不过这个应该也算是对网络资源的请求吧？</p>
 ]]></content>
     </entry>
 </feed>

@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Uniapp学习记录day2 | Mark</title>
+<title>vuex遇到的一个错误 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599571126964">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Uniapp学习记录day2" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="vuex遇到的一个错误" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
-      Uniapp学习记录day2
+    <a class="post-title-link" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">
+      vuex遇到的一个错误
     </a>
   </h1>
   <div class="post-meta">
@@ -285,22 +285,9 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-06 14:30:13">2020-08-06</span>
+      <span class="publish-time" data-t="2020-09-08 21:09:41">2020-09-08</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-        <span>uniapp</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
@@ -309,32 +296,28 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>138<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>133<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
-<p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
-这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<pre><code>const query = wx.createSelectorQuery()
-query.select('#boxFixed').boundingClientRect()
-query.selectViewport().scrollOffset()
-query.exec((res) =&gt; {
-    this.menutop = res[0].top
-})
+              <p>使用vuex的mutations时遇到的一个错误，找了一下没找到答案，换个方法就规避了这个错误，这个应该不算是错误，因为报错提示<code>handler: &quot;Error: [vuex] expects string as the type, but found undefined.&quot;</code>是需要字符串，我这边传递的是对象，之前的使用中也是传递的字符串，所以错误应该是这个原因。<br>
+错误代码</p>
+<pre><code>...mapMutations({
+    setNewSong: &quot;SET_NEWSONG&quot;,
+    }),
+
+fn(){
+    this.$store.commit(this.setNewSong(item));
+}
 </code></pre>
-<p>用来返回选中节点的TOP位置</p>
-<pre><code>wx.pageScrollTo({
-    scrollTop: this.menutop,
-    duration: 300
-})
+<p>正常代码</p>
+<pre><code>...mapMutations([&quot;SET_NEWSONG&quot;]),
+fn(){
+    this.$store.commit(&quot;SET_NEWSONG&quot;, item);
+}
 </code></pre>
-<p>用来使页面滚动到选择的位置</p>
-<pre><code>:catchtouchmove=&quot;true&quot;
-</code></pre>
-<p>专门用来解决小程序的事件穿透</p>
 
             </div>
             
@@ -347,7 +330,7 @@ query.exec((res) =&gt; {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/" title="Uniapp学习记录day2">https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/</a>
+      <a href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/" title="vuex遇到的一个错误">https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -356,21 +339,15 @@ query.exec((res) =&gt; {
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/"># uniapp</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day1" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">Uniapp学习记录day1</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day1" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">下一篇</a>
+        <a class="nav-pc-next" title="每天一个名词解释—amis" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/">每天一个名词解释—amis</a>
+        <a class="nav-mobile-next" title="每天一个名词解释—amis" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

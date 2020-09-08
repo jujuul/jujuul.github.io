@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Uniapp学习记录day2 | Mark</title>
+<title>每天一个名词解释—amis | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599571126964">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="Uniapp学习记录day2" />
-  <meta name="keywords" content="uniapp" />
+  <meta name="description" content="每天一个名词解释—amis" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,198 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF-amis">什么是 amis</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%81%9A-amis">为什么要做 amis？</a></li>
+<li><a href="#%E7%94%A8-json-%E5%86%99%E9%A1%B5%E9%9D%A2%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84">用 JSON 写页面有什么好处</a></li>
+<li><a href="#amis-%E4%B8%8D%E9%80%82%E5%90%88%E5%81%9A%E4%BB%80%E4%B9%88">amis 不适合做什么？</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +469,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/">
-      Uniapp学习记录day2
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/">
+      每天一个名词解释—amis
     </a>
   </h1>
   <div class="post-meta">
@@ -285,56 +478,52 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-06 14:30:13">2020-08-06</span>
+      <span class="publish-time" data-t="2020-09-07 14:40:59">2020-09-07</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/">
-        <span>uniapp</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>138<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1214<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>开搞开搞，开始之前先在网上搜索了下小程序怎么上线，毕竟我自己也有的个公众号，把项目上线一下岂不美哉?</p>
-<p><img src="https://jujuul.github.io//post-images/1596709131676.PNG" alt="" loading="lazy"><br>
-这个图标切换和阴影背景的显示隐藏真是够麻烦的</p>
-<pre><code>const query = wx.createSelectorQuery()
-query.select('#boxFixed').boundingClientRect()
-query.selectViewport().scrollOffset()
-query.exec((res) =&gt; {
-    this.menutop = res[0].top
-})
-</code></pre>
-<p>用来返回选中节点的TOP位置</p>
-<pre><code>wx.pageScrollTo({
-    scrollTop: this.menutop,
-    duration: 300
-})
-</code></pre>
-<p>用来使页面滚动到选择的位置</p>
-<pre><code>:catchtouchmove=&quot;true&quot;
-</code></pre>
-<p>专门用来解决小程序的事件穿透</p>
+              <h2 id="什么是-amis">什么是 amis</h2>
+<p>amis 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。</p>
+<h2 id="为什么要做-amis">为什么要做 amis？</h2>
+<p>在经历了十几年的发展后，前端开发变得越来越复杂，门槛也越来越高，要使用当下流行的 UI 组件库，你必须懂 npm、webpack、react/vue，必须熟悉 ES6 语法，最好还了解状态管理，比如 Redux，如果没接触过函数式编程，光入门都很费劲，而入门之后会发现它还有巨大的 生态，相关的库有 2347 个，很多功能相似，挑选成本高。</p>
+<p>然而前端技术的发展不会停滞，等学完这些后可能会发现大家都用 Hooks 了、某个打包工具取代 Webpack 了……</p>
+<h2 id="用-json-写页面有什么好处">用 JSON 写页面有什么好处</h2>
+<p>为了实现用最简单方式来生成大部分页面，amis 的解决方案是基于 JSON 来配置，它的独特好处是：</p>
+<ol>
+<li>不需要懂前端：在百度内部，大部分 amis 用户之前从来没写过前端页面，也不会 JavaScript，却能做出专业且复杂的后台界面，这是所有其他前端 UI 库都无法做到的；</li>
+<li>不受前端技术更新的影响：百度内部最老的 amis 页面是 4 年多前创建的，至今还在使用，而当年的 Angular/Vue/React 版本现在都废弃了，当年流行的 Gulp 也被 Webpack 取代了，如果这些页面不是用 amis，现在的维护成本会很高；</li>
+<li>享受 amis 的不断升级：amis 一直在提升细节交互体验，比如表格首行冻结、下拉框大数据下不卡顿等，之前的 JSON 配置完全不需要修改；</li>
+<li>可以 完全 使用 可视化页面编辑器 来制作页面：一般前端可视化编辑器只能用来做静态原型，而 amis 可视化编辑器做出的页面是可以直接上线的。</li>
+</ol>
+<p>##amis 的其它亮点</p>
+<ol>
+<li>提供完整的界面解决方案：其它 UI 框架必须使用 JavaScript 来组装业务逻辑，而 amis 只需 JSON 配置就能完成完整功能开发，包括数据获取、表单提交及验证等功能，做出来的页面不需要经过二次开发就能直接上线；</li>
+<li>内置 100+ 种 UI 组件：包括其它 UI 框架都不会提供的富文本编辑器、条件组合等，能满足各种页面组件展现的需求，而且对于特殊的展现形式还可以通过 自定义组件 来扩充；</li>
+<li>容器支持无限级嵌套：可以通过组合来满足各种布局需求；</li>
+<li>经历了长时间的实战考验：amis 在百度内部得到了广泛使用，在 4 年多的时间里创建了 3 万+ 页面，从内容审核到机器管理，从数据分析到模型训练，amis 满足了各种各样的页面需求，最复杂的页面有超过 1 万行 JSON 配置。</li>
+</ol>
+<h2 id="amis-不适合做什么">amis 不适合做什么？</h2>
+<p>使用 JSON 有优点但也有明显缺点，在以下场合并不适合 amis：</p>
+<ol>
+<li>大量定制 UI：JSON 配置使得 amis 更适合做有大量常见 UI 组件的页面，但对于面向普通客户（toC）的页面，往往追求个性化的视觉效果，这种情况下用 amis 就不合适，实际上绝大部分前端 UI 组件库也都不适合，只能定制开发。</li>
+<li>极为复杂或特殊的交互：<br>
+1. 有些复杂的前端功能，比如 可视化编辑器，其中有大量定制的拖拽操作，这种需要依赖原生            DOM 实现的功能无法使用 amis。<br>
+2. 但对于某些交互固定的领域，比如图连线，amis 后续会有专门的组件来实现。</li>
+</ol>
+<p>这个系列也是好久没写，关键是之前把前端领域比较有影响力的种种写出来以后，就不知道该写些什么了，几天码云更新的这篇文章算是让我知道了该写什么，虽然以后可能用不到amis，但是了解一下也是好的，amis有两种使用方法，npm与JS SDK，其中npm适合在react项目中，sdk适合对前端或是react不了解的开发者，但是sdk的方式难以自定义组件，通过这些天做项目的经验，自定义组件在我看来还是相当重要的，所以这个只能在学了react后使用，官方文档上各个组件倒是不少，但是没有react的经验，也没法立即使用，码云上400+的star数说明这个项目目前还不是很好，可以留意一下。</p>
 
             </div>
             
@@ -347,7 +536,7 @@ query.exec((res) =&gt; {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/" title="Uniapp学习记录day2">https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day2/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/" title="每天一个名词解释—amis">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -356,21 +545,19 @@ query.exec((res) =&gt; {
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/L2QA5znWB/"># uniapp</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">Uniapp学习记录day3</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day3" href="https://jujuul.github.io/post/uniapp-xue-xi-ji-lu-day3/">上一篇</a>
+        <a class="nav-pc-next" title="vuex遇到的一个错误" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">vuex遇到的一个错误</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="vuex遇到的一个错误" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="Uniapp学习记录day1" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">Uniapp学习记录day1</a>
-        <a class="nav-mobile-next" title="Uniapp学习记录day1" href="https://jujuul.github.io/post/uni-app-xue-xi-ji-lu-day1/">下一篇</a>
+        <a class="nav-pc-next" title="B站播放器的一个小BUG" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">B站播放器的一个小BUG</a>
+        <a class="nav-mobile-next" title="B站播放器的一个小BUG" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

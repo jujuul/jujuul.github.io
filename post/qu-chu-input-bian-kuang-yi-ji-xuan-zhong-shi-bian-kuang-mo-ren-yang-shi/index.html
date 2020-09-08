@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>去除input边框以及选中时边框 默认样式 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1599406141157">
+<link rel="shortcut icon" href="/favicon.ico?v=1599571126964">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">50</span>
+        <span class="site-item-stat-count">52</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -805,6 +805,61 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/"" data-c="
+          &lt;p&gt;使用vuex的mutations时遇到的一个错误，找了一下没找到答案，换个方法就规避了这个错误，这个应该不算是错误，因为报错提示&lt;code&gt;handler: &amp;quot;Error: [vuex] expects string as the type, but found undefined.&amp;quot;&lt;/code&gt;是需要字符串，我这边传递的是对象，之前的使用中也是传递的字符串，所以错误应该是这个原因。&lt;br&gt;
+错误代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;...mapMutations({
+    setNewSong: &amp;quot;SET_NEWSONG&amp;quot;,
+    }),
+
+fn(){
+    this.$store.commit(this.setNewSong(item));
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;正常代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;...mapMutations([&amp;quot;SET_NEWSONG&amp;quot;]),
+fn(){
+    this.$store.commit(&amp;quot;SET_NEWSONG&amp;quot;, item);
+}
+&lt;/code&gt;&lt;/pre&gt;
+">vuex遇到的一个错误</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/"" data-c="
+          &lt;h2 id=&#34;什么是-amis&#34;&gt;什么是 amis&lt;/h2&gt;
+&lt;p&gt;amis 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要做-amis&#34;&gt;为什么要做 amis？&lt;/h2&gt;
+&lt;p&gt;在经历了十几年的发展后，前端开发变得越来越复杂，门槛也越来越高，要使用当下流行的 UI 组件库，你必须懂 npm、webpack、react/vue，必须熟悉 ES6 语法，最好还了解状态管理，比如 Redux，如果没接触过函数式编程，光入门都很费劲，而入门之后会发现它还有巨大的 生态，相关的库有 2347 个，很多功能相似，挑选成本高。&lt;/p&gt;
+&lt;p&gt;然而前端技术的发展不会停滞，等学完这些后可能会发现大家都用 Hooks 了、某个打包工具取代 Webpack 了……&lt;/p&gt;
+&lt;h2 id=&#34;用-json-写页面有什么好处&#34;&gt;用 JSON 写页面有什么好处&lt;/h2&gt;
+&lt;p&gt;为了实现用最简单方式来生成大部分页面，amis 的解决方案是基于 JSON 来配置，它的独特好处是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不需要懂前端：在百度内部，大部分 amis 用户之前从来没写过前端页面，也不会 JavaScript，却能做出专业且复杂的后台界面，这是所有其他前端 UI 库都无法做到的；&lt;/li&gt;
+&lt;li&gt;不受前端技术更新的影响：百度内部最老的 amis 页面是 4 年多前创建的，至今还在使用，而当年的 Angular/Vue/React 版本现在都废弃了，当年流行的 Gulp 也被 Webpack 取代了，如果这些页面不是用 amis，现在的维护成本会很高；&lt;/li&gt;
+&lt;li&gt;享受 amis 的不断升级：amis 一直在提升细节交互体验，比如表格首行冻结、下拉框大数据下不卡顿等，之前的 JSON 配置完全不需要修改；&lt;/li&gt;
+&lt;li&gt;可以 完全 使用 可视化页面编辑器 来制作页面：一般前端可视化编辑器只能用来做静态原型，而 amis 可视化编辑器做出的页面是可以直接上线的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;##amis 的其它亮点&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;提供完整的界面解决方案：其它 UI 框架必须使用 JavaScript 来组装业务逻辑，而 amis 只需 JSON 配置就能完成完整功能开发，包括数据获取、表单提交及验证等功能，做出来的页面不需要经过二次开发就能直接上线；&lt;/li&gt;
+&lt;li&gt;内置 100+ 种 UI 组件：包括其它 UI 框架都不会提供的富文本编辑器、条件组合等，能满足各种页面组件展现的需求，而且对于特殊的展现形式还可以通过 自定义组件 来扩充；&lt;/li&gt;
+&lt;li&gt;容器支持无限级嵌套：可以通过组合来满足各种布局需求；&lt;/li&gt;
+&lt;li&gt;经历了长时间的实战考验：amis 在百度内部得到了广泛使用，在 4 年多的时间里创建了 3 万+ 页面，从内容审核到机器管理，从数据分析到模型训练，amis 满足了各种各样的页面需求，最复杂的页面有超过 1 万行 JSON 配置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;amis-不适合做什么&#34;&gt;amis 不适合做什么？&lt;/h2&gt;
+&lt;p&gt;使用 JSON 有优点但也有明显缺点，在以下场合并不适合 amis：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;大量定制 UI：JSON 配置使得 amis 更适合做有大量常见 UI 组件的页面，但对于面向普通客户（toC）的页面，往往追求个性化的视觉效果，这种情况下用 amis 就不合适，实际上绝大部分前端 UI 组件库也都不适合，只能定制开发。&lt;/li&gt;
+&lt;li&gt;极为复杂或特殊的交互：&lt;br&gt;
+1. 有些复杂的前端功能，比如 可视化编辑器，其中有大量定制的拖拽操作，这种需要依赖原生            DOM 实现的功能无法使用 amis。&lt;br&gt;
+2. 但对于某些交互固定的领域，比如图连线，amis 后续会有专门的组件来实现。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这个系列也是好久没写，关键是之前把前端领域比较有影响力的种种写出来以后，就不知道该写些什么了，几天码云更新的这篇文章算是让我知道了该写什么，虽然以后可能用不到amis，但是了解一下也是好的，amis有两种使用方法，npm与JS SDK，其中npm适合在react项目中，sdk适合对前端或是react不了解的开发者，但是sdk的方式难以自定义组件，通过这些天做项目的经验，自定义组件在我看来还是相当重要的，所以这个只能在学了react后使用，官方文档上各个组件倒是不少，但是没有react的经验，也没法立即使用，码云上400+的star数说明这个项目目前还不是很好，可以留意一下。&lt;/p&gt;
+">每天一个名词解释—amis</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/"" data-c="
