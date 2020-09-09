@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-08T15:47:05.328Z</updated>
+    <updated>2020-09-09T05:58:00.435Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,162 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[vuex 数据持久化插件]]></title>
+        <id>https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/</id>
+        <link href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">
+        </link>
+        <updated>2020-09-09T04:25:51.000Z</updated>
+        <content type="html"><![CDATA[<ol>
+<li>安装<br>
+<code>npm install vuex-persistedstate</code></li>
+<li>配置<br>
+<code>import persistedState from 'vuex-persistedstate'</code></li>
+</ol>
+<pre><code>export default new Vuex.Store({
+    // ...
+    plugins: [persistedState()]
+})
+</code></pre>
+<ol start="3">
+<li>自定义存储方式<br>
+vuex-persistedstate默认使用localStorage来固化数据，一些特殊情况要如何应对呢？
+<ol>
+<li>需要使用sessionStorage的情况</li>
+</ol>
+<pre><code>plugins: [
+persistedState({ storage: window.sessionStorage })
+]
+</code></pre>
+<ol start="2">
+<li>使用cookie的情况</li>
+</ol>
+<pre><code>import persistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
+
+export default new Vuex.Store({
+plugins: [
+persistedState({
+    storage: {
+        getItem: key =&gt; Cookies.get(key),
+        setItem: (key, value) =&gt; Cookies.set(key, value, { expires: 7 }),
+        removeItem: key =&gt; Cookies.remove(key)
+    }
+    })
+]
+})
+</code></pre>
+</li>
+</ol>
+<p>根据我的使用来说，如果是存储普通类型的数据，sessionStorage和localStorage可以直接存储，如果是存储对象与数组则需要使用JSON.stringify进行转换，转换为JSON字符串，在storage中存储，如果需要使用则需要通过JSON.parse解析，而通过这个插件，就不需要手动设置存储到storage中，也不需要使用JSON，而是插件将所有state的值以对象的形式存储到localStorage中的vuex为key的value中，通过读取value获取数据。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载：那些你总是记不住但又总是要用的css]]></title>
+        <id>https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/</id>
+        <link href="https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/">
+        </link>
+        <updated>2020-09-09T02:46:34.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="一-设置input-的placeholder的字体样式">一、设置input 的placeholder的字体样式</h2>
+<pre><code>input::-webkit-input-placeholder {    /* Chrome/Opera/Safari */
+    color: red;
+}
+input::-moz-placeholder { /* Firefox 19+ */  
+    color: red;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+    color: red;
+}
+input:-moz-placeholder { /* Firefox 18- */
+    color: red;
+}
+</code></pre>
+<h3 id="设置input聚焦时的样式">设置input聚焦时的样式</h3>
+<pre><code>input:focus {   
+  background-color: red;
+}
+</code></pre>
+<h3 id="取消input的边框">取消input的边框</h3>
+<pre><code>border: none;
+outline: none;
+</code></pre>
+<h2 id="二-隐藏滚动条或更改滚动条样式">二、隐藏滚动条或更改滚动条样式</h2>
+<pre><code>/*css主要部分的样式*//*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 10px; /*对垂直流动条有效*/
+    height: 10px; /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rosybrown;
+    border-radius: 3px;
+}
+
+/*定义滑块颜色、内阴影及圆角*/
+::-webkit-scrollbar-thumb{ 
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #E8E8E8;
+}
+
+/*定义两端按钮的样式*/
+::-webkit-scrollbar-button {
+    background-color:cyan;
+}
+
+/*定义右下角汇合处的样式*/
+::-webkit-scrollbar-corner {
+    background:khaki;
+}
+</code></pre>
+<h2 id="三-文字超出隐藏并显示省略号">三、文字超出隐藏并显示省略号</h2>
+<h3 id="单行一定要有宽度">单行（一定要有宽度）</h3>
+<pre><code>width:200rpx;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+</code></pre>
+<p>多行</p>
+<pre><code>word-break: break-all;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+</code></pre>
+<h2 id="四-控制div内的元素自动换行">四、控制div内的元素自动换行</h2>
+<pre><code>word-wrap: break-word;
+word-break：break-all;
+</code></pre>
+<h2 id="五-纯css画三角形">五、 纯css画三角形</h2>
+<pre><code>#demo {
+    width: 0;
+    height: 0;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+}
+</code></pre>
+<h2 id="六-绝对定位元素居中水平和垂直方向">六、 绝对定位元素居中（水平和垂直方向）</h2>
+<pre><code>#demo {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: green;
+}
+</code></pre>
+<h2 id="七-表格边框合并">七、表格边框合并</h2>
+<pre><code>table,tr,td{border: 1px solid #333;}
+table{
+  border-collapse: collapse;
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vuex遇到的一个错误]]></title>
         <id>https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/</id>
@@ -352,84 +508,6 @@ validateFields().then(values =&gt; {
 }
 </code></pre>
 <p>因为我的项目使用了less，所以使用第二种做样式穿透。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Vue同路由跳转传参]]></title>
-        <id>https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/</id>
-        <link href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
-        </link>
-        <updated>2020-08-31T03:02:39.000Z</updated>
-        <content type="html"><![CDATA[<p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
-<pre><code>const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err =&gt; err)
-}
-</code></pre>
-<p>可以用来屏蔽掉路由重复的报错，虽然报错没了，但是也没跳转啊，不是很明白这个的具体用处，我路由就是为了切换页面，同路径的传参路由就是为了切换数据，用这个虽然屏蔽了同页面路由的报错，但是也没能切换数据啊，意义不明。最后找到了3种方法，第一：使用watch监听路由变化，手动更新数据；第二：使用router-view；第三：使用provide-inject。最终选择了第一种watch监听。</p>
-<pre><code>watch: {
-    $route(n, o) {
-      if (n.fullPath !== o.fullPath) {
-        //监听路由参数是否变化
-        location.reload(); //强制刷新页面
-      }
-    },
-  },
-</code></pre>
-<p>一开始是监听到路由参数改变直接强制刷新页面，问题在于用户体验太差，后面改成了刷新各个函数的调用，这样就不会有屏幕刷新的问题，可惜事与愿违，video.js组件一个生命周期内只能被声明一次，所以最后还是只能强制刷新页面。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[视频播放器插件的使用]]></title>
-        <id>https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/</id>
-        <link href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">
-        </link>
-        <updated>2020-08-29T02:44:20.000Z</updated>
-        <content type="html"><![CDATA[<p>其实看的好几个demo都是用的原生的Video标签，但是我感觉不是很好看，就去网上找了几个，分别有vue-video和vue-video-player，还有个HTML5的video.js，vue-video已经三年多没更新了，所以直接pass，然后就是vue-video-player与video.js对比，原本我是打算使用vue-video-player的，毕竟github上3.3k的star数，但是发现使用过程中过于繁琐，而且样式也不是很好，声音没法做到改变大小，只能是开启或静音，这样还要额外写一个切换声音的功能，并且它的倍速播放功能也不是很有必要，而且我在github上看到它有29k的star，所以最后选择了video.js。</p>
-<h2 id="安装">安装</h2>
-<p><code>$ npm install video.js</code></p>
-<h2 id="引入">引入</h2>
-<pre><code>import Video from 'video.js' 
-import 'video.js/dist/video-js.css'
-
-Vue.prototype.$video = Video  //挂载到原型上
-</code></pre>
-<h2 id="在项目中使用">在项目中使用</h2>
-<h3 id="html部分">HTML部分</h3>
-<pre><code> &lt;video id=&quot;myVideo&quot; class=&quot;video-js&quot;&gt;
-      &lt;source
-        src=&quot;http://vodkgeyttp8.vod.126.net/cloudmusic/
-        5805/core/a70e/407418faf42d67b7f0a095fc137dbc
-        8e.mp4?wsSecret=49d2d403360b1ce82d0c12432a
-        4c395e&amp;wsTime=1598668903&quot;
-        type=&quot;video/mp4&quot;
-      /&gt;
-    &lt;/video&gt;
-</code></pre>
-<h3 id="初始化视频方法">初始化视频方法</h3>
-<pre><code>methods: {
-    initVideo() {
-      //初始化视频方法
-      let myPlayer = this.$video(myVideo, {
-        //确定播放器是否具有用户可以与之交互的控件。
-        //没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-        controls: true,
-        //自动播放属性,muted:静音播放
-        autoplay: &quot;muted&quot;,
-        //建议浏览器是否应在&lt;video&gt;加载元素后立即开始下载视频数据。
-        preload: &quot;auto&quot;,
-        //设置视频播放器的显示宽度
-        width: &quot;800px&quot;,
-        //设置视频播放器的显示高度
-        height: &quot;400px&quot;,
-      });
-    },
-</code></pre>
-<h3 id="在挂载钩子内执行">在挂载钩子内执行</h3>
-<pre><code>mounted() { 
-        this.initVideo();
-    },
-</code></pre>
 ]]></content>
     </entry>
 </feed>

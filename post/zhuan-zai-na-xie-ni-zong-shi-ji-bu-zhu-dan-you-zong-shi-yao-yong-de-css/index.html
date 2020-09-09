@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>播放器进度条改进 | Mark</title>
+<title>转载：那些你总是记不住但又总是要用的css | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599631073722">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="播放器进度条改进" />
+  <meta name="description" content="转载：那些你总是记不住但又总是要用的css" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,210 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%80-%E8%AE%BE%E7%BD%AEinput-%E7%9A%84placeholder%E7%9A%84%E5%AD%97%E4%BD%93%E6%A0%B7%E5%BC%8F">一、设置input 的placeholder的字体样式</a>
+<ul>
+<li><a href="#%E8%AE%BE%E7%BD%AEinput%E8%81%9A%E7%84%A6%E6%97%B6%E7%9A%84%E6%A0%B7%E5%BC%8F">设置input聚焦时的样式</a></li>
+<li><a href="#%E5%8F%96%E6%B6%88input%E7%9A%84%E8%BE%B9%E6%A1%86">取消input的边框</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E9%9A%90%E8%97%8F%E6%BB%9A%E5%8A%A8%E6%9D%A1%E6%88%96%E6%9B%B4%E6%94%B9%E6%BB%9A%E5%8A%A8%E6%9D%A1%E6%A0%B7%E5%BC%8F">二、隐藏滚动条或更改滚动条样式</a></li>
+<li><a href="#%E4%B8%89-%E6%96%87%E5%AD%97%E8%B6%85%E5%87%BA%E9%9A%90%E8%97%8F%E5%B9%B6%E6%98%BE%E7%A4%BA%E7%9C%81%E7%95%A5%E5%8F%B7">三、文字超出隐藏并显示省略号</a>
+<ul>
+<li><a href="#%E5%8D%95%E8%A1%8C%E4%B8%80%E5%AE%9A%E8%A6%81%E6%9C%89%E5%AE%BD%E5%BA%A6">单行（一定要有宽度）</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9B%9B-%E6%8E%A7%E5%88%B6div%E5%86%85%E7%9A%84%E5%85%83%E7%B4%A0%E8%87%AA%E5%8A%A8%E6%8D%A2%E8%A1%8C">四、控制div内的元素自动换行</a></li>
+<li><a href="#%E4%BA%94-%E7%BA%AFcss%E7%94%BB%E4%B8%89%E8%A7%92%E5%BD%A2">五、 纯css画三角形</a></li>
+<li><a href="#%E5%85%AD-%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E6%B0%B4%E5%B9%B3%E5%92%8C%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91">六、 绝对定位元素居中（水平和垂直方向）</a></li>
+<li><a href="#%E4%B8%83-%E8%A1%A8%E6%A0%BC%E8%BE%B9%E6%A1%86%E5%90%88%E5%B9%B6">七、表格边框合并</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +481,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">
-      播放器进度条改进
+    <a class="post-title-link" href="https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/">
+      转载：那些你总是记不住但又总是要用的css
     </a>
   </h1>
   <div class="post-meta">
@@ -285,76 +490,120 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-09-05 16:16:30">2020-09-05</span>
+      <span class="publish-time" data-t="2020-09-09 10:46:34">2020-09-09</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>517<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>381<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>因为不满意之前的进度条样式，所以决定更换进度条，在参考多个其他项目之后，我发现还是elementUI的进度条比较合适，所以就换成了elementUI的slider组件，因为组件默认的颜色是蓝色，所以这里使用样式穿透更改组件颜色以及组件的高度，宽度等显示效果。</p>
-<pre><code>.slider /deep/ .el-slider {
-  margin: 2px 4px;
-  .el-slider__runway {
-    height: 4px;
-    margin: 4px 0px;
-    // border: 1px solid red;
-    .el-slider__bar {
-      background: #fa2800;
-      height: 4px;
-    }
-    .el-slider__button-wrapper {
-      top: -7px;
-      height: 0;
-      .el-slider__button {
-        width: 12px;
-        height: 12px;
-        border: 2px solid #fa2800;
-      }
-    }
-  }
+              <h2 id="一-设置input-的placeholder的字体样式">一、设置input 的placeholder的字体样式</h2>
+<pre><code>input::-webkit-input-placeholder {    /* Chrome/Opera/Safari */
+    color: red;
+}
+input::-moz-placeholder { /* Firefox 19+ */  
+    color: red;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+    color: red;
+}
+input:-moz-placeholder { /* Firefox 18- */
+    color: red;
 }
 </code></pre>
-<p>这样进度条就符合了我的要求，然后遇到了一个问题，因为使用的是elementUI的el-slider组件+我自己写的其他代码组合而成的Slider组件，这里就有着父子组件传值的问题，而$emit的方式还是会报错，或者我把props里面的value值赋给子组件定义的counter，然后给le-slider组件v-model绑定为counter，这样虽然不会报错但是会使父组件的监听播放时间改变进度条位置的效果无效，所以最后采取了对象的方式处理</p>
-<pre><code>return{
-    value: {},
+<h3 id="设置input聚焦时的样式">设置input聚焦时的样式</h3>
+<pre><code>input:focus {   
+  background-color: red;
 }
 </code></pre>
-<p>将要传给子组件的值设置为对象类型，然后在赋值的时候添加一个属性接收参数</p>
-<pre><code> this.value.data =
-        (this.$refs.audio.currentTime / this.$refs.audio.duration) * 100;
+<h3 id="取消input的边框">取消input的边框</h3>
+<pre><code>border: none;
+outline: none;
 </code></pre>
-<p>最后在传递的时候将整个对象传递过去</p>
-<pre><code>&lt;Slider
-      @showCurrent=&quot;changeCurrent&quot;
-      :value=&quot;value&quot;
-      :duration=&quot;duration&quot;
-      :songName=&quot;songName&quot;
-      :currentTime=&quot;currentTime&quot;
-    &gt;&lt;/Slider&gt;
+<h2 id="二-隐藏滚动条或更改滚动条样式">二、隐藏滚动条或更改滚动条样式</h2>
+<pre><code>/*css主要部分的样式*//*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+    width: 10px; /*对垂直流动条有效*/
+    height: 10px; /*对水平流动条有效*/
+}
+
+/*定义滚动条的轨道颜色、内阴影及圆角*/
+::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: rosybrown;
+    border-radius: 3px;
+}
+
+/*定义滑块颜色、内阴影及圆角*/
+::-webkit-scrollbar-thumb{ 
+    border-radius: 7px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #E8E8E8;
+}
+
+/*定义两端按钮的样式*/
+::-webkit-scrollbar-button {
+    background-color:cyan;
+}
+
+/*定义右下角汇合处的样式*/
+::-webkit-scrollbar-corner {
+    background:khaki;
+}
 </code></pre>
-<p>然后在子组件赋值时采用对象属性的方式</p>
-<pre><code>&lt;el-slider @change=&quot;changCurrent&quot; :show-tooltip=&quot;false&quot; v-model=&quot;value.data&quot;&gt;&lt;/el-slider&gt;
+<h2 id="三-文字超出隐藏并显示省略号">三、文字超出隐藏并显示省略号</h2>
+<h3 id="单行一定要有宽度">单行（一定要有宽度）</h3>
+<pre><code>width:200rpx;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 </code></pre>
-<p>在它绑定的change事件上绑定方法，通过$emit的方式提交给父组件，</p>
-<pre><code>changCurrent() {
-      this.$emit(&quot;showCurrent&quot;, this.value.data);
-    },
+<p>多行</p>
+<pre><code>word-break: break-all;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
 </code></pre>
-<p>将值传递过去，父组件接收以后再更改自己的value.data的值，再传递给子组件，子组件再更改自己进度条滑块的位置，完成操作。</p>
-<pre><code>changeCurrent(data) {
-      this.$refs.audio.currentTime = (data / 100) * (this.duration / 1000);
-},
+<h2 id="四-控制div内的元素自动换行">四、控制div内的元素自动换行</h2>
+<pre><code>word-wrap: break-word;
+word-break：break-all;
+</code></pre>
+<h2 id="五-纯css画三角形">五、 纯css画三角形</h2>
+<pre><code>#demo {
+    width: 0;
+    height: 0;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+}
+</code></pre>
+<h2 id="六-绝对定位元素居中水平和垂直方向">六、 绝对定位元素居中（水平和垂直方向）</h2>
+<pre><code>#demo {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background-color: green;
+}
+</code></pre>
+<h2 id="七-表格边框合并">七、表格边框合并</h2>
+<pre><code>table,tr,td{border: 1px solid #333;}
+table{
+  border-collapse: collapse;
+}
 </code></pre>
 
             </div>
@@ -368,7 +617,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/" title="播放器进度条改进">https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/</a>
+      <a href="https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/" title="转载：那些你总是记不住但又总是要用的css">https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -382,14 +631,14 @@
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="B站播放器的一个小BUG" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">B站播放器的一个小BUG</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="B站播放器的一个小BUG" href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">上一篇</a>
+        <a class="nav-pc-next" title="vuex 数据持久化插件" href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">vuex 数据持久化插件</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="vuex 数据持久化插件" href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="uniapp生态下的UI框架—uView" href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/">uniapp生态下的UI框架—uView</a>
-        <a class="nav-mobile-next" title="uniapp生态下的UI框架—uView" href="https://jujuul.github.io/post/uniapp-sheng-tai-xia-de-ui-kuang-jia-uview/">下一篇</a>
+        <a class="nav-pc-next" title="vuex遇到的一个错误" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">vuex遇到的一个错误</a>
+        <a class="nav-mobile-next" title="vuex遇到的一个错误" href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
