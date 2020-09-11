@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Vue同路由跳转传参 | Mark</title>
+<title>百度搜索页更新了 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599820217257">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Vue同路由跳转传参" />
+  <meta name="description" content="百度搜索页更新了" />
   <meta name="keywords" content="" />
 </head>
 
@@ -276,8 +276,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
-      Vue同路由跳转传参
+    <a class="post-title-link" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/">
+      百度搜索页更新了
     </a>
   </h1>
   <div class="post-meta">
@@ -285,40 +285,29 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-31 11:02:39">2020-08-31</span>
+      <span class="publish-time" data-t="2020-09-11 18:11:34">2020-09-11</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>377<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>231<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
-<pre><code>const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err =&gt; err)
-}
-</code></pre>
-<p>可以用来屏蔽掉路由重复的报错，虽然报错没了，但是也没跳转啊，不是很明白这个的具体用处，我路由就是为了切换页面，同路径的传参路由就是为了切换数据，用这个虽然屏蔽了同页面路由的报错，但是也没能切换数据啊，意义不明。最后找到了3种方法，第一：使用watch监听路由变化，手动更新数据；第二：使用router-view；第三：使用provide-inject。最终选择了第一种watch监听。</p>
-<pre><code>watch: {
-    $route(n, o) {
-      if (n.fullPath !== o.fullPath) {
-        //监听路由参数是否变化
-        location.reload(); //强制刷新页面
-      }
-    },
-  },
-</code></pre>
-<p>一开始是监听到路由参数改变直接强制刷新页面，问题在于用户体验太差，后面改成了刷新各个函数的调用，这样就不会有屏幕刷新的问题，可惜事与愿违，video.js组件一个生命周期内只能被声明一次，所以最后还是只能强制刷新页面。</p>
+              <p>今天打开百度搜索一点东西，发现搜索结果页变了，变得更加“圆润”、“圆滑”了，字体改变了，下面的分页标签也改了，变成了圆角矩形<img src="https://jujuul.github.io//post-images/1599819940269.PNG" alt="" loading="lazy"><br>
+页面上文字颜色也改变了，变得更淡了，页面上加载的图片也全都变成圆角矩形了<br>
+<img src="https://jujuul.github.io//post-images/1599819914261.PNG" alt="" loading="lazy"><br>
+<img src="https://jujuul.github.io//post-images/1599819970092.PNG" alt="" loading="lazy"><br>
+同时还有一个<code>border: 1px solid rgba(0,0,0,.05);</code>边框<br>
+我个人觉得，比以前好看多了，虽然以前也用百度，但是对于页面UI之类的不太敏感，所以以前百度什么样子已经忘了，记得前几天在掘金看到有人介绍今年比较流行的新拟态样式，底下有人评论：扁平 - 拟物 - 扁平 - 拟物，风水轮流转，想来人类的审美还是趋同的，就像一个轮回，也许百度以前也是这种圆润风格的页面呢。</p>
 
             </div>
             
@@ -331,7 +320,7 @@ Router.prototype.push = function push(location) {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/" title="Vue同路由跳转传参">https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/</a>
+      <a href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/" title="百度搜索页更新了">https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -344,15 +333,11 @@ Router.prototype.push = function push(location) {
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">Vue样式穿透</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a>
-        <a class="nav-mobile-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">下一篇</a>
+        <a class="nav-pc-next" title="每天一个名词解释—Hippy" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/">每天一个名词解释—Hippy</a>
+        <a class="nav-mobile-next" title="每天一个名词解释—Hippy" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

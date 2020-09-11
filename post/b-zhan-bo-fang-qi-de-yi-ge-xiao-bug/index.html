@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>B站播放器的一个小BUG | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1599631073722">
+<link rel="shortcut icon" href="/favicon.ico?v=1599820217257">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">54</span>
+        <span class="site-item-stat-count">56</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -799,6 +799,63 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/"" data-c="
+          &lt;p&gt;今天打开百度搜索一点东西，发现搜索结果页变了，变得更加“圆润”、“圆滑”了，字体改变了，下面的分页标签也改了，变成了圆角矩形&lt;img src=&#34;https://jujuul.github.io//post-images/1599819940269.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+页面上文字颜色也改变了，变得更淡了，页面上加载的图片也全都变成圆角矩形了&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1599819914261.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1599819970092.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+同时还有一个&lt;code&gt;border: 1px solid rgba(0,0,0,.05);&lt;/code&gt;边框&lt;br&gt;
+我个人觉得，比以前好看多了，虽然以前也用百度，但是对于页面UI之类的不太敏感，所以以前百度什么样子已经忘了，记得前几天在掘金看到有人介绍今年比较流行的新拟态样式，底下有人评论：扁平 - 拟物 - 扁平 - 拟物，风水轮流转，想来人类的审美还是趋同的，就像一个轮回，也许百度以前也是这种圆润风格的页面呢。&lt;/p&gt;
+">百度搜索页更新了</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言：&lt;/h2&gt;
+&lt;p&gt;记得之前看过几篇前端跨端框架的文章，里面提到最多的就是uniapp、taro、mpvue，而截至目前，最为主流的应该就是uniapp和taro了，因为使用vue的关系，所以uniapp我也稍微看过，当时就在想，为什么有京东和美团的，不见阿里腾讯的呢？今天码云推送的一篇文章终于提到了，Hippy—腾讯的跨端开发框架。&lt;/p&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;介绍：&lt;/h2&gt;
+&lt;p&gt;Hippy 是一个新生的跨端开发框架，目标是使开发者可以只写一套代码就直接运行于三个平台（iOS、Android 和 Web）。Hippy 的设计是面向传统 Web 开发者的，特别是之前有过 React Native 和 Vue 的开发者用起来会更为顺手，Hippy 致力于让前端开发跨端 App 更加容易。&lt;/p&gt;
+&lt;p&gt;到目前为止，腾讯内已经有了18款流行 App 在使用 Hippy 框架，每日触达数亿用户。&lt;/p&gt;
+&lt;h2 id=&#34;特征&#34;&gt;特征：&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;为传统 Web 前端设计，官方支持 React 和 Vue 两种主流前端框架。&lt;/li&gt;
+&lt;li&gt;不同的平台保持了相同的接口。&lt;/li&gt;
+&lt;li&gt;通过 JS 引擎 binding 模式实现的前终端通讯，具备超强性能。&lt;/li&gt;
+&lt;li&gt;提供了高性能的可复用列表。&lt;/li&gt;
+&lt;li&gt;皆可平滑迁移到 Web 浏览器。&lt;/li&gt;
+&lt;li&gt;完整支持 Flex 的布局引擎。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;project-structure&#34;&gt;Project structure：&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;Hippy
+├── examples                          # 前终端范例代码。
+│   ├── hippy-react-demo              # hippy-react 前端范例代码。
+│   ├── hippy-vue-demo                # hippy-vue 前端范例代码。
+│   ├── ios-demo                      # iOS 终端范例代码。
+│   └── android-demo                  # Android 终端范例代码。
+├── packages                          # 前端 npm 包。
+│   ├── hippy-debug-server            # Hippy 的前终端调试服务。
+│   ├── hippy-react                   # Hippy 的 React 语法绑定。
+│   ├── hippy-react-web               # hippy-react 转 Web 的库。
+│   ├── hippy-vue                     # Hippy 的 Vue 语法绑定。
+│   ├── hippy-vue-css-loader          # 用来将 CSS 文本转换为 JS 语法树以供解析的 Webpack loader。
+│   ├── hippy-vue-native-components   # hippy-vue 中浏览器中所没有的，额外的，终端定制组件。
+│   └── hippy-vue-router              # 在 hippy-vue 中运行的 vue-router。
+├── ios
+│   └── sdk                           # iOS SDK。
+├── android
+│   ├── support_ui                    # Android 终端实现的组件。
+│   └── sdk                           # Android SDK。
+├── core                              # C++ 实现的 JS 模块，通过 Binding 方式运行在 JS 引擎中。
+├── layout                            # Hippy 布局引擎。
+├── scripts                           # 项目编译脚本。
+└── types                             # 全局 Typescript 类型定义。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;结束&#34;&gt;结束：&lt;/h2&gt;
+&lt;p&gt;我看了码云和github上最早提交时间都是9个月前，知乎上的提问也是差不多的时间，并且通过网上的讨论度，也能看出这个框架才刚刚开始，不过背后有着腾讯的加持，想来是不会有什么大问题。&lt;/p&gt;
+">每天一个名词解释—Hippy</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/"" data-c="

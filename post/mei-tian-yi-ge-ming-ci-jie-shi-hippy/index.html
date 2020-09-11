@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>Vue同路由跳转传参 | Mark</title>
+<title>每天一个名词解释—Hippy | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1599820217257">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="Vue同路由跳转传参" />
+  <meta name="description" content="每天一个名词解释—Hippy" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,199 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言：</a></li>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍：</a></li>
+<li><a href="#%E7%89%B9%E5%BE%81">特征：</a></li>
+<li><a href="#project-structure">Project structure：</a></li>
+<li><a href="#%E7%BB%93%E6%9D%9F">结束：</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +470,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
-      Vue同路由跳转传参
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/">
+      每天一个名词解释—Hippy
     </a>
   </h1>
   <div class="post-meta">
@@ -285,40 +479,64 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-31 11:02:39">2020-08-31</span>
+      <span class="publish-time" data-t="2020-09-10 12:19:33">2020-09-10</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>377<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>628<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
-<pre><code>const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch(err =&gt; err)
-}
+              <h2 id="前言">前言：</h2>
+<p>记得之前看过几篇前端跨端框架的文章，里面提到最多的就是uniapp、taro、mpvue，而截至目前，最为主流的应该就是uniapp和taro了，因为使用vue的关系，所以uniapp我也稍微看过，当时就在想，为什么有京东和美团的，不见阿里腾讯的呢？今天码云推送的一篇文章终于提到了，Hippy—腾讯的跨端开发框架。</p>
+<h2 id="介绍">介绍：</h2>
+<p>Hippy 是一个新生的跨端开发框架，目标是使开发者可以只写一套代码就直接运行于三个平台（iOS、Android 和 Web）。Hippy 的设计是面向传统 Web 开发者的，特别是之前有过 React Native 和 Vue 的开发者用起来会更为顺手，Hippy 致力于让前端开发跨端 App 更加容易。</p>
+<p>到目前为止，腾讯内已经有了18款流行 App 在使用 Hippy 框架，每日触达数亿用户。</p>
+<h2 id="特征">特征：</h2>
+<ul>
+<li>为传统 Web 前端设计，官方支持 React 和 Vue 两种主流前端框架。</li>
+<li>不同的平台保持了相同的接口。</li>
+<li>通过 JS 引擎 binding 模式实现的前终端通讯，具备超强性能。</li>
+<li>提供了高性能的可复用列表。</li>
+<li>皆可平滑迁移到 Web 浏览器。</li>
+<li>完整支持 Flex 的布局引擎。</li>
+</ul>
+<h2 id="project-structure">Project structure：</h2>
+<pre><code>Hippy
+├── examples                          # 前终端范例代码。
+│   ├── hippy-react-demo              # hippy-react 前端范例代码。
+│   ├── hippy-vue-demo                # hippy-vue 前端范例代码。
+│   ├── ios-demo                      # iOS 终端范例代码。
+│   └── android-demo                  # Android 终端范例代码。
+├── packages                          # 前端 npm 包。
+│   ├── hippy-debug-server            # Hippy 的前终端调试服务。
+│   ├── hippy-react                   # Hippy 的 React 语法绑定。
+│   ├── hippy-react-web               # hippy-react 转 Web 的库。
+│   ├── hippy-vue                     # Hippy 的 Vue 语法绑定。
+│   ├── hippy-vue-css-loader          # 用来将 CSS 文本转换为 JS 语法树以供解析的 Webpack loader。
+│   ├── hippy-vue-native-components   # hippy-vue 中浏览器中所没有的，额外的，终端定制组件。
+│   └── hippy-vue-router              # 在 hippy-vue 中运行的 vue-router。
+├── ios
+│   └── sdk                           # iOS SDK。
+├── android
+│   ├── support_ui                    # Android 终端实现的组件。
+│   └── sdk                           # Android SDK。
+├── core                              # C++ 实现的 JS 模块，通过 Binding 方式运行在 JS 引擎中。
+├── layout                            # Hippy 布局引擎。
+├── scripts                           # 项目编译脚本。
+└── types                             # 全局 Typescript 类型定义。
 </code></pre>
-<p>可以用来屏蔽掉路由重复的报错，虽然报错没了，但是也没跳转啊，不是很明白这个的具体用处，我路由就是为了切换页面，同路径的传参路由就是为了切换数据，用这个虽然屏蔽了同页面路由的报错，但是也没能切换数据啊，意义不明。最后找到了3种方法，第一：使用watch监听路由变化，手动更新数据；第二：使用router-view；第三：使用provide-inject。最终选择了第一种watch监听。</p>
-<pre><code>watch: {
-    $route(n, o) {
-      if (n.fullPath !== o.fullPath) {
-        //监听路由参数是否变化
-        location.reload(); //强制刷新页面
-      }
-    },
-  },
-</code></pre>
-<p>一开始是监听到路由参数改变直接强制刷新页面，问题在于用户体验太差，后面改成了刷新各个函数的调用，这样就不会有屏幕刷新的问题，可惜事与愿违，video.js组件一个生命周期内只能被声明一次，所以最后还是只能强制刷新页面。</p>
+<h2 id="结束">结束：</h2>
+<p>我看了码云和github上最早提交时间都是9个月前，知乎上的提问也是差不多的时间，并且通过网上的讨论度，也能看出这个框架才刚刚开始，不过背后有着腾讯的加持，想来是不会有什么大问题。</p>
 
             </div>
             
@@ -331,7 +549,7 @@ Router.prototype.push = function push(location) {
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/" title="Vue同路由跳转传参">https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/" title="每天一个名词解释—Hippy">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -345,14 +563,14 @@ Router.prototype.push = function push(location) {
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">Vue样式穿透</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Vue样式穿透" href="https://jujuul.github.io/post/vue-yang-shi-chuan-tou/">上一篇</a>
+        <a class="nav-pc-next" title="百度搜索页更新了" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/">百度搜索页更新了</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="百度搜索页更新了" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a>
-        <a class="nav-mobile-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">下一篇</a>
+        <a class="nav-pc-next" title="vuex 数据持久化插件" href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">vuex 数据持久化插件</a>
+        <a class="nav-mobile-next" title="vuex 数据持久化插件" href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
