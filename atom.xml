@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-11T14:56:22.907Z</updated>
+    <updated>2020-09-13T04:11:36.426Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,15 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[逛简书时发现的问题]]></title>
+        <id>https://jujuul.github.io/post/guang-jian-shu-shi-fa-xian-de-wen-ti/</id>
+        <link href="https://jujuul.github.io/post/guang-jian-shu-shi-fa-xian-de-wen-ti/">
+        </link>
+        <updated>2020-09-13T04:05:40.000Z</updated>
+        <content type="html"><![CDATA[<p>今天在简书看文章是，因为要用到控制台，就顺手按了F12，打开了当前页面的控制台，发现有一个打印出来的数组<img src="https://jujuul.github.io//post-images/1599970226633.PNG" alt="" loading="lazy">，虽然都不是什么重要的信息，但是这种打印应该也是不应该的吧</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[百度搜索页更新了]]></title>
         <id>https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/</id>
@@ -378,67 +387,6 @@ fn(){
 来源：知乎<br>
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <p>ps：我去官方文档看了下，组件功能很完善，文档也很详细，码云上才53(算上我)个star(不过码云上uniapp也才2.1K的star)，说到码云，最近知乎上看有几个大佬都在说码云，不知道是收了费还是单纯的觉得码云好用，就我个人而言，码云的使用体验还是不错的，毕竟访问速度上比github快多了，而且码云的开发者都是使用中文的，再配合在各个社区孜孜不倦的推荐开源项目的码云官方号，使用体验真的很好，就这10几天就看到了不少像是这个uView还有之前的一个chart组件一样的开源作品。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[搜索组件]]></title>
-        <id>https://jujuul.github.io/post/sou-suo-zu-jian/</id>
-        <link href="https://jujuul.github.io/post/sou-suo-zu-jian/">
-        </link>
-        <updated>2020-09-02T08:45:32.000Z</updated>
-        <content type="html"><![CDATA[<p>做到了搜索功能，因为之前没做过，在这里卡了一下，所以记录一下。<br>
-一开始是打算做成网易云的样式的，就是input聚焦以后弹出弹出层，然后里面列出推荐关键词，如果有历史搜索记录也列出来，但是这样效果很平常，所以就换了一个样式，换成点击搜索图标，整个页面模糊，弹出层内显示一个搜索框，下面列出推荐关键词。<br>
-先是实现背景模糊</p>
-<pre><code>.cover {
-  backdrop-filter: blur(10px);
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(255, 255, 255, 0.22);
-  cursor: default;
-  z-index: 9;
-}
-</code></pre>
-<p>这里不知道为什么，整个背景的cursor都是Pointer，所以后面为了显示的效果，我将在其之上的search部分的curcor都设置为了default。使用backdrop-filter属性让它呈现模糊的效果，fixed是为了定位它的位置，因为是要显示在上面的，所以把它的层级提高了。</p>
-<pre><code>.top::after {
-      content: &quot;&quot;;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: url(&quot;https://163musicloud.oss-cn-beijing.aliyuncs.com/backImage.jpg&quot;);
-      background-position: center;
-      filter: blur(10px);
-      z-index: -1;
-    }
-</code></pre>
-<p>这里是为了达到搜索框背景部分模糊的效果，借鉴了《css揭秘》这本书中对于毛玻璃的用法，filter与backdrop-filter的区别在于backdrop-filte可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）。 因为它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。而filter是出现毛玻璃效果，内容和背景都会模糊，为了不遮挡搜索框，所以这里的z-index层级需设置为负数。<br>
-👆为css部分<br>
-👇为js部分<br>
-因为要实现点击除弹出层外任意位置关闭弹出层的效果，所以这里要用到event，而vue中使用event就需要使用$event，在文档的事件处理那一节也有写。<br>
-在要触发事件的那一层添加点击事件</p>
-<pre><code>&lt;div class=&quot;cover&quot; v-show=&quot;isShow&quot; @click=&quot;closeMsg($event)&quot;&gt;
-</code></pre>
-<pre><code>closeMsg(event) {
-      let btn = document.querySelector(&quot;.search&quot;);
-      if (btn) {
-        if (!btn.contains(event.target)) {
-          this.isShow = false;
-        }
-      }
-    },
-</code></pre>
-<p>在事件里对它进行判断。<br>
-这里之所以被卡了很久就是因为不知道$event，之前竟然没有用到过，看文档的时候也不够仔细。<br>
-它的使用还有两个要注意的点<br>
-注意两点<br>
-1.不使用圆括号，event被自动当作实参传入<br>
-2.使用圆括号，必须显式的传入event对象，如果不传入可能最终找到的是全局的window .event<br>
-最后贴一下效果图<br>
-<img src="https://jujuul.github.io//post-images/1599038569224.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
