@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-13T04:15:57.583Z</updated>
+    <updated>2020-09-14T10:41:32.822Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,116 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[跨域相关]]></title>
+        <id>https://jujuul.github.io/post/kua-yu-xiang-guan/</id>
+        <link href="https://jujuul.github.io/post/kua-yu-xiang-guan/">
+        </link>
+        <updated>2020-09-14T09:47:50.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>最早接触跨域是在做毕设项目的时候，因为之前做的都是使用THINKPHP的项目，前后端不分离，所以没有遇到过跨域的问题，后来该做前端vue+后端thinkphp才遇到这个问题，但是因为是使用的vue-cli，跨域配置起来很简单，就没有特意去记录，但是因为跨域问题是前后端分离比较常见的问题，所以今天汇总一下。</p>
+<h2 id="什么是跨域为什么要跨域">什么是跨域？为什么要跨域？</h2>
+<p>首先，跨域指的是从一个域名去请求另一个域名的数据，这不够严谨，因为只要不是同协议、同域名、同端口的请求都算作跨域。<br>
+其次，为什么要跨域？是因为浏览器的同源策略。<br>
+同源策略，是为了保证用户的信息安全，防止信息被恶意窃取。如果没有同源策略，当访问A网站后如果访问B网站，那么B网站就可以读取A网站上的Cookie，用户的安全就受到了极大的威胁，所以同源策略是必须的。</p>
+<h2 id="同源是哪些相同呢">同源是哪些相同呢？</h2>
+<p>同源指的是三个相同</p>
+<ul>
+<li>协议相同</li>
+<li>域名相同</li>
+<li>端口相同<br>
+只有符合这三个，才是符合同源策略的。</li>
+</ul>
+<h2 id="同源策略限制了什么呢">同源策略限制了什么呢？</h2>
+<ol>
+<li>cookie、localstorage、indexDB无法获取</li>
+<li>Dom无法获取</li>
+<li>AJAX请求不能发送<br>
+我前面提到的前后端分离要配置跨域，就是为了解决ajax的问题。</li>
+</ol>
+<h2 id="问题知道了那怎么解决呢">问题知道了，那怎么解决呢？</h2>
+<ol>
+<li>JSONP</li>
+<li>CORS</li>
+<li>WebSocket</li>
+<li>Post Message<br>
+以上几种方式，我只使用过1、2来解决跨域问题。</li>
+</ol>
+<h2 id="jsonp">JSONP</h2>
+<p>这是最简单的一种解决方式，利用<code>&lt;script&gt;</code>标签不受跨域的限制，让<code>&lt;script&gt;</code>指向一个地址并提供一个回调函数来接收数据，简单且兼容性好，缺点在于只限GET请求。<br>
+前端</p>
+<pre><code>&lt;script&gt;
+var callback = (resp) =&gt; {
+      console.log(resp)
+}
+&lt;/script&gt;
+&lt;script src=&quot;http:localhost:3000/jsonp?callback=callback&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>服务端</p>
+<pre><code>app.get('/jsonp', function(req, res, next) {
+	res.jsonp(
+		'hello 这是一个jsonP跨域'
+	);
+});
+</code></pre>
+<p>例子中我使用了express作为服务器，res.jsonp应该是express专门为jsonp做的，后端会将hello 这是一个jsonP跨域这串字符返回，前端接收到以后调用名为callback的函数，处理数据。</p>
+<h2 id="cors">CORS</h2>
+<p>cors全称是cross-site resource sharing，跨域资源共享，是为了解决跨域问题存在的。<br>
+它有两种请求类型：简单请求和非简单请求<br>
+只要同时满足以下两大条件就属于简单请求</p>
+<ol>
+<li>请求方法是以下三种之一</li>
+</ol>
+<ul>
+<li>head</li>
+<li>get</li>
+<li>post</li>
+</ul>
+<ol start="2">
+<li>HTTP的头信息不超出以下几种字段</li>
+</ol>
+<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Last-Event-Id</li>
+<li>Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain<br>
+简单请求前端无需任何处理，如果需要携带cookie，前后端都设置一下就可以了。<br>
+复杂请求因为各个后端设置不同，所以就不详细介绍了。</li>
+</ul>
+<h2 id="websocket">WebSocket</h2>
+<p>websocket我也没有使用过，不过稍微用过一下PHPsocket框架Workerman,因为打算在毕设里加入个聊天功能，一开始找vue相关的推荐的全是websocket，但是因为已经完成大半了，没法换到nodejs，所以作罢了。不过我看了一下，两者思路差不多，都是先建立连接，对话，最后再关闭对话，期间好像还要监听通讯是否保持通讯，好像是叫做心跳。其间也看到很多在socket出现之前的通讯方法，长轮询和短轮询，通过ajax来进行通讯。</p>
+<h2 id="postmessage">postMessage</h2>
+<p>postMessage也是H5提供的方法，我这里找了一个网上的例子</p>
+<pre><code>// 发送消息端
+window.parent.postMessage('message', 'http://test.com')
+// 接收消息端
+var mc = new MessageChannel()
+mc.addEventListener('message', event =&gt; {
+  var origin = event.origin || event.originalEvent.origin
+  if (origin === 'http://test.com') {
+    console.log('验证通过')
+  }
+})
+</code></pre>
+<p>以上的是在开发环境中的跨域方式，按照今天看到的说法，在生产环境中以上方式是不行的，需要使用ngnix代理。</p>
+<h2 id="ngnix">NGNIX</h2>
+<p>ngnix配置</p>
+<pre><code>server{
+    # 监听9099端口
+    listen 9099;
+    # 域名是localhost
+    server_name localhost;
+    #凡是localhost:9099/api这个样子的，都转发到真正的服务端地址http://localhost:9871 
+    location ^~ /api {
+        proxy_pass http://localhost:9871;
+    }    
+}
+</code></pre>
+<h2 id="后记">后记</h2>
+<p>终于写了一遍篇幅较长的，比较像样的文章了，虽然也是拾人牙慧，但是也比之前要么简短、要么长篇复制、要么不知所云的好不少，尤其是写完之后的满足感，希望能够继续保持。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[TIOBE - 2020年9月编程语言排行]]></title>
         <id>https://jujuul.github.io/post/tiobe-2020-nian-9-yue-bian-cheng-yu-yan-pai-xing/</id>
@@ -326,68 +436,6 @@ fn(){
         </link>
         <updated>2020-09-06T15:25:25.000Z</updated>
         <content type="html"><![CDATA[<p>其实这个bug已经有好几天了，但是迟迟没修让我不禁怀疑是不是只有我遇到了这个bug，前几天的时候是打开新视频，当音量大于50%的时候，不论怎么调节，只要不使音量&lt;=50%都不显示音量图标，静音的情况没有测试，今晚使用发现当音量&lt; 50%的时候，会出现跟之前上面一样的情况(切换到静音状态再调节就好了)，不知道是不是修了旧bug又有了新bug。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[播放器进度条改进]]></title>
-        <id>https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/</id>
-        <link href="https://jujuul.github.io/post/bo-fang-qi-jin-du-tiao-gai-jin/">
-        </link>
-        <updated>2020-09-05T08:16:30.000Z</updated>
-        <content type="html"><![CDATA[<p>因为不满意之前的进度条样式，所以决定更换进度条，在参考多个其他项目之后，我发现还是elementUI的进度条比较合适，所以就换成了elementUI的slider组件，因为组件默认的颜色是蓝色，所以这里使用样式穿透更改组件颜色以及组件的高度，宽度等显示效果。</p>
-<pre><code>.slider /deep/ .el-slider {
-  margin: 2px 4px;
-  .el-slider__runway {
-    height: 4px;
-    margin: 4px 0px;
-    // border: 1px solid red;
-    .el-slider__bar {
-      background: #fa2800;
-      height: 4px;
-    }
-    .el-slider__button-wrapper {
-      top: -7px;
-      height: 0;
-      .el-slider__button {
-        width: 12px;
-        height: 12px;
-        border: 2px solid #fa2800;
-      }
-    }
-  }
-}
-</code></pre>
-<p>这样进度条就符合了我的要求，然后遇到了一个问题，因为使用的是elementUI的el-slider组件+我自己写的其他代码组合而成的Slider组件，这里就有着父子组件传值的问题，而$emit的方式还是会报错，或者我把props里面的value值赋给子组件定义的counter，然后给le-slider组件v-model绑定为counter，这样虽然不会报错但是会使父组件的监听播放时间改变进度条位置的效果无效，所以最后采取了对象的方式处理</p>
-<pre><code>return{
-    value: {},
-}
-</code></pre>
-<p>将要传给子组件的值设置为对象类型，然后在赋值的时候添加一个属性接收参数</p>
-<pre><code> this.value.data =
-        (this.$refs.audio.currentTime / this.$refs.audio.duration) * 100;
-</code></pre>
-<p>最后在传递的时候将整个对象传递过去</p>
-<pre><code>&lt;Slider
-      @showCurrent=&quot;changeCurrent&quot;
-      :value=&quot;value&quot;
-      :duration=&quot;duration&quot;
-      :songName=&quot;songName&quot;
-      :currentTime=&quot;currentTime&quot;
-    &gt;&lt;/Slider&gt;
-</code></pre>
-<p>然后在子组件赋值时采用对象属性的方式</p>
-<pre><code>&lt;el-slider @change=&quot;changCurrent&quot; :show-tooltip=&quot;false&quot; v-model=&quot;value.data&quot;&gt;&lt;/el-slider&gt;
-</code></pre>
-<p>在它绑定的change事件上绑定方法，通过$emit的方式提交给父组件，</p>
-<pre><code>changCurrent() {
-      this.$emit(&quot;showCurrent&quot;, this.value.data);
-    },
-</code></pre>
-<p>将值传递过去，父组件接收以后再更改自己的value.data的值，再传递给子组件，子组件再更改自己进度条滑块的位置，完成操作。</p>
-<pre><code>changeCurrent(data) {
-      this.$refs.audio.currentTime = (data / 100) * (this.duration / 1000);
-},
-</code></pre>
 ]]></content>
     </entry>
 </feed>
