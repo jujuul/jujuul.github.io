@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>vuetify学习记录 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600149575911">
+<link rel="shortcut icon" href="/favicon.ico?v=1600180390388">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">60</span>
+        <span class="site-item-stat-count">61</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -807,6 +807,40 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fei-chang-jian-dan-de-fang-dou-he-jie-liu/"" data-c="
+          &lt;p&gt;防抖和节流是面试前端必考的内容，之前也总结过防抖和节流，但是最近又看到了一个非常简单的防抖和节流的代码，给大家看一下&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function debounce(fn,delay){
+    var timer = null;
+    return function(){
+        var firstClick = !timer;
+        if (timer) {
+            clearTimeout(timer);
+        }
+        if(firstClick){
+            fn.apply(this,arguments)
+        }
+        timer = setTimeout(function(){
+            timer = null;
+        },delay)
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;function throttle(fn,delay){
+    var old = 0;
+    return function(){
+        var new = new Date().getTime();
+        if(new -old &amp;gt; daley){
+            fn.apply(this,arguments)
+            old = new;
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;防抖的代码还可以使用箭头函数再简化一下，第一次看到这个代码的时候我没有想到竟然还能这么写。&lt;/p&gt;
+">非常简单的防抖和节流</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/"" data-c="

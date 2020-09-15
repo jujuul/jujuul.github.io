@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-15T05:59:45.126Z</updated>
+    <updated>2020-09-15T14:33:17.235Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,43 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[非常简单的防抖和节流]]></title>
+        <id>https://jujuul.github.io/post/fei-chang-jian-dan-de-fang-dou-he-jie-liu/</id>
+        <link href="https://jujuul.github.io/post/fei-chang-jian-dan-de-fang-dou-he-jie-liu/">
+        </link>
+        <updated>2020-09-15T14:09:27.000Z</updated>
+        <content type="html"><![CDATA[<p>防抖和节流是面试前端必考的内容，之前也总结过防抖和节流，但是最近又看到了一个非常简单的防抖和节流的代码，给大家看一下</p>
+<pre><code>function debounce(fn,delay){
+    var timer = null;
+    return function(){
+        var firstClick = !timer;
+        if (timer) {
+            clearTimeout(timer);
+        }
+        if(firstClick){
+            fn.apply(this,arguments)
+        }
+        timer = setTimeout(function(){
+            timer = null;
+        },delay)
+    }
+}
+</code></pre>
+<pre><code>function throttle(fn,delay){
+    var old = 0;
+    return function(){
+        var new = new Date().getTime();
+        if(new -old &gt; daley){
+            fn.apply(this,arguments)
+            old = new;
+        }
+    }
+}
+</code></pre>
+<p>防抖的代码还可以使用箭头函数再简化一下，第一次看到这个代码的时候我没有想到竟然还能这么写。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[前端模块化简介]]></title>
         <id>https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/</id>
@@ -555,43 +592,6 @@ fn(){
     this.$store.commit(&quot;SET_NEWSONG&quot;, item);
 }
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—amis]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-amis/">
-        </link>
-        <updated>2020-09-07T06:40:59.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="什么是-amis">什么是 amis</h2>
-<p>amis 是一个低代码前端框架，它使用 JSON 配置来生成页面，可以减少页面开发工作量，极大提升效率。</p>
-<h2 id="为什么要做-amis">为什么要做 amis？</h2>
-<p>在经历了十几年的发展后，前端开发变得越来越复杂，门槛也越来越高，要使用当下流行的 UI 组件库，你必须懂 npm、webpack、react/vue，必须熟悉 ES6 语法，最好还了解状态管理，比如 Redux，如果没接触过函数式编程，光入门都很费劲，而入门之后会发现它还有巨大的 生态，相关的库有 2347 个，很多功能相似，挑选成本高。</p>
-<p>然而前端技术的发展不会停滞，等学完这些后可能会发现大家都用 Hooks 了、某个打包工具取代 Webpack 了……</p>
-<h2 id="用-json-写页面有什么好处">用 JSON 写页面有什么好处</h2>
-<p>为了实现用最简单方式来生成大部分页面，amis 的解决方案是基于 JSON 来配置，它的独特好处是：</p>
-<ol>
-<li>不需要懂前端：在百度内部，大部分 amis 用户之前从来没写过前端页面，也不会 JavaScript，却能做出专业且复杂的后台界面，这是所有其他前端 UI 库都无法做到的；</li>
-<li>不受前端技术更新的影响：百度内部最老的 amis 页面是 4 年多前创建的，至今还在使用，而当年的 Angular/Vue/React 版本现在都废弃了，当年流行的 Gulp 也被 Webpack 取代了，如果这些页面不是用 amis，现在的维护成本会很高；</li>
-<li>享受 amis 的不断升级：amis 一直在提升细节交互体验，比如表格首行冻结、下拉框大数据下不卡顿等，之前的 JSON 配置完全不需要修改；</li>
-<li>可以 完全 使用 可视化页面编辑器 来制作页面：一般前端可视化编辑器只能用来做静态原型，而 amis 可视化编辑器做出的页面是可以直接上线的。</li>
-</ol>
-<p>##amis 的其它亮点</p>
-<ol>
-<li>提供完整的界面解决方案：其它 UI 框架必须使用 JavaScript 来组装业务逻辑，而 amis 只需 JSON 配置就能完成完整功能开发，包括数据获取、表单提交及验证等功能，做出来的页面不需要经过二次开发就能直接上线；</li>
-<li>内置 100+ 种 UI 组件：包括其它 UI 框架都不会提供的富文本编辑器、条件组合等，能满足各种页面组件展现的需求，而且对于特殊的展现形式还可以通过 自定义组件 来扩充；</li>
-<li>容器支持无限级嵌套：可以通过组合来满足各种布局需求；</li>
-<li>经历了长时间的实战考验：amis 在百度内部得到了广泛使用，在 4 年多的时间里创建了 3 万+ 页面，从内容审核到机器管理，从数据分析到模型训练，amis 满足了各种各样的页面需求，最复杂的页面有超过 1 万行 JSON 配置。</li>
-</ol>
-<h2 id="amis-不适合做什么">amis 不适合做什么？</h2>
-<p>使用 JSON 有优点但也有明显缺点，在以下场合并不适合 amis：</p>
-<ol>
-<li>大量定制 UI：JSON 配置使得 amis 更适合做有大量常见 UI 组件的页面，但对于面向普通客户（toC）的页面，往往追求个性化的视觉效果，这种情况下用 amis 就不合适，实际上绝大部分前端 UI 组件库也都不适合，只能定制开发。</li>
-<li>极为复杂或特殊的交互：<br>
-1. 有些复杂的前端功能，比如 可视化编辑器，其中有大量定制的拖拽操作，这种需要依赖原生            DOM 实现的功能无法使用 amis。<br>
-2. 但对于某些交互固定的领域，比如图连线，amis 后续会有专门的组件来实现。</li>
-</ol>
-<p>这个系列也是好久没写，关键是之前把前端领域比较有影响力的种种写出来以后，就不知道该写些什么了，几天码云更新的这篇文章算是让我知道了该写什么，虽然以后可能用不到amis，但是了解一下也是好的，amis有两种使用方法，npm与JS SDK，其中npm适合在react项目中，sdk适合对前端或是react不了解的开发者，但是sdk的方式难以自定义组件，通过这些天做项目的经验，自定义组件在我看来还是相当重要的，所以这个只能在学了react后使用，官方文档上各个组件倒是不少，但是没有react的经验，也没法立即使用，码云上400+的star数说明这个项目目前还不是很好，可以留意一下。</p>
 ]]></content>
     </entry>
 </feed>
