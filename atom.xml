@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-14T10:41:32.822Z</updated>
+    <updated>2020-09-15T05:59:45.126Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,171 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[前端模块化简介]]></title>
+        <id>https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/</id>
+        <link href="https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/">
+        </link>
+        <updated>2020-09-15T05:04:08.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>前端模块化是个进几年常被提起的词，随着大前端的盛行，前端模块化也越来越被广泛应用，但其实前端模块化是早就存在的，但是随着时间的推移，技术不断进步，模块化的方式也在不断变化，本文就大致梳理一下前端模块化。</p>
+<h2 id="什么是模块模块化模块化开发">什么是模块？模块化？模块化开发？</h2>
+<p>模块，是为了完成某个功能所需的程序。模块是系统中职责单一且可替换的部分。<br>
+模块化是把系统代码分为一些列的职责单一且可替换的模块。<br>
+模块化开发是指开发新模块和复用旧模块来实现应用功能的开发形式。</p>
+<h2 id="为什么要模块化">为什么要模块化？</h2>
+<p>因为随着硬件的发展，web能做的事情也越来越多，很多业务逻辑和交互都通过web实现，随之而来的就是代码量的提升，因此需要模块化开发，模块化开发具有以下的优点。</p>
+<ul>
+<li>避免命名冲突</li>
+<li>更高的复用性与可维护性</li>
+<li>更好的分离，按需加载</li>
+</ul>
+<h2 id="模块化的发展历程">模块化的发展历程</h2>
+<h3 id="洪荒时期">洪荒时期</h3>
+<p>1999    直接定义依赖（全局function模式）</p>
+<pre><code>function foo(){
+    //...
+}
+</code></pre>
+<p>缺点是污染全局变量，每个函数都单独命名，如果有多个函数就过于繁琐<br>
+2002    namespace模式</p>
+<pre><code>var app = {};
+app.foo = function(){
+    //...
+}
+</code></pre>
+<p>优点：不在污染全局变量，减少了命名冲突<br>
+缺点：依赖唯一的全局变量，并且如果使用同一个全局变量就无法共存<br>
+2003    匿名闭包模型（IIFE模式）</p>
+<pre><code>(function(window) {
+  let data = 'www.baidu.com'
+  //操作数据的函数
+  function foo() {
+    //用于暴露有函数
+    console.log(`foo() ${data}`)
+  }
+  function bar() {
+    //用于暴露有函数
+    console.log(`bar() ${data}`)
+    otherFun() //内部调用
+  }
+  function otherFun() {
+    //内部私有的函数
+    console.log('otherFun()')
+  }
+  //暴露行为
+  window.myModule = { foo, bar } //ES6写法
+})(window)
+</code></pre>
+<p>缺点在于无法解决模块间的依赖问题<br>
+2009    注入依赖模式<br>
+这一时期，因为前端才刚刚发展，所以还是很原始的</p>
+<h3 id="现在所常用的前端模块化方案">现在所常用的前端模块化方案</h3>
+<p>CommonJS<br>
+特点：所有代码运行在模块作用域，不会污染全局变量，模块可以多次加载，但只在第一次直接读取缓存，想让模块再次运行必须清除缓存。模块加载顺序取决于在代码中的顺序。nodejs就是采用这种模式<br>
+基本语法：<br>
+暴露模块：<br>
+<code>module.exports = value</code>或<code>exports.xxx = value</code><br>
+引入模块：<br>
+<code>require(xxx)</code><br>
+重点：CommonJS的加载机制是，引入的是被输出的值的拷贝，一旦输出，模块内部的变化无法影响这个值。<br>
+AMD<br>
+特点：异步<br>
+基本语法：<br>
+暴露模块：</p>
+<pre><code>// 定义没有依赖的模块
+define(function(){
+    return 模块
+})
+// 定义有依赖的模块
+define(['module1','module2'],function(m1,m2){
+    return 模块
+})
+</code></pre>
+<p>引入使用模块</p>
+<pre><code>require(['module1','module2'],function(m1,m2){
+    使用 m1/m2
+})
+</code></pre>
+<p>CMD<br>
+基本语法：<br>
+定义暴露模块：</p>
+<pre><code>// 定义无依赖模块
+define(function(require,exports,module){
+    exports.xxx = value;
+    module.exports = value;
+})
+// 定义有依赖模块
+define(function(require,exports,module){
+    var module2 = require('./module2');
+    require.async('./module3',function(m3){
+        // ...
+    })
+    exports.xxx = value
+})
+</code></pre>
+<p>引入使用模块：</p>
+<pre><code>define(function (require) {
+  var m1 = require('./module1')
+  var m4 = require('./module4')
+  m1.show()
+  m4.show()
+})
+</code></pre>
+<p>ES6模块化<br>
+ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文档很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。<br>
+语法：<br>
+export：用于规定模块的对外接口<br>
+import：用于引入其他模块提供的功能</p>
+<pre><code>// libs.js
+export let counter = 3;
+
+// main.js
+import {counter} from './libs'
+</code></pre>
+<p>定义模块代码：</p>
+<pre><code>//module1.js文件
+// 分别暴露
+export function foo() {
+  console.log('foo() module1')
+}
+export function bar() {
+  console.log('bar() module1')
+}
+</code></pre>
+<pre><code>//module2.js文件
+// 统一暴露
+function fun1() {
+  console.log('fun1() module2')
+}
+function fun2() {
+  console.log('fun2() module2')
+}
+export { fun1, fun2 }
+</code></pre>
+<pre><code>//module3.js文件
+// 默认暴露 可以暴露任意数据类项，暴露什么数据，接收到就是什么数据
+export default () =&gt; {
+  console.log('默认暴露')
+}
+</code></pre>
+<h3 id="es6模块与commonjs模块对比">ES6模块与CommonJS模块对比</h3>
+<ol>
+<li>CommonJS输出的是值的拷贝，而ES6modules输出的是值的引用</li>
+<li>CommonJS是运行时加载，而ES6modules是编译时输出接口</li>
+</ol>
+<h2 id="总结">总结</h2>
+<p>前端模块化的进程伴随着前端的发展，也许几年后又是新的方法取代现在的方法，但是目前，ES6模块是能够完全取代CommonJS与CMD等规范的。</p>
+<h2 id="后记">后记</h2>
+<p>其实正如文章名字所言，这是一个关于前端模块化的简介，或者说是演变史，关于CMD、AMD等规范的详细内容都没有提及，这也不是现阶段的我需要去了解的，这里只是梳理一下，文章依然是总结了其他大牛的文章，可能总结的还不够好，精华部分可能也被舍弃了，但至少是我自己查阅与思考后的结果。前几天看掘金上不少有多年前端开发经验的前辈在感叹现如今前端发展之快，对前端从业者技能要求也是越来越高，学习前端的资源更是多不胜数，远超他们当年，不由得感谢这些在网络上输出优质内容的前辈们，是他们推动了技术整体的进步，让我想起了大刘的那本《乡村教师》，看到里面外星人感叹人类的文明传承竟是靠言传身教，现如今人们获取知识的途径或许变得简单，但是传播知识的人的精神却丝毫未减。</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://segmentfault.com/a/1190000017466120">前端模块化详解(完整版)</a><br>
+<a href="https://juejin.im/post/6844903640897945614#heading-10">Javascript模块化的演进历程</a><br>
+<a href="https://github.com/seajs/seajs/issues/242">CMD 模块定义规范</a><br>
+<a href="https://www.iteye.com/blog/zccst-2215317">CommonJS，AMD，CMD区别</a><br>
+<a href="https://github.com/seajs/seajs/issues/588">前端模块化开发那点历史</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[跨域相关]]></title>
         <id>https://jujuul.github.io/post/kua-yu-xiang-guan/</id>
@@ -427,15 +592,6 @@ fn(){
 2. 但对于某些交互固定的领域，比如图连线，amis 后续会有专门的组件来实现。</li>
 </ol>
 <p>这个系列也是好久没写，关键是之前把前端领域比较有影响力的种种写出来以后，就不知道该写些什么了，几天码云更新的这篇文章算是让我知道了该写什么，虽然以后可能用不到amis，但是了解一下也是好的，amis有两种使用方法，npm与JS SDK，其中npm适合在react项目中，sdk适合对前端或是react不了解的开发者，但是sdk的方式难以自定义组件，通过这些天做项目的经验，自定义组件在我看来还是相当重要的，所以这个只能在学了react后使用，官方文档上各个组件倒是不少，但是没有react的经验，也没法立即使用，码云上400+的star数说明这个项目目前还不是很好，可以留意一下。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[B站播放器的一个小BUG]]></title>
-        <id>https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/</id>
-        <link href="https://jujuul.github.io/post/b-zhan-bo-fang-qi-de-yi-ge-xiao-bug/">
-        </link>
-        <updated>2020-09-06T15:25:25.000Z</updated>
-        <content type="html"><![CDATA[<p>其实这个bug已经有好几天了，但是迟迟没修让我不禁怀疑是不是只有我遇到了这个bug，前几天的时候是打开新视频，当音量大于50%的时候，不论怎么调节，只要不使音量&lt;=50%都不显示音量图标，静音的情况没有测试，今晚使用发现当音量&lt; 50%的时候，会出现跟之前上面一样的情况(切换到静音状态再调节就好了)，不知道是不是修了旧bug又有了新bug。</p>
 ]]></content>
     </entry>
 </feed>

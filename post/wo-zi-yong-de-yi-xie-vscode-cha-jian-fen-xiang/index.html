@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>我自用的一些vscode插件分享 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600080081741">
+<link rel="shortcut icon" href="/favicon.ico?v=1600149575911">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">59</span>
+        <span class="site-item-stat-count">60</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -837,6 +837,168 @@ JS代码检测工具，配合之前的几个代码检测，写出的代码将无
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;前端模块化是个进几年常被提起的词，随着大前端的盛行，前端模块化也越来越被广泛应用，但其实前端模块化是早就存在的，但是随着时间的推移，技术不断进步，模块化的方式也在不断变化，本文就大致梳理一下前端模块化。&lt;/p&gt;
+&lt;h2 id=&#34;什么是模块模块化模块化开发&#34;&gt;什么是模块？模块化？模块化开发？&lt;/h2&gt;
+&lt;p&gt;模块，是为了完成某个功能所需的程序。模块是系统中职责单一且可替换的部分。&lt;br&gt;
+模块化是把系统代码分为一些列的职责单一且可替换的模块。&lt;br&gt;
+模块化开发是指开发新模块和复用旧模块来实现应用功能的开发形式。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要模块化&#34;&gt;为什么要模块化？&lt;/h2&gt;
+&lt;p&gt;因为随着硬件的发展，web能做的事情也越来越多，很多业务逻辑和交互都通过web实现，随之而来的就是代码量的提升，因此需要模块化开发，模块化开发具有以下的优点。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;避免命名冲突&lt;/li&gt;
+&lt;li&gt;更高的复用性与可维护性&lt;/li&gt;
+&lt;li&gt;更好的分离，按需加载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;模块化的发展历程&#34;&gt;模块化的发展历程&lt;/h2&gt;
+&lt;h3 id=&#34;洪荒时期&#34;&gt;洪荒时期&lt;/h3&gt;
+&lt;p&gt;1999    直接定义依赖（全局function模式）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function foo(){
+    //...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点是污染全局变量，每个函数都单独命名，如果有多个函数就过于繁琐&lt;br&gt;
+2002    namespace模式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var app = {};
+app.foo = function(){
+    //...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;优点：不在污染全局变量，减少了命名冲突&lt;br&gt;
+缺点：依赖唯一的全局变量，并且如果使用同一个全局变量就无法共存&lt;br&gt;
+2003    匿名闭包模型（IIFE模式）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;(function(window) {
+  let data = &#39;www.baidu.com&#39;
+  //操作数据的函数
+  function foo() {
+    //用于暴露有函数
+    console.log(`foo() ${data}`)
+  }
+  function bar() {
+    //用于暴露有函数
+    console.log(`bar() ${data}`)
+    otherFun() //内部调用
+  }
+  function otherFun() {
+    //内部私有的函数
+    console.log(&#39;otherFun()&#39;)
+  }
+  //暴露行为
+  window.myModule = { foo, bar } //ES6写法
+})(window)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;缺点在于无法解决模块间的依赖问题&lt;br&gt;
+2009    注入依赖模式&lt;br&gt;
+这一时期，因为前端才刚刚发展，所以还是很原始的&lt;/p&gt;
+&lt;h3 id=&#34;现在所常用的前端模块化方案&#34;&gt;现在所常用的前端模块化方案&lt;/h3&gt;
+&lt;p&gt;CommonJS&lt;br&gt;
+特点：所有代码运行在模块作用域，不会污染全局变量，模块可以多次加载，但只在第一次直接读取缓存，想让模块再次运行必须清除缓存。模块加载顺序取决于在代码中的顺序。nodejs就是采用这种模式&lt;br&gt;
+基本语法：&lt;br&gt;
+暴露模块：&lt;br&gt;
+&lt;code&gt;module.exports = value&lt;/code&gt;或&lt;code&gt;exports.xxx = value&lt;/code&gt;&lt;br&gt;
+引入模块：&lt;br&gt;
+&lt;code&gt;require(xxx)&lt;/code&gt;&lt;br&gt;
+重点：CommonJS的加载机制是，引入的是被输出的值的拷贝，一旦输出，模块内部的变化无法影响这个值。&lt;br&gt;
+AMD&lt;br&gt;
+特点：异步&lt;br&gt;
+基本语法：&lt;br&gt;
+暴露模块：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 定义没有依赖的模块
+define(function(){
+    return 模块
+})
+// 定义有依赖的模块
+define([&#39;module1&#39;,&#39;module2&#39;],function(m1,m2){
+    return 模块
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;引入使用模块&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;require([&#39;module1&#39;,&#39;module2&#39;],function(m1,m2){
+    使用 m1/m2
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;CMD&lt;br&gt;
+基本语法：&lt;br&gt;
+定义暴露模块：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 定义无依赖模块
+define(function(require,exports,module){
+    exports.xxx = value;
+    module.exports = value;
+})
+// 定义有依赖模块
+define(function(require,exports,module){
+    var module2 = require(&#39;./module2&#39;);
+    require.async(&#39;./module3&#39;,function(m3){
+        // ...
+    })
+    exports.xxx = value
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;引入使用模块：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;define(function (require) {
+  var m1 = require(&#39;./module1&#39;)
+  var m4 = require(&#39;./module4&#39;)
+  m1.show()
+  m4.show()
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;ES6模块化&lt;br&gt;
+ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文档很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。&lt;br&gt;
+语法：&lt;br&gt;
+export：用于规定模块的对外接口&lt;br&gt;
+import：用于引入其他模块提供的功能&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// libs.js
+export let counter = 3;
+
+// main.js
+import {counter} from &#39;./libs&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;定义模块代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//module1.js文件
+// 分别暴露
+export function foo() {
+  console.log(&#39;foo() module1&#39;)
+}
+export function bar() {
+  console.log(&#39;bar() module1&#39;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;//module2.js文件
+// 统一暴露
+function fun1() {
+  console.log(&#39;fun1() module2&#39;)
+}
+function fun2() {
+  console.log(&#39;fun2() module2&#39;)
+}
+export { fun1, fun2 }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;//module3.js文件
+// 默认暴露 可以暴露任意数据类项，暴露什么数据，接收到就是什么数据
+export default () =&amp;gt; {
+  console.log(&#39;默认暴露&#39;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;es6模块与commonjs模块对比&#34;&gt;ES6模块与CommonJS模块对比&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;CommonJS输出的是值的拷贝，而ES6modules输出的是值的引用&lt;/li&gt;
+&lt;li&gt;CommonJS是运行时加载，而ES6modules是编译时输出接口&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;前端模块化的进程伴随着前端的发展，也许几年后又是新的方法取代现在的方法，但是目前，ES6模块是能够完全取代CommonJS与CMD等规范的。&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;其实正如文章名字所言，这是一个关于前端模块化的简介，或者说是演变史，关于CMD、AMD等规范的详细内容都没有提及，这也不是现阶段的我需要去了解的，这里只是梳理一下，文章依然是总结了其他大牛的文章，可能总结的还不够好，精华部分可能也被舍弃了，但至少是我自己查阅与思考后的结果。前几天看掘金上不少有多年前端开发经验的前辈在感叹现如今前端发展之快，对前端从业者技能要求也是越来越高，学习前端的资源更是多不胜数，远超他们当年，不由得感谢这些在网络上输出优质内容的前辈们，是他们推动了技术整体的进步，让我想起了大刘的那本《乡村教师》，看到里面外星人感叹人类的文明传承竟是靠言传身教，现如今人们获取知识的途径或许变得简单，但是传播知识的人的精神却丝毫未减。&lt;/p&gt;
+&lt;h2 id=&#34;参考文章&#34;&gt;参考文章&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000017466120&#34;&gt;前端模块化详解(完整版)&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://juejin.im/post/6844903640897945614#heading-10&#34;&gt;Javascript模块化的演进历程&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://github.com/seajs/seajs/issues/242&#34;&gt;CMD 模块定义规范&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.iteye.com/blog/zccst-2215317&#34;&gt;CommonJS，AMD，CMD区别&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://github.com/seajs/seajs/issues/588&#34;&gt;前端模块化开发那点历史&lt;/a&gt;&lt;/p&gt;
+">前端模块化简介</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/kua-yu-xiang-guan/"" data-c="
