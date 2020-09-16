@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-15T14:33:17.235Z</updated>
+    <updated>2020-09-16T09:30:09.646Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,174 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Emment语法（vscode快捷方式）]]></title>
+        <id>https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/</id>
+        <link href="https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/">
+        </link>
+        <updated>2020-09-16T09:25:23.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="1生成html5代码">1.生成HTML5代码</h3>
+<p><code>&lt;!-- ! 或者 html:5 --&gt;</code></p>
+<h3 id="2生成子代元素">2.生成子代元素：( &gt; )</h3>
+<pre><code>&lt;!-- div&gt;p&gt;span --&gt;
+&lt;div&gt;
+    &lt;p&gt;
+        &lt;span&gt;&lt;/span&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="3生成兄弟元素">3.生成兄弟元素：( + )</h3>
+<pre><code>&lt;!-- div+p+h2 --&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;h2&gt;&lt;/h2&gt;
+</code></pre>
+<h3 id="4生成多个元素">4.生成多个元素： ( * )</h3>
+<pre><code>&lt;!-- div&gt;p*2+div*3 --&gt;
+&lt;div&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;/p&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="5生成上一个层级的元素">5.生成上一个层级的元素：( ^ )</h3>
+<pre><code>&lt;!-- div&gt;p^div --&gt;
+&lt;div&gt;
+    &lt;p&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+
+&lt;!-- div&gt;p&gt;span^^h2+strong --&gt;
+&lt;div&gt;
+    &lt;p&gt;
+        &lt;span&gt;&lt;/span&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;strong&gt;&lt;/strong&gt;
+</code></pre>
+<h3 id="6对元素进行分组-使用-括号分组">6.对元素进行分组( 使用() 括号分组 )</h3>
+<pre><code>&lt;!-- (div&gt;p&gt;span)+h2+strong --&gt;
+&lt;div&gt;
+    &lt;p&gt;
+        &lt;span&gt;&lt;/span&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;h2&gt;&lt;/h2&gt;
+&lt;strong&gt;&lt;/strong&gt;
+
+&lt;!-- div&gt;(p&gt;span)+h2+a--&gt;
+&lt;div&gt;
+    &lt;p&gt;
+        &lt;span&gt;&lt;/span&gt;
+    &lt;/p&gt;
+    &lt;h2&gt;&lt;/h2&gt;
+    &lt;a&gt;&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+<h3 id="7生成元素属性id属性class属性普通属性">7.生成元素属性(id属性，class属性，普通属性)</h3>
+<pre><code>&lt;!--id: div#main --&gt;
+&lt;div id='main'&gt;&lt;/div&gt;
+&lt;!--class: div.box --&gt;
+&lt;div class='box'&gt;&lt;/div&gt;
+&lt;!--普通属性: div[title] --&gt;
+&lt;div class=''&gt;&lt;/div&gt;
+&lt;!--普通属性赋值: div[title='文字内容'] --&gt;
+&lt;div title='文字内容'&gt;&lt;/div&gt;
+</code></pre>
+<pre><code>&lt;!--div#header&gt;div.box1^div.page+div#footer--&gt;
+&lt;div id='header'&gt;
+    &lt;div class='box1'&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class='page'&gt;&lt;/div&gt;
+&lt;div id='footer'&gt;&lt;/div&gt;
+</code></pre>
+<h3 id="8生成元素的文字-使用-花括号">8.生成元素的文字( 使用{} 花括号 )</h3>
+<pre><code>&lt;!--div#box{div文字内容}--&gt;
+&lt;div id='box'&gt;div文字内容&lt;/div&gt;
+</code></pre>
+<h3 id="9生成结构中有数字-使用-符号">9.生成结构中有数字( 使用 $ 符号)</h3>
+<pre><code>&lt;!-- 属性中有数字: div.box$*3--&gt;
+&lt;div class=&quot;box1&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;box2&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;box3&quot;&gt;&lt;/div&gt;
+
+&lt;!-- 属性中的数字中有多个0: ul&gt;li.item$$$*3 --&gt;
+&lt;ul&gt;
+    &lt;li class=&quot;item001&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item002&quot;&gt;&lt;/li&gt;
+    &lt;li class=&quot;item003&quot;&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- 内容中有数字: div{第$行内容}*3 --&gt;
+&lt;div&gt;第1行内容&lt;/div&gt;
+&lt;div&gt;第2行内容&lt;/div&gt;
+&lt;div&gt;第3行内容&lt;/div&gt;
+</code></pre>
+<h3 id="10隐式标签">10.隐式标签</h3>
+<pre><code>&lt;!-- 第一种: #header&gt;.box (默认以 div 形式展示)--&gt;
+&lt;div id=&quot;header&quot;&gt;
+    &lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code>&lt;!-- 第二种 ul&gt;.item${文本内容$}*3 (ul中 默认是 li)--&gt;
+&lt;ul&gt;
+    &lt;li class=&quot;item1&quot;&gt;文本内容1&lt;/li&gt;
+    &lt;li class=&quot;item2&quot;&gt;文本内容2&lt;/li&gt;
+    &lt;li class=&quot;item3&quot;&gt;文本内容3&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+<pre><code>&lt;!-- 第三种 table&gt;#row$*3&gt;[colspan=2]--&gt;
+&lt;table&gt;
+    &lt;tr id=&quot;row1&quot;&gt;
+        &lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr id=&quot;row2&quot;&gt;
+        &lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr id=&quot;row3&quot;&gt;
+        &lt;td colspan=&quot;2&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<h3 id="11css中的emment语法">11.CSS中的Emment语法</h3>
+<pre><code>/* w100+h100+m0+p0 */
+div{
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+</code></pre>
+<pre><code>/* m20-30-40-50 分别是上,右,下,左*/
+div{
+    margin: 20px 30px 40px 50px;
+}
+
+/* p-10-20--30 分别是上-10,右和左20,下-30*/
+div{
+    padding: -10px 20px -30px;
+}
+</code></pre>
+<pre><code>/* m10px20px   m10px-20*/
+div{
+    margin:10px  20px;
+    margin:10px -20px;
+}
+
+/*dib  fz20  fz1.5  fw400  lh20px(行高必须加单位)*/
+div{
+    display: inline-block;
+    font-size:20px;
+    font-size:1.5em;
+    font-weight:400;
+    line-height:20px;
+}
+</code></pre>
+<p>转载于 <a href="https://www.cnblogs.com/rans/p/12804016.html">白邪</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[非常简单的防抖和节流]]></title>
         <id>https://jujuul.github.io/post/fei-chang-jian-dan-de-fang-dou-he-jie-liu/</id>
@@ -566,30 +734,6 @@ word-break：break-all;
 <pre><code>table,tr,td{border: 1px solid #333;}
 table{
   border-collapse: collapse;
-}
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vuex遇到的一个错误]]></title>
-        <id>https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/</id>
-        <link href="https://jujuul.github.io/post/vuex-yu-dao-de-yi-ge-cuo-wu/">
-        </link>
-        <updated>2020-09-08T13:09:41.000Z</updated>
-        <content type="html"><![CDATA[<p>使用vuex的mutations时遇到的一个错误，找了一下没找到答案，换个方法就规避了这个错误，这个应该不算是错误，因为报错提示<code>handler: &quot;Error: [vuex] expects string as the type, but found undefined.&quot;</code>是需要字符串，我这边传递的是对象，之前的使用中也是传递的字符串，所以错误应该是这个原因。<br>
-错误代码</p>
-<pre><code>...mapMutations({
-    setNewSong: &quot;SET_NEWSONG&quot;,
-    }),
-
-fn(){
-    this.$store.commit(this.setNewSong(item));
-}
-</code></pre>
-<p>正常代码</p>
-<pre><code>...mapMutations([&quot;SET_NEWSONG&quot;]),
-fn(){
-    this.$store.commit(&quot;SET_NEWSONG&quot;, item);
 }
 </code></pre>
 ]]></content>

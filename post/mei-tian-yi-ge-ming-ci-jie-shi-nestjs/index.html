@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—nest.js | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600180390388">
+<link rel="shortcut icon" href="/favicon.ico?v=1600248598844">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">61</span>
+        <span class="site-item-stat-count">62</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -804,6 +804,171 @@ Nest可以看作是所有Koa-xxx的功能集合，并且再nNpm上Nest也是涨�
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/"" data-c="
+          &lt;h3 id=&#34;1生成html5代码&#34;&gt;1.生成HTML5代码&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;&amp;lt;!-- ! 或者 html:5 --&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2生成子代元素&#34;&gt;2.生成子代元素：( &amp;gt; )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- div&amp;gt;p&amp;gt;span --&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;
+        &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+    &amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;3生成兄弟元素&#34;&gt;3.生成兄弟元素：( + )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- div+p+h2 --&amp;gt;
+&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;4生成多个元素&#34;&gt;4.生成多个元素： ( * )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- div&amp;gt;p*2+div*3 --&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+    &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;5生成上一个层级的元素&#34;&gt;5.生成上一个层级的元素：( ^ )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- div&amp;gt;p^div --&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;!-- div&amp;gt;p&amp;gt;span^^h2+strong --&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;
+        &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+    &amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;strong&amp;gt;&amp;lt;/strong&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;6对元素进行分组-使用-括号分组&#34;&gt;6.对元素进行分组( 使用() 括号分组 )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- (div&amp;gt;p&amp;gt;span)+h2+strong --&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;
+        &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+    &amp;lt;/p&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;
+&amp;lt;strong&amp;gt;&amp;lt;/strong&amp;gt;
+
+&amp;lt;!-- div&amp;gt;(p&amp;gt;span)+h2+a--&amp;gt;
+&amp;lt;div&amp;gt;
+    &amp;lt;p&amp;gt;
+        &amp;lt;span&amp;gt;&amp;lt;/span&amp;gt;
+    &amp;lt;/p&amp;gt;
+    &amp;lt;h2&amp;gt;&amp;lt;/h2&amp;gt;
+    &amp;lt;a&amp;gt;&amp;lt;/a&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;7生成元素属性id属性class属性普通属性&#34;&gt;7.生成元素属性(id属性，class属性，普通属性)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--id: div#main --&amp;gt;
+&amp;lt;div id=&#39;main&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;!--class: div.box --&amp;gt;
+&amp;lt;div class=&#39;box&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;!--普通属性: div[title] --&amp;gt;
+&amp;lt;div class=&#39;&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;!--普通属性赋值: div[title=&#39;文字内容&#39;] --&amp;gt;
+&amp;lt;div title=&#39;文字内容&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--div#header&amp;gt;div.box1^div.page+div#footer--&amp;gt;
+&amp;lt;div id=&#39;header&#39;&amp;gt;
+    &amp;lt;div class=&#39;box1&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div class=&#39;page&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div id=&#39;footer&#39;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;8生成元素的文字-使用-花括号&#34;&gt;8.生成元素的文字( 使用{} 花括号 )&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!--div#box{div文字内容}--&amp;gt;
+&amp;lt;div id=&#39;box&#39;&amp;gt;div文字内容&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;9生成结构中有数字-使用-符号&#34;&gt;9.生成结构中有数字( 使用 $ 符号)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 属性中有数字: div.box$*3--&amp;gt;
+&amp;lt;div class=&amp;quot;box1&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;box2&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;div class=&amp;quot;box3&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+
+&amp;lt;!-- 属性中的数字中有多个0: ul&amp;gt;li.item$$$*3 --&amp;gt;
+&amp;lt;ul&amp;gt;
+    &amp;lt;li class=&amp;quot;item001&amp;quot;&amp;gt;&amp;lt;/li&amp;gt;
+    &amp;lt;li class=&amp;quot;item002&amp;quot;&amp;gt;&amp;lt;/li&amp;gt;
+    &amp;lt;li class=&amp;quot;item003&amp;quot;&amp;gt;&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+
+&amp;lt;!-- 内容中有数字: div{第$行内容}*3 --&amp;gt;
+&amp;lt;div&amp;gt;第1行内容&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;第2行内容&amp;lt;/div&amp;gt;
+&amp;lt;div&amp;gt;第3行内容&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;10隐式标签&#34;&gt;10.隐式标签&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 第一种: #header&amp;gt;.box (默认以 div 形式展示)--&amp;gt;
+&amp;lt;div id=&amp;quot;header&amp;quot;&amp;gt;
+    &amp;lt;div class=&amp;quot;box&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 第二种 ul&amp;gt;.item${文本内容$}*3 (ul中 默认是 li)--&amp;gt;
+&amp;lt;ul&amp;gt;
+    &amp;lt;li class=&amp;quot;item1&amp;quot;&amp;gt;文本内容1&amp;lt;/li&amp;gt;
+    &amp;lt;li class=&amp;quot;item2&amp;quot;&amp;gt;文本内容2&amp;lt;/li&amp;gt;
+    &amp;lt;li class=&amp;quot;item3&amp;quot;&amp;gt;文本内容3&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- 第三种 table&amp;gt;#row$*3&amp;gt;[colspan=2]--&amp;gt;
+&amp;lt;table&amp;gt;
+    &amp;lt;tr id=&amp;quot;row1&amp;quot;&amp;gt;
+        &amp;lt;td colspan=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+    &amp;lt;tr id=&amp;quot;row2&amp;quot;&amp;gt;
+        &amp;lt;td colspan=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+    &amp;lt;tr id=&amp;quot;row3&amp;quot;&amp;gt;
+        &amp;lt;td colspan=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;/td&amp;gt;
+    &amp;lt;/tr&amp;gt;
+&amp;lt;/table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;11css中的emment语法&#34;&gt;11.CSS中的Emment语法&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;/* w100+h100+m0+p0 */
+div{
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/* m20-30-40-50 分别是上,右,下,左*/
+div{
+    margin: 20px 30px 40px 50px;
+}
+
+/* p-10-20--30 分别是上-10,右和左20,下-30*/
+div{
+    padding: -10px 20px -30px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;/* m10px20px   m10px-20*/
+div{
+    margin:10px  20px;
+    margin:10px -20px;
+}
+
+/*dib  fz20  fz1.5  fw400  lh20px(行高必须加单位)*/
+div{
+    display: inline-block;
+    font-size:20px;
+    font-size:1.5em;
+    font-weight:400;
+    line-height:20px;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;转载于 &lt;a href=&#34;https://www.cnblogs.com/rans/p/12804016.html&#34;&gt;白邪&lt;/a&gt;&lt;/p&gt;
+">Emment语法（vscode快捷方式）</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/fei-chang-jian-dan-de-fang-dou-he-jie-liu/"" data-c="
