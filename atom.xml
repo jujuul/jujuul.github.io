@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-16T09:30:09.646Z</updated>
+    <updated>2020-09-16T13:59:37.377Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,178 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[事件相关]]></title>
+        <id>https://jujuul.github.io/post/shi-jian-xiang-guan/</id>
+        <link href="https://jujuul.github.io/post/shi-jian-xiang-guan/">
+        </link>
+        <updated>2020-09-16T12:42:45.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>事件委托是前端面试必考内容，在工作中也是经常使用，所以我就对事件以及相关的操作做一下简单的梳理。</p>
+<h2 id="事件事件流">事件，事件流</h2>
+<h3 id="事件">事件</h3>
+<p>JS高程第三版中，第十三章详细的介绍了事件，其中提到，JS与HTML之间的交互是通过事件实现的，事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。</p>
+<h3 id="事件流">事件流</h3>
+<p>事件流描述的是从页面中接收事件的顺序，而今天我们所熟知的冒泡与捕获事件，其实是IE与Netscape基于自己的认知提出的完全相反的事件流概念，IE的是冒泡，网景的是捕获。<br>
+<img src="https://jujuul.github.io//post-images/1600262228942.jpg" alt="" loading="lazy"></p>
+<h3 id="事件三要素">事件三要素</h3>
+<p>我们知道，事件不是独自存在的，它由这三个要素构成：事件源、事件、事件驱动程序。<br>
+事件一般有以下几种(偷懒放图)<br>
+<img src="https://jujuul.github.io//post-images/1600261807248.png" alt="" loading="lazy"><br>
+事件源就是指发生事件的对象，一般来说是dom元素，所以获取事件源就是获取dom，获取dom有以下几类。</p>
+<pre><code>// 获取单个
+document.getElementById
+// 获取多个的组合
+document.getElementsByClassName
+……
+// 获取静态
+document.querySelector
+……
+</code></pre>
+<p>获取完事件源，接下来就是绑定事件，这里就不得不提到dom级别。</p>
+<h4 id="dom0">dom0</h4>
+<pre><code>// 绑定事件
+btn.onclick = function () {
+    alert(this.id);
+}
+// 删除事件
+btn.onclick = null;
+</code></pre>
+<p>dom0级的优点是实现简单，并且具有跨浏览器的优势,缺点是同种事件只能绑定一个，后面的会覆盖前面的，并且事件是在冒泡阶段触发。</p>
+<h4 id="dom1">dom1</h4>
+<p>dom1因为一般只有设计规范没有具体实现，所以一般跳过。</p>
+<h4 id="dom2">dom2</h4>
+<pre><code>let btn = document.getElementById('btn')
+    btn.addEventListener('click', function () {
+    let li = document.createElement('li');
+    li.innerHTML = i + 1
+    i++;
+    ul.appendChild(li)
+})
+</code></pre>
+<p>dom2通过addEventListener绑定事件，并且传递三个参数，分别是要处理的事件名、作为事件处理程序的函数以及一个布尔值，布尔值为true表示在捕获阶段调用事件处理程序；如果是false表示在冒泡阶段调用事件处理程序，默认是false。</p>
+<h4 id="dom3">dom3</h4>
+<p>dom3在dom2的基础上添加了更多的事件类型，见下图(再次偷懒)<br>
+<img src="https://jujuul.github.io//post-images/1600262059244.PNG" alt="" loading="lazy"><br>
+同时dom3也允许开发人员自定义事件。</p>
+<pre><code>var myEvent = new Event('clickTest');
+element.addEventListener('clickTest', function () {
+    console.log('smyhvae');
+});
+
+//元素注册事件
+element.dispatchEvent(myEvent); //注意，参数是写事件对象 myEvent，不是写 事件名 clickTest
+</code></pre>
+<h2 id="事件委托">事件委托</h2>
+<p>事件委托可以看作是事件最为重要的应用了。就如同它的名字，通俗的将事件委托就是把一个元素响应事件（click、keydown......）的函数委托到另一个元素。各路大牛在讲事件委托时，都使用了取快递来解释：<br>
+有三个同事预计会在周一收到快递。为签收快递，有两种办法：一是三个人在公司门口等快递；二是委托给前台小姐姐代为签收。现实当中，我们大都采用委托的方案（公司也不会容忍那么多员工站在门口就为了等快递）。前台小姐姐收到快递后，她会判断收件人是谁，然后按照收件人的要求签收，甚至代为付款。这种方案还有一个优势，那就是即使公司里来了新员工，前台小姐姐也会在收到寄给新员工的快递后核实并代为签收。<br>
+其中还包含两种意思：<br>
+---- 委托前台的同事可以是可以代为签收的，即程序中的dom节点有事件<br>
+---- 新来的员工可以委托前台代签，即程序中新添加的dom节点也会有事件<br>
+事件委托是利用冒泡来实现的，事件委托的优点有：</p>
+<ol>
+<li>减少事件的绑定次数，减少内存消耗</li>
+<li>动态绑定事件<br>
+例子：点击按钮新增li，点击li可以给li增加红色背景色</li>
+</ol>
+<pre><code>// html
+&lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+    &lt;li&gt;6&lt;/li&gt;
+    &lt;li&gt;7&lt;/li&gt;
+    &lt;li&gt;8&lt;/li&gt;
+    &lt;li&gt;9&lt;/li&gt;
+    &lt;li&gt;10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;添加&quot;&gt;
+</code></pre>
+<pre><code>//js
+let i = 10;
+let btn = document.querySelector('#btn');
+let ul = document.getElementsByTagName('ul')[0];
+btn.addEventListener('click', function () {
+    let li = document.createElement('li');
+    li.innerHTML = i + 1;
+    i++;
+    ul.appendChild(li)
+})
+ul.addEventListener('click', function (event) {
+    event = event || window.event;
+    if (event.target.nodeName.toLowerCase() == 'li') {
+        event.target.style.backgroundColor = 'red'
+        }
+}, false)
+</code></pre>
+<pre><code>// jquery写法
+$('#btn').on('click', function (event) {
+    let li = document.createElement('li');
+    $('ul').append(li)
+})
+$('ul').on('click', 'li', function (event) {
+    var target = $(event.target);
+    target.css({
+        'backgroundColor': 'red'
+    })
+})
+</code></pre>
+<p>再写一个简易的拖拽div</p>
+<pre><code>// css
+.div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: tomato;
+}
+</code></pre>
+<pre><code>// html
+&lt;div class=&quot;div&quot; id=&quot;div&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code>let div = document.getElementById('div')
+div.onclick = function (event) {
+    console.log(event)
+}
+div.addEventListener('mousedown', start)
+
+function start() {
+    div.addEventListener('mousemove', move)
+    div.addEventListener('mouseup', stop)
+}
+
+function move(event) {
+    div.style.left = event.clientX - 50 + 'px'
+    div.style.top = event.clientY - 50 + 'px'
+}
+
+function stop(event) {
+    div.removeEventListener('mousemove', move)
+}
+</code></pre>
+<p>event常用属性方法<br>
+event.preventDefault()<br>
+作用：阻止默认事件<br>
+event.stopPropagation()<br>
+作用：阻止冒泡<br>
+event.cancelBubble = true<br>
+兼容低版本<br>
+offsetX/offsetY<br>
+offsetX/Y获取到是触发点相对被触发dom的左上角距离，不过左上角基准点在不同浏览器中有区别，以内容区左上角为基准点（不包括边框），如果触发点在边框上会返回负值，<br>
+pageX/pageY<br>
+pageX/Y获取到的是触发点相对文档区域左上角距离，会随着页面滚动而改变。<br>
+clientX/Y<br>
+event的clientX，clientY属性分别表示鼠标点击位置相对于文档的左边距，上边距，不随页面滚动而改变。<br>
+target,currentTarget<br>
+target是事件的真正发出者<br>
+currentTarget始终是监听事件者</p>
+<h2 id="总结">总结</h2>
+<p>事件并不算难，需要记住的是事件模型与事件流，尤其是捕获与冒泡的流程，其中捕获起点是从window-&gt;document，冒泡终点是document-&gt;window，事件委托要记住几个事件以及兼容性。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Emment语法（vscode快捷方式）]]></title>
         <id>https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/</id>
@@ -255,11 +427,11 @@ app.foo = function(){
   let data = 'www.baidu.com'
   //操作数据的函数
   function foo() {
-    //用于暴露有函数
+    //用于暴露函数
     console.log(`foo() ${data}`)
   }
   function bar() {
-    //用于暴露有函数
+    //用于暴露函数
     console.log(`bar() ${data}`)
     otherFun() //内部调用
   }
@@ -327,7 +499,7 @@ define(function(require,exports,module){
 })
 </code></pre>
 <p>ES6模块化<br>
-ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文档很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。<br>
+ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文章很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。<br>
 语法：<br>
 export：用于规定模块的对外接口<br>
 import：用于引入其他模块提供的功能</p>
@@ -630,112 +802,6 @@ persistedState({
 </li>
 </ol>
 <p>根据我的使用来说，如果是存储普通类型的数据，sessionStorage和localStorage可以直接存储，如果是存储对象与数组则需要使用JSON.stringify进行转换，转换为JSON字符串，在storage中存储，如果需要使用则需要通过JSON.parse解析，而通过这个插件，就不需要手动设置存储到storage中，也不需要使用JSON，而是插件将所有state的值以对象的形式存储到localStorage中的vuex为key的value中，通过读取value获取数据。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[转载：那些你总是记不住但又总是要用的css]]></title>
-        <id>https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/</id>
-        <link href="https://jujuul.github.io/post/zhuan-zai-na-xie-ni-zong-shi-ji-bu-zhu-dan-you-zong-shi-yao-yong-de-css/">
-        </link>
-        <updated>2020-09-09T02:46:34.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="一-设置input-的placeholder的字体样式">一、设置input 的placeholder的字体样式</h2>
-<pre><code>input::-webkit-input-placeholder {    /* Chrome/Opera/Safari */
-    color: red;
-}
-input::-moz-placeholder { /* Firefox 19+ */  
-    color: red;
-}
-input:-ms-input-placeholder { /* IE 10+ */
-    color: red;
-}
-input:-moz-placeholder { /* Firefox 18- */
-    color: red;
-}
-</code></pre>
-<h3 id="设置input聚焦时的样式">设置input聚焦时的样式</h3>
-<pre><code>input:focus {   
-  background-color: red;
-}
-</code></pre>
-<h3 id="取消input的边框">取消input的边框</h3>
-<pre><code>border: none;
-outline: none;
-</code></pre>
-<h2 id="二-隐藏滚动条或更改滚动条样式">二、隐藏滚动条或更改滚动条样式</h2>
-<pre><code>/*css主要部分的样式*//*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
-::-webkit-scrollbar {
-    width: 10px; /*对垂直流动条有效*/
-    height: 10px; /*对水平流动条有效*/
-}
-
-/*定义滚动条的轨道颜色、内阴影及圆角*/
-::-webkit-scrollbar-track{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: rosybrown;
-    border-radius: 3px;
-}
-
-/*定义滑块颜色、内阴影及圆角*/
-::-webkit-scrollbar-thumb{ 
-    border-radius: 7px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #E8E8E8;
-}
-
-/*定义两端按钮的样式*/
-::-webkit-scrollbar-button {
-    background-color:cyan;
-}
-
-/*定义右下角汇合处的样式*/
-::-webkit-scrollbar-corner {
-    background:khaki;
-}
-</code></pre>
-<h2 id="三-文字超出隐藏并显示省略号">三、文字超出隐藏并显示省略号</h2>
-<h3 id="单行一定要有宽度">单行（一定要有宽度）</h3>
-<pre><code>width:200rpx;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis;
-</code></pre>
-<p>多行</p>
-<pre><code>word-break: break-all;
-display: -webkit-box;
--webkit-line-clamp: 2;
--webkit-box-orient: vertical;
-overflow: hidden;
-</code></pre>
-<h2 id="四-控制div内的元素自动换行">四、控制div内的元素自动换行</h2>
-<pre><code>word-wrap: break-word;
-word-break：break-all;
-</code></pre>
-<h2 id="五-纯css画三角形">五、 纯css画三角形</h2>
-<pre><code>#demo {
-    width: 0;
-    height: 0;
-    border-width: 20px;
-    border-style: solid;
-    border-color: transparent transparent red transparent;
-}
-</code></pre>
-<h2 id="六-绝对定位元素居中水平和垂直方向">六、 绝对定位元素居中（水平和垂直方向）</h2>
-<pre><code>#demo {
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    background-color: green;
-}
-</code></pre>
-<h2 id="七-表格边框合并">七、表格边框合并</h2>
-<pre><code>table,tr,td{border: 1px solid #333;}
-table{
-  border-collapse: collapse;
-}
-</code></pre>
 ]]></content>
     </entry>
 </feed>

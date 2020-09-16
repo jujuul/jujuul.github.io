@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vue中使用moment.js格式化时间戳 | Mark</title>
+<title>事件相关 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1600264744118">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vue中使用moment.js格式化时间戳" />
+  <meta name="description" content="事件相关" />
   <meta name="keywords" content="" />
 </head>
 
@@ -198,8 +198,23 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E4%BA%8B%E4%BB%B6%E6%B5%81">事件，事件流</a>
+<ul>
+<li><a href="#%E4%BA%8B%E4%BB%B6">事件</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E6%B5%81">事件流</a></li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E4%B8%89%E8%A6%81%E7%B4%A0">事件三要素</a>
+<ul>
+<li><a href="#dom0">dom0</a></li>
+<li><a href="#dom1">dom1</a></li>
+<li><a href="#dom2">dom2</a></li>
+<li><a href="#dom3">dom3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98">事件委托</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 </li>
 </ul>
@@ -467,8 +482,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
-      vue中使用moment.js格式化时间戳
+    <a class="post-title-link" href="https://jujuul.github.io/post/shi-jian-xiang-guan/">
+      事件相关
     </a>
   </h1>
   <div class="post-meta">
@@ -476,70 +491,187 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
+      <span class="publish-time" data-t="2020-09-16 20:42:45">2020-09-16</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>7<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>575<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1530<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
-<h2 id="安装">安装</h2>
-<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
-<h2 id="引入">引入</h2>
-<p>在main中全局引入，并且定义全局的时间过滤器</p>
-<pre><code>// 定义全局时间戳过滤器
-Vue.filter(&quot;formatDate&quot;, function(value) {
-  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
+              <h2 id="前言">前言</h2>
+<p>事件委托是前端面试必考内容，在工作中也是经常使用，所以我就对事件以及相关的操作做一下简单的梳理。</p>
+<h2 id="事件事件流">事件，事件流</h2>
+<h3 id="事件">事件</h3>
+<p>JS高程第三版中，第十三章详细的介绍了事件，其中提到，JS与HTML之间的交互是通过事件实现的，事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。</p>
+<h3 id="事件流">事件流</h3>
+<p>事件流描述的是从页面中接收事件的顺序，而今天我们所熟知的冒泡与捕获事件，其实是IE与Netscape基于自己的认知提出的完全相反的事件流概念，IE的是冒泡，网景的是捕获。<br>
+<img src="https://jujuul.github.io//post-images/1600262228942.jpg" alt="" loading="lazy"></p>
+<h3 id="事件三要素">事件三要素</h3>
+<p>我们知道，事件不是独自存在的，它由这三个要素构成：事件源、事件、事件驱动程序。<br>
+事件一般有以下几种(偷懒放图)<br>
+<img src="https://jujuul.github.io//post-images/1600261807248.png" alt="" loading="lazy"><br>
+事件源就是指发生事件的对象，一般来说是dom元素，所以获取事件源就是获取dom，获取dom有以下几类。</p>
+<pre><code>// 获取单个
+document.getElementById
+// 获取多个的组合
+document.getElementsByClassName
+……
+// 获取静态
+document.querySelector
+……
+</code></pre>
+<p>获取完事件源，接下来就是绑定事件，这里就不得不提到dom级别。</p>
+<h4 id="dom0">dom0</h4>
+<pre><code>// 绑定事件
+btn.onclick = function () {
+    alert(this.id);
+}
+// 删除事件
+btn.onclick = null;
+</code></pre>
+<p>dom0级的优点是实现简单，并且具有跨浏览器的优势,缺点是同种事件只能绑定一个，后面的会覆盖前面的，并且事件是在冒泡阶段触发。</p>
+<h4 id="dom1">dom1</h4>
+<p>dom1因为一般只有设计规范没有具体实现，所以一般跳过。</p>
+<h4 id="dom2">dom2</h4>
+<pre><code>let btn = document.getElementById('btn')
+    btn.addEventListener('click', function () {
+    let li = document.createElement('li');
+    li.innerHTML = i + 1
+    i++;
+    ul.appendChild(li)
+})
+</code></pre>
+<p>dom2通过addEventListener绑定事件，并且传递三个参数，分别是要处理的事件名、作为事件处理程序的函数以及一个布尔值，布尔值为true表示在捕获阶段调用事件处理程序；如果是false表示在冒泡阶段调用事件处理程序，默认是false。</p>
+<h4 id="dom3">dom3</h4>
+<p>dom3在dom2的基础上添加了更多的事件类型，见下图(再次偷懒)<br>
+<img src="https://jujuul.github.io//post-images/1600262059244.PNG" alt="" loading="lazy"><br>
+同时dom3也允许开发人员自定义事件。</p>
+<pre><code>var myEvent = new Event('clickTest');
+element.addEventListener('clickTest', function () {
+    console.log('smyhvae');
 });
+
+//元素注册事件
+element.dispatchEvent(myEvent); //注意，参数是写事件对象 myEvent，不是写 事件名 clickTest
 </code></pre>
-<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
-日期格式化</p>
-<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
-moment().format('dddd');                    // 星期二
-moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
-moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
-moment().format();                          // 2019-04-16T12:24:48+08:00
+<h2 id="事件委托">事件委托</h2>
+<p>事件委托可以看作是事件最为重要的应用了。就如同它的名字，通俗的将事件委托就是把一个元素响应事件（click、keydown......）的函数委托到另一个元素。各路大牛在讲事件委托时，都使用了取快递来解释：<br>
+有三个同事预计会在周一收到快递。为签收快递，有两种办法：一是三个人在公司门口等快递；二是委托给前台小姐姐代为签收。现实当中，我们大都采用委托的方案（公司也不会容忍那么多员工站在门口就为了等快递）。前台小姐姐收到快递后，她会判断收件人是谁，然后按照收件人的要求签收，甚至代为付款。这种方案还有一个优势，那就是即使公司里来了新员工，前台小姐姐也会在收到寄给新员工的快递后核实并代为签收。<br>
+其中还包含两种意思：<br>
+---- 委托前台的同事可以是可以代为签收的，即程序中的dom节点有事件<br>
+---- 新来的员工可以委托前台代签，即程序中新添加的dom节点也会有事件<br>
+事件委托是利用冒泡来实现的，事件委托的优点有：</p>
+<ol>
+<li>减少事件的绑定次数，减少内存消耗</li>
+<li>动态绑定事件<br>
+例子：点击按钮新增li，点击li可以给li增加红色背景色</li>
+</ol>
+<pre><code>// html
+&lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+    &lt;li&gt;6&lt;/li&gt;
+    &lt;li&gt;7&lt;/li&gt;
+    &lt;li&gt;8&lt;/li&gt;
+    &lt;li&gt;9&lt;/li&gt;
+    &lt;li&gt;10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;添加&quot;&gt;
 </code></pre>
-<p>相对时间</p>
-<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment().startOf('day').fromNow();        // 12 小时前
-moment().endOf('day').fromNow();          // 12 小时内
-moment().startOf('hour').fromNow();       // 28 分钟前
+<pre><code>//js
+let i = 10;
+let btn = document.querySelector('#btn');
+let ul = document.getElementsByTagName('ul')[0];
+btn.addEventListener('click', function () {
+    let li = document.createElement('li');
+    li.innerHTML = i + 1;
+    i++;
+    ul.appendChild(li)
+})
+ul.addEventListener('click', function (event) {
+    event = event || window.event;
+    if (event.target.nodeName.toLowerCase() == 'li') {
+        event.target.style.backgroundColor = 'red'
+        }
+}, false)
 </code></pre>
-<p>日历时间</p>
-<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
-moment().subtract(6, 'days').calendar();  // 上周三中午12点28
-moment().subtract(3, 'days').calendar();  // 上周六中午12点28
-moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
-moment().calendar();                      // 今天中午12点28分
-moment().add(1, 'days').calendar();       // 明天中午12点28分
-moment().add(3, 'days').calendar();       // 本周五中午12点28
-moment().add(10, 'days').calendar();      // 2019年4月26日
+<pre><code>// jquery写法
+$('#btn').on('click', function (event) {
+    let li = document.createElement('li');
+    $('ul').append(li)
+})
+$('ul').on('click', 'li', function (event) {
+    var target = $(event.target);
+    target.css({
+        'backgroundColor': 'red'
+    })
+})
 </code></pre>
-<p>多语言支持</p>
-<pre><code>moment().format('L');    // 2019-04-16
-moment().format('l');    // 2019-04-16
-moment().format('LL');   // 2019年4月16日
-moment().format('ll');   // 2019年4月16日
-moment().format('LLL');  // 2019年4月16日中午12点28分
-moment().format('lll');  // 2019年4月16日中午12点28分
-moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
-moment().format('llll'); // 2019年4月16日星期二中午12点28分
+<p>再写一个简易的拖拽div</p>
+<pre><code>// css
+.div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: tomato;
+}
 </code></pre>
-<p>文档地址：http://momentjs.cn/<br>
-不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
+<pre><code>// html
+&lt;div class=&quot;div&quot; id=&quot;div&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code>let div = document.getElementById('div')
+div.onclick = function (event) {
+    console.log(event)
+}
+div.addEventListener('mousedown', start)
+
+function start() {
+    div.addEventListener('mousemove', move)
+    div.addEventListener('mouseup', stop)
+}
+
+function move(event) {
+    div.style.left = event.clientX - 50 + 'px'
+    div.style.top = event.clientY - 50 + 'px'
+}
+
+function stop(event) {
+    div.removeEventListener('mousemove', move)
+}
+</code></pre>
+<p>event常用属性方法<br>
+event.preventDefault()<br>
+作用：阻止默认事件<br>
+event.stopPropagation()<br>
+作用：阻止冒泡<br>
+event.cancelBubble = true<br>
+兼容低版本<br>
+offsetX/offsetY<br>
+offsetX/Y获取到是触发点相对被触发dom的左上角距离，不过左上角基准点在不同浏览器中有区别，以内容区左上角为基准点（不包括边框），如果触发点在边框上会返回负值，<br>
+pageX/pageY<br>
+pageX/Y获取到的是触发点相对文档区域左上角距离，会随着页面滚动而改变。<br>
+clientX/Y<br>
+event的clientX，clientY属性分别表示鼠标点击位置相对于文档的左边距，上边距，不随页面滚动而改变。<br>
+target,currentTarget<br>
+target是事件的真正发出者<br>
+currentTarget始终是监听事件者</p>
+<h2 id="总结">总结</h2>
+<p>事件并不算难，需要记住的是事件模型与事件流，尤其是捕获与冒泡的流程，其中捕获起点是从window-&gt;document，冒泡终点是document-&gt;window，事件委托要记住几个事件以及兼容性。</p>
 
             </div>
             
@@ -552,7 +684,7 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" title="vue中使用moment.js格式化时间戳">https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</a>
+      <a href="https://jujuul.github.io/post/shi-jian-xiang-guan/" title="事件相关">https://jujuul.github.io/post/shi-jian-xiang-guan/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -565,15 +697,11 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">仿网易云demo—day4</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">下一篇</a>
+        <a class="nav-pc-next" title="Emment语法（vscode快捷方式）" href="https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/">Emment语法（vscode快捷方式）</a>
+        <a class="nav-mobile-next" title="Emment语法（vscode快捷方式）" href="https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

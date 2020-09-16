@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600248598844">
+<link rel="shortcut icon" href="/favicon.ico?v=1600264744118">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">62</span>
+        <span class="site-item-stat-count">63</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -428,6 +428,175 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shi-jian-xiang-guan/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;事件委托是前端面试必考内容，在工作中也是经常使用，所以我就对事件以及相关的操作做一下简单的梳理。&lt;/p&gt;
+&lt;h2 id=&#34;事件事件流&#34;&gt;事件，事件流&lt;/h2&gt;
+&lt;h3 id=&#34;事件&#34;&gt;事件&lt;/h3&gt;
+&lt;p&gt;JS高程第三版中，第十三章详细的介绍了事件，其中提到，JS与HTML之间的交互是通过事件实现的，事件，就是文档或浏览器窗口中发生的一些特定的交互瞬间。&lt;/p&gt;
+&lt;h3 id=&#34;事件流&#34;&gt;事件流&lt;/h3&gt;
+&lt;p&gt;事件流描述的是从页面中接收事件的顺序，而今天我们所熟知的冒泡与捕获事件，其实是IE与Netscape基于自己的认知提出的完全相反的事件流概念，IE的是冒泡，网景的是捕获。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1600262228942.jpg&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;事件三要素&#34;&gt;事件三要素&lt;/h3&gt;
+&lt;p&gt;我们知道，事件不是独自存在的，它由这三个要素构成：事件源、事件、事件驱动程序。&lt;br&gt;
+事件一般有以下几种(偷懒放图)&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1600261807248.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+事件源就是指发生事件的对象，一般来说是dom元素，所以获取事件源就是获取dom，获取dom有以下几类。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 获取单个
+document.getElementById
+// 获取多个的组合
+document.getElementsByClassName
+……
+// 获取静态
+document.querySelector
+……
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;获取完事件源，接下来就是绑定事件，这里就不得不提到dom级别。&lt;/p&gt;
+&lt;h4 id=&#34;dom0&#34;&gt;dom0&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;// 绑定事件
+btn.onclick = function () {
+    alert(this.id);
+}
+// 删除事件
+btn.onclick = null;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;dom0级的优点是实现简单，并且具有跨浏览器的优势,缺点是同种事件只能绑定一个，后面的会覆盖前面的，并且事件是在冒泡阶段触发。&lt;/p&gt;
+&lt;h4 id=&#34;dom1&#34;&gt;dom1&lt;/h4&gt;
+&lt;p&gt;dom1因为一般只有设计规范没有具体实现，所以一般跳过。&lt;/p&gt;
+&lt;h4 id=&#34;dom2&#34;&gt;dom2&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;let btn = document.getElementById(&#39;btn&#39;)
+    btn.addEventListener(&#39;click&#39;, function () {
+    let li = document.createElement(&#39;li&#39;);
+    li.innerHTML = i + 1
+    i++;
+    ul.appendChild(li)
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;dom2通过addEventListener绑定事件，并且传递三个参数，分别是要处理的事件名、作为事件处理程序的函数以及一个布尔值，布尔值为true表示在捕获阶段调用事件处理程序；如果是false表示在冒泡阶段调用事件处理程序，默认是false。&lt;/p&gt;
+&lt;h4 id=&#34;dom3&#34;&gt;dom3&lt;/h4&gt;
+&lt;p&gt;dom3在dom2的基础上添加了更多的事件类型，见下图(再次偷懒)&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1600262059244.PNG&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+同时dom3也允许开发人员自定义事件。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var myEvent = new Event(&#39;clickTest&#39;);
+element.addEventListener(&#39;clickTest&#39;, function () {
+    console.log(&#39;smyhvae&#39;);
+});
+
+//元素注册事件
+element.dispatchEvent(myEvent); //注意，参数是写事件对象 myEvent，不是写 事件名 clickTest
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;事件委托&#34;&gt;事件委托&lt;/h2&gt;
+&lt;p&gt;事件委托可以看作是事件最为重要的应用了。就如同它的名字，通俗的将事件委托就是把一个元素响应事件（click、keydown......）的函数委托到另一个元素。各路大牛在讲事件委托时，都使用了取快递来解释：&lt;br&gt;
+有三个同事预计会在周一收到快递。为签收快递，有两种办法：一是三个人在公司门口等快递；二是委托给前台小姐姐代为签收。现实当中，我们大都采用委托的方案（公司也不会容忍那么多员工站在门口就为了等快递）。前台小姐姐收到快递后，她会判断收件人是谁，然后按照收件人的要求签收，甚至代为付款。这种方案还有一个优势，那就是即使公司里来了新员工，前台小姐姐也会在收到寄给新员工的快递后核实并代为签收。&lt;br&gt;
+其中还包含两种意思：&lt;br&gt;
+---- 委托前台的同事可以是可以代为签收的，即程序中的dom节点有事件&lt;br&gt;
+---- 新来的员工可以委托前台代签，即程序中新添加的dom节点也会有事件&lt;br&gt;
+事件委托是利用冒泡来实现的，事件委托的优点有：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;减少事件的绑定次数，减少内存消耗&lt;/li&gt;
+&lt;li&gt;动态绑定事件&lt;br&gt;
+例子：点击按钮新增li，点击li可以给li增加红色背景色&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;// html
+&amp;lt;ul&amp;gt;
+    &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;4&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;5&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;6&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;7&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;8&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;9&amp;lt;/li&amp;gt;
+    &amp;lt;li&amp;gt;10&amp;lt;/li&amp;gt;
+&amp;lt;/ul&amp;gt;
+&amp;lt;input type=&amp;quot;button&amp;quot; id=&amp;quot;btn&amp;quot; value=&amp;quot;添加&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;//js
+let i = 10;
+let btn = document.querySelector(&#39;#btn&#39;);
+let ul = document.getElementsByTagName(&#39;ul&#39;)[0];
+btn.addEventListener(&#39;click&#39;, function () {
+    let li = document.createElement(&#39;li&#39;);
+    li.innerHTML = i + 1;
+    i++;
+    ul.appendChild(li)
+})
+ul.addEventListener(&#39;click&#39;, function (event) {
+    event = event || window.event;
+    if (event.target.nodeName.toLowerCase() == &#39;li&#39;) {
+        event.target.style.backgroundColor = &#39;red&#39;
+        }
+}, false)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// jquery写法
+$(&#39;#btn&#39;).on(&#39;click&#39;, function (event) {
+    let li = document.createElement(&#39;li&#39;);
+    $(&#39;ul&#39;).append(li)
+})
+$(&#39;ul&#39;).on(&#39;click&#39;, &#39;li&#39;, function (event) {
+    var target = $(event.target);
+    target.css({
+        &#39;backgroundColor&#39;: &#39;red&#39;
+    })
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;再写一个简易的拖拽div&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// css
+.div {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: tomato;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// html
+&amp;lt;div class=&amp;quot;div&amp;quot; id=&amp;quot;div&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;let div = document.getElementById(&#39;div&#39;)
+div.onclick = function (event) {
+    console.log(event)
+}
+div.addEventListener(&#39;mousedown&#39;, start)
+
+function start() {
+    div.addEventListener(&#39;mousemove&#39;, move)
+    div.addEventListener(&#39;mouseup&#39;, stop)
+}
+
+function move(event) {
+    div.style.left = event.clientX - 50 + &#39;px&#39;
+    div.style.top = event.clientY - 50 + &#39;px&#39;
+}
+
+function stop(event) {
+    div.removeEventListener(&#39;mousemove&#39;, move)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;event常用属性方法&lt;br&gt;
+event.preventDefault()&lt;br&gt;
+作用：阻止默认事件&lt;br&gt;
+event.stopPropagation()&lt;br&gt;
+作用：阻止冒泡&lt;br&gt;
+event.cancelBubble = true&lt;br&gt;
+兼容低版本&lt;br&gt;
+offsetX/offsetY&lt;br&gt;
+offsetX/Y获取到是触发点相对被触发dom的左上角距离，不过左上角基准点在不同浏览器中有区别，以内容区左上角为基准点（不包括边框），如果触发点在边框上会返回负值，&lt;br&gt;
+pageX/pageY&lt;br&gt;
+pageX/Y获取到的是触发点相对文档区域左上角距离，会随着页面滚动而改变。&lt;br&gt;
+clientX/Y&lt;br&gt;
+event的clientX，clientY属性分别表示鼠标点击位置相对于文档的左边距，上边距，不随页面滚动而改变。&lt;br&gt;
+target,currentTarget&lt;br&gt;
+target是事件的真正发出者&lt;br&gt;
+currentTarget始终是监听事件者&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;事件并不算难，需要记住的是事件模型与事件流，尤其是捕获与冒泡的流程，其中捕获起点是从window-&amp;gt;document，冒泡终点是document-&amp;gt;window，事件委托要记住几个事件以及兼容性。&lt;/p&gt;
+">事件相关</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/emment-yu-fa-vscode-kuai-jie-fang-shi/"" data-c="
           &lt;h3 id=&#34;1生成html5代码&#34;&gt;1.生成HTML5代码&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;&amp;lt;!-- ! 或者 html:5 --&amp;gt;&lt;/code&gt;&lt;/p&gt;
@@ -662,11 +831,11 @@ app.foo = function(){
   let data = &#39;www.baidu.com&#39;
   //操作数据的函数
   function foo() {
-    //用于暴露有函数
+    //用于暴露函数
     console.log(`foo() ${data}`)
   }
   function bar() {
-    //用于暴露有函数
+    //用于暴露函数
     console.log(`bar() ${data}`)
     otherFun() //内部调用
   }
@@ -734,7 +903,7 @@ define(function(require,exports,module){
 })
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;ES6模块化&lt;br&gt;
-ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文档很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。&lt;br&gt;
+ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文章很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。&lt;br&gt;
 语法：&lt;br&gt;
 export：用于规定模块的对外接口&lt;br&gt;
 import：用于引入其他模块提供的功能&lt;/p&gt;
