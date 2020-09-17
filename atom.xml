@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-16T13:59:37.377Z</updated>
+    <updated>2020-09-17T15:25:23.216Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,16 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Promise相关]]></title>
+        <id>https://jujuul.github.io/post/promise-xiang-guan/</id>
+        <link href="https://jujuul.github.io/post/promise-xiang-guan/">
+        </link>
+        <updated>2020-09-17T15:24:44.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>promise是ES6新增的</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[事件相关]]></title>
         <id>https://jujuul.github.io/post/shi-jian-xiang-guan/</id>
@@ -752,56 +762,6 @@ mc.addEventListener('message', event =&gt; {
 </code></pre>
 <h2 id="结束">结束：</h2>
 <p>我看了码云和github上最早提交时间都是9个月前，知乎上的提问也是差不多的时间，并且通过网上的讨论度，也能看出这个框架才刚刚开始，不过背后有着腾讯的加持，想来是不会有什么大问题。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vuex 数据持久化插件]]></title>
-        <id>https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/</id>
-        <link href="https://jujuul.github.io/post/vuex-shu-ju-chi-jiu-hua-cha-jian/">
-        </link>
-        <updated>2020-09-09T04:25:51.000Z</updated>
-        <content type="html"><![CDATA[<ol>
-<li>安装<br>
-<code>npm install vuex-persistedstate</code></li>
-<li>配置<br>
-<code>import persistedState from 'vuex-persistedstate'</code></li>
-</ol>
-<pre><code>export default new Vuex.Store({
-    // ...
-    plugins: [persistedState()]
-})
-</code></pre>
-<ol start="3">
-<li>自定义存储方式<br>
-vuex-persistedstate默认使用localStorage来固化数据，一些特殊情况要如何应对呢？
-<ol>
-<li>需要使用sessionStorage的情况</li>
-</ol>
-<pre><code>plugins: [
-persistedState({ storage: window.sessionStorage })
-]
-</code></pre>
-<ol start="2">
-<li>使用cookie的情况</li>
-</ol>
-<pre><code>import persistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
-
-export default new Vuex.Store({
-plugins: [
-persistedState({
-    storage: {
-        getItem: key =&gt; Cookies.get(key),
-        setItem: (key, value) =&gt; Cookies.set(key, value, { expires: 7 }),
-        removeItem: key =&gt; Cookies.remove(key)
-    }
-    })
-]
-})
-</code></pre>
-</li>
-</ol>
-<p>根据我的使用来说，如果是存储普通类型的数据，sessionStorage和localStorage可以直接存储，如果是存储对象与数组则需要使用JSON.stringify进行转换，转换为JSON字符串，在storage中存储，如果需要使用则需要通过JSON.parse解析，而通过这个插件，就不需要手动设置存储到storage中，也不需要使用JSON，而是插件将所有state的值以对象的形式存储到localStorage中的vuex为key的value中，通过读取value获取数据。</p>
 ]]></content>
     </entry>
 </feed>

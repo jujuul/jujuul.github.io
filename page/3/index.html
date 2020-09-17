@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600264744118">
+<link rel="shortcut icon" href="/favicon.ico?v=1600356314635">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">63</span>
+        <span class="site-item-stat-count">64</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -190,6 +190,83 @@
         <div class="section-box mist">
           <section class="section bg-color posts-expand slide-down-in">
             
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
+      Vue同路由跳转传参
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-08-31 11:02:39">2020-08-31</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>377<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
+<pre><code>const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
   <article class="post-list-box  post box-shadow-wrapper">
     <div class="article-wrapper bg-color">
       <section class="post-header">
@@ -870,72 +947,6 @@ volume ：当前音量<br>
       
     </div>
   </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">
-      仿网易云demo—day3
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-22 17:08:24">2020-08-22</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>192<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-            
-              <p><p>还是换做客户端了，网页端的界面实在是不好看，而且布局也不够灵活，最终还是换成做客户端，还是先创建项目，引入各种依赖，鉴于首页的跑马灯使用elementUI能直接符合效果，就又引入了elementUI<img src="https://jujuul.github.io//post-images/1598087573125.PNG" alt="" loading="lazy">其实关于封装还不能说是完全弄懂，只能是按照网上的模仿一下，教程里还用到了拦截器，我不知道有什么使用场景，所以就先注释掉了，以我对于封装的理解就是定义各个功能的方法，然后暴露出去，另一个文件调用，然后把不同文件暴露的功能拼接到一起，再暴露给其他页面调用。</p>
-
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
   
             
             
@@ -1237,6 +1248,13 @@ volume ：当前音量<br>
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/promise-xiang-guan/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;promise是ES6新增的&lt;/p&gt;
+">Promise相关</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shi-jian-xiang-guan/"" data-c="
