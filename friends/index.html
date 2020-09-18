@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600356314635">
+<link rel="shortcut icon" href="/favicon.ico?v=1600439646554">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -430,7 +430,123 @@
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/promise-xiang-guan/"" data-c="
           &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
-&lt;p&gt;promise是ES6新增的&lt;/p&gt;
+&lt;p&gt;promise是ES6新增的，用于处理异步编程，在ES6之前，当ajax请求中出现数据依赖关系的时候，就需要写多层回调，产生“回调地狱”，而promise的出现解决了这个问题，能写出更加优雅的异步代码。&lt;/p&gt;
+&lt;h2 id=&#34;promise原理与基本语法&#34;&gt;Promise原理与基本语法&lt;/h2&gt;
+&lt;h3 id=&#34;一-promise原理&#34;&gt;一、Promise原理&lt;/h3&gt;
+&lt;p&gt;Promise是一种对异步操作的封装，添加了对异步操作执行成功、失败时的方法，主流的规范是Promise/A+。&lt;br&gt;
+Promise中有几个状态：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pending:等待中，或者进行中，表示还没有得到结果&lt;/li&gt;
+&lt;li&gt;resolved(Fulfilled): 已经完成，表示得到了我们想要的结果，可以继续往下执行&lt;/li&gt;
+&lt;li&gt;rejected: 也表示得到结果，但是由于结果并非我们所愿，因此拒绝执行&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1600438117168.webp&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+这三种状态不受外界影响，而且状态只能从pending改变为resolved或者rejected，并且不可逆。在Promise对象的构造函数中，将一个函数作为第一个参数。而这个函数，就是用来处理Promise的状态变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-promise的基本语法&#34;&gt;二、Promise的基本语法&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Promise实例必须实现then这个方法&lt;/li&gt;
+&lt;li&gt;then()必须可以接收两个函数作为参数&lt;/li&gt;
+&lt;li&gt;then()返回的必须是一个Promise实例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;let p1 = new Promise((resolve,reject)=&amp;gt;{
+  console.log(1);
+  resolve(&#39;浪里行舟&#39;)
+  console.log(2)
+})
+// then:设置成功或者失败后处理的方法
+p1.then(result=&amp;gt;{
+ //p1延迟绑定回调函数
+  console.log(&#39;成功 &#39;+result)
+},reason=&amp;gt;{
+  console.log(&#39;失败 &#39;+reason)
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;因为then方法的执行结果会返回一个Promise对象，所以可以通过then进行链式执行，通过这种方式解决“回调地狱”。&lt;/p&gt;
+&lt;h3 id=&#34;三-错误处理&#34;&gt;三、错误处理&lt;/h3&gt;
+&lt;p&gt;上面的例子中，是通过then返回的第二个函数进行错误处理，而Promise对象的错误具有“冒泡”的性质，会一直向后传递，直到被捕获，所以可以不用在单个Promise对象中单独捕获。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function executor (resolve, reject) {
+  let rand = Math.random()
+  console.log(1)
+  console.log(rand)
+  if (rand &amp;gt; 0.5) {
+    resolve()
+  } else {
+    reject()
+  }
+}
+var p0 = new Promise(executor)
+var p1 = p0.then((value) =&amp;gt; {
+  console.log(&#39;succeed-1&#39;)
+  return new Promise(executor)
+})
+var p2 = p1.then((value) =&amp;gt; {
+  console.log(&#39;succeed-2&#39;)
+  return new Promise(executor)
+})
+p2.catch((error) =&amp;gt; {
+  console.log(&#39;error&#39;, error)
+})
+console.log(2)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的例子中，就把错误通过p2.catch处理了。&lt;/p&gt;
+&lt;h3 id=&#34;四-链式调用&#34;&gt;四、链式调用&lt;/h3&gt;
+&lt;p&gt;Promise可以链接到一起，表示一系列的异步步骤。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let p1=new Promise((resolve,reject)=&amp;gt;{
+    resolve(100) // 决定了下个then中成功方法会被执行
+})
+// 连接p1
+let p2=p1.then(result=&amp;gt;{
+    console.log(&#39;成功1 &#39;+result)
+    return Promise.reject(1) 
+// 返回一个新的Promise实例，决定了当前实例是失败的，所以决定下一个then中失败方法会被执行
+},reason=&amp;gt;{
+    console.log(&#39;失败1 &#39;+reason)
+    return 200
+})
+// 连接p2 
+let p3=p2.then(result=&amp;gt;{
+    console.log(&#39;成功2 &#39;+result)
+},reason=&amp;gt;{
+    console.log(&#39;失败2 &#39;+reason)
+})
+// 成功1 100
+// 失败2 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过p1传递resolve(100)给p2，p2执行result并且打印“成功1 100”，p2则返回传递reject(1)给p3，所以p3会打印“失败2 1”&lt;/p&gt;
+&lt;h2 id=&#34;promise常用方法&#34;&gt;Promise常用方法&lt;/h2&gt;
+&lt;h3 id=&#34;promiseall&#34;&gt;Promise.all()&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;let p1 = Promise.resolve(1)
+let p2 = new Promise(resolve =&amp;gt; {
+  setTimeout(() =&amp;gt; {
+    resolve(2)
+  }, 1000)
+})
+let p3 = Promise.resolve(3)
+Promise.all([p3, p2, p1])
+  .then(result =&amp;gt; {
+ // 返回的结果是按照Array中编写实例的顺序来
+    console.log(result) // [ 3, 2, 1 ]
+  })
+  .catch(reason =&amp;gt; {
+    console.log(&amp;quot;失败:reason&amp;quot;)
+  })
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Promise.all()方法需要一个数组参数，数组内则是多个Promise对象，只有当数组内所有Promise对象的状态都变为resolved或rejected时，才调用then方法。&lt;/p&gt;
+&lt;h3 id=&#34;promiserace&#34;&gt;Promise.race()&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;function renderRace() {
+    return Promise.race([getJSON(url), getJSON(url1)]);
+}
+
+renderRace().then(function(value) {
+    console.log(value);
+})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;与all类似，Promise.race()方法也需要一个数组作为参数，区别在于Promise.race()方法只要有一个数组中的Promise对象状态改变，无论是resolved还是rejected，都直接调用then方法。&lt;/p&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;Promise使用是非常频繁的，并且最近的几次更新中也新增了一些Promise的新方法，还有Async/await这次来不及总结，之后会汇总进来，还有Promise涉及到宏任务与微任务，也是之后要整理的，这篇文章也是多次用到了参考中几位前辈的图片以及代码，深表感谢。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/ljianshu/Blog/issues/81&#34;&gt;你真的懂Promise吗&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://yangbo5207.github.io/wutongluo/ji-chu-jin-jie-xi-lie/shi-san-3001-promise.html&#34;&gt;Promise&lt;/a&gt;&lt;/p&gt;
 ">Promise相关</a>
       </div>
       
