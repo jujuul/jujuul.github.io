@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>视频播放器插件的使用 | Mark</title>
+<title>每天一个名词解释—微前端 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1600595166051">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="视频播放器插件的使用" />
+  <meta name="description" content="每天一个名词解释—微前端" />
   <meta name="keywords" content="" />
 </head>
 
@@ -198,15 +198,10 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
-<li><a href="#%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E4%BD%BF%E7%94%A8">在项目中使用</a>
-<ul>
-<li><a href="#html%E9%83%A8%E5%88%86">HTML部分</a></li>
-<li><a href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E8%A7%86%E9%A2%91%E6%96%B9%E6%B3%95">初始化视频方法</a></li>
-<li><a href="#%E5%9C%A8%E6%8C%82%E8%BD%BD%E9%92%A9%E5%AD%90%E5%86%85%E6%89%A7%E8%A1%8C">在挂载钩子内执行</a></li>
-</ul>
-</li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%BE%AE%E5%89%8D%E7%AB%AF">什么是微前端？</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E5%BE%AE%E5%89%8D%E7%AB%AF">为什么会有微前端</a></li>
+<li><a href="#%E5%AE%9E%E7%8E%B0%E5%BE%AE%E5%89%8D%E7%AB%AF%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88">实现微前端有哪些方案</a></li>
+<li><a href="#%E6%98%AF%E5%90%A6%E8%A6%81%E7%94%A8%E5%BE%AE%E5%89%8D%E7%AB%AF">是否要用微前端</a></li>
 </ul>
 </li>
 </ul>
@@ -474,8 +469,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">
-      视频播放器插件的使用
+    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/">
+      每天一个名词解释—微前端
     </a>
   </h1>
   <div class="post-meta">
@@ -483,68 +478,56 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-29 10:44:20">2020-08-29</span>
+      <span class="publish-time" data-t="2020-09-20 17:26:24">2020-09-20</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>428<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1040<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>其实看的好几个demo都是用的原生的Video标签，但是我感觉不是很好看，就去网上找了几个，分别有vue-video和vue-video-player，还有个HTML5的video.js，vue-video已经三年多没更新了，所以直接pass，然后就是vue-video-player与video.js对比，原本我是打算使用vue-video-player的，毕竟github上3.3k的star数，但是发现使用过程中过于繁琐，而且样式也不是很好，声音没法做到改变大小，只能是开启或静音，这样还要额外写一个切换声音的功能，并且它的倍速播放功能也不是很有必要，而且我在github上看到它有29k的star，所以最后选择了video.js。</p>
-<h2 id="安装">安装</h2>
-<p><code>$ npm install video.js</code></p>
-<h2 id="引入">引入</h2>
-<pre><code>import Video from 'video.js' 
-import 'video.js/dist/video-js.css'
-
-Vue.prototype.$video = Video  //挂载到原型上
-</code></pre>
-<h2 id="在项目中使用">在项目中使用</h2>
-<h3 id="html部分">HTML部分</h3>
-<pre><code> &lt;video id=&quot;myVideo&quot; class=&quot;video-js&quot;&gt;
-      &lt;source
-        src=&quot;http://vodkgeyttp8.vod.126.net/cloudmusic/
-        5805/core/a70e/407418faf42d67b7f0a095fc137dbc
-        8e.mp4?wsSecret=49d2d403360b1ce82d0c12432a
-        4c395e&amp;wsTime=1598668903&quot;
-        type=&quot;video/mp4&quot;
-      /&gt;
-    &lt;/video&gt;
-</code></pre>
-<h3 id="初始化视频方法">初始化视频方法</h3>
-<pre><code>methods: {
-    initVideo() {
-      //初始化视频方法
-      let myPlayer = this.$video(myVideo, {
-        //确定播放器是否具有用户可以与之交互的控件。
-        //没有控件，启动视频播放的唯一方法是使用autoplay属性或通过Player API。
-        controls: true,
-        //自动播放属性,muted:静音播放
-        autoplay: &quot;muted&quot;,
-        //建议浏览器是否应在&lt;video&gt;加载元素后立即开始下载视频数据。
-        preload: &quot;auto&quot;,
-        //设置视频播放器的显示宽度
-        width: &quot;800px&quot;,
-        //设置视频播放器的显示高度
-        height: &quot;400px&quot;,
-      });
-    },
-</code></pre>
-<h3 id="在挂载钩子内执行">在挂载钩子内执行</h3>
-<pre><code>mounted() { 
-        this.initVideo();
-    },
-</code></pre>
+              <h2 id="什么是微前端">什么是微前端？</h2>
+<p>微前端（Micro-Frontends）是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立运行、独立开发、独立部署。微前端不是单纯的前端框架或者工具，而是一套架构体系，这个概念最早在2016年底被提出，可以参考在Google上搜索Micro-Frontends, 排名靠前的micro-frontends.org的博客文章，提出了早期的微前端模型。</p>
+<h2 id="为什么会有微前端">为什么会有微前端</h2>
+<ol>
+<li>任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：<br>
+拆分和细化：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。</li>
+<li>整合历史系统：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。</li>
+</ol>
+<h2 id="实现微前端有哪些方案">实现微前端有哪些方案</h2>
+<p>单纯根据对概念的理解，很容易想到实现微前端的重要思想就是将应用进行拆解和整合，通常是一个父应用加上一些子应用，那么使用类似Nginx配置不同应用的转发，或是采用iframe来将多个应用整合到一起等等这些其实都属于微前端的实现方案，他们之间的对比如下图：<br>
+<img src="https://jujuul.github.io//post-images/1600594986903.png" alt="" loading="lazy"><br>
+上述方案中，每种都有自己的优劣，最原始的Nginx配置反向代理是从接入层的角度来将系统进行分离，但是需要运维配置，而iframe嵌套是最简单和最快速的方案，但是iframe的弊端也是无法避免的，而Web Components的方案则需要大量的改造成本，最后的组合式应用路由分发方案改造成本中等并且能满足大部分需求，也不影响各前端应用的体验，是当下各个业务普遍采用的一种方案。</p>
+<h2 id="是否要用微前端">是否要用微前端</h2>
+<p>微前端帮助开发者解决了实际的问题，但是对于每个业务来说，是否适合使用微前端，以及是否正确的使用微前端，还是需要遵循以下一些原则：</p>
+<ol>
+<li>
+<p>微前端最佳的使用场景是一些B端的管理系统，既能兼容集成历史系统，也可以将新的系统集成进来，并且不影响原先的交互体验。</p>
+</li>
+<li>
+<p>整体的微前端不仅仅是只将系统集成进来，而是整个微前端体系的完善，这其中就包括：<br>
+1)：基座应用和微应用的自动部署能力。<br>
+2)：微应用的配置管理能力。<br>
+3)：本地开发调试能力。<br>
+4)：线上监控和统计能力等等。<br>
+只有将整个能力体系搭建完善，才能说是整个微前端体系流程的完善。</p>
+</li>
+<li>
+<p>当发现使用微前端反而使效率变低，简单的变更复杂那就说明微前端并不适用。</p>
+</li>
+</ol>
+<p>作者：吕小鸣<br>
+链接：<a href="https://juejin.im/post/6844904162509979662">https://juejin.im/post/6844904162509979662</a><br>
+来源：掘金</p>
 
             </div>
             
@@ -557,7 +540,7 @@ Vue.prototype.$video = Video  //挂载到原型上
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/" title="视频播放器插件的使用">https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/</a>
+      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/" title="每天一个名词解释—微前端">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -570,15 +553,11 @@ Vue.prototype.$video = Video  //挂载到原型上
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">Vue同路由跳转传参</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Vue同路由跳转传参" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="vue中使用moment.js格式化时间戳" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">vue中使用moment.js格式化时间戳</a>
-        <a class="nav-mobile-next" title="vue中使用moment.js格式化时间戳" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">下一篇</a>
+        <a class="nav-pc-next" title="Promise相关" href="https://jujuul.github.io/post/promise-xiang-guan/">Promise相关</a>
+        <a class="nav-mobile-next" title="Promise相关" href="https://jujuul.github.io/post/promise-xiang-guan/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

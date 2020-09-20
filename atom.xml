@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-18T15:36:50.063Z</updated>
+    <updated>2020-09-20T09:46:15.093Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[每天一个名词解释—微前端]]></title>
+        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/</id>
+        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/">
+        </link>
+        <updated>2020-09-20T09:26:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="什么是微前端">什么是微前端？</h2>
+<p>微前端（Micro-Frontends）是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立运行、独立开发、独立部署。微前端不是单纯的前端框架或者工具，而是一套架构体系，这个概念最早在2016年底被提出，可以参考在Google上搜索Micro-Frontends, 排名靠前的micro-frontends.org的博客文章，提出了早期的微前端模型。</p>
+<h2 id="为什么会有微前端">为什么会有微前端</h2>
+<ol>
+<li>任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：<br>
+拆分和细化：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。</li>
+<li>整合历史系统：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。</li>
+</ol>
+<h2 id="实现微前端有哪些方案">实现微前端有哪些方案</h2>
+<p>单纯根据对概念的理解，很容易想到实现微前端的重要思想就是将应用进行拆解和整合，通常是一个父应用加上一些子应用，那么使用类似Nginx配置不同应用的转发，或是采用iframe来将多个应用整合到一起等等这些其实都属于微前端的实现方案，他们之间的对比如下图：<br>
+<img src="https://jujuul.github.io//post-images/1600594986903.png" alt="" loading="lazy"><br>
+上述方案中，每种都有自己的优劣，最原始的Nginx配置反向代理是从接入层的角度来将系统进行分离，但是需要运维配置，而iframe嵌套是最简单和最快速的方案，但是iframe的弊端也是无法避免的，而Web Components的方案则需要大量的改造成本，最后的组合式应用路由分发方案改造成本中等并且能满足大部分需求，也不影响各前端应用的体验，是当下各个业务普遍采用的一种方案。</p>
+<h2 id="是否要用微前端">是否要用微前端</h2>
+<p>微前端帮助开发者解决了实际的问题，但是对于每个业务来说，是否适合使用微前端，以及是否正确的使用微前端，还是需要遵循以下一些原则：</p>
+<ol>
+<li>
+<p>微前端最佳的使用场景是一些B端的管理系统，既能兼容集成历史系统，也可以将新的系统集成进来，并且不影响原先的交互体验。</p>
+</li>
+<li>
+<p>整体的微前端不仅仅是只将系统集成进来，而是整个微前端体系的完善，这其中就包括：<br>
+1)：基座应用和微应用的自动部署能力。<br>
+2)：微应用的配置管理能力。<br>
+3)：本地开发调试能力。<br>
+4)：线上监控和统计能力等等。<br>
+只有将整个能力体系搭建完善，才能说是整个微前端体系流程的完善。</p>
+</li>
+<li>
+<p>当发现使用微前端反而使效率变低，简单的变更复杂那就说明微前端并不适用。</p>
+</li>
+</ol>
+<p>作者：吕小鸣<br>
+链接：<a href="https://juejin.im/post/6844904162509979662">https://juejin.im/post/6844904162509979662</a><br>
+来源：掘金</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Promise相关]]></title>
         <id>https://jujuul.github.io/post/promise-xiang-guan/</id>
@@ -829,55 +870,6 @@ mc.addEventListener('message', event =&gt; {
 <img src="https://jujuul.github.io//post-images/1599819970092.PNG" alt="" loading="lazy"><br>
 同时还有一个<code>border: 1px solid rgba(0,0,0,.05);</code>边框<br>
 我个人觉得，比以前好看多了，虽然以前也用百度，但是对于页面UI之类的不太敏感，所以以前百度什么样子已经忘了，记得前几天在掘金看到有人介绍今年比较流行的新拟态样式，底下有人评论：扁平 - 拟物 - 扁平 - 拟物，风水轮流转，想来人类的审美还是趋同的，就像一个轮回，也许百度以前也是这种圆润风格的页面呢。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[每天一个名词解释—Hippy]]></title>
-        <id>https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/</id>
-        <link href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-hippy/">
-        </link>
-        <updated>2020-09-10T04:19:33.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前言">前言：</h2>
-<p>记得之前看过几篇前端跨端框架的文章，里面提到最多的就是uniapp、taro、mpvue，而截至目前，最为主流的应该就是uniapp和taro了，因为使用vue的关系，所以uniapp我也稍微看过，当时就在想，为什么有京东和美团的，不见阿里腾讯的呢？今天码云推送的一篇文章终于提到了，Hippy—腾讯的跨端开发框架。</p>
-<h2 id="介绍">介绍：</h2>
-<p>Hippy 是一个新生的跨端开发框架，目标是使开发者可以只写一套代码就直接运行于三个平台（iOS、Android 和 Web）。Hippy 的设计是面向传统 Web 开发者的，特别是之前有过 React Native 和 Vue 的开发者用起来会更为顺手，Hippy 致力于让前端开发跨端 App 更加容易。</p>
-<p>到目前为止，腾讯内已经有了18款流行 App 在使用 Hippy 框架，每日触达数亿用户。</p>
-<h2 id="特征">特征：</h2>
-<ul>
-<li>为传统 Web 前端设计，官方支持 React 和 Vue 两种主流前端框架。</li>
-<li>不同的平台保持了相同的接口。</li>
-<li>通过 JS 引擎 binding 模式实现的前终端通讯，具备超强性能。</li>
-<li>提供了高性能的可复用列表。</li>
-<li>皆可平滑迁移到 Web 浏览器。</li>
-<li>完整支持 Flex 的布局引擎。</li>
-</ul>
-<h2 id="project-structure">Project structure：</h2>
-<pre><code>Hippy
-├── examples                          # 前终端范例代码。
-│   ├── hippy-react-demo              # hippy-react 前端范例代码。
-│   ├── hippy-vue-demo                # hippy-vue 前端范例代码。
-│   ├── ios-demo                      # iOS 终端范例代码。
-│   └── android-demo                  # Android 终端范例代码。
-├── packages                          # 前端 npm 包。
-│   ├── hippy-debug-server            # Hippy 的前终端调试服务。
-│   ├── hippy-react                   # Hippy 的 React 语法绑定。
-│   ├── hippy-react-web               # hippy-react 转 Web 的库。
-│   ├── hippy-vue                     # Hippy 的 Vue 语法绑定。
-│   ├── hippy-vue-css-loader          # 用来将 CSS 文本转换为 JS 语法树以供解析的 Webpack loader。
-│   ├── hippy-vue-native-components   # hippy-vue 中浏览器中所没有的，额外的，终端定制组件。
-│   └── hippy-vue-router              # 在 hippy-vue 中运行的 vue-router。
-├── ios
-│   └── sdk                           # iOS SDK。
-├── android
-│   ├── support_ui                    # Android 终端实现的组件。
-│   └── sdk                           # Android SDK。
-├── core                              # C++ 实现的 JS 模块，通过 Binding 方式运行在 JS 引擎中。
-├── layout                            # Hippy 布局引擎。
-├── scripts                           # 项目编译脚本。
-└── types                             # 全局 Typescript 类型定义。
-</code></pre>
-<h2 id="结束">结束：</h2>
-<p>我看了码云和github上最早提交时间都是9个月前，知乎上的提问也是差不多的时间，并且通过网上的讨论度，也能看出这个框架才刚刚开始，不过背后有着腾讯的加持，想来是不会有什么大问题。</p>
 ]]></content>
     </entry>
 </feed>

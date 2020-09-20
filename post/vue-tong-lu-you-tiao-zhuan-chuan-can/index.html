@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Vue同路由跳转传参 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600439646554">
+<link rel="shortcut icon" href="/favicon.ico?v=1600595166051">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">64</span>
+        <span class="site-item-stat-count">65</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -815,6 +815,44 @@ Router.prototype.push = function push(location) {
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/"" data-c="
+          &lt;h2 id=&#34;什么是微前端&#34;&gt;什么是微前端？&lt;/h2&gt;
+&lt;p&gt;微前端（Micro-Frontends）是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将 Web 应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立运行、独立开发、独立部署。微前端不是单纯的前端框架或者工具，而是一套架构体系，这个概念最早在2016年底被提出，可以参考在Google上搜索Micro-Frontends, 排名靠前的micro-frontends.org的博客文章，提出了早期的微前端模型。&lt;/p&gt;
+&lt;h2 id=&#34;为什么会有微前端&#34;&gt;为什么会有微前端&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;任何新技术的产生都是为了解决现有场景和需求下的技术痛点，微前端也不例外：&lt;br&gt;
+拆分和细化：当下前端领域，单页面应用（SPA）是非常流行的项目形态之一，而随着时间的推移以及应用功能的丰富，单页应用变得不再单一而是越来越庞大也越来越难以维护，往往是改一处而动全身，由此带来的发版成本也越来越高。微前端的意义就是将这些庞大应用进行拆分，并随之解耦，每个部分可以单独进行维护和部署，提升效率。&lt;/li&gt;
+&lt;li&gt;整合历史系统：在不少的业务中，或多或少会存在一些历史项目，这些项目大多以采用老框架类似（Backbone.js，Angular.js 1）的B端管理系统为主，介于日常运营，这些系统需要结合到新框架中来使用还不能抛弃，对此我们也没有理由浪费时间和精力重写旧的逻辑。而微前端可以将这些系统进行整合，在基本不修改来逻辑的同时来同时兼容新老两套系统并行运行。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;实现微前端有哪些方案&#34;&gt;实现微前端有哪些方案&lt;/h2&gt;
+&lt;p&gt;单纯根据对概念的理解，很容易想到实现微前端的重要思想就是将应用进行拆解和整合，通常是一个父应用加上一些子应用，那么使用类似Nginx配置不同应用的转发，或是采用iframe来将多个应用整合到一起等等这些其实都属于微前端的实现方案，他们之间的对比如下图：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1600594986903.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+上述方案中，每种都有自己的优劣，最原始的Nginx配置反向代理是从接入层的角度来将系统进行分离，但是需要运维配置，而iframe嵌套是最简单和最快速的方案，但是iframe的弊端也是无法避免的，而Web Components的方案则需要大量的改造成本，最后的组合式应用路由分发方案改造成本中等并且能满足大部分需求，也不影响各前端应用的体验，是当下各个业务普遍采用的一种方案。&lt;/p&gt;
+&lt;h2 id=&#34;是否要用微前端&#34;&gt;是否要用微前端&lt;/h2&gt;
+&lt;p&gt;微前端帮助开发者解决了实际的问题，但是对于每个业务来说，是否适合使用微前端，以及是否正确的使用微前端，还是需要遵循以下一些原则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;微前端最佳的使用场景是一些B端的管理系统，既能兼容集成历史系统，也可以将新的系统集成进来，并且不影响原先的交互体验。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;整体的微前端不仅仅是只将系统集成进来，而是整个微前端体系的完善，这其中就包括：&lt;br&gt;
+1)：基座应用和微应用的自动部署能力。&lt;br&gt;
+2)：微应用的配置管理能力。&lt;br&gt;
+3)：本地开发调试能力。&lt;br&gt;
+4)：线上监控和统计能力等等。&lt;br&gt;
+只有将整个能力体系搭建完善，才能说是整个微前端体系流程的完善。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当发现使用微前端反而使效率变低，简单的变更复杂那就说明微前端并不适用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;作者：吕小鸣&lt;br&gt;
+链接：&lt;a href=&#34;https://juejin.im/post/6844904162509979662&#34;&gt;https://juejin.im/post/6844904162509979662&lt;/a&gt;&lt;br&gt;
+来源：掘金&lt;/p&gt;
+">每天一个名词解释—微前端</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/promise-xiang-guan/"" data-c="
