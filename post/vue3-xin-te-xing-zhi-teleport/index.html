@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>防抖和节流 | Mark</title>
+<title>Vue3新特性之——Teleport | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1600868123037">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="防抖和节流" />
-  <meta name="keywords" content="前端" />
+  <meta name="description" content="Vue3新特性之——Teleport" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -198,9 +198,10 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96">函数防抖</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81">函数节流</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81%E5%92%8C%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96%E5%8C%BA%E5%88%AB">函数节流和函数防抖区别</a></li>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#teleport">Teleport</a></li>
+<li><a href="#teleport%E7%9A%84%E4%BD%BF%E7%94%A8">Teleport的使用</a></li>
+<li><a href="#%E6%84%9F%E8%B0%A2">感谢</a></li>
 </ul>
 </li>
 </ul>
@@ -468,8 +469,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-      防抖和节流
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/">
+      Vue3新特性之——Teleport
     </a>
   </h1>
   <div class="post-meta">
@@ -477,94 +478,81 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 12:26:34">2020-08-08</span>
+      <span class="publish-time" data-t="2020-09-23 21:23:52">2020-09-23</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-        <span>前端</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
-    
-    <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>355<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>698<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="函数防抖">函数防抖</h2>
-<p>函数防抖是优化高频率执行js代码的一种手段<br>
-可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
-<pre><code>function debounce(fn, wait) {
-            let timer
-            return function () {
-                // 改变执行函数内部this指向
-                let _this = this
-                let _args = arguments
-                clearTimeout(timer)
-                timer = setTimeout(function () {
-                    fn.apply(_this, _args)
-                }, wait)
-            }
- }
+              <h2 id="前言">前言</h2>
+<p>Vue3发布的消息牵动着每一个前端er的心，终于在18号，尤大发布了3.0，作为一个夜猫子，也是第一时间就得到了消息，根据尤大的说法，新版本的中文翻译已经差不多了，而网络上对于3.0的教程也出了不少，尤其是这几天，各路大神对于vue3.0也是各种解析，本系列就是博彩各路大神之长，将他们对于vue3.0的介绍汇总整理。</p>
+<h2 id="teleport">Teleport</h2>
+<p>Teleport 是一种能够将我们的模板移动到 DOM 中 Vue app 之外的其他位置的技术，就有点像哆啦A梦的“任意门”</p>
+<p>场景：像 modals,toast 等这样的元素，很多情况下，我们将它完全的和我们的 Vue 应用的 DOM 完全剥离，管理起来反而会方便容易很多</p>
+<p>原因在于如果我们嵌套在 Vue 的某个组件内部，那么处理嵌套组件的定位、z-index 和样式就会变得很困难</p>
+<p>另外，像 modals,toast 等这样的元素需要使用到 Vue 组件的状态（data 或者 props）的值</p>
+<p>这就是 Teleport 派上用场的地方。我们可以在组件的逻辑位置写模板代码，这意味着我们可以使用组件的 data 或 props。然后在 Vue 应用的范围之外渲染它</p>
+<h2 id="teleport的使用">Teleport的使用</h2>
+<ul>
+<li><code>&lt;teleport&gt;</code>向Vue核心添加组件</li>
+<li>该组件需要一个目标元素，该元素是通过需要一个HTMLElement或querySelector字符串的prop提供的。</li>
+<li>组件将其子代移动到DOM选择器标识的元素</li>
+<li>在虚拟DOM级别，子级仍然是子代的后代<teleport>，因此他们可以从其祖先那里获得注入</li>
+</ul>
+<pre><code>&lt;body&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;h1&gt;Move the #content with the portal component&lt;/h1&gt;
+    &lt;teleport to=&quot;#endofbody&quot;&gt;
+      &lt;div id=&quot;content&quot;&gt;
+        &lt;p&gt;
+          this will be moved to #endofbody.&lt;br /&gt;
+          Pretend that it's a modal
+        &lt;/p&gt;
+        &lt;Child /&gt;
+      &lt;/div&gt;
+    &lt;/teleport&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;endofbody&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+    new Vue({
+      el: &quot;#app&quot;,
+      components: {
+        Child: { template: &quot;&lt;div&gt;Placeholder&lt;/div&gt;&quot; }
+      }
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
 </code></pre>
-<h2 id="函数节流">函数节流</h2>
-<p>函数节流是优化高频率执行js代码的一种手段<br>
-可以减少高频调用函数的执行次数</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
-第一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let timer
-            return function () {
-                if (timer) return
-                let _this = this
-                let _args = arguments
-                timer = setTimeout(() =&gt; {
-                    fn.apply(_this, _args)
-                    timer = null
-                }, wait)
-            }
-        }
+<p>这将导致以下行为：</p>
+<p>1 <code>&lt;teleport&gt;</code>在此示例中：<code>&lt;div id=&quot;content&quot;&gt;</code>和<code>&lt;Child /&gt;</code>的所有子项都将附加到<code>&lt;div id=&quot;endofbody&quot;&gt;</code><br>
+2 <code>&lt;Child&gt;</code>作为这些子项之一的组件将保留为<code>&lt;teleport&gt;</code>的父项的子项（<code>&lt;teleport&gt;</code>透明）。</p>
+<pre><code>&lt;div id=&quot;app&quot;&gt;
+  &lt;!-- --&gt;
+&lt;/div&gt;
+&lt;div id=&quot;endofbody&quot;&gt;
+  &lt;div id=&quot;content&quot;&gt;
+    &lt;p&gt;
+      this will be moved to #endofbody.&lt;br /&gt;
+      Pretend that it's a modal
+    &lt;/p&gt;
+    &lt;div&gt;Placeholder&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 </code></pre>
-<p>最后一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let old = 0
-            return function () {
-                let _this = this
-                let _args = arguments
-                // 获取当前的时间戳
-                let now = new Date().valueOf()
-                if (now - old &gt; wait) {
-                    fn.apply(_this, _args)
-                    // 立即执行
-                    old = now;
-                }
-            }
-        }
-</code></pre>
-<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
-<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
-函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
-<p>参考<br>
-https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
+<h2 id="感谢">感谢</h2>
+<p><a href="https://zhuanlan.zhihu.com/p/143042237?from_voters_page=true">志学python</a><br>
+<a href="https://www.jianshu.com/p/1ecf5006b1ae">GpingFeng</a></p>
 
             </div>
             
@@ -577,7 +565,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/" title="防抖和节流">https://jujuul.github.io/post/fang-dou-he-jie-liu/</a>
+      <a href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/" title="Vue3新特性之——Teleport">https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -586,21 +574,15 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/"># 前端</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">收藏的一些有用的网站</a>
-        <a class="nav-mobile-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">下一篇</a>
+        <a class="nav-pc-next" title="每天一个名词解释—微前端" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/">每天一个名词解释—微前端</a>
+        <a class="nav-mobile-next" title="每天一个名词解释—微前端" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

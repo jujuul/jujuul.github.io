@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600595166051">
+<link rel="shortcut icon" href="/favicon.ico?v=1600868123037">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">65</span>
+        <span class="site-item-stat-count">66</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -190,6 +190,83 @@
         <div class="section-box mist">
           <section class="section bg-color posts-expand slide-down-in">
             
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/">
+      修改滚动条
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-08-22 22:43:26">2020-08-22</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>35<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><pre><code>.main::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/xiu-gai-gun-dong-tiao/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
   <article class="post-list-box  post box-shadow-wrapper">
     <div class="article-wrapper bg-color">
       <section class="post-header">
@@ -791,70 +868,6 @@
       
     </div>
   </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/">
-      每天一个名词解释—webpack
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-19 14:54:49">2020-08-19</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>509<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <h1 id="概念">概念</h1>
-<p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(module bundler)。当 webpack 处理应用程序时，它会递归地构建一个依赖关系图(dependency graph)，其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个 bundle。</p>
-<p>webpack是一个打包工具，可以将项目中用到的各种文件按照一定的规则集合起来。在这个过程中可以进行诸如图片压缩、ES6语法转ES5语法、TypeScript转JavaScript等等操作。</p>
-<h2 id="与gulpgrunt等打包工具有什么区别">与gulp/grunt等打包工具有什么区别？</h2>
-<p><code>gulp 是自动化构建工具，可以配合各种插件做 js 压缩、css 压缩、less 编译、代码检查等，替代手工实现自动化工作</code><br>
-1 构建工具<br>
-2 自动化<br>
-3 提高效率用</p>
-<p><code>webpack是文件打包工具，可以把项目的各种 js、css文件等打包合并成一个或多个文件，主要用于模块化方案，预编译模块的方案</code><br>
-1 打包工具<br>
-2 模块化识别<br>
-3 编译模块化代码方案用</p>
-
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-webpack/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
   
             
             
@@ -1138,6 +1151,69 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;Vue3发布的消息牵动着每一个前端er的心，终于在18号，尤大发布了3.0，作为一个夜猫子，也是第一时间就得到了消息，根据尤大的说法，新版本的中文翻译已经差不多了，而网络上对于3.0的教程也出了不少，尤其是这几天，各路大神对于vue3.0也是各种解析，本系列就是博彩各路大神之长，将他们对于vue3.0的介绍汇总整理。&lt;/p&gt;
+&lt;h2 id=&#34;teleport&#34;&gt;Teleport&lt;/h2&gt;
+&lt;p&gt;Teleport 是一种能够将我们的模板移动到 DOM 中 Vue app 之外的其他位置的技术，就有点像哆啦A梦的“任意门”&lt;/p&gt;
+&lt;p&gt;场景：像 modals,toast 等这样的元素，很多情况下，我们将它完全的和我们的 Vue 应用的 DOM 完全剥离，管理起来反而会方便容易很多&lt;/p&gt;
+&lt;p&gt;原因在于如果我们嵌套在 Vue 的某个组件内部，那么处理嵌套组件的定位、z-index 和样式就会变得很困难&lt;/p&gt;
+&lt;p&gt;另外，像 modals,toast 等这样的元素需要使用到 Vue 组件的状态（data 或者 props）的值&lt;/p&gt;
+&lt;p&gt;这就是 Teleport 派上用场的地方。我们可以在组件的逻辑位置写模板代码，这意味着我们可以使用组件的 data 或 props。然后在 Vue 应用的范围之外渲染它&lt;/p&gt;
+&lt;h2 id=&#34;teleport的使用&#34;&gt;Teleport的使用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;向Vue核心添加组件&lt;/li&gt;
+&lt;li&gt;该组件需要一个目标元素，该元素是通过需要一个HTMLElement或querySelector字符串的prop提供的。&lt;/li&gt;
+&lt;li&gt;组件将其子代移动到DOM选择器标识的元素&lt;/li&gt;
+&lt;li&gt;在虚拟DOM级别，子级仍然是子代的后代&lt;teleport&gt;，因此他们可以从其祖先那里获得注入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;body&amp;gt;
+  &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+    &amp;lt;h1&amp;gt;Move the #content with the portal component&amp;lt;/h1&amp;gt;
+    &amp;lt;teleport to=&amp;quot;#endofbody&amp;quot;&amp;gt;
+      &amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+        &amp;lt;p&amp;gt;
+          this will be moved to #endofbody.&amp;lt;br /&amp;gt;
+          Pretend that it&#39;s a modal
+        &amp;lt;/p&amp;gt;
+        &amp;lt;Child /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/teleport&amp;gt;
+  &amp;lt;/div&amp;gt;
+  &amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+  &amp;lt;script&amp;gt;
+    new Vue({
+      el: &amp;quot;#app&amp;quot;,
+      components: {
+        Child: { template: &amp;quot;&amp;lt;div&amp;gt;Placeholder&amp;lt;/div&amp;gt;&amp;quot; }
+      }
+    });
+  &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这将导致以下行为：&lt;/p&gt;
+&lt;p&gt;1 &lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;在此示例中：&lt;code&gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&lt;/code&gt;和&lt;code&gt;&amp;lt;Child /&amp;gt;&lt;/code&gt;的所有子项都将附加到&lt;code&gt;&amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;&lt;/code&gt;&lt;br&gt;
+2 &lt;code&gt;&amp;lt;Child&amp;gt;&lt;/code&gt;作为这些子项之一的组件将保留为&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;的父项的子项（&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;透明）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+  &amp;lt;!-- --&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;
+  &amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+    &amp;lt;p&amp;gt;
+      this will be moved to #endofbody.&amp;lt;br /&amp;gt;
+      Pretend that it&#39;s a modal
+    &amp;lt;/p&amp;gt;
+    &amp;lt;div&amp;gt;Placeholder&amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;感谢&#34;&gt;感谢&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/143042237?from_voters_page=true&#34;&gt;志学python&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.jianshu.com/p/1ecf5006b1ae&#34;&gt;GpingFeng&lt;/a&gt;&lt;/p&gt;
+">Vue3新特性之——Teleport</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/"" data-c="

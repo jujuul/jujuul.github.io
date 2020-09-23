@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600595166051">
+<link rel="shortcut icon" href="/favicon.ico?v=1600868123037">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -149,7 +149,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">65</span>
+        <span class="site-item-stat-count">66</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -426,6 +426,69 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;Vue3发布的消息牵动着每一个前端er的心，终于在18号，尤大发布了3.0，作为一个夜猫子，也是第一时间就得到了消息，根据尤大的说法，新版本的中文翻译已经差不多了，而网络上对于3.0的教程也出了不少，尤其是这几天，各路大神对于vue3.0也是各种解析，本系列就是博彩各路大神之长，将他们对于vue3.0的介绍汇总整理。&lt;/p&gt;
+&lt;h2 id=&#34;teleport&#34;&gt;Teleport&lt;/h2&gt;
+&lt;p&gt;Teleport 是一种能够将我们的模板移动到 DOM 中 Vue app 之外的其他位置的技术，就有点像哆啦A梦的“任意门”&lt;/p&gt;
+&lt;p&gt;场景：像 modals,toast 等这样的元素，很多情况下，我们将它完全的和我们的 Vue 应用的 DOM 完全剥离，管理起来反而会方便容易很多&lt;/p&gt;
+&lt;p&gt;原因在于如果我们嵌套在 Vue 的某个组件内部，那么处理嵌套组件的定位、z-index 和样式就会变得很困难&lt;/p&gt;
+&lt;p&gt;另外，像 modals,toast 等这样的元素需要使用到 Vue 组件的状态（data 或者 props）的值&lt;/p&gt;
+&lt;p&gt;这就是 Teleport 派上用场的地方。我们可以在组件的逻辑位置写模板代码，这意味着我们可以使用组件的 data 或 props。然后在 Vue 应用的范围之外渲染它&lt;/p&gt;
+&lt;h2 id=&#34;teleport的使用&#34;&gt;Teleport的使用&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;向Vue核心添加组件&lt;/li&gt;
+&lt;li&gt;该组件需要一个目标元素，该元素是通过需要一个HTMLElement或querySelector字符串的prop提供的。&lt;/li&gt;
+&lt;li&gt;组件将其子代移动到DOM选择器标识的元素&lt;/li&gt;
+&lt;li&gt;在虚拟DOM级别，子级仍然是子代的后代&lt;teleport&gt;，因此他们可以从其祖先那里获得注入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;body&amp;gt;
+  &amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+    &amp;lt;h1&amp;gt;Move the #content with the portal component&amp;lt;/h1&amp;gt;
+    &amp;lt;teleport to=&amp;quot;#endofbody&amp;quot;&amp;gt;
+      &amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+        &amp;lt;p&amp;gt;
+          this will be moved to #endofbody.&amp;lt;br /&amp;gt;
+          Pretend that it&#39;s a modal
+        &amp;lt;/p&amp;gt;
+        &amp;lt;Child /&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/teleport&amp;gt;
+  &amp;lt;/div&amp;gt;
+  &amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;
+  &amp;lt;script&amp;gt;
+    new Vue({
+      el: &amp;quot;#app&amp;quot;,
+      components: {
+        Child: { template: &amp;quot;&amp;lt;div&amp;gt;Placeholder&amp;lt;/div&amp;gt;&amp;quot; }
+      }
+    });
+  &amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这将导致以下行为：&lt;/p&gt;
+&lt;p&gt;1 &lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;在此示例中：&lt;code&gt;&amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;&lt;/code&gt;和&lt;code&gt;&amp;lt;Child /&amp;gt;&lt;/code&gt;的所有子项都将附加到&lt;code&gt;&amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;&lt;/code&gt;&lt;br&gt;
+2 &lt;code&gt;&amp;lt;Child&amp;gt;&lt;/code&gt;作为这些子项之一的组件将保留为&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;的父项的子项（&lt;code&gt;&amp;lt;teleport&amp;gt;&lt;/code&gt;透明）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;div id=&amp;quot;app&amp;quot;&amp;gt;
+  &amp;lt;!-- --&amp;gt;
+&amp;lt;/div&amp;gt;
+&amp;lt;div id=&amp;quot;endofbody&amp;quot;&amp;gt;
+  &amp;lt;div id=&amp;quot;content&amp;quot;&amp;gt;
+    &amp;lt;p&amp;gt;
+      this will be moved to #endofbody.&amp;lt;br /&amp;gt;
+      Pretend that it&#39;s a modal
+    &amp;lt;/p&amp;gt;
+    &amp;lt;div&amp;gt;Placeholder&amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;感谢&#34;&gt;感谢&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/143042237?from_voters_page=true&#34;&gt;志学python&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://www.jianshu.com/p/1ecf5006b1ae&#34;&gt;GpingFeng&lt;/a&gt;&lt;/p&gt;
+">Vue3新特性之——Teleport</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-wei-qian-duan/"" data-c="
