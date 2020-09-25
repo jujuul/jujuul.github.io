@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Uniapp学习记录day6 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1600868123037">
+<link rel="shortcut icon" href="/favicon.ico?v=1601038952518">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">66</span>
+        <span class="site-item-stat-count">67</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1032,6 +1032,63 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/event-loop/"" data-c="
+          &lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;事件循环机制已经听说很久了，但是一直没有深入的了解，主要原因还是在于听到事件、循环、机制这些词语组合到一起，就觉得很难，一直没有了解，直到今天看刘博文大神的深入浅出Vue.js，看到其中的NextTick，看到里面讲了事件循环机制，才开始详细了解。&lt;/p&gt;
+&lt;p&gt;我们都知道，JS被设计为单线程非阻塞脚本语言。之所以这样设计，是因为JS需要与浏览器进行交互。单线程可以保证js代码执行时只有一个线程来处理所有任务。非阻塞是为了当执行异步任务时，能够继续执行其他的任务，在异步任务返回结果再去调用。那么JS时如何实现这一点的呢？&lt;br&gt;
+ps: 其实网上的很多文章都是把浏览器和nodejs放在一起讲的，但是为了效率，我没有详细了解nodejs(以后有机会会补上)。&lt;/p&gt;
+&lt;h2 id=&#34;执行栈与事件队列&#34;&gt;执行栈与事件队列&lt;/h2&gt;
+&lt;p&gt;当调用一个方法时，JS会生成一个与这个方法对应的执行环境，也就是执行上下文。这个执行环境存在着这个方法的私有作用域，上层作用域的指向，方法的参数，这个作用域中定义的变量以及这个作用域的this对象。当其被调用时，因为是单线程，同一时间只能执行一个方法，这些方法就被放在一个单独的地方排列，这个地方就是执行栈。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1601037266593.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+这张图片就展示了这个过程。&lt;br&gt;
+以上为同步代码执行，如果执行异步代码又会怎样？&lt;br&gt;
+这里就不得不提到JS的另一特点：非阻塞，而实现这一特点的，是事件队列(Task Queue)。&lt;/p&gt;
+&lt;p&gt;JS遇到异步事件后不会苦苦等待，而是继续执行栈中的其他任务，而将异步任务挂起，当异步任务返回结果后，JS会将这个事件加入当前执行栈的另一个队列，事件队列。放入事件队列不会立即回调，而是等待当前执行栈全部任务执行完毕，才会执行，如此反复循环，就是事件循环机制。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1601037572038.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;宏任务与微任务&#34;&gt;宏任务与微任务&lt;/h2&gt;
+&lt;p&gt;前面对于异步任务的描述并不够具体，因为异步任务之间也并不相同，可以分为微任务（micro task）和宏任务（macro task）。&lt;br&gt;
+宏任务&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;script&lt;/li&gt;
+&lt;li&gt;setTimeout&lt;/li&gt;
+&lt;li&gt;setTimeInterval&lt;/li&gt;
+&lt;li&gt;I/O操作&lt;/li&gt;
+&lt;li&gt;UI渲染&lt;br&gt;
+微任务&lt;/li&gt;
+&lt;li&gt;Promise&lt;/li&gt;
+&lt;li&gt;MutationObserver&lt;br&gt;
+这里可能有人要问了，为什么还有UI渲染？因为浏览器内核是由多个线程组成的，JS引擎线程只是其中之一，浏览器内核可以共有以下几种：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;GUI 渲染线程&lt;/li&gt;
+&lt;li&gt;JavaScript引擎线程&lt;/li&gt;
+&lt;li&gt;定时触发器线程&lt;/li&gt;
+&lt;li&gt;事件触发线程&lt;/li&gt;
+&lt;li&gt;异步http请求线程&lt;br&gt;
+这里就不过多展开了&lt;br&gt;
+再次说回宏任务微任务，前面我们知道当遇到异步任务会挂起执行同步任务，而这里的异步任务可以分宏任务与微任务，微任务先于宏任务执行，并且只有微任务队列所有任务执行完毕(包括微任务执行中创建的新的微任务)，才会执行宏任务，总结一下：&lt;/li&gt;
+&lt;li&gt;首先执行全局的script代码，其中有同步也有异步。&lt;/li&gt;
+&lt;li&gt;全局script执行完毕，清空执行栈。&lt;/li&gt;
+&lt;li&gt;从微任务队列中取出位于首位的任务，放入执行栈执行，微任务队列长度-1&lt;/li&gt;
+&lt;li&gt;继续执行第三步，直到微任务队列清空。&lt;/li&gt;
+&lt;li&gt;从宏任务队列取出首位执行，执行完毕后先去微任务队列看是否有微任务需要执行，如果有执行微任务；没有继续取出宏任务队列的下一个任务执行。&lt;br&gt;
+循环以上的步骤就是事件循环机制(event loop)&lt;br&gt;
+注1：new Promise 跟 script 同级&lt;br&gt;
+注2：async await 跟 Promise 同级&lt;br&gt;
+注3：看好上面一个是new Promise 一个是 Promise&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;后记&#34;&gt;后记&lt;/h2&gt;
+&lt;p&gt;这次关于事件循环机制的学习最大的收获倒不是学会了它本身，而是让我知道了面对那些听起来就复杂的东西没有必要避开，也许它比你想象的更简单，还有就是一切计算机相关的东西，最后都会到底层，各种语言各种机制都是建立在底层之上的，如果真的想成为这一领域的大师，更加深入的学习是十分必要的。&lt;br&gt;
+最后还是感谢网络上各位大神的文章视频的帮助，感谢互联网。&lt;/p&gt;
+&lt;h2 id=&#34;参考&#34;&gt;参考&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.im/post/6844904035770695693#heading-1&#34;&gt;前端中的事件循环eventloop机制&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://zhuanlan.zhihu.com/p/33058983&#34;&gt;详解JavaScript中的Event Loop（事件循环）机制&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://zhuanlan.zhihu.com/p/72507900&#34;&gt;如何解释Event Loop面试官才满意？&lt;/a&gt;&lt;br&gt;
+&lt;a href=&#34;https://github.com/ljianshu/Blog/issues/54&#34;&gt;浏览器与Node的事件循环(Event Loop)有何区别?&lt;/a&gt;&lt;/p&gt;
+">Event loop</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/"" data-c="

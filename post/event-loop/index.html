@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>逛简书时发现的问题 | Mark</title>
+<title>Event loop | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1601038952518">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="逛简书时发现的问题" />
+  <meta name="description" content="Event loop" />
   <meta name="keywords" content="" />
 </head>
 
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,199 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E6%89%A7%E8%A1%8C%E6%A0%88%E4%B8%8E%E4%BA%8B%E4%BB%B6%E9%98%9F%E5%88%97">执行栈与事件队列</a></li>
+<li><a href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E4%B8%8E%E5%BE%AE%E4%BB%BB%E5%8A%A1">宏任务与微任务</a></li>
+<li><a href="#%E5%90%8E%E8%AE%B0">后记</a></li>
+<li><a href="#%E5%8F%82%E8%80%83">参考</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -276,8 +470,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/guang-jian-shu-shi-fa-xian-de-wen-ti/">
-      逛简书时发现的问题
+    <a class="post-title-link" href="https://jujuul.github.io/post/event-loop/">
+      Event loop
     </a>
   </h1>
   <div class="post-meta">
@@ -285,24 +479,75 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-09-13 12:05:40">2020-09-13</span>
+      <span class="publish-time" data-t="2020-09-25 19:41:14">2020-09-25</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>73<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1263<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天在简书看文章是，因为要用到控制台，就顺手按了F12，打开了当前页面的控制台，发现有一个打印出来的数组<img src="https://jujuul.github.io//post-images/1599970226633.PNG" alt="" loading="lazy">，虽然都不是什么重要的信息，但是这种打印应该也是不应该的吧</p>
+              <h2 id="前言">前言</h2>
+<p>事件循环机制已经听说很久了，但是一直没有深入的了解，主要原因还是在于听到事件、循环、机制这些词语组合到一起，就觉得很难，一直没有了解，直到今天看刘博文大神的深入浅出Vue.js，看到其中的NextTick，看到里面讲了事件循环机制，才开始详细了解。</p>
+<p>我们都知道，JS被设计为单线程非阻塞脚本语言。之所以这样设计，是因为JS需要与浏览器进行交互。单线程可以保证js代码执行时只有一个线程来处理所有任务。非阻塞是为了当执行异步任务时，能够继续执行其他的任务，在异步任务返回结果再去调用。那么JS时如何实现这一点的呢？<br>
+ps: 其实网上的很多文章都是把浏览器和nodejs放在一起讲的，但是为了效率，我没有详细了解nodejs(以后有机会会补上)。</p>
+<h2 id="执行栈与事件队列">执行栈与事件队列</h2>
+<p>当调用一个方法时，JS会生成一个与这个方法对应的执行环境，也就是执行上下文。这个执行环境存在着这个方法的私有作用域，上层作用域的指向，方法的参数，这个作用域中定义的变量以及这个作用域的this对象。当其被调用时，因为是单线程，同一时间只能执行一个方法，这些方法就被放在一个单独的地方排列，这个地方就是执行栈。<br>
+<img src="https://jujuul.github.io//post-images/1601037266593.gif" alt="" loading="lazy"><br>
+这张图片就展示了这个过程。<br>
+以上为同步代码执行，如果执行异步代码又会怎样？<br>
+这里就不得不提到JS的另一特点：非阻塞，而实现这一特点的，是事件队列(Task Queue)。</p>
+<p>JS遇到异步事件后不会苦苦等待，而是继续执行栈中的其他任务，而将异步任务挂起，当异步任务返回结果后，JS会将这个事件加入当前执行栈的另一个队列，事件队列。放入事件队列不会立即回调，而是等待当前执行栈全部任务执行完毕，才会执行，如此反复循环，就是事件循环机制。<br>
+<img src="https://jujuul.github.io//post-images/1601037572038.png" alt="" loading="lazy"></p>
+<h2 id="宏任务与微任务">宏任务与微任务</h2>
+<p>前面对于异步任务的描述并不够具体，因为异步任务之间也并不相同，可以分为微任务（micro task）和宏任务（macro task）。<br>
+宏任务</p>
+<ul>
+<li>script</li>
+<li>setTimeout</li>
+<li>setTimeInterval</li>
+<li>I/O操作</li>
+<li>UI渲染<br>
+微任务</li>
+<li>Promise</li>
+<li>MutationObserver<br>
+这里可能有人要问了，为什么还有UI渲染？因为浏览器内核是由多个线程组成的，JS引擎线程只是其中之一，浏览器内核可以共有以下几种：</li>
+</ul>
+<ol>
+<li>GUI 渲染线程</li>
+<li>JavaScript引擎线程</li>
+<li>定时触发器线程</li>
+<li>事件触发线程</li>
+<li>异步http请求线程<br>
+这里就不过多展开了<br>
+再次说回宏任务微任务，前面我们知道当遇到异步任务会挂起执行同步任务，而这里的异步任务可以分宏任务与微任务，微任务先于宏任务执行，并且只有微任务队列所有任务执行完毕(包括微任务执行中创建的新的微任务)，才会执行宏任务，总结一下：</li>
+<li>首先执行全局的script代码，其中有同步也有异步。</li>
+<li>全局script执行完毕，清空执行栈。</li>
+<li>从微任务队列中取出位于首位的任务，放入执行栈执行，微任务队列长度-1</li>
+<li>继续执行第三步，直到微任务队列清空。</li>
+<li>从宏任务队列取出首位执行，执行完毕后先去微任务队列看是否有微任务需要执行，如果有执行微任务；没有继续取出宏任务队列的下一个任务执行。<br>
+循环以上的步骤就是事件循环机制(event loop)<br>
+注1：new Promise 跟 script 同级<br>
+注2：async await 跟 Promise 同级<br>
+注3：看好上面一个是new Promise 一个是 Promise</li>
+</ol>
+<h2 id="后记">后记</h2>
+<p>这次关于事件循环机制的学习最大的收获倒不是学会了它本身，而是让我知道了面对那些听起来就复杂的东西没有必要避开，也许它比你想象的更简单，还有就是一切计算机相关的东西，最后都会到底层，各种语言各种机制都是建立在底层之上的，如果真的想成为这一领域的大师，更加深入的学习是十分必要的。<br>
+最后还是感谢网络上各位大神的文章视频的帮助，感谢互联网。</p>
+<h2 id="参考">参考</h2>
+<p><a href="https://juejin.im/post/6844904035770695693#heading-1">前端中的事件循环eventloop机制</a><br>
+<a href="https://zhuanlan.zhihu.com/p/33058983">详解JavaScript中的Event Loop（事件循环）机制</a><br>
+<a href="https://zhuanlan.zhihu.com/p/72507900">如何解释Event Loop面试官才满意？</a><br>
+<a href="https://github.com/ljianshu/Blog/issues/54">浏览器与Node的事件循环(Event Loop)有何区别?</a></p>
 
             </div>
             
@@ -315,7 +560,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/guang-jian-shu-shi-fa-xian-de-wen-ti/" title="逛简书时发现的问题">https://jujuul.github.io/post/guang-jian-shu-shi-fa-xian-de-wen-ti/</a>
+      <a href="https://jujuul.github.io/post/event-loop/" title="Event loop">https://jujuul.github.io/post/event-loop/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -328,15 +573,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="TIOBE - 2020年9月编程语言排行" href="https://jujuul.github.io/post/tiobe-2020-nian-9-yue-bian-cheng-yu-yan-pai-xing/">TIOBE - 2020年9月编程语言排行</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="TIOBE - 2020年9月编程语言排行" href="https://jujuul.github.io/post/tiobe-2020-nian-9-yue-bian-cheng-yu-yan-pai-xing/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="百度搜索页更新了" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/">百度搜索页更新了</a>
-        <a class="nav-mobile-next" title="百度搜索页更新了" href="https://jujuul.github.io/post/bai-du-sou-suo-ye-geng-xin-liao/">下一篇</a>
+        <a class="nav-pc-next" title="Vue3新特性之——Teleport" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/">Vue3新特性之——Teleport</a>
+        <a class="nav-mobile-next" title="Vue3新特性之——Teleport" href="https://jujuul.github.io/post/vue3-xin-te-xing-zhi-teleport/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
