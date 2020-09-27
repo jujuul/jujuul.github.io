@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601175093657">
+<link rel="shortcut icon" href="/favicon.ico?v=1601201552414">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -194,6 +194,86 @@
     <div class="article-wrapper bg-color">
       <section class="post-header">
   <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/event-loop/">
+      Event loop
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item">
+      <i class="fa fa-thumb-tack"></i>
+      <span class="language" data-lan="top">置顶</span>
+      <span class="post-meta-divider">|</span>
+    </span>
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-09-25 19:41:14">2020-09-25</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>5<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>1263<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><h2 id="前言">前言</h2>
+<p>事件循环机制已经听说很久了，但是一直没有深入的了解，主要原因还是在于听到事件、循环、机制这些词语组合到一起，就觉得很难，一直没有了解，直到今天看刘博文大神的深入浅出Vue.js，看到其中的NextTick，看到里面讲了事件循环机制，才开始详细了解。</p>
+<p>我们都知道，JS被设计为单线程非阻塞脚本语言。之所以这样设计，是因为JS需要与浏览器进行交互。单线程可以保证js代码执行时只有一个线程来处理所有任务。非阻塞是为了当执行异步任务时，能够继续执行其他的任务，在异步任务返回结果再去调用。那么JS时如何实现这一点的呢？<br>
+
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/event-loop/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
     <a class="post-title-link" href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/">
       作用域、作用域链和闭包
     </a>
@@ -251,80 +331,6 @@
         
         <div class="post-button text-center">
           <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/event-loop/">
-      Event loop
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-09-25 19:41:14">2020-09-25</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>5<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>1263<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><h2 id="前言">前言</h2>
-<p>事件循环机制已经听说很久了，但是一直没有深入的了解，主要原因还是在于听到事件、循环、机制这些词语组合到一起，就觉得很难，一直没有了解，直到今天看刘博文大神的深入浅出Vue.js，看到其中的NextTick，看到里面讲了事件循环机制，才开始详细了解。</p>
-<p>我们都知道，JS被设计为单线程非阻塞脚本语言。之所以这样设计，是因为JS需要与浏览器进行交互。单线程可以保证js代码执行时只有一个线程来处理所有任务。非阻塞是为了当执行异步任务时，能够继续执行其他的任务，在异步任务返回结果再去调用。那么JS时如何实现这一点的呢？<br>
-
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/event-loop/" rel="contents">
             阅读全文 »
           </a>
         </div>
@@ -1230,6 +1236,17 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/npm-publish-cai-keng-ji-lu/"" data-c="
+          &lt;h2 id=&#34;npm-publish-作用&#34;&gt;npm publish 作用&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;npm publish&lt;/code&gt; 用于向npm上传自己的包，从而达到发布的目的。&lt;/p&gt;
+&lt;h2 id=&#34;npm-publish-使用&#34;&gt;npm publish 使用&lt;/h2&gt;
+&lt;p&gt;需要现在npm注册账号，然后终端上&lt;code&gt;npm login&lt;/code&gt;登录，输入用户名与密码还有邮箱，尤其要注意，密码输入时不会显示，也没有任何提示，我又是使用的google注册时自动生成的密码，这里特别麻烦，不知道是不是只有我这样。&lt;/p&gt;
+&lt;p&gt;还要注意的是，package.json的内容，name、version、files、main都是必填项。&lt;/p&gt;
+&lt;h2 id=&#34;npm-publish-报错&#34;&gt;npm publish 报错&lt;/h2&gt;
+">npm publish 踩坑记录</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/"" data-c="
