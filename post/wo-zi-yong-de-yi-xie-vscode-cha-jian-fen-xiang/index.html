@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>我自用的一些vscode插件分享 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601636586376">
+<link rel="shortcut icon" href="/favicon.ico?v=1601656319958">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -166,7 +166,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">70</span>
+        <span class="site-item-stat-count">72</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -837,6 +837,136 @@ JS代码检测工具，配合之前的几个代码检测，写出的代码将无
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/"" data-c="
+          &lt;p&gt;安装&lt;br&gt;
+&lt;code&gt;npm i typescript -g&lt;/code&gt;&lt;/p&gt;
+">typescript学习记录1</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/webpack-you-hua/"" data-c="
+          &lt;h1 id=&#34;hmr&#34;&gt;HMR&lt;/h1&gt;
+&lt;h3 id=&#34;介绍&#34;&gt;介绍&lt;/h3&gt;
+&lt;p&gt;HMR:  hot module  replacement 热模块替换 / 模块热替换&lt;br&gt;
+开启方式：再devServer中设置hot: true,&lt;br&gt;
+作用： 一个模块发生变化，只会从新打包这一个模块（而不是打包所有）&lt;br&gt;
+极大提升构建速度&lt;br&gt;
+样式文件：可以使用html功能：因为style-loader内部实现了&lt;br&gt;
+js文件：默认不能使用HMR功能 --&amp;gt; 需要修改js代码，添加支持HMR功能的代码&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注意：HMR功能对js的处理，只能处理非入口js文件的其他文件&lt;br&gt;
+html文件：默认不能使用HMR功能，同时会导致问题：html文件不能热更新了（不用做HMR功能）&lt;/li&gt;
+&lt;li&gt;解决：修改entry入口，将html文件引入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;用法&#34;&gt;用法&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;devServer: {
+    contentBase: resolve(__dirname, &amp;quot;build&amp;quot;),
+    compress: true,
+    port: 3000,
+    open: true,
+    // 开启HMR功能
+    // 当修改了webpack配置，新配置想要生效，必须重启webpack服务
+    hot: true,
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;if (module.hot) {
+  // 一旦 module.hot为true，说明开启了HMR功能。  --&amp;gt; 让HMR功能代码生效
+  module.hot.accept(&amp;quot;./print.js&amp;quot;, function () {
+    // 方法会监听print.js文件的变化，一旦发生变化，其他模块不会重新打包构建。
+    // 会执行后面的回调函数
+    print();
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;source-map&#34;&gt;source-map&lt;/h1&gt;
+&lt;h3 id=&#34;介绍-2&#34;&gt;介绍&lt;/h3&gt;
+&lt;p&gt;source-map一种提供源代码到构建后代码映射 技术（如果构建后代码出错了，通过映射关系可以追踪到源代码错误）&lt;br&gt;
+[inline-|hidden-|eval][nosources-][cheap-[module-]]source-map&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;source-map          外部
+错误代码的准确信息 和 源代码的错误位置
+inline-source-map   内联
+生成一个内联source-map
+错误代码的准确信息 和 源代码的错误位置
+hidden-source-map   外部
+错误代码错误原因，但是没有错误位置
+不能追踪到源代码的错误，只能提示到构建后代码的错误位置
+eval-source-map     内联
+每一个文件都生成对应的source-map，都在eval
+错误代码的准确信息 和 源代码的错误位置
+nosources-source-map  外部
+错误代码的准确信息，但是没有任何源代码信息
+cheap-source-map    外部
+错误代码的准确信息 和 源代码的错误位置，但是只能精确到行
+cheap-module-source-map   外部
+错误代码的准确信息 和 源代码的错误位置
+module会将loader的source map加入
+
+内联和外部的区别：1.外部生成了文件，内联没有  2.内联构建速度更快
+
+开发环境：速度快，调试更友好
+速度快（eavl&amp;gt;inline&amp;gt;cheap&amp;gt;...）
+eval-cheap-source-map
+eval-source-map
+调试更友好
+source-map
+cheap-module-source-map
+cheap-source-map
+折中选择：eval-source-map &amp;gt;   eval-cheap/module-source-map  
+脚手架默认使用eval-source-map
+生产环境：源代码要不要隐藏？调试要不要更友好？
+内联会让代码体积变大，所以在生产环境不用内联
+nosources-source-map  全部隐藏
+hidden-source-map     只隐藏源代码，会提示构建后代码错误
+
+折中选择 source-map  &amp;gt;  cheap-module-source-map
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;使用方法&#34;&gt;使用方法&lt;/h3&gt;
+&lt;p&gt;在webpack.config.js中添加&lt;code&gt;devtool: &amp;quot;source-map&amp;quot;,&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;oneof&#34;&gt;oneOf&lt;/h1&gt;
+&lt;h3 id=&#34;介绍-3&#34;&gt;介绍&lt;/h3&gt;
+&lt;p&gt;webpack原本的loader是将每个文件都过一遍，比如有一个js文件 rules中有10个loader，第一个是处理js文件的loader，当第一个loader处理完成后webpack不会自动跳出，而是会继续拿着这个js文件去尝试匹配剩下的9个loader，相当于没有break。&lt;br&gt;
+而oneOf就相当于这个break&lt;/p&gt;
+&lt;h3 id=&#34;使用方法-2&#34;&gt;使用方法&lt;/h3&gt;
+&lt;p&gt;创建一个oneOf的数组，把要处理的规则放入oneOf中，如果一个文件类型需要多种处理，可以将其放在oneOf数组外&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    enforcement: &amp;quot;pre&amp;quot;,
+    loader: &amp;quot;eslint-loader&amp;quot;,
+    options: {
+        fix: true,
+    },
+},
+oneOf: [
+    {
+       test: /\.js$/,
+            exclude: /node_modules/,
+            loader: &amp;quot;babel-loader&amp;quot;,
+            options: {
+              presets: [
+                &amp;quot;@babel/preset-env&amp;quot;,
+                {
+                  useBuiltIns: &amp;quot;usage&amp;quot;,
+                  corejs: {
+                    version: 3,
+                  },
+                  targets: {
+                    chrome: &amp;quot;60&amp;quot;,
+                    firefox: &amp;quot;60&amp;quot;,
+                    ie: &amp;quot;9&amp;quot;,
+                    safari: &amp;quot;10&amp;quot;,
+                    edge: &amp;quot;17&amp;quot;,
+                    },
+                },
+            ],
+        },
+    }
+]
+&lt;/code&gt;&lt;/pre&gt;
+">webpack优化</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/"" data-c="
