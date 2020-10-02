@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>TIOBE - 2020年9月编程语言排行 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601216239710">
+<link rel="shortcut icon" href="/favicon.ico?v=1601636586376">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -167,7 +167,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">68</span>
+        <span class="site-item-stat-count">70</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1005,6 +1005,274 @@
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/"" data-c="
+          &lt;pre&gt;&lt;code&gt;const { resolve } = require(&amp;quot;path&amp;quot;);
+const MiniCssExtractPlugin = require(&amp;quot;mini-css-extract-plugin&amp;quot;);
+const OptimizeCssAssetsWebpackPlugin = require(&amp;quot;optimize-css-assets-webpack-plugin&amp;quot;);
+const htmlWebpackPlugin = require(&amp;quot;html-webpack-plugin&amp;quot;);
+
+// 复用loader
+const commonCssLoader = [
+  MiniCssExtractPlugin.loader,
+  &amp;quot;css-loader&amp;quot;,
+  {
+    // 还需要在package.json中定义broswerslist
+    loader: &amp;quot;postcss-loader&amp;quot;,
+    options: {
+      ident: &amp;quot;postcss&amp;quot;,
+      plugins: () =&amp;gt; [require(&amp;quot;postcss-preset-env&amp;quot;)()],
+    },
+  },
+];
+
+process.env.NODE_ENV = &amp;quot;development&amp;quot;;
+module.exports = {
+  entry: &amp;quot;./src/js/index.js&amp;quot;,
+  output: {
+    filename: &amp;quot;built&amp;quot;,
+    path: resolve(__dirname, &amp;quot;build&amp;quot;),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [...commonCssLoader],
+      },
+      {
+        test: /\.less$/,
+        use: [...commonCssLoader, &amp;quot;less-loader&amp;quot;],
+      },
+      /*
+      正常来讲，一个文件只能被一个loader处理。
+      当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：
+        先执行eslint    再执行babel
+      */
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        enforcement: &amp;quot;pre&amp;quot;,
+        loader: &amp;quot;eslint-loader&amp;quot;,
+        options: {
+          fix: true,
+        },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: &amp;quot;babel-loader&amp;quot;,
+        options: {
+          presets: [
+            &amp;quot;@babel/preset-env&amp;quot;,
+            {
+              useBuiltIns: &amp;quot;usage&amp;quot;,
+              corejs: {
+                version: 3,
+              },
+              targets: {
+                chrome: &amp;quot;60&amp;quot;,
+                firefox: &amp;quot;60&amp;quot;,
+                ie: &amp;quot;9&amp;quot;,
+                safari: &amp;quot;10&amp;quot;,
+                edge: &amp;quot;17&amp;quot;,
+              },
+            },
+          ],
+        },
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        loader: &amp;quot;url-loader&amp;quot;,
+        options: {
+          limit: 8 * 1024,
+          name: &amp;quot;[hash:10].[ext]&amp;quot;,
+          outputPath: &amp;quot;imgs&amp;quot;,
+          esModules: false,
+        },
+      },
+      {
+        test: /\.html$/,
+        loader: &amp;quot;html-loader&amp;quot;,
+      },
+      {
+        exclude: /\.(js|html|css|jpg|png|gif|less)$/,
+        loader: &amp;quot;file-loader&amp;quot;,
+        options: {
+          outputPath: &amp;quot;media&amp;quot;,
+        },
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: &amp;quot;css/built.css&amp;quot;,
+    }),
+    new OptimizeCssAssetsWebpackPlugin(),
+    new htmlWebpackPlugin({
+      template: &amp;quot;./src/index/html&amp;quot;,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
+    }),
+  ],
+  mode: &amp;quot;production&amp;quot;,
+};
+&lt;/code&gt;&lt;/pre&gt;
+">webpack生产环境搭建</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/webpack-chang-yong-cha-jian/"" data-c="
+          &lt;h2 id=&#34;css兼容性&#34;&gt;CSS兼容性&lt;/h2&gt;
+&lt;h3 id=&#34;相关npm包&#34;&gt;相关npm包&lt;/h3&gt;
+&lt;p&gt;postcss-loader postcss-preset-env MiniCssExtractPlugin&lt;/p&gt;
+&lt;h3 id=&#34;相关语法&#34;&gt;相关语法&lt;/h3&gt;
+&lt;p&gt;在webpack.config.js中配置 &lt;code&gt;process.env.NODE_ENV = &amp;quot;development&amp;quot;;&lt;/code&gt;或&lt;code&gt;process.env.NODE_ENV = &amp;quot;production&amp;quot;;&lt;/code&gt;来决定使用browserslist的哪个环境&lt;br&gt;
+在package.json中配置&lt;code&gt;browserslist&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;帮postcss找到package.json中browserslist里面的配置，通过配置加载指定的css兼容性样式
+          &amp;quot;browserslist&amp;quot;: {
+          / 开发环境  --&amp;gt; 设置node环境变量：process.env.NODE_ENV = development
+          / 如果想要在
+          &amp;quot;development&amp;quot;: [
+            &amp;quot;last 1 chrome version&amp;quot;,
+            &amp;quot;last 1 firefox version&amp;quot;,
+            &amp;quot;last 1 safari version&amp;quot;
+          ],
+          / 生产环境：默认是看生产环境
+          &amp;quot;production&amp;quot;: [
+            &amp;quot;&amp;gt;0.2%&amp;quot;,
+            &amp;quot;not dead&amp;quot;,
+            &amp;quot;not op_mini all&amp;quot;
+          ]
+          },
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;plugins: [
+    new MiniCssExtractPlugin({
+      filename: &amp;quot;css/built.css&amp;quot;,
+    }),
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;css压缩&#34;&gt;CSS压缩&lt;/h2&gt;
+&lt;h3 id=&#34;相关npm包-2&#34;&gt;相关npm包&lt;/h3&gt;
+&lt;p&gt;optimize-css-assets-webpack-plugin&lt;/p&gt;
+&lt;h3 id=&#34;相关语法-2&#34;&gt;相关语法&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;plugins: [
+    new OptimizeCssAssetsWebpackPlugin()
+  ],
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;js语法检查&#34;&gt;JS语法检查&lt;/h2&gt;
+&lt;h3 id=&#34;eslint-lodaer&#34;&gt;eslint-lodaer&lt;/h3&gt;
+&lt;h3 id=&#34;相关npm包-3&#34;&gt;相关npm包&lt;/h3&gt;
+&lt;p&gt;eslint  eslint-config-airbnb-base  eslint-plugin-import&lt;/p&gt;
+&lt;h3 id=&#34;相关语法-3&#34;&gt;相关语法&lt;/h3&gt;
+&lt;p&gt;在package.json中配置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;eslintConfig&amp;quot;: {
+    &amp;quot;extends&amp;quot;: &amp;quot;airbnb-base&amp;quot;
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 对报错进行修复
+{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: &amp;quot;eslint-loader&amp;quot;,
+    options: {
+        fix: true,
+    },
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;eslint-disable-next-line    对下一行不进行检查&lt;/p&gt;
+&lt;h2 id=&#34;js兼容性处理&#34;&gt;JS兼容性处理&lt;/h2&gt;
+&lt;h3 id=&#34;babel-loader&#34;&gt;babel-loader&lt;/h3&gt;
+&lt;h3 id=&#34;相关npm包-4&#34;&gt;相关npm包&lt;/h3&gt;
+&lt;p&gt;babel-loader    @babel/core     @babel/preset-env   @babel/polyfill     core-js&lt;/p&gt;
+&lt;h3 id=&#34;相关语法-4&#34;&gt;相关语法&lt;/h3&gt;
+&lt;p&gt;1.基本js兼容性处理  --&amp;gt; @babel/preset-env&lt;br&gt;
+问题：只能转换基本语法，如promise不能转换&lt;br&gt;
+2.全部js兼容性处理  --&amp;gt; @babel/polyfill&lt;br&gt;
+使用 index.js文件中 &lt;code&gt;import &amp;quot;@babel/polyfill&amp;quot;;&lt;/code&gt;即可&lt;br&gt;
+问题：我只要解决部分问题，但是将所有兼容性代码全部引入，体积太大了&lt;br&gt;
+3.需要做兼容性处理的就做：按需加载  --&amp;gt; core-js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+    test: /\.js$/,
+    exclude: /node_modules/,    // 注：这里别写成带引号的
+    loader: &amp;quot;babel-loader&amp;quot;,
+    options: {
+        // 预设：指示babel做怎样的兼容性处理
+        presets: [
+            &amp;quot;@babel/preset-env&amp;quot;,
+            {
+                // 按需加载
+                useBuiltIns: &amp;quot;usage&amp;quot;,
+                corejs: {
+                // 指定corejs版本
+                version: 3,
+            },
+            // 指定兼容性做到哪个版本浏览器
+            targets: {
+                chrome: &amp;quot;60&amp;quot;,
+                firefox: &amp;quot;60&amp;quot;,
+                ie: &amp;quot;9&amp;quot;,
+                safari: &amp;quot;10&amp;quot;,
+                edge: &amp;quot;17&amp;quot;,
+                },
+            },
+        ],
+    },
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;正常来讲，一个文件只能被一个loader处理。&lt;br&gt;
+当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先执行eslint    再执行babel&lt;br&gt;
+所以添加&lt;code&gt;enforcement: &amp;quot;pre&amp;quot;,&lt;/code&gt;，确保eslint一定先执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    enforcement: &amp;quot;pre&amp;quot;,
+    loader: &amp;quot;eslint-loader&amp;quot;,
+    options: {
+        fix: true,
+    },
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;js压缩&#34;&gt;JS压缩&lt;/h2&gt;
+&lt;p&gt;webpack.config.js的mode设置为&lt;code&gt;production&lt;/code&gt;，自动开启js压缩&lt;/p&gt;
+&lt;h2 id=&#34;html压缩&#34;&gt;html压缩&lt;/h2&gt;
+&lt;p&gt;在new   HtmlWebpackPlugin的实例中&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;new HtmlWebpackPlugin({
+    template: &amp;quot;./src/index.html&amp;quot;,
+    minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true,
+    },
+}),
+&lt;/code&gt;&lt;/pre&gt;
+">webpack兼容性与压缩处理</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/webpack-xue-xi-ji-lu-1/"" data-c="
+          &lt;h2 id=&#34;webpack介绍&#34;&gt;webpack介绍&lt;/h2&gt;
+&lt;p&gt;本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包器(https://jujuul.github.io//post-images/1601562038280.png)&lt;/p&gt;
+&lt;h2 id=&#34;webpack核心概念&#34;&gt;webpack核心概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Entry（入口）&lt;/li&gt;
+&lt;li&gt;Output（出口）&lt;/li&gt;
+&lt;li&gt;Loader&lt;/li&gt;
+&lt;li&gt;Plugins（插件）&lt;/li&gt;
+&lt;li&gt;Mode（模式）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;entry&#34;&gt;entry&lt;/h3&gt;
+&lt;p&gt;指示webpack以哪个文件为入口起点打包文件，分析构建内部依赖图。&lt;/p&gt;
+&lt;h3 id=&#34;output&#34;&gt;output&lt;/h3&gt;
+&lt;p&gt;指示webpack&lt;/p&gt;
+">webpack学习记录1</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/npm-publish-cai-keng-ji-lu/"" data-c="

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-09-27T14:17:30.085Z</updated>
+    <updated>2020-10-02T12:12:17.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,261 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[webpack生产环境搭建]]></title>
+        <id>https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/</id>
+        <link href="https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/">
+        </link>
+        <updated>2020-10-02T11:02:36.000Z</updated>
+        <content type="html"><![CDATA[<pre><code>const { resolve } = require(&quot;path&quot;);
+const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;);
+const OptimizeCssAssetsWebpackPlugin = require(&quot;optimize-css-assets-webpack-plugin&quot;);
+const htmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);
+
+// 复用loader
+const commonCssLoader = [
+  MiniCssExtractPlugin.loader,
+  &quot;css-loader&quot;,
+  {
+    // 还需要在package.json中定义broswerslist
+    loader: &quot;postcss-loader&quot;,
+    options: {
+      ident: &quot;postcss&quot;,
+      plugins: () =&gt; [require(&quot;postcss-preset-env&quot;)()],
+    },
+  },
+];
+
+process.env.NODE_ENV = &quot;development&quot;;
+module.exports = {
+  entry: &quot;./src/js/index.js&quot;,
+  output: {
+    filename: &quot;built&quot;,
+    path: resolve(__dirname, &quot;build&quot;),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [...commonCssLoader],
+      },
+      {
+        test: /\.less$/,
+        use: [...commonCssLoader, &quot;less-loader&quot;],
+      },
+      /*
+      正常来讲，一个文件只能被一个loader处理。
+      当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：
+        先执行eslint    再执行babel
+      */
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        enforcement: &quot;pre&quot;,
+        loader: &quot;eslint-loader&quot;,
+        options: {
+          fix: true,
+        },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: &quot;babel-loader&quot;,
+        options: {
+          presets: [
+            &quot;@babel/preset-env&quot;,
+            {
+              useBuiltIns: &quot;usage&quot;,
+              corejs: {
+                version: 3,
+              },
+              targets: {
+                chrome: &quot;60&quot;,
+                firefox: &quot;60&quot;,
+                ie: &quot;9&quot;,
+                safari: &quot;10&quot;,
+                edge: &quot;17&quot;,
+              },
+            },
+          ],
+        },
+      },
+      {
+        test: /\.(jpg|png|gif)$/,
+        loader: &quot;url-loader&quot;,
+        options: {
+          limit: 8 * 1024,
+          name: &quot;[hash:10].[ext]&quot;,
+          outputPath: &quot;imgs&quot;,
+          esModules: false,
+        },
+      },
+      {
+        test: /\.html$/,
+        loader: &quot;html-loader&quot;,
+      },
+      {
+        exclude: /\.(js|html|css|jpg|png|gif|less)$/,
+        loader: &quot;file-loader&quot;,
+        options: {
+          outputPath: &quot;media&quot;,
+        },
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: &quot;css/built.css&quot;,
+    }),
+    new OptimizeCssAssetsWebpackPlugin(),
+    new htmlWebpackPlugin({
+      template: &quot;./src/index/html&quot;,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+      },
+    }),
+  ],
+  mode: &quot;production&quot;,
+};
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[webpack兼容性与压缩处理]]></title>
+        <id>https://jujuul.github.io/post/webpack-chang-yong-cha-jian/</id>
+        <link href="https://jujuul.github.io/post/webpack-chang-yong-cha-jian/">
+        </link>
+        <updated>2020-10-02T05:16:24.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="css兼容性">CSS兼容性</h2>
+<h3 id="相关npm包">相关npm包</h3>
+<p>postcss-loader postcss-preset-env MiniCssExtractPlugin</p>
+<h3 id="相关语法">相关语法</h3>
+<p>在webpack.config.js中配置 <code>process.env.NODE_ENV = &quot;development&quot;;</code>或<code>process.env.NODE_ENV = &quot;production&quot;;</code>来决定使用browserslist的哪个环境<br>
+在package.json中配置<code>browserslist</code></p>
+<pre><code>帮postcss找到package.json中browserslist里面的配置，通过配置加载指定的css兼容性样式
+          &quot;browserslist&quot;: {
+          / 开发环境  --&gt; 设置node环境变量：process.env.NODE_ENV = development
+          / 如果想要在
+          &quot;development&quot;: [
+            &quot;last 1 chrome version&quot;,
+            &quot;last 1 firefox version&quot;,
+            &quot;last 1 safari version&quot;
+          ],
+          / 生产环境：默认是看生产环境
+          &quot;production&quot;: [
+            &quot;&gt;0.2%&quot;,
+            &quot;not dead&quot;,
+            &quot;not op_mini all&quot;
+          ]
+          },
+</code></pre>
+<pre><code>plugins: [
+    new MiniCssExtractPlugin({
+      filename: &quot;css/built.css&quot;,
+    }),
+]
+</code></pre>
+<h2 id="css压缩">CSS压缩</h2>
+<h3 id="相关npm包-2">相关npm包</h3>
+<p>optimize-css-assets-webpack-plugin</p>
+<h3 id="相关语法-2">相关语法</h3>
+<pre><code>plugins: [
+    new OptimizeCssAssetsWebpackPlugin()
+  ],
+</code></pre>
+<h2 id="js语法检查">JS语法检查</h2>
+<h3 id="eslint-lodaer">eslint-lodaer</h3>
+<h3 id="相关npm包-3">相关npm包</h3>
+<p>eslint  eslint-config-airbnb-base  eslint-plugin-import</p>
+<h3 id="相关语法-3">相关语法</h3>
+<p>在package.json中配置</p>
+<pre><code>&quot;eslintConfig&quot;: {
+    &quot;extends&quot;: &quot;airbnb-base&quot;
+},
+</code></pre>
+<pre><code>// 对报错进行修复
+{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: &quot;eslint-loader&quot;,
+    options: {
+        fix: true,
+    },
+},
+</code></pre>
+<p>eslint-disable-next-line    对下一行不进行检查</p>
+<h2 id="js兼容性处理">JS兼容性处理</h2>
+<h3 id="babel-loader">babel-loader</h3>
+<h3 id="相关npm包-4">相关npm包</h3>
+<p>babel-loader    @babel/core     @babel/preset-env   @babel/polyfill     core-js</p>
+<h3 id="相关语法-4">相关语法</h3>
+<p>1.基本js兼容性处理  --&gt; @babel/preset-env<br>
+问题：只能转换基本语法，如promise不能转换<br>
+2.全部js兼容性处理  --&gt; @babel/polyfill<br>
+使用 index.js文件中 <code>import &quot;@babel/polyfill&quot;;</code>即可<br>
+问题：我只要解决部分问题，但是将所有兼容性代码全部引入，体积太大了<br>
+3.需要做兼容性处理的就做：按需加载  --&gt; core-js</p>
+<pre><code>{
+    test: /\.js$/,
+    exclude: /node_modules/,    // 注：这里别写成带引号的
+    loader: &quot;babel-loader&quot;,
+    options: {
+        // 预设：指示babel做怎样的兼容性处理
+        presets: [
+            &quot;@babel/preset-env&quot;,
+            {
+                // 按需加载
+                useBuiltIns: &quot;usage&quot;,
+                corejs: {
+                // 指定corejs版本
+                version: 3,
+            },
+            // 指定兼容性做到哪个版本浏览器
+            targets: {
+                chrome: &quot;60&quot;,
+                firefox: &quot;60&quot;,
+                ie: &quot;9&quot;,
+                safari: &quot;10&quot;,
+                edge: &quot;17&quot;,
+                },
+            },
+        ],
+    },
+},
+</code></pre>
+<p>正常来讲，一个文件只能被一个loader处理。<br>
+当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：</p>
+<ul>
+<li>先执行eslint    再执行babel<br>
+所以添加<code>enforcement: &quot;pre&quot;,</code>，确保eslint一定先执行</li>
+</ul>
+<pre><code>{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    enforcement: &quot;pre&quot;,
+    loader: &quot;eslint-loader&quot;,
+    options: {
+        fix: true,
+    },
+},
+</code></pre>
+<h2 id="js压缩">JS压缩</h2>
+<p>webpack.config.js的mode设置为<code>production</code>，自动开启js压缩</p>
+<h2 id="html压缩">html压缩</h2>
+<p>在new   HtmlWebpackPlugin的实例中</p>
+<pre><code>new HtmlWebpackPlugin({
+    template: &quot;./src/index.html&quot;,
+    minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true,
+    },
+}),
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[作用域、作用域链和闭包]]></title>
         <id>https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/</id>
@@ -820,281 +1075,6 @@ div{
 }
 </code></pre>
 <p>防抖的代码还可以使用箭头函数再简化一下，第一次看到这个代码的时候我没有想到竟然还能这么写。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[前端模块化简介]]></title>
-        <id>https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/</id>
-        <link href="https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/">
-        </link>
-        <updated>2020-09-15T05:04:08.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
-<p>前端模块化是个进几年常被提起的词，随着大前端的盛行，前端模块化也越来越被广泛应用，但其实前端模块化是早就存在的，但是随着时间的推移，技术不断进步，模块化的方式也在不断变化，本文就大致梳理一下前端模块化。</p>
-<h2 id="什么是模块模块化模块化开发">什么是模块？模块化？模块化开发？</h2>
-<p>模块，是为了完成某个功能所需的程序。模块是系统中职责单一且可替换的部分。<br>
-模块化是把系统代码分为一些列的职责单一且可替换的模块。<br>
-模块化开发是指开发新模块和复用旧模块来实现应用功能的开发形式。</p>
-<h2 id="为什么要模块化">为什么要模块化？</h2>
-<p>因为随着硬件的发展，web能做的事情也越来越多，很多业务逻辑和交互都通过web实现，随之而来的就是代码量的提升，因此需要模块化开发，模块化开发具有以下的优点。</p>
-<ul>
-<li>避免命名冲突</li>
-<li>更高的复用性与可维护性</li>
-<li>更好的分离，按需加载</li>
-</ul>
-<h2 id="模块化的发展历程">模块化的发展历程</h2>
-<h3 id="洪荒时期">洪荒时期</h3>
-<p>1999    直接定义依赖（全局function模式）</p>
-<pre><code>function foo(){
-    //...
-}
-</code></pre>
-<p>缺点是污染全局变量，每个函数都单独命名，如果有多个函数就过于繁琐<br>
-2002    namespace模式</p>
-<pre><code>var app = {};
-app.foo = function(){
-    //...
-}
-</code></pre>
-<p>优点：不在污染全局变量，减少了命名冲突<br>
-缺点：依赖唯一的全局变量，并且如果使用同一个全局变量就无法共存<br>
-2003    匿名闭包模型（IIFE模式）</p>
-<pre><code>(function(window) {
-  let data = 'www.baidu.com'
-  //操作数据的函数
-  function foo() {
-    //用于暴露函数
-    console.log(`foo() ${data}`)
-  }
-  function bar() {
-    //用于暴露函数
-    console.log(`bar() ${data}`)
-    otherFun() //内部调用
-  }
-  function otherFun() {
-    //内部私有的函数
-    console.log('otherFun()')
-  }
-  //暴露行为
-  window.myModule = { foo, bar } //ES6写法
-})(window)
-</code></pre>
-<p>缺点在于无法解决模块间的依赖问题<br>
-2009    注入依赖模式<br>
-这一时期，因为前端才刚刚发展，所以还是很原始的</p>
-<h3 id="现在所常用的前端模块化方案">现在所常用的前端模块化方案</h3>
-<p>CommonJS<br>
-特点：所有代码运行在模块作用域，不会污染全局变量，模块可以多次加载，但只在第一次直接读取缓存，想让模块再次运行必须清除缓存。模块加载顺序取决于在代码中的顺序。nodejs就是采用这种模式<br>
-基本语法：<br>
-暴露模块：<br>
-<code>module.exports = value</code>或<code>exports.xxx = value</code><br>
-引入模块：<br>
-<code>require(xxx)</code><br>
-重点：CommonJS的加载机制是，引入的是被输出的值的拷贝，一旦输出，模块内部的变化无法影响这个值。<br>
-AMD<br>
-特点：异步<br>
-基本语法：<br>
-暴露模块：</p>
-<pre><code>// 定义没有依赖的模块
-define(function(){
-    return 模块
-})
-// 定义有依赖的模块
-define(['module1','module2'],function(m1,m2){
-    return 模块
-})
-</code></pre>
-<p>引入使用模块</p>
-<pre><code>require(['module1','module2'],function(m1,m2){
-    使用 m1/m2
-})
-</code></pre>
-<p>CMD<br>
-基本语法：<br>
-定义暴露模块：</p>
-<pre><code>// 定义无依赖模块
-define(function(require,exports,module){
-    exports.xxx = value;
-    module.exports = value;
-})
-// 定义有依赖模块
-define(function(require,exports,module){
-    var module2 = require('./module2');
-    require.async('./module3',function(m3){
-        // ...
-    })
-    exports.xxx = value
-})
-</code></pre>
-<p>引入使用模块：</p>
-<pre><code>define(function (require) {
-  var m1 = require('./module1')
-  var m4 = require('./module4')
-  m1.show()
-  m4.show()
-})
-</code></pre>
-<p>ES6模块化<br>
-ES6模块化是我接触前端以来接触到的最多的一个，基本各个技术文档关于使用的部分也都是import、export之类的，并且网上的文章很多都是花费最多篇幅介绍ES6模块化，想来这应该是最为广泛使用的一种前端模块化规范了。<br>
-语法：<br>
-export：用于规定模块的对外接口<br>
-import：用于引入其他模块提供的功能</p>
-<pre><code>// libs.js
-export let counter = 3;
-
-// main.js
-import {counter} from './libs'
-</code></pre>
-<p>定义模块代码：</p>
-<pre><code>//module1.js文件
-// 分别暴露
-export function foo() {
-  console.log('foo() module1')
-}
-export function bar() {
-  console.log('bar() module1')
-}
-</code></pre>
-<pre><code>//module2.js文件
-// 统一暴露
-function fun1() {
-  console.log('fun1() module2')
-}
-function fun2() {
-  console.log('fun2() module2')
-}
-export { fun1, fun2 }
-</code></pre>
-<pre><code>//module3.js文件
-// 默认暴露 可以暴露任意数据类项，暴露什么数据，接收到就是什么数据
-export default () =&gt; {
-  console.log('默认暴露')
-}
-</code></pre>
-<h3 id="es6模块与commonjs模块对比">ES6模块与CommonJS模块对比</h3>
-<ol>
-<li>CommonJS输出的是值的拷贝，而ES6modules输出的是值的引用</li>
-<li>CommonJS是运行时加载，而ES6modules是编译时输出接口</li>
-</ol>
-<h2 id="总结">总结</h2>
-<p>前端模块化的进程伴随着前端的发展，也许几年后又是新的方法取代现在的方法，但是目前，ES6模块是能够完全取代CommonJS与CMD等规范的。</p>
-<h2 id="后记">后记</h2>
-<p>其实正如文章名字所言，这是一个关于前端模块化的简介，或者说是演变史，关于CMD、AMD等规范的详细内容都没有提及，这也不是现阶段的我需要去了解的，这里只是梳理一下，文章依然是总结了其他大牛的文章，可能总结的还不够好，精华部分可能也被舍弃了，但至少是我自己查阅与思考后的结果。前几天看掘金上不少有多年前端开发经验的前辈在感叹现如今前端发展之快，对前端从业者技能要求也是越来越高，学习前端的资源更是多不胜数，远超他们当年，不由得感谢这些在网络上输出优质内容的前辈们，是他们推动了技术整体的进步，让我想起了大刘的那本《乡村教师》，看到里面外星人感叹人类的文明传承竟是靠言传身教，现如今人们获取知识的途径或许变得简单，但是传播知识的人的精神却丝毫未减。</p>
-<h2 id="参考文章">参考文章</h2>
-<p><a href="https://segmentfault.com/a/1190000017466120">前端模块化详解(完整版)</a><br>
-<a href="https://juejin.im/post/6844903640897945614#heading-10">Javascript模块化的演进历程</a><br>
-<a href="https://github.com/seajs/seajs/issues/242">CMD 模块定义规范</a><br>
-<a href="https://www.iteye.com/blog/zccst-2215317">CommonJS，AMD，CMD区别</a><br>
-<a href="https://github.com/seajs/seajs/issues/588">前端模块化开发那点历史</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[跨域相关]]></title>
-        <id>https://jujuul.github.io/post/kua-yu-xiang-guan/</id>
-        <link href="https://jujuul.github.io/post/kua-yu-xiang-guan/">
-        </link>
-        <updated>2020-09-14T09:47:50.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
-<p>最早接触跨域是在做毕设项目的时候，因为之前做的都是使用THINKPHP的项目，前后端不分离，所以没有遇到过跨域的问题，后来该做前端vue+后端thinkphp才遇到这个问题，但是因为是使用的vue-cli，跨域配置起来很简单，就没有特意去记录，但是因为跨域问题是前后端分离比较常见的问题，所以今天汇总一下。</p>
-<h2 id="什么是跨域为什么要跨域">什么是跨域？为什么要跨域？</h2>
-<p>首先，跨域指的是从一个域名去请求另一个域名的数据，这不够严谨，因为只要不是同协议、同域名、同端口的请求都算作跨域。<br>
-其次，为什么要跨域？是因为浏览器的同源策略。<br>
-同源策略，是为了保证用户的信息安全，防止信息被恶意窃取。如果没有同源策略，当访问A网站后如果访问B网站，那么B网站就可以读取A网站上的Cookie，用户的安全就受到了极大的威胁，所以同源策略是必须的。</p>
-<h2 id="同源是哪些相同呢">同源是哪些相同呢？</h2>
-<p>同源指的是三个相同</p>
-<ul>
-<li>协议相同</li>
-<li>域名相同</li>
-<li>端口相同<br>
-只有符合这三个，才是符合同源策略的。</li>
-</ul>
-<h2 id="同源策略限制了什么呢">同源策略限制了什么呢？</h2>
-<ol>
-<li>cookie、localstorage、indexDB无法获取</li>
-<li>Dom无法获取</li>
-<li>AJAX请求不能发送<br>
-我前面提到的前后端分离要配置跨域，就是为了解决ajax的问题。</li>
-</ol>
-<h2 id="问题知道了那怎么解决呢">问题知道了，那怎么解决呢？</h2>
-<ol>
-<li>JSONP</li>
-<li>CORS</li>
-<li>WebSocket</li>
-<li>Post Message<br>
-以上几种方式，我只使用过1、2来解决跨域问题。</li>
-</ol>
-<h2 id="jsonp">JSONP</h2>
-<p>这是最简单的一种解决方式，利用<code>&lt;script&gt;</code>标签不受跨域的限制，让<code>&lt;script&gt;</code>指向一个地址并提供一个回调函数来接收数据，简单且兼容性好，缺点在于只限GET请求。<br>
-前端</p>
-<pre><code>&lt;script&gt;
-var callback = (resp) =&gt; {
-      console.log(resp)
-}
-&lt;/script&gt;
-&lt;script src=&quot;http:localhost:3000/jsonp?callback=callback&quot;&gt;&lt;/script&gt;
-</code></pre>
-<p>服务端</p>
-<pre><code>app.get('/jsonp', function(req, res, next) {
-	res.jsonp(
-		'hello 这是一个jsonP跨域'
-	);
-});
-</code></pre>
-<p>例子中我使用了express作为服务器，res.jsonp应该是express专门为jsonp做的，后端会将hello 这是一个jsonP跨域这串字符返回，前端接收到以后调用名为callback的函数，处理数据。</p>
-<h2 id="cors">CORS</h2>
-<p>cors全称是cross-site resource sharing，跨域资源共享，是为了解决跨域问题存在的。<br>
-它有两种请求类型：简单请求和非简单请求<br>
-只要同时满足以下两大条件就属于简单请求</p>
-<ol>
-<li>请求方法是以下三种之一</li>
-</ol>
-<ul>
-<li>head</li>
-<li>get</li>
-<li>post</li>
-</ul>
-<ol start="2">
-<li>HTTP的头信息不超出以下几种字段</li>
-</ol>
-<ul>
-<li>Accept</li>
-<li>Accept-Language</li>
-<li>Content-Language</li>
-<li>Last-Event-Id</li>
-<li>Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain<br>
-简单请求前端无需任何处理，如果需要携带cookie，前后端都设置一下就可以了。<br>
-复杂请求因为各个后端设置不同，所以就不详细介绍了。</li>
-</ul>
-<h2 id="websocket">WebSocket</h2>
-<p>websocket我也没有使用过，不过稍微用过一下PHPsocket框架Workerman,因为打算在毕设里加入个聊天功能，一开始找vue相关的推荐的全是websocket，但是因为已经完成大半了，没法换到nodejs，所以作罢了。不过我看了一下，两者思路差不多，都是先建立连接，对话，最后再关闭对话，期间好像还要监听通讯是否保持通讯，好像是叫做心跳。其间也看到很多在socket出现之前的通讯方法，长轮询和短轮询，通过ajax来进行通讯。</p>
-<h2 id="postmessage">postMessage</h2>
-<p>postMessage也是H5提供的方法，我这里找了一个网上的例子</p>
-<pre><code>// 发送消息端
-window.parent.postMessage('message', 'http://test.com')
-// 接收消息端
-var mc = new MessageChannel()
-mc.addEventListener('message', event =&gt; {
-  var origin = event.origin || event.originalEvent.origin
-  if (origin === 'http://test.com') {
-    console.log('验证通过')
-  }
-})
-</code></pre>
-<p>以上的是在开发环境中的跨域方式，按照今天看到的说法，在生产环境中以上方式是不行的，需要使用ngnix代理。</p>
-<h2 id="ngnix">NGNIX</h2>
-<p>ngnix配置</p>
-<pre><code>server{
-    # 监听9099端口
-    listen 9099;
-    # 域名是localhost
-    server_name localhost;
-    #凡是localhost:9099/api这个样子的，都转发到真正的服务端地址http://localhost:9871 
-    location ^~ /api {
-        proxy_pass http://localhost:9871;
-    }    
-}
-</code></pre>
-<h2 id="后记">后记</h2>
-<p>终于写了一遍篇幅较长的，比较像样的文章了，虽然也是拾人牙慧，但是也比之前要么简短、要么长篇复制、要么不知所云的好不少，尤其是写完之后的满足感，希望能够继续保持。</p>
 ]]></content>
     </entry>
 </feed>

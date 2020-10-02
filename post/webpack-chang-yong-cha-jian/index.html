@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>每天一个名词解释—快应用 | Mark</title>
+<title>webpack兼容性与压缩处理 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1601636586376">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="每天一个名词解释—快应用" />
+  <meta name="description" content="webpack兼容性与压缩处理" />
   <meta name="keywords" content="" />
 </head>
 
@@ -198,19 +198,34 @@
     <ul class="markdownIt-TOC">
 <li>
 <ul>
-<li><a href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D">背景介绍</a></li>
-<li><a href="#%E5%85%A5%E5%8F%A3%E5%9C%BA%E6%99%AF">入口场景</a>
+<li><a href="#css%E5%85%BC%E5%AE%B9%E6%80%A7">CSS兼容性</a>
 <ul>
-<li><a href="#%E6%AF%94%E5%A6%82%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2">比如：全局搜索</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3npm%E5%8C%85">相关npm包</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E8%AF%AD%E6%B3%95">相关语法</a></li>
 </ul>
 </li>
-<li><a href="#%E5%8F%82%E4%B8%8E%E6%B5%81%E7%A8%8B">参与流程</a>
+<li><a href="#css%E5%8E%8B%E7%BC%A9">CSS压缩</a>
 <ul>
-<li><a href="#%E6%95%B4%E4%BD%93%E5%8F%82%E4%B8%8E%E6%B5%81%E7%A8%8B%E5%A6%82%E5%9B%BE%E6%89%80%E7%A4%BA">整体参与流程如图所示:</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3npm%E5%8C%85-2">相关npm包</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E8%AF%AD%E6%B3%95-2">相关语法</a></li>
 </ul>
 </li>
-<li><a href="#%E5%A6%82%E4%BD%95%E5%BC%80%E5%8F%91">如何开发</a></li>
-<li><a href="#%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B">开发过程</a></li>
+<li><a href="#js%E8%AF%AD%E6%B3%95%E6%A3%80%E6%9F%A5">JS语法检查</a>
+<ul>
+<li><a href="#eslint-lodaer">eslint-lodaer</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3npm%E5%8C%85-3">相关npm包</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E8%AF%AD%E6%B3%95-3">相关语法</a></li>
+</ul>
+</li>
+<li><a href="#js%E5%85%BC%E5%AE%B9%E6%80%A7%E5%A4%84%E7%90%86">JS兼容性处理</a>
+<ul>
+<li><a href="#babel-loader">babel-loader</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3npm%E5%8C%85-4">相关npm包</a></li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E8%AF%AD%E6%B3%95-4">相关语法</a></li>
+</ul>
+</li>
+<li><a href="#js%E5%8E%8B%E7%BC%A9">JS压缩</a></li>
+<li><a href="#html%E5%8E%8B%E7%BC%A9">html压缩</a></li>
 </ul>
 </li>
 </ul>
@@ -478,8 +493,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/">
-      每天一个名词解释—快应用
+    <a class="post-title-link" href="https://jujuul.github.io/post/webpack-chang-yong-cha-jian/">
+      webpack兼容性与压缩处理
     </a>
   </h1>
   <div class="post-meta">
@@ -487,7 +502,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-20 21:59:25">2020-08-20</span>
+      <span class="publish-time" data-t="2020-10-02 13:16:24">2020-10-02</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -498,56 +513,139 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>865<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>607<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="背景介绍">背景介绍</h2>
-<p>快应用是一种新的应用形态，以往的手机端应用主要有两种方式：网页、原生应用；网页无需安装，却体验不是很好；原生应用体验流畅，却需要从应用商店下载安装，难以一步直达用户；快应用的出现，就是希望能够让用户无需下载安装，并且还能流畅的体验应用内容。</p>
-<p>为了达到上面的目标，快应用建立一种新的语言开发规范，同时提供一系列的开发套件辅助支持。简单来说，开发者主要利用前端知识与技能，以及对应的IDE，手机设备就可以做原型的开发。快应用使用前端技术栈开发，原生渲染，同时具备H5与原生应用的双重优点，开发者使用的前端技术栈资料多，学习成本低。</p>
-<p>2018年3月份，由小米，OPPO，VIVO，华为等10家国内主流厂商成立了快应用联盟，从技术规范层面做了统一，并保证了开发者开发的快应用可以直接在所有的联盟内厂商的手机设备上运行。</p>
-<p>快应用框架深度集成进各手机厂商的手机操作系统中，可以在操作系统层面形成用户需求与应用服务的无缝连接，很多只用在原生应用中才能使用的功能，在快应用中可以很方便的实现，享受原生应用体验，同时不用担心分发留存等问题，资源消耗也比较少。</p>
-<p>对于每台手机设备，应用可以从多个系统入口，引用用户体验产品。比如：全局搜索、负一屏、浏览器搜索等。</p>
-<p>下面，我们全面介绍一下快应用的开发流程。</p>
-<h2 id="入口场景">入口场景</h2>
-<p>快应用的部分场景入口列举如下：<br>
-<img src="https://jujuul.github.io//post-images/1597937182347.PNG" alt="" loading="lazy"></p>
-<h3 id="比如全局搜索">比如：全局搜索</h3>
-<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597937210145.gif" alt="" loading="lazy"></figure>
-<h2 id="参与流程">参与流程</h2>
-<p>开发者参与快应用开发，主要分为以下几个步骤:</p>
-<p>快应用官网注册<br>
-完善资料<br>
-绑定厂商开发者账号(至少一家)<br>
-完成以上三部，快应用开发者就可以提交快应用。</p>
-<h3 id="整体参与流程如图所示">整体参与流程如图所示:</h3>
-<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597937254951.jpg" alt="" loading="lazy"></figure>
-<h2 id="如何开发">如何开发</h2>
-<p>快应用采用前端技术栈，运行可开发效率高，学习成本低，代码可复用</p>
-<p>快应用开发需要基本基础的前端知识，如 标签， 样式， js脚本</p>
-<p>快应用使用 MVVM的设计模式进行开发，开发者无需直接操作DOM节点的增删，利用数据驱动的方式完成节点更新。</p>
-<p>当前标准的开发规范与Vue的开发方式相近，后期可能开放并接入其它的DSL开发方式，以符合开发者的开发习惯。</p>
-<h2 id="开发过程">开发过程</h2>
-<p>进行快应用开发，整体过程如下：</p>
-<ol>
-<li>
-<p>准备开发工具<br>
-快应用开发需要准备PC/笔记本，厂商手机，内网环境或者手机可连接电脑</p>
-</li>
-<li>
-<p>开发调试<br>
-开发调试过程:</p>
-<p>1.通过命令行工具，或者IDE安装并运行快应用<br>
-2.了解命令行工具生成的项目结构，编写项目代码<br>
-3.通过 toolkit，chrome devtools 进行调试</p>
-</li>
-<li>
-<p>提交上传<br>
-完成代码相关工作，我们就可以提交上传快应用。</p>
-</li>
-</ol>
+              <h2 id="css兼容性">CSS兼容性</h2>
+<h3 id="相关npm包">相关npm包</h3>
+<p>postcss-loader postcss-preset-env MiniCssExtractPlugin</p>
+<h3 id="相关语法">相关语法</h3>
+<p>在webpack.config.js中配置 <code>process.env.NODE_ENV = &quot;development&quot;;</code>或<code>process.env.NODE_ENV = &quot;production&quot;;</code>来决定使用browserslist的哪个环境<br>
+在package.json中配置<code>browserslist</code></p>
+<pre><code>帮postcss找到package.json中browserslist里面的配置，通过配置加载指定的css兼容性样式
+          &quot;browserslist&quot;: {
+          / 开发环境  --&gt; 设置node环境变量：process.env.NODE_ENV = development
+          / 如果想要在
+          &quot;development&quot;: [
+            &quot;last 1 chrome version&quot;,
+            &quot;last 1 firefox version&quot;,
+            &quot;last 1 safari version&quot;
+          ],
+          / 生产环境：默认是看生产环境
+          &quot;production&quot;: [
+            &quot;&gt;0.2%&quot;,
+            &quot;not dead&quot;,
+            &quot;not op_mini all&quot;
+          ]
+          },
+</code></pre>
+<pre><code>plugins: [
+    new MiniCssExtractPlugin({
+      filename: &quot;css/built.css&quot;,
+    }),
+]
+</code></pre>
+<h2 id="css压缩">CSS压缩</h2>
+<h3 id="相关npm包-2">相关npm包</h3>
+<p>optimize-css-assets-webpack-plugin</p>
+<h3 id="相关语法-2">相关语法</h3>
+<pre><code>plugins: [
+    new OptimizeCssAssetsWebpackPlugin()
+  ],
+</code></pre>
+<h2 id="js语法检查">JS语法检查</h2>
+<h3 id="eslint-lodaer">eslint-lodaer</h3>
+<h3 id="相关npm包-3">相关npm包</h3>
+<p>eslint  eslint-config-airbnb-base  eslint-plugin-import</p>
+<h3 id="相关语法-3">相关语法</h3>
+<p>在package.json中配置</p>
+<pre><code>&quot;eslintConfig&quot;: {
+    &quot;extends&quot;: &quot;airbnb-base&quot;
+},
+</code></pre>
+<pre><code>// 对报错进行修复
+{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    loader: &quot;eslint-loader&quot;,
+    options: {
+        fix: true,
+    },
+},
+</code></pre>
+<p>eslint-disable-next-line    对下一行不进行检查</p>
+<h2 id="js兼容性处理">JS兼容性处理</h2>
+<h3 id="babel-loader">babel-loader</h3>
+<h3 id="相关npm包-4">相关npm包</h3>
+<p>babel-loader    @babel/core     @babel/preset-env   @babel/polyfill     core-js</p>
+<h3 id="相关语法-4">相关语法</h3>
+<p>1.基本js兼容性处理  --&gt; @babel/preset-env<br>
+问题：只能转换基本语法，如promise不能转换<br>
+2.全部js兼容性处理  --&gt; @babel/polyfill<br>
+使用 index.js文件中 <code>import &quot;@babel/polyfill&quot;;</code>即可<br>
+问题：我只要解决部分问题，但是将所有兼容性代码全部引入，体积太大了<br>
+3.需要做兼容性处理的就做：按需加载  --&gt; core-js</p>
+<pre><code>{
+    test: /\.js$/,
+    exclude: /node_modules/,    // 注：这里别写成带引号的
+    loader: &quot;babel-loader&quot;,
+    options: {
+        // 预设：指示babel做怎样的兼容性处理
+        presets: [
+            &quot;@babel/preset-env&quot;,
+            {
+                // 按需加载
+                useBuiltIns: &quot;usage&quot;,
+                corejs: {
+                // 指定corejs版本
+                version: 3,
+            },
+            // 指定兼容性做到哪个版本浏览器
+            targets: {
+                chrome: &quot;60&quot;,
+                firefox: &quot;60&quot;,
+                ie: &quot;9&quot;,
+                safari: &quot;10&quot;,
+                edge: &quot;17&quot;,
+                },
+            },
+        ],
+    },
+},
+</code></pre>
+<p>正常来讲，一个文件只能被一个loader处理。<br>
+当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序：</p>
+<ul>
+<li>先执行eslint    再执行babel<br>
+所以添加<code>enforcement: &quot;pre&quot;,</code>，确保eslint一定先执行</li>
+</ul>
+<pre><code>{
+    test: /\.js$/,
+    exclude: /node_modules/,
+    enforcement: &quot;pre&quot;,
+    loader: &quot;eslint-loader&quot;,
+    options: {
+        fix: true,
+    },
+},
+</code></pre>
+<h2 id="js压缩">JS压缩</h2>
+<p>webpack.config.js的mode设置为<code>production</code>，自动开启js压缩</p>
+<h2 id="html压缩">html压缩</h2>
+<p>在new   HtmlWebpackPlugin的实例中</p>
+<pre><code>new HtmlWebpackPlugin({
+    template: &quot;./src/index.html&quot;,
+    minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true,
+    },
+}),
+</code></pre>
 
             </div>
             
@@ -560,7 +658,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/" title="每天一个名词解释—快应用">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-kuai-ying-yong/</a>
+      <a href="https://jujuul.github.io/post/webpack-chang-yong-cha-jian/" title="webpack兼容性与压缩处理">https://jujuul.github.io/post/webpack-chang-yong-cha-jian/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -574,14 +672,14 @@
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="我自用的一些vscode插件分享" href="https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/">我自用的一些vscode插件分享</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="我自用的一些vscode插件分享" href="https://jujuul.github.io/post/wo-zi-yong-de-yi-xie-vscode-cha-jian-fen-xiang/">上一篇</a>
+        <a class="nav-pc-next" title="webpack生产环境搭建" href="https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/">webpack生产环境搭建</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="webpack生产环境搭建" href="https://jujuul.github.io/post/webpack-sheng-chan-huan-jing-da-jian/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="仿网易云demo—day1" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">仿网易云demo—day1</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day1" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day1/">下一篇</a>
+        <a class="nav-pc-next" title="作用域、作用域链和闭包" href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/">作用域、作用域链和闭包</a>
+        <a class="nav-mobile-next" title="作用域、作用域链和闭包" href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
