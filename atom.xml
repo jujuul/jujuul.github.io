@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-02T16:32:08.920Z</updated>
+    <updated>2020-10-03T08:03:30.875Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -16,8 +16,132 @@
         <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/">
         </link>
         <updated>2020-10-02T16:31:11.000Z</updated>
-        <content type="html"><![CDATA[<p>安装<br>
-<code>npm i typescript -g</code></p>
+        <content type="html"><![CDATA[<h2 id="前置">前置</h2>
+<h3 id="安装">安装</h3>
+<p><code>npm i typescript -g</code><br>
+<code>yarn global add typescript</code></p>
+<h3 id="允许在终端直接输出">允许在终端直接输出</h3>
+<p><code>npm install -g ts-node</code><br>
+语法<br>
+<code>ts-node demo1.ts</code></p>
+<h2 id="静态类型">静态类型</h2>
+<h3 id="定义静态类型">定义静态类型</h3>
+<p>在变量后面通过  冒号类型  的形式，<br>
+<code>let count: number = 1;</code></p>
+<h3 id="自定义静态类型">自定义静态类型</h3>
+<h2 id="基础静态类型和对象类型">基础静态类型和对象类型</h2>
+<h3 id="基础静态类型">基础静态类型</h3>
+<p>null    undefined   boolean    void    symbol</p>
+<h3 id="对象类型">对象类型</h3>
+<ol>
+<li>对象类型</li>
+</ol>
+<pre><code>const xiaojiejie: {
+  name: string;
+  age: number;
+} = {
+  name: &quot;大脚&quot;,
+  age: 18,
+};
+</code></pre>
+<ol start="2">
+<li>数组类型<br>
+<code>const xiaojiejies: string[] = [&quot;谢大脚&quot;, &quot;刘英&quot;, &quot;918&quot;];</code></li>
+<li>类类型</li>
+</ol>
+<pre><code>class Person {}
+const dajiao: Person = new Person();
+</code></pre>
+<ol start="4">
+<li>函数类型</li>
+</ol>
+<pre><code>const jianXiaojiejie: () =&gt; string = () =&gt; {
+  return &quot;大脚&quot;;
+};
+</code></pre>
+<h2 id="类型注解与类型推断">类型注解与类型推断</h2>
+<p>type annotation 类型注解<br>
+type inference  类型推断</p>
+<h3 id="类型注解">类型注解</h3>
+<pre><code>let count: number;
+count = 123;
+</code></pre>
+<p>像这样在count后面加上 :number 就是类型注解，就是人为指定变量的类型</p>
+<pre><code>let countInference = 123;
+</code></pre>
+<p>而像这样不指定变量的类型，ts也能知道变量是 number 类型，就是类型推断</p>
+<pre><code>// 能推断出，不需要注解
+const one = 1;
+const two = 2;
+const three = one + two;
+</code></pre>
+<pre><code>// 不能推断出，需要注解
+function getTotal(one: number, two: number) {
+  return one + two;
+}
+const total = getTotal(1, 2);
+</code></pre>
+<p>实际使用中，如果ts能够自动分析出类型的就不需要写注解，不能够自动分析出来的就写注解</p>
+<h2 id="函数参数和返回类型的注解">函数参数和返回类型的注解</h2>
+<pre><code>function getTotal(one: number, two: number): number {
+  return one + two;
+}
+</code></pre>
+<p>可以直接在函数的参数后添加注解，指定参数的类型；在 {} 之前添加注解，指定函数的返回值的类型</p>
+<pre><code>function sayHello(): void {
+  console.log(&quot;hello world&quot;);
+}
+</code></pre>
+<p>当不需要函数有返回值时，可以使用 void</p>
+<p>never</p>
+<pre><code>function add({ one, two }: { one: number; two: number }) {
+  return one + two;
+}
+</code></pre>
+<p>当函数参数为对象时想要确定它的属性类型，可以在参数对象后面再写一个对象，里面写上其中的参数，后面写注解</p>
+<h2 id="数组类型的注解">数组类型的注解</h2>
+<pre><code>// 数字数组
+const numberArr: number[] = [1, 2, 3];
+</code></pre>
+<pre><code>// 字符串数组
+const stringArr: string[] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+</code></pre>
+<pre><code>// undefined数组
+const undefinedArr: undefined[] = [undefined, undefined, undefined];
+</code></pre>
+<pre><code>const arr: (number | string)[] = [1, &quot;string&quot;, 2];
+</code></pre>
+<p>有不同类型值的数组</p>
+<pre><code>const xiaojiejies: { name: string; age: number }[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>对象数组的注解</p>
+<pre><code>type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名（type alias）</p>
+<pre><code>type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名1（对象形式）</p>
+<pre><code>class Madam {
+  name: string;
+  age: number;
+}
+const xiaojiejies: Madam[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名2（类形式）</p>
 ]]></content>
     </entry>
     <entry>

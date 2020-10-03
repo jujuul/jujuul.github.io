@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>typescript学习记录1 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601656319958">
+<link rel="shortcut icon" href="/favicon.ico?v=1601712201980">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -155,7 +155,8 @@
       <div class="sidebar-body mist" id="sidebar_body">
         
           
-            
+            <div class="post-side-meta" id="post_side_meta">
+              
 <div class="sidebar-wrapper box-shadow-wrapper ">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="/images/avatar.png"/>
@@ -189,6 +190,219 @@
 
 
 </div>
+            </div>
+            <div class="post-toc sidebar-body-active" id="post_toc" style="opacity: 1;">
+              <div class="toc-box right-motion">
+  <div class="toc-wrapper auto-number auto"
+    id="toc_wrapper">
+    <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E7%BD%AE">前置</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%85%81%E8%AE%B8%E5%9C%A8%E7%BB%88%E7%AB%AF%E7%9B%B4%E6%8E%A5%E8%BE%93%E5%87%BA">允许在终端直接输出</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B">静态类型</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B">定义静态类型</a></li>
+<li><a href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B">自定义静态类型</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B">基础静态类型和对象类型</a>
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B">基础静态类型</a></li>
+<li><a href="#%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B">对象类型</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3%E4%B8%8E%E7%B1%BB%E5%9E%8B%E6%8E%A8%E6%96%AD">类型注解与类型推断</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E6%B3%A8%E8%A7%A3">类型注解</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E5%92%8C%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%B3%A8%E8%A7%A3">函数参数和返回类型的注解</a></li>
+<li><a href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%B3%A8%E8%A7%A3">数组类型的注解</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</div>
+
+<script>
+
+  let lastTop = 0, lList = [], hList = [], postBody, lastIndex = -1;
+  let active = 'active-show', activeClass = 'active-current';
+  let tocWrapper = document.querySelector('#toc_wrapper');
+  let tocContent = tocWrapper.children[0];
+  let autoNumber = tocWrapper && tocWrapper.classList.contains('auto-number');
+
+  function addTocNumber(elem, deep) {
+    if (!elem) {
+      return;
+    }
+    let prop = elem.__proto__;
+
+    if (prop === HTMLUListElement.prototype) {
+      for (let i = 0; i < elem.children.length; i++) {
+        addTocNumber(elem.children[i], deep + (i + 1) + '.');
+      }
+    } else if (prop === HTMLLIElement.prototype) {
+      // 保存li元素
+      if (elem.children[0] && elem.children[0].__proto__ === HTMLAnchorElement.prototype) {
+        lList.push(elem);
+      }
+      for (let i = 0; i < elem.children.length; i++) {
+        let cur = elem.children[i];
+        if (cur.__proto__ === HTMLAnchorElement.prototype) {
+          if (autoNumber) {
+            cur.text = deep + ' ' + cur.text;
+          }
+        } else if (cur.__proto__ === HTMLUListElement.prototype) {
+          addTocNumber(cur, deep);
+        }
+      }
+    }
+  }
+
+  function removeParentActiveClass() {
+    let parents = tocContent.querySelectorAll('.' + active)
+    parents.forEach(function (elem) {
+      elem.classList.remove(active);
+    });
+  }
+
+  function addActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.add(activeClass);
+    }
+  }
+
+  function removeActiveClass(index) {
+    if (index >= 0 && index < hList.length) {
+      lList[index].classList.remove(activeClass);
+    }
+  }
+
+  function addActiveLiElemment(elem, parent) {
+    if (!elem || elem === parent) {
+      return;
+    } else {
+      if (elem.__proto__ === HTMLLIElement.prototype) {
+        elem.classList.add(active);
+      }
+      addActiveLiElemment(elem.parentElement, parent);
+    }
+  }
+
+  function showToc() {
+    if (tocWrapper) {
+      postBody = document.querySelector('#post_body');
+      for (let i = 0; i < postBody.children.length; i++) {
+        if (postBody.children[i].__proto__ === HTMLHeadingElement.prototype) {
+          hList.push(postBody.children[i]);
+        }
+      }
+      if (tocWrapper.classList.contains('compress')) {
+        tocContent.classList.add('closed');
+      } else if (tocWrapper.classList.contains('no_compress')) {
+        tocContent.classList.add('expanded');
+      } else {
+        if (hList.length > 10) {
+          active = 'active-hidden'
+          tocContent.classList.add('closed');
+        } else {
+          tocContent.classList.add('expanded');
+        }
+      }
+    }
+  }
+
+  (function () {
+    // 处理不是从#一级标题开始目录
+    if (tocContent.children.length === 1 && tocContent.children[0].__proto__ === HTMLLIElement.prototype) {
+      let con = tocContent.children[0].children[0];
+      tocContent.innerHTML = con.innerHTML;
+    }
+    let markdownItTOC = document.querySelector('.markdownIt-TOC');
+    let innerHeight = window.innerHeight;
+    markdownItTOC.style = `max-height: ${innerHeight - 80 > 0 ? innerHeight - 80 : innerHeight}px`
+    addTocNumber(tocContent, '');
+  })();
+
+  document.addEventListener('scroll', function (e) {
+    if (lList.length <= 0) {
+      return;
+    }
+    let scrollTop = document.scrollingElement.scrollTop + 10;
+    let dir;
+
+    if (lastTop - scrollTop > 0) {
+      dir = 'up';
+    } else {
+      dir = 'down';
+    }
+
+    lastTop = scrollTop;
+    if (scrollTop <= 0) {
+      if (lastIndex >= 0 && lastIndex < hList.length) {
+        lList[lastIndex].classList.remove(activeClass);
+      }
+      return;
+    }
+
+    let current = 0, hasFind = false;
+    for (let i = 0; i < hList.length; i++) {
+      if (hList[i].offsetTop > scrollTop) {
+        current = i;
+        hasFind = true;
+        break;
+      }
+    }
+    if (!hasFind && scrollTop > lList[lList.length - 1].offsetTop) {
+      current = hList.length - 1;
+    } else {
+      current--;
+    }
+    if (dir === 'down') {
+      if (current > lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex)
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    } else {
+      if (current < lastIndex) {
+        addActiveClass(current);
+        removeActiveClass(lastIndex);
+        lastIndex = current;
+        removeParentActiveClass();
+        lList[current] && addActiveLiElemment(lList[current].parentElement, tocContent);
+      }
+    }
+  });
+
+
+  window.addEventListener('load', function () {
+    showToc();
+    document.querySelector('#sidebar').style = 'display: block;';
+    tocWrapper.classList.add('toc-active');
+    setTimeout(function () {
+      if ("createEvent" in document) {
+        let evt = document.createEvent("HTMLEvents");
+        evt.initEvent("scroll", false, true);
+        document.dispatchEvent(evt);
+      }
+      else {
+        document.fireEvent("scroll");
+      }
+    }, 500)
+  })
+
+</script>
+            </div>
           
         
       </div>
@@ -291,19 +505,143 @@
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>6<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>654<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>安装<br>
-<code>npm i typescript -g</code></p>
+              <h2 id="前置">前置</h2>
+<h3 id="安装">安装</h3>
+<p><code>npm i typescript -g</code><br>
+<code>yarn global add typescript</code></p>
+<h3 id="允许在终端直接输出">允许在终端直接输出</h3>
+<p><code>npm install -g ts-node</code><br>
+语法<br>
+<code>ts-node demo1.ts</code></p>
+<h2 id="静态类型">静态类型</h2>
+<h3 id="定义静态类型">定义静态类型</h3>
+<p>在变量后面通过  冒号类型  的形式，<br>
+<code>let count: number = 1;</code></p>
+<h3 id="自定义静态类型">自定义静态类型</h3>
+<h2 id="基础静态类型和对象类型">基础静态类型和对象类型</h2>
+<h3 id="基础静态类型">基础静态类型</h3>
+<p>null    undefined   boolean    void    symbol</p>
+<h3 id="对象类型">对象类型</h3>
+<ol>
+<li>对象类型</li>
+</ol>
+<pre><code>const xiaojiejie: {
+  name: string;
+  age: number;
+} = {
+  name: &quot;大脚&quot;,
+  age: 18,
+};
+</code></pre>
+<ol start="2">
+<li>数组类型<br>
+<code>const xiaojiejies: string[] = [&quot;谢大脚&quot;, &quot;刘英&quot;, &quot;918&quot;];</code></li>
+<li>类类型</li>
+</ol>
+<pre><code>class Person {}
+const dajiao: Person = new Person();
+</code></pre>
+<ol start="4">
+<li>函数类型</li>
+</ol>
+<pre><code>const jianXiaojiejie: () =&gt; string = () =&gt; {
+  return &quot;大脚&quot;;
+};
+</code></pre>
+<h2 id="类型注解与类型推断">类型注解与类型推断</h2>
+<p>type annotation 类型注解<br>
+type inference  类型推断</p>
+<h3 id="类型注解">类型注解</h3>
+<pre><code>let count: number;
+count = 123;
+</code></pre>
+<p>像这样在count后面加上 :number 就是类型注解，就是人为指定变量的类型</p>
+<pre><code>let countInference = 123;
+</code></pre>
+<p>而像这样不指定变量的类型，ts也能知道变量是 number 类型，就是类型推断</p>
+<pre><code>// 能推断出，不需要注解
+const one = 1;
+const two = 2;
+const three = one + two;
+</code></pre>
+<pre><code>// 不能推断出，需要注解
+function getTotal(one: number, two: number) {
+  return one + two;
+}
+const total = getTotal(1, 2);
+</code></pre>
+<p>实际使用中，如果ts能够自动分析出类型的就不需要写注解，不能够自动分析出来的就写注解</p>
+<h2 id="函数参数和返回类型的注解">函数参数和返回类型的注解</h2>
+<pre><code>function getTotal(one: number, two: number): number {
+  return one + two;
+}
+</code></pre>
+<p>可以直接在函数的参数后添加注解，指定参数的类型；在 {} 之前添加注解，指定函数的返回值的类型</p>
+<pre><code>function sayHello(): void {
+  console.log(&quot;hello world&quot;);
+}
+</code></pre>
+<p>当不需要函数有返回值时，可以使用 void</p>
+<p>never</p>
+<pre><code>function add({ one, two }: { one: number; two: number }) {
+  return one + two;
+}
+</code></pre>
+<p>当函数参数为对象时想要确定它的属性类型，可以在参数对象后面再写一个对象，里面写上其中的参数，后面写注解</p>
+<h2 id="数组类型的注解">数组类型的注解</h2>
+<pre><code>// 数字数组
+const numberArr: number[] = [1, 2, 3];
+</code></pre>
+<pre><code>// 字符串数组
+const stringArr: string[] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
+</code></pre>
+<pre><code>// undefined数组
+const undefinedArr: undefined[] = [undefined, undefined, undefined];
+</code></pre>
+<pre><code>const arr: (number | string)[] = [1, &quot;string&quot;, 2];
+</code></pre>
+<p>有不同类型值的数组</p>
+<pre><code>const xiaojiejies: { name: string; age: number }[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>对象数组的注解</p>
+<pre><code>type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名（type alias）</p>
+<pre><code>type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名1（对象形式）</p>
+<pre><code>class Madam {
+  name: string;
+  age: number;
+}
+const xiaojiejies: Madam[] = [
+  { name: &quot;刘英&quot;, age: 18 },
+  { name: &quot;谢大脚&quot;, age: 28 },
+];
+</code></pre>
+<p>类型别名2（类形式）</p>
 
             </div>
             
@@ -799,8 +1137,132 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/"" data-c="
-          &lt;p&gt;安装&lt;br&gt;
-&lt;code&gt;npm i typescript -g&lt;/code&gt;&lt;/p&gt;
+          &lt;h2 id=&#34;前置&#34;&gt;前置&lt;/h2&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;npm i typescript -g&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;yarn global add typescript&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;允许在终端直接输出&#34;&gt;允许在终端直接输出&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;npm install -g ts-node&lt;/code&gt;&lt;br&gt;
+语法&lt;br&gt;
+&lt;code&gt;ts-node demo1.ts&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;静态类型&#34;&gt;静态类型&lt;/h2&gt;
+&lt;h3 id=&#34;定义静态类型&#34;&gt;定义静态类型&lt;/h3&gt;
+&lt;p&gt;在变量后面通过  冒号类型  的形式，&lt;br&gt;
+&lt;code&gt;let count: number = 1;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自定义静态类型&#34;&gt;自定义静态类型&lt;/h3&gt;
+&lt;h2 id=&#34;基础静态类型和对象类型&#34;&gt;基础静态类型和对象类型&lt;/h2&gt;
+&lt;h3 id=&#34;基础静态类型&#34;&gt;基础静态类型&lt;/h3&gt;
+&lt;p&gt;null    undefined   boolean    void    symbol&lt;/p&gt;
+&lt;h3 id=&#34;对象类型&#34;&gt;对象类型&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;对象类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejie: {
+  name: string;
+  age: number;
+} = {
+  name: &amp;quot;大脚&amp;quot;,
+  age: 18,
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;数组类型&lt;br&gt;
+&lt;code&gt;const xiaojiejies: string[] = [&amp;quot;谢大脚&amp;quot;, &amp;quot;刘英&amp;quot;, &amp;quot;918&amp;quot;];&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;类类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;class Person {}
+const dajiao: Person = new Person();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;函数类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;const jianXiaojiejie: () =&amp;gt; string = () =&amp;gt; {
+  return &amp;quot;大脚&amp;quot;;
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;类型注解与类型推断&#34;&gt;类型注解与类型推断&lt;/h2&gt;
+&lt;p&gt;type annotation 类型注解&lt;br&gt;
+type inference  类型推断&lt;/p&gt;
+&lt;h3 id=&#34;类型注解&#34;&gt;类型注解&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;let count: number;
+count = 123;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;像这样在count后面加上 :number 就是类型注解，就是人为指定变量的类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let countInference = 123;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而像这样不指定变量的类型，ts也能知道变量是 number 类型，就是类型推断&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 能推断出，不需要注解
+const one = 1;
+const two = 2;
+const three = one + two;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 不能推断出，需要注解
+function getTotal(one: number, two: number) {
+  return one + two;
+}
+const total = getTotal(1, 2);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实际使用中，如果ts能够自动分析出类型的就不需要写注解，不能够自动分析出来的就写注解&lt;/p&gt;
+&lt;h2 id=&#34;函数参数和返回类型的注解&#34;&gt;函数参数和返回类型的注解&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;function getTotal(one: number, two: number): number {
+  return one + two;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以直接在函数的参数后添加注解，指定参数的类型；在 {} 之前添加注解，指定函数的返回值的类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function sayHello(): void {
+  console.log(&amp;quot;hello world&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当不需要函数有返回值时，可以使用 void&lt;/p&gt;
+&lt;p&gt;never&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function add({ one, two }: { one: number; two: number }) {
+  return one + two;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当函数参数为对象时想要确定它的属性类型，可以在参数对象后面再写一个对象，里面写上其中的参数，后面写注解&lt;/p&gt;
+&lt;h2 id=&#34;数组类型的注解&#34;&gt;数组类型的注解&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;// 数字数组
+const numberArr: number[] = [1, 2, 3];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 字符串数组
+const stringArr: string[] = [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// undefined数组
+const undefinedArr: undefined[] = [undefined, undefined, undefined];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;const arr: (number | string)[] = [1, &amp;quot;string&amp;quot;, 2];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有不同类型值的数组&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejies: { name: string; age: number }[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对象数组的注解&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名（type alias）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名1（对象形式）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Madam {
+  name: string;
+  age: number;
+}
+const xiaojiejies: Madam[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名2（类形式）&lt;/p&gt;
 ">typescript学习记录1</a>
       </div>
       

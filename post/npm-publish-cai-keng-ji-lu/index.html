@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>npm publish 踩坑记录 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601656319958">
+<link rel="shortcut icon" href="/favicon.ico?v=1601712201980">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -993,8 +993,132 @@
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/"" data-c="
-          &lt;p&gt;安装&lt;br&gt;
-&lt;code&gt;npm i typescript -g&lt;/code&gt;&lt;/p&gt;
+          &lt;h2 id=&#34;前置&#34;&gt;前置&lt;/h2&gt;
+&lt;h3 id=&#34;安装&#34;&gt;安装&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;npm i typescript -g&lt;/code&gt;&lt;br&gt;
+&lt;code&gt;yarn global add typescript&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;允许在终端直接输出&#34;&gt;允许在终端直接输出&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;npm install -g ts-node&lt;/code&gt;&lt;br&gt;
+语法&lt;br&gt;
+&lt;code&gt;ts-node demo1.ts&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;静态类型&#34;&gt;静态类型&lt;/h2&gt;
+&lt;h3 id=&#34;定义静态类型&#34;&gt;定义静态类型&lt;/h3&gt;
+&lt;p&gt;在变量后面通过  冒号类型  的形式，&lt;br&gt;
+&lt;code&gt;let count: number = 1;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自定义静态类型&#34;&gt;自定义静态类型&lt;/h3&gt;
+&lt;h2 id=&#34;基础静态类型和对象类型&#34;&gt;基础静态类型和对象类型&lt;/h2&gt;
+&lt;h3 id=&#34;基础静态类型&#34;&gt;基础静态类型&lt;/h3&gt;
+&lt;p&gt;null    undefined   boolean    void    symbol&lt;/p&gt;
+&lt;h3 id=&#34;对象类型&#34;&gt;对象类型&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;对象类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejie: {
+  name: string;
+  age: number;
+} = {
+  name: &amp;quot;大脚&amp;quot;,
+  age: 18,
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;数组类型&lt;br&gt;
+&lt;code&gt;const xiaojiejies: string[] = [&amp;quot;谢大脚&amp;quot;, &amp;quot;刘英&amp;quot;, &amp;quot;918&amp;quot;];&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;类类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;class Person {}
+const dajiao: Person = new Person();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;函数类型&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;const jianXiaojiejie: () =&amp;gt; string = () =&amp;gt; {
+  return &amp;quot;大脚&amp;quot;;
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;类型注解与类型推断&#34;&gt;类型注解与类型推断&lt;/h2&gt;
+&lt;p&gt;type annotation 类型注解&lt;br&gt;
+type inference  类型推断&lt;/p&gt;
+&lt;h3 id=&#34;类型注解&#34;&gt;类型注解&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;let count: number;
+count = 123;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;像这样在count后面加上 :number 就是类型注解，就是人为指定变量的类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let countInference = 123;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而像这样不指定变量的类型，ts也能知道变量是 number 类型，就是类型推断&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 能推断出，不需要注解
+const one = 1;
+const two = 2;
+const three = one + two;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 不能推断出，需要注解
+function getTotal(one: number, two: number) {
+  return one + two;
+}
+const total = getTotal(1, 2);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;实际使用中，如果ts能够自动分析出类型的就不需要写注解，不能够自动分析出来的就写注解&lt;/p&gt;
+&lt;h2 id=&#34;函数参数和返回类型的注解&#34;&gt;函数参数和返回类型的注解&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;function getTotal(one: number, two: number): number {
+  return one + two;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以直接在函数的参数后添加注解，指定参数的类型；在 {} 之前添加注解，指定函数的返回值的类型&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function sayHello(): void {
+  console.log(&amp;quot;hello world&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当不需要函数有返回值时，可以使用 void&lt;/p&gt;
+&lt;p&gt;never&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function add({ one, two }: { one: number; two: number }) {
+  return one + two;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;当函数参数为对象时想要确定它的属性类型，可以在参数对象后面再写一个对象，里面写上其中的参数，后面写注解&lt;/p&gt;
+&lt;h2 id=&#34;数组类型的注解&#34;&gt;数组类型的注解&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;// 数字数组
+const numberArr: number[] = [1, 2, 3];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 字符串数组
+const stringArr: string[] = [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;c&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// undefined数组
+const undefinedArr: undefined[] = [undefined, undefined, undefined];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;const arr: (number | string)[] = [1, &amp;quot;string&amp;quot;, 2];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有不同类型值的数组&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejies: { name: string; age: number }[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对象数组的注解&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名（type alias）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;type Lady = { name: string; age: number };
+const xiaojiejies: Lady[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名1（对象形式）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Madam {
+  name: string;
+  age: number;
+}
+const xiaojiejies: Madam[] = [
+  { name: &amp;quot;刘英&amp;quot;, age: 18 },
+  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
+];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类型别名2（类形式）&lt;/p&gt;
 ">typescript学习记录1</a>
       </div>
       
