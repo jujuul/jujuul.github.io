@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-03T08:04:25.166Z</updated>
+    <updated>2020-10-03T10:07:34.555Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -31,7 +31,7 @@
 <h3 id="自定义静态类型">自定义静态类型</h3>
 <h2 id="基础静态类型和对象类型">基础静态类型和对象类型</h2>
 <h3 id="基础静态类型">基础静态类型</h3>
-<p>null    undefined   boolean    void    symbol</p>
+<p>null    undefined   boolean    void    symbol   string  number</p>
 <h3 id="对象类型">对象类型</h3>
 <ol>
 <li>对象类型</li>
@@ -124,14 +124,8 @@ const xiaojiejies: Lady[] = [
   { name: &quot;谢大脚&quot;, age: 28 },
 ];
 </code></pre>
-<p>类型别名（type alias）</p>
-<pre><code>type Lady = { name: string; age: number };
-const xiaojiejies: Lady[] = [
-  { name: &quot;刘英&quot;, age: 18 },
-  { name: &quot;谢大脚&quot;, age: 28 },
-];
-</code></pre>
-<p>类型别名1（对象形式）</p>
+<p>类型别名（type alias）<br>
+类型别名1（对象形式）</p>
 <pre><code>class Madam {
   name: string;
   age: number;
@@ -142,6 +136,24 @@ const xiaojiejies: Madam[] = [
 ];
 </code></pre>
 <p>类型别名2（类形式）</p>
+<h2 id="元组的使用和类型约束">元组的使用和类型约束</h2>
+<p>元组可以看作是数组的加强版，数组plus = 元组<br>
+元组不常用，一般用于csv文件</p>
+<pre><code>const xiaojiejie: (string | number)[] = [&quot;dajiao&quot;, 28, &quot;teacher&quot;];
+</code></pre>
+<p>虽然代码上没有错，也没有报错，但是逻辑上错误了</p>
+<pre><code>// 使用元组
+const xiaojiejie: [string, string, number] = [&quot;dajiao&quot;, 28, &quot;teacher&quot;];
+</code></pre>
+<p>这样会报错，因为它要求数组第二位是字符串，第三位是数字</p>
+<pre><code>const xiaojiejie: [string, string, number] = [&quot;dajiao&quot;, &quot;teacher&quot;, 28];
+</code></pre>
+<p>正确，注解与值相对应</p>
+<h2 id="interface">interface</h2>
+<h3 id="可选值">可选值</h3>
+<pre><code>waistline?: number;
+</code></pre>
+<p>在注解前加 ? 问号，值就为可选值，可以有也可以没有</p>
 ]]></content>
     </entry>
     <entry>

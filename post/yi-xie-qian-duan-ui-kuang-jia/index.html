@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>一些前端UI框架 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601712257969">
+<link rel="shortcut icon" href="/favicon.ico?v=1601719647817">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -888,7 +888,7 @@ github星数有26.9K，比iview多出3.5K，最近一次更新是两天前，最
 &lt;h3 id=&#34;自定义静态类型&#34;&gt;自定义静态类型&lt;/h3&gt;
 &lt;h2 id=&#34;基础静态类型和对象类型&#34;&gt;基础静态类型和对象类型&lt;/h2&gt;
 &lt;h3 id=&#34;基础静态类型&#34;&gt;基础静态类型&lt;/h3&gt;
-&lt;p&gt;null    undefined   boolean    void    symbol&lt;/p&gt;
+&lt;p&gt;null    undefined   boolean    void    symbol   string  number&lt;/p&gt;
 &lt;h3 id=&#34;对象类型&#34;&gt;对象类型&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;对象类型&lt;/li&gt;
@@ -981,14 +981,8 @@ const xiaojiejies: Lady[] = [
   { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
 ];
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;类型别名（type alias）&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;type Lady = { name: string; age: number };
-const xiaojiejies: Lady[] = [
-  { name: &amp;quot;刘英&amp;quot;, age: 18 },
-  { name: &amp;quot;谢大脚&amp;quot;, age: 28 },
-];
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;类型别名1（对象形式）&lt;/p&gt;
+&lt;p&gt;类型别名（type alias）&lt;br&gt;
+类型别名1（对象形式）&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;class Madam {
   name: string;
   age: number;
@@ -999,6 +993,24 @@ const xiaojiejies: Madam[] = [
 ];
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;类型别名2（类形式）&lt;/p&gt;
+&lt;h2 id=&#34;元组的使用和类型约束&#34;&gt;元组的使用和类型约束&lt;/h2&gt;
+&lt;p&gt;元组可以看作是数组的加强版，数组plus = 元组&lt;br&gt;
+元组不常用，一般用于csv文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejie: (string | number)[] = [&amp;quot;dajiao&amp;quot;, 28, &amp;quot;teacher&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;虽然代码上没有错，也没有报错，但是逻辑上错误了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 使用元组
+const xiaojiejie: [string, string, number] = [&amp;quot;dajiao&amp;quot;, 28, &amp;quot;teacher&amp;quot;];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样会报错，因为它要求数组第二位是字符串，第三位是数字&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const xiaojiejie: [string, string, number] = [&amp;quot;dajiao&amp;quot;, &amp;quot;teacher&amp;quot;, 28];
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;正确，注解与值相对应&lt;/p&gt;
+&lt;h2 id=&#34;interface&#34;&gt;interface&lt;/h2&gt;
+&lt;h3 id=&#34;可选值&#34;&gt;可选值&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;waistline?: number;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在注解前加 ? 问号，值就为可选值，可以有也可以没有&lt;/p&gt;
 ">typescript学习记录1</a>
       </div>
       
