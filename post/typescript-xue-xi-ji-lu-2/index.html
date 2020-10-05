@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vue中使用moment.js格式化时间戳 | Mark</title>
+<title>typescript学习记录2 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1601915654688">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vue中使用moment.js格式化时间戳" />
+  <meta name="description" content="typescript学习记录2" />
   <meta name="keywords" content="" />
 </head>
 
@@ -183,10 +183,37 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E6%A6%82%E5%BF%B5%E4%B8%8E%E4%BD%BF%E7%94%A8">类的概念与使用</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8">类的基本使用</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E7%BB%A7%E6%89%BF">类的继承</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84%E9%87%8D%E5%86%99">类的重写</a></li>
+<li><a href="#super%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E4%BD%BF%E7%94%A8">super关键字的使用</a></li>
+</ul>
+</li>
+<li><a href="#ts%E4%B8%AD%E7%B1%BB%E7%9A%84%E8%AE%BF%E9%97%AE%E7%B1%BB%E5%9E%8B">ts中类的访问类型</a>
+<ul>
+<li><a href="#public">public</a></li>
+<li><a href="#private">private</a></li>
+<li><a href="#protected">protected</a></li>
+</ul>
+</li>
+<li><a href="#ts%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">ts类的构造函数</a>
+<ul>
+<li><a href="#%E7%B1%BB%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">类的构造函数</a></li>
+<li><a href="#%E7%BB%A7%E6%89%BF%E4%B8%AD%E7%9A%84%E5%86%99%E6%B3%95">继承中的写法</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B1%BB%E7%9A%84getter%E5%92%8Csetter-static">类的getter和setter、static</a>
+<ul>
+<li><a href="#%E7%B1%BB%E7%9A%84getter%E5%92%8Csetter">类的getter和setter</a></li>
+<li><a href="#%E7%B1%BB%E7%9A%84static%E9%9D%99%E6%80%81%E7%B1%BB">类的static（静态类）</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AA%E8%AF%BB%E5%B1%9E%E6%80%A7%E5%92%8C%E6%8A%BD%E8%B1%A1%E7%B1%BB">只读属性和抽象类</a>
+<ul>
+<li><a href="#%E5%8F%AA%E8%AF%BB%E5%B1%9E%E6%80%A7">只读属性</a></li>
+<li><a href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB">抽象类</a></li>
 </ul>
 </li>
 </ul>
@@ -454,8 +481,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
-      vue中使用moment.js格式化时间戳
+    <a class="post-title-link" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/">
+      typescript学习记录2
     </a>
   </h1>
   <div class="post-meta">
@@ -463,70 +490,221 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
+      <span class="publish-time" data-t="2020-10-04 16:48:22">2020-10-04</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>575<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>751<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
-<h2 id="安装">安装</h2>
-<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
-<h2 id="引入">引入</h2>
-<p>在main中全局引入，并且定义全局的时间过滤器</p>
-<pre><code>// 定义全局时间戳过滤器
-Vue.filter(&quot;formatDate&quot;, function(value) {
-  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
-});
+              <h1 id="类的概念与使用">类的概念与使用</h1>
+<h2 id="类的基本使用">类的基本使用</h2>
+<pre><code>// 定义父类
+class Lady {
+  content = &quot;hi 帅哥！&quot;;
+  sayHello() {
+    return this.content;
+  }
+}
 </code></pre>
-<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
-日期格式化</p>
-<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
-moment().format('dddd');                    // 星期二
-moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
-moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
-moment().format();                          // 2019-04-16T12:24:48+08:00
+<h2 id="类的继承">类的继承</h2>
+<pre><code>class Lady {
+  content = &quot;Hi，帅哥&quot;;
+  sayHello() {
+    return this.content;
+  }
+}
+// 继承父类
+class XiaoJieJie extends Lady {
+  sayLove() {
+    return &quot;I love you&quot;;
+  }
+}
 </code></pre>
-<p>相对时间</p>
-<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment().startOf('day').fromNow();        // 12 小时前
-moment().endOf('day').fromNow();          // 12 小时内
-moment().startOf('hour').fromNow();       // 28 分钟前
+<p>ts中类的继承与ES6一致，通过<code>extends</code>关键字实现。</p>
+<h2 id="类的重写">类的重写</h2>
+<pre><code>class Lady {
+  content = &quot;hi 帅哥！&quot;;
+  sayHello() {
+    return this.content;
+  }
+}
+class XiaoJieJie extends Lady {
+    // 重写了父类的sayHello方法
+  sayHello() {
+    return &quot;. 你好!&quot;;
+  }
+  sayLove() {
+    return &quot;i love u&quot;;
+  }
+}
 </code></pre>
-<p>日历时间</p>
-<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
-moment().subtract(6, 'days').calendar();  // 上周三中午12点28
-moment().subtract(3, 'days').calendar();  // 上周六中午12点28
-moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
-moment().calendar();                      // 今天中午12点28分
-moment().add(1, 'days').calendar();       // 明天中午12点28分
-moment().add(3, 'days').calendar();       // 本周五中午12点28
-moment().add(10, 'days').calendar();      // 2019年4月26日
+<h2 id="super关键字的使用">super关键字的使用</h2>
+<pre><code>class XiaoJieJie extends Lady {
+  sayHello() {
+      // 通过super关键字能直接调用父类的方法
+    return super.sayHello() + &quot;. 你好!&quot;;
+  }
+  sayLove() {
+    return &quot;i love u&quot;;
+  }
+}
 </code></pre>
-<p>多语言支持</p>
-<pre><code>moment().format('L');    // 2019-04-16
-moment().format('l');    // 2019-04-16
-moment().format('LL');   // 2019年4月16日
-moment().format('ll');   // 2019年4月16日
-moment().format('LLL');  // 2019年4月16日中午12点28分
-moment().format('lll');  // 2019年4月16日中午12点28分
-moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
-moment().format('llll'); // 2019年4月16日星期二中午12点28分
+<h1 id="ts中类的访问类型">ts中类的访问类型</h1>
+<ol>
+<li>private（私有的）</li>
+<li>protected（受保护的）</li>
+<li>public（公共的）</li>
+</ol>
+<h2 id="public">public</h2>
+<p>public：未设置的情况下，默认为public类型</p>
+<pre><code>class Person {
+  name: string;
+}
 </code></pre>
-<p>文档地址：http://momentjs.cn/<br>
-不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
+<p>等同于</p>
+<pre><code>class Person {
+  public name: string;
+}
+</code></pre>
+<p>允许在类的内部和类的外部都可以调用</p>
+<pre><code>const person = new Person();
+person.name = &quot;zx&quot;;
+console.log(person.name);
+</code></pre>
+<h2 id="private">private</h2>
+<pre><code>class Person {
+  private name: string;
+  public sayHello() {
+    console.log(this.name + &quot; say Hello&quot;);
+  }
+}
+const person = new Person();
+// person.name 报错
+person.name = &quot;zx&quot;;
+person.sayHello();
+// person.name 报错
+console.log(person.name);
+</code></pre>
+<p>在内部调用不会报错，外部调用就会报错</p>
+<h2 id="protected">protected</h2>
+<pre><code>class Teacher extends Person {
+  public sayBye() {
+    console.log(this.name);
+  }
+}
+</code></pre>
+<p>与 private类似，也是只能内部访问，区别在于可以通过继承的方式传递</p>
+<h1 id="ts类的构造函数">ts类的构造函数</h1>
+<h2 id="类的构造函数">类的构造函数</h2>
+<pre><code>class Person {
+  constructor(public name: string) {}
+}
+const person = new Person(&quot;zx&quot;);
+console.log(person.name); // zx
+</code></pre>
+<p>等价于</p>
+<pre><code>class Person {
+  public name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+const person = new Person(&quot;zx&quot;);
+console.log(person.name);   // zx
+</code></pre>
+<p>第一种形式为第二种形式的简写</p>
+<h2 id="继承中的写法">继承中的写法</h2>
+<pre><code>class Person {
+  constructor(public name: string) {}
+}
+class Teacher extends Person {
+  constructor(public age: number) {
+    super(&quot;zx&quot;);
+  }
+}
+const teacher = new Teacher(18);
+console.log(teacher.age);
+console.log(teacher.name);
+</code></pre>
+<p>只要子类需要写 constructor 构造函数，就必须写 super</p>
+<h1 id="类的getter和setter-static">类的getter和setter、static</h1>
+<h2 id="类的getter和setter">类的getter和setter</h2>
+<p>可以使内部真正的值和外部取到的值不一致</p>
+<pre><code>class XiaoJieJie {
+  constructor(private _age: number) {}
+  get age() {
+    return this._age - 10;
+  }
+  set age(age: number) {
+    this._age = age + 3;
+  }
+}
+const dajiao = new XiaoJieJie(28);
+dajiao.age = 25;
+console.log(dajiao.age);  // 18
+</code></pre>
+<h2 id="类的static静态类">类的static（静态类）</h2>
+<pre><code>class Girl {
+  static sayLove() {
+    return &quot;i love u&quot;;
+  }
+}
+console.log(Girl.sayLove());  // i love u
+</code></pre>
+<p>可以不实例化，而是通过类名+方法名调用方法</p>
+<h1 id="只读属性和抽象类">只读属性和抽象类</h1>
+<h2 id="只读属性">只读属性</h2>
+<pre><code>class Person {
+  constructor(public name: string) {}
+}
+const person = new Person(&quot;zx&quot;);
+console.log(person.name);   // zx
+person.name = &quot;xz&quot;;
+console.log(person.name);   // xz
+</code></pre>
+<p>正常情况下，对象的属性是可以更改的</p>
+<pre><code>class Person {
+  public readonly _name: string;
+  constructor(name: string) {
+    this._name = name;
+  }
+}
+const person = new Person(&quot;zx&quot;);
+console.log(person._name);
+person._name = &quot;xz&quot;;    // vscode报错，属性为只读
+</code></pre>
+<p>设置为只读以后，无法修改</p>
+<h2 id="抽象类">抽象类</h2>
+<p>通过 abstract 定义抽象类<br>
+抽象类中的抽象方法不用具体实现，通过 abstract 定义就可以了</p>
+<pre><code>abstract class Girl {
+  abstract skill();
+}
+</code></pre>
+<p>继承该类时，子类必须有 skill() 方法</p>
+<pre><code>class Waiter extends Girl {
+  skill() {
+    console.log(&quot;端茶&quot;);
+  }
+}
+class baseTeacher extends Girl {
+  skill() {
+    console.log(&quot;倒水&quot;);
+  }
+}
+</code></pre>
+<p>方法可以不同，但是必须要有</p>
 
             </div>
             
@@ -539,7 +717,7 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" title="vue中使用moment.js格式化时间戳">https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</a>
+      <a href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/" title="typescript学习记录2">https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -553,14 +731,14 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">上一篇</a>
+        <a class="nav-pc-next" title="typescript学习记录3" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/">typescript学习记录3</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="typescript学习记录3" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">仿网易云demo—day4</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">下一篇</a>
+        <a class="nav-pc-next" title="typescript学习记录1" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/">typescript学习记录1</a>
+        <a class="nav-mobile-next" title="typescript学习记录1" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

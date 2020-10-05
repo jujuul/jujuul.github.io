@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vue中使用moment.js格式化时间戳 | Mark</title>
+<title>React学习记录1 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1601915654688">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vue中使用moment.js格式化时间戳" />
+  <meta name="description" content="React学习记录1" />
   <meta name="keywords" content="" />
 </head>
 
@@ -186,7 +186,6 @@
 <li>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
 </ul>
 </li>
 </ul>
@@ -454,8 +453,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
-      vue中使用moment.js格式化时间戳
+    <a class="post-title-link" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-1/">
+      React学习记录1
     </a>
   </h1>
   <div class="post-meta">
@@ -463,70 +462,40 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
+      <span class="publish-time" data-t="2020-10-04 09:49:08">2020-10-04</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>3<span class="language" data-lan="minute">分钟</span></span>
+      <span>1<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>575<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>104<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
-<h2 id="安装">安装</h2>
-<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
-<h2 id="引入">引入</h2>
-<p>在main中全局引入，并且定义全局的时间过滤器</p>
-<pre><code>// 定义全局时间戳过滤器
-Vue.filter(&quot;formatDate&quot;, function(value) {
-  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
-});
+              <h2 id="安装">安装</h2>
+<ol>
+<li>通过script引入使用，仅用于学习调试</li>
+</ol>
+<pre><code>&lt;script crossorigin src=&quot;https://unpkg.com/react@16/umd/react.development.js&quot;&gt;&lt;/script&gt;
+&lt;script crossorigin src=&quot;https://unpkg.com/react-dom@16/umd/react-dom.development.js&quot;&gt;&lt;/script&gt;
 </code></pre>
-<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
-日期格式化</p>
-<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
-moment().format('dddd');                    // 星期二
-moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
-moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
-moment().format();                          // 2019-04-16T12:24:48+08:00
-</code></pre>
-<p>相对时间</p>
-<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment().startOf('day').fromNow();        // 12 小时前
-moment().endOf('day').fromNow();          // 12 小时内
-moment().startOf('hour').fromNow();       // 28 分钟前
-</code></pre>
-<p>日历时间</p>
-<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
-moment().subtract(6, 'days').calendar();  // 上周三中午12点28
-moment().subtract(3, 'days').calendar();  // 上周六中午12点28
-moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
-moment().calendar();                      // 今天中午12点28分
-moment().add(1, 'days').calendar();       // 明天中午12点28分
-moment().add(3, 'days').calendar();       // 本周五中午12点28
-moment().add(10, 'days').calendar();      // 2019年4月26日
-</code></pre>
-<p>多语言支持</p>
-<pre><code>moment().format('L');    // 2019-04-16
-moment().format('l');    // 2019-04-16
-moment().format('LL');   // 2019年4月16日
-moment().format('ll');   // 2019年4月16日
-moment().format('LLL');  // 2019年4月16日中午12点28分
-moment().format('lll');  // 2019年4月16日中午12点28分
-moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
-moment().format('llll'); // 2019年4月16日星期二中午12点28分
-</code></pre>
-<p>文档地址：http://momentjs.cn/<br>
-不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
+<ol start="2">
+<li>通过react的脚手架，创建项目
+<ol>
+<li>安装脚手架 Crate React App<br>
+<code>npm i -g create-React-app</code>或者<code>npx create-react-app my-app</code>（不需再创建项目）</li>
+<li>创建项目<br>
+<code>create-react-app my-app</code></li>
+</ol>
+</li>
+</ol>
 
             </div>
             
@@ -539,7 +508,7 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" title="vue中使用moment.js格式化时间戳">https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</a>
+      <a href="https://jujuul.github.io/post/react-xue-xi-ji-lu-1/" title="React学习记录1">https://jujuul.github.io/post/react-xue-xi-ji-lu-1/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -552,16 +521,8 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">上一篇</a>
-      
     </div>
     <div class="nav-next">
-      
-        <a class="nav-pc-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">仿网易云demo—day4</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">下一篇</a>
-        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>

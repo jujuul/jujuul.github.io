@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>vue中使用moment.js格式化时间戳 | Mark</title>
+<title>typescript学习记录3 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1601915654688">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="vue中使用moment.js格式化时间戳" />
+  <meta name="description" content="typescript学习记录3" />
   <meta name="keywords" content="" />
 </head>
 
@@ -183,10 +183,28 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#tsconfigjson">tsconfig.json</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-%E5%88%9D%E5%A7%8Btsconfigjson%E6%96%87%E4%BB%B6">配置文件-初始tsconfig.json文件</a>
+<ul>
+<li><a href="#removecomments">removeComments</a></li>
+<li><a href="#include">include</a></li>
+<li><a href="#exclude">exclude</a></li>
+<li><a href="#files">files</a></li>
+<li><a href="#">*</a></li>
+<li><a href="#target">target</a></li>
+<li><a href="#strict">strict</a></li>
+<li><a href="#noimplicitany">noImplicitAny</a></li>
+<li><a href="#strictnullchecks">strictNullChecks</a></li>
+<li><a href="#module">module</a></li>
+<li><a href="#esmoduleinterop">esModuleInterop</a></li>
+<li><a href="#skiplibcheck">skipLibCheck</a></li>
+<li><a href="#forceconsistentcasinginfilenames">forceConsistentCasingInFileNames</a></li>
+<li><a href="#rootdir-%E4%B8%8E-outdir">rootDir 与 outDir</a></li>
+<li><a href="#sourcemap">sourceMap</a></li>
+<li><a href="#nounusedlocals">noUnusedLocals</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -454,8 +472,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
-      vue中使用moment.js格式化时间戳
+    <a class="post-title-link" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/">
+      typescript学习记录3
     </a>
   </h1>
   <div class="post-meta">
@@ -463,7 +481,7 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
+      <span class="publish-time" data-t="2020-10-05 12:18:06">2020-10-05</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
@@ -474,59 +492,68 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>575<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>582<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
-<h2 id="安装">安装</h2>
-<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
-<h2 id="引入">引入</h2>
-<p>在main中全局引入，并且定义全局的时间过滤器</p>
-<pre><code>// 定义全局时间戳过滤器
-Vue.filter(&quot;formatDate&quot;, function(value) {
-  return Moment(value).format(&quot;YYYY-MM-DD&quot;);
-});
+              <h1 id="tsconfigjson">tsconfig.json</h1>
+<p>大小写不敏感</p>
+<h2 id="配置文件-初始tsconfigjson文件">配置文件-初始tsconfig.json文件</h2>
+<p>在终端中输入 <code>tsc init</code>生成tsconfig.json文件</p>
+<h3 id="removecomments">removeComments</h3>
+<p>removeComments：生成的文件中是否带有源文件的注释，取值为 true 或 false</p>
+<h3 id="include">include</h3>
+<p>include 配置项，需手动添加，作用是决定哪些文件作为被编译的源文件，键值为数组</p>
+<pre><code>&quot;include&quot;: [&quot;demo.ts&quot;]
 </code></pre>
-<p>按照以上设置可以返回YYYY-MM-DD格式的日期，也可以按照一下方式设置<br>
-日期格式化</p>
-<pre><code>moment().format('MMMM Do YYYY, h:mm:ss a'); // 四月 16日 2019, 12:24:48 中午
-moment().format('dddd');                    // 星期二
-moment().format(&quot;MMM Do YY&quot;);               // 4月 16日 19
-moment().format('YYYY [escaped] YYYY');     // 2019 escaped 2019
-moment().format();                          // 2019-04-16T12:24:48+08:00
+<h3 id="exclude">exclude</h3>
+<p>与 include 相反，数组中是不需要编译的文件</p>
+<pre><code>&quot;exclude&quot;: [&quot;demo.ts&quot;]
 </code></pre>
-<p>相对时间</p>
-<pre><code>moment(&quot;20111031&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment(&quot;20120620&quot;, &quot;YYYYMMDD&quot;).fromNow(); // 7 年前
-moment().startOf('day').fromNow();        // 12 小时前
-moment().endOf('day').fromNow();          // 12 小时内
-moment().startOf('hour').fromNow();       // 28 分钟前
+<h3 id="files">files</h3>
+<p>与 include 基本相同，区别是对于大小写的处理，如果配置中写的是小写，则编译后的文件也是小写，但是如果存在同类型的大写的同名称的文件，就不会编译，反之亦然。</p>
+<pre><code>&quot;files&quot;: [&quot;demo.ts&quot;],
 </code></pre>
-<p>日历时间</p>
-<pre><code>moment().subtract(10, 'days').calendar(); // 2019年4月6日
-moment().subtract(6, 'days').calendar();  // 上周三中午12点28
-moment().subtract(3, 'days').calendar();  // 上周六中午12点28
-moment().subtract(1, 'days').calendar();  // 昨天中午12点28分
-moment().calendar();                      // 今天中午12点28分
-moment().add(1, 'days').calendar();       // 明天中午12点28分
-moment().add(3, 'days').calendar();       // 本周五中午12点28
-moment().add(10, 'days').calendar();      // 2019年4月26日
+<h3 id="">*</h3>
+<p>通配符，和其他语言效果一致</p>
+<h3 id="target">target</h3>
+<p>指定ECMAScript目标版本 &quot;ES3&quot;（默认）， &quot;ES5&quot;， &quot;ES6&quot;/ &quot;ES2015&quot;， &quot;ES2016&quot;， &quot;ES2017&quot;或 &quot;ESNext&quot;。</p>
+<h3 id="strict">strict</h3>
+<p>启用所有严格类型检查选项。</p>
+<h3 id="noimplicitany">noImplicitAny</h3>
+<p>在表达式和声明上有隐含的 any类型时报错,也就是值类型为隐式any的时候会报错，可以设置为false规避</p>
+<h3 id="strictnullchecks">strictNullChecks</h3>
+<p>在严格的 null检查模式下， null和 undefined值不包含在任何类型里，只允许用它们自己和 any来赋值</p>
+<pre><code>const zx: string = null;  // 报错
 </code></pre>
-<p>多语言支持</p>
-<pre><code>moment().format('L');    // 2019-04-16
-moment().format('l');    // 2019-04-16
-moment().format('LL');   // 2019年4月16日
-moment().format('ll');   // 2019年4月16日
-moment().format('LLL');  // 2019年4月16日中午12点28分
-moment().format('lll');  // 2019年4月16日中午12点28分
-moment().format('LLLL'); // 2019年4月16日星期二中午12点28分
-moment().format('llll'); // 2019年4月16日星期二中午12点28分
+<p>设置为false可以规避</p>
+<h3 id="module">module</h3>
+<p>指定生成哪个模块系统代码： &quot;None&quot;， &quot;CommonJS&quot;， &quot;AMD&quot;， &quot;System&quot;， &quot;UMD&quot;， &quot;ES6&quot;或 &quot;ES2015&quot;。</p>
+<h3 id="esmoduleinterop">esModuleInterop</h3>
+<p>允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。</p>
+<h3 id="skiplibcheck">skipLibCheck</h3>
+<p>忽略所有的声明文件（ *.d.ts）的类型检查。</p>
+<h3 id="forceconsistentcasinginfilenames">forceConsistentCasingInFileNames</h3>
+<p>禁止对同一个文件的不一致的引用。</p>
+<h3 id="rootdir-与-outdir">rootDir 与 outDir</h3>
+<p>设置入口文件与出口文件，类似于webpack的 entry 与 output</p>
+<pre><code>&quot;outDir&quot;: &quot;./build&quot;,
+&quot;rootDir&quot;: &quot;./src&quot;,
 </code></pre>
-<p>文档地址：http://momentjs.cn/<br>
-不过使用的时候也有一些问题，我如果想要其他方式处理图片，比如想要返回demo中歌单的创建日期为多长时间以前，就要新设置一个全局的filter，并且命名不能和其余的处理函数相同，然后在需要的地方引用，我认为这种较为麻烦，应该有别的更简单的方法，集合在一个函数内完成，不过我试着像该函数传值并没有成功。</p>
+<h3 id="sourcemap">sourceMap</h3>
+<p>生成相应的 .map文件。用于排查错误位置，与webpack相近</p>
+<h3 id="nounusedlocals">noUnusedLocals</h3>
+<p>若有未使用的局部变量则抛错。</p>
+<pre><code>const zx: string = null;
+export const name = &quot;zx&quot;; 
+</code></pre>
+<p>抛出错误</p>
+<pre><code>error TS6133: 'zx' is declared but its value is never read.
+</code></pre>
+<p>上面列出了一些常用的配置项，其余的可以去ts官方文档的配置项列表查看<br>
+<a href="https://www.tslang.cn/docs/handbook/compiler-options.html">配置项列表地址</a></p>
 
             </div>
             
@@ -539,7 +566,7 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" title="vue中使用moment.js格式化时间戳">https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/</a>
+      <a href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/" title="typescript学习记录3">https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -553,14 +580,14 @@ moment().format('llll'); // 2019年4月16日星期二中午12点28分
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">视频播放器插件的使用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="视频播放器插件的使用" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">上一篇</a>
+        <a class="nav-pc-next" title="typescript学习记录4" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/">typescript学习记录4</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="typescript学习记录4" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">仿网易云demo—day4</a>
-        <a class="nav-mobile-next" title="仿网易云demo—day4" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day4/">下一篇</a>
+        <a class="nav-pc-next" title="typescript学习记录2" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/">typescript学习记录2</a>
+        <a class="nav-mobile-next" title="typescript学习记录2" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
