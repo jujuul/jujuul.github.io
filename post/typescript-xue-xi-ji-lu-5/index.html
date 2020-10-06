@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>防抖和节流 | Mark</title>
+<title>typescript学习记录5 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1602000063968">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,8 +38,8 @@
 
 
 
-  <meta name="description" content="防抖和节流" />
-  <meta name="keywords" content="前端" />
+  <meta name="description" content="typescript学习记录5" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -183,13 +183,16 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">命名空间</a>
 <ul>
-<li><a href="#%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96">函数防抖</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81">函数节流</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E8%8A%82%E6%B5%81%E5%92%8C%E5%87%BD%E6%95%B0%E9%98%B2%E6%8A%96%E5%8C%BA%E5%88%AB">函数节流和函数防抖区别</a></li>
+<li><a href="#%E6%B2%A1%E6%9C%89%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E6%97%B6%E7%9A%84%E9%97%AE%E9%A2%98">没有命名空间时的问题</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">使用命名空间</a></li>
+<li><a href="#%E5%AD%90%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4">子命名空间</a></li>
 </ul>
 </li>
+<li><a href="#ts%E4%BD%BF%E7%94%A8parcel">ts使用Parcel</a></li>
+<li><a href="#%E5%9C%A8ts%E4%B8%AD%E4%BD%BF%E7%94%A8jquery">在ts中使用jquery</a></li>
+<li><a href="#%E6%84%9F%E8%B0%A2">感谢</a></li>
 </ul>
 
   </div>
@@ -455,8 +458,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-dou-he-jie-liu/">
-      防抖和节流
+    <a class="post-title-link" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/">
+      typescript学习记录5
     </a>
   </h1>
   <div class="post-meta">
@@ -464,22 +467,9 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-08 12:26:34">2020-08-08</span>
+      <span class="publish-time" data-t="2020-10-06 11:12:30">2020-10-06</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-folder-o"></i>
-      <span class="pc-show language" data-lan="category-in">分类于</span>
-      
-      
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/">
-        <span>前端</span>
-      </a>
-      
-      
-    </span>
-    <span class="post-meta-divider">|</span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
@@ -488,70 +478,96 @@
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>355<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>387<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="函数防抖">函数防抖</h2>
-<p>函数防抖是优化高频率执行js代码的一种手段<br>
-可以让被调用的函数在一次连续的高频操作中只被调用一次</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件</p>
-<pre><code>function debounce(fn, wait) {
-            let timer
-            return function () {
-                // 改变执行函数内部this指向
-                let _this = this
-                let _args = arguments
-                clearTimeout(timer)
-                timer = setTimeout(function () {
-                    fn.apply(_this, _args)
-                }, wait)
-            }
- }
+              <h1 id="命名空间">命名空间</h1>
+<h2 id="没有命名空间时的问题">没有命名空间时的问题</h2>
+<pre><code>// ts
+class Header {
+    constructor() {
+      const elem = document.createElement(&quot;div&quot;);
+      elem.innerText = &quot;This is Header&quot;;
+      document.body.appendChild(elem);
+    }
+}
+class Page {
+  constructor() {
+    new Header();
+  }
+}
 </code></pre>
-<h2 id="函数节流">函数节流</h2>
-<p>函数节流是优化高频率执行js代码的一种手段<br>
-可以减少高频调用函数的执行次数</p>
-<p>作用：减少代码执行次数, 提升网页性能<br>
-应用场景：oninput / onmousemove / onscroll / onresize 等事件<br>
-第一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let timer
-            return function () {
-                if (timer) return
-                let _this = this
-                let _args = arguments
-                timer = setTimeout(() =&gt; {
-                    fn.apply(_this, _args)
-                    timer = null
-                }, wait)
-            }
+<pre><code>// html
+&lt;script&gt;
+       Page()
+&lt;/script&gt;
+// 这种方式使用，Page和Header都是全局变量
+</code></pre>
+<p>这种方式会生成多个全局变量，造成全局变量污染</p>
+<h2 id="使用命名空间">使用命名空间</h2>
+<pre><code>namespace Home {
+    class Header {
+        constructor() {
+        const elem = document.createElement(&quot;div&quot;);
+        elem.innerText = &quot;This is Header&quot;;
+        document.body.appendChild(elem);
         }
+    }
+    class export Page {
+    constructor() {
+        new Header();
+    }
+    }
+}
 </code></pre>
-<p>最后一次不执行</p>
-<pre><code>function throttle(fn, wait) {
-            let old = 0
-            return function () {
-                let _this = this
-                let _args = arguments
-                // 获取当前的时间戳
-                let now = new Date().valueOf()
-                if (now - old &gt; wait) {
-                    fn.apply(_this, _args)
-                    // 立即执行
-                    old = now;
-                }
-            }
-        }
+<p>使用命名空间的语法非常简单，就是<code>namespace Home</code>这种形式使用，只要加个<code>namespace XXXX</code>的关键字就可以了，最后再把需要暴露的变量通过<code>export</code>暴露出去</p>
+<pre><code>&lt;script&gt;
+        new Home.Page()
+&lt;/script&gt;
 </code></pre>
-<h2 id="函数节流和函数防抖区别">函数节流和函数防抖区别</h2>
-<p>函数节流是减少连续的高频操作函数执行次数 (例如连续调用10次, 可能只执行3-4次)<br>
-函数防抖是让连续的高频操作时函数只执行一次(例如连续调用10次, 但是只会执行1次)</p>
-<p>参考<br>
-https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
+<p>这样就可以在页面中使用了</p>
+<h2 id="子命名空间">子命名空间</h2>
+<p>命名空间是可以嵌套的</p>
+<pre><code>namespace Components {
+    // 命名空间内嵌套命名空间
+  export namespace SubComponents {
+      export class Test{}
+  }
+}
+</code></pre>
+<h1 id="ts使用parcel">ts使用Parcel</h1>
+<p>安装</p>
+<pre><code>npm i parcel@next
+或
+yarn add --dev parcel@next
+</code></pre>
+<p>打包</p>
+<pre><code>// 修改 package.json 的配置项，使用 parcel 打包 src 下的 index 文件
+&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;parcel ./src/index.html&quot;
+},
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1601957052531.png" alt="打包后的结果" loading="lazy"><br>
+使用 parcel 会创建一个 dist 文件夹，打包后的内容都在其中，包括 map 文件，相比于 webpack 明显要快捷的多。</p>
+<h1 id="在ts中使用jquery">在ts中使用jquery</h1>
+<pre><code>$(function () {
+  alert(&quot;jujuul&quot;);
+});
+// vscode报错，找不到 $ 
+</code></pre>
+<p>解决方法：<br>
+一、 安装jquery<br>
+<code>npm i @types/jquery</code><br>
+二、declare<br>
+<code>declare var $: any;</code><br>
+声明 $ 为any，简单粗暴</p>
+<h1 id="感谢">感谢</h1>
+<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
+<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
+<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
 
             </div>
             
@@ -564,7 +580,7 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/fang-dou-he-jie-liu/" title="防抖和节流">https://jujuul.github.io/post/fang-dou-he-jie-liu/</a>
+      <a href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/" title="typescript学习记录5">https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -573,21 +589,19 @@ https://www.bilibili.com/video/BV1pQ4y1M71e?p=1</p>
   </ul>
   <div class="tags">
     
-      <a href="https://jujuul.github.io/tag/cg2tXSp4Q/"># 前端</a>
-    
   </div>
   <div class="nav">
     <div class="nav-prev">
       
         <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">Uniapp学习记录day4</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="Uniapp学习记录day4" href="https://jujuul.github.io/post/1/">上一篇</a>
+        <a class="nav-pc-next" title="vue3学习记录1" href="https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/">vue3学习记录1</a class="nav-pc-next">
+        <a class="nav-mobile-prev" title="vue3学习记录1" href="https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/">上一篇</a>
       
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">收藏的一些有用的网站</a>
-        <a class="nav-mobile-next" title="收藏的一些有用的网站" href="https://jujuul.github.io/post/shou-cang-de-yi-xie-you-yong-de-wang-zhan/">下一篇</a>
+        <a class="nav-pc-next" title="typescript学习记录4" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/">typescript学习记录4</a>
+        <a class="nav-mobile-next" title="typescript学习记录4" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>

@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>修改滚动条 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1601915654688">
+<link rel="shortcut icon" href="/favicon.ico?v=1602000063968">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -153,7 +153,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">75</span>
+        <span class="site-item-stat-count">77</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -802,6 +802,223 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/"" data-c="
+          &lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;h2 id=&#34;使用vue-cli&#34;&gt;使用vue-cli&lt;/h2&gt;
+&lt;p&gt;可以使用&lt;code&gt;npm&lt;/code&gt;或者&lt;code&gt;yarn&lt;/code&gt;安装，需要先把vue-cli的版本升级到v4.5.6。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 创建项目 vue3learn
+vue create vue3learn
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;创建项目除了使用命令行还可以使用图形页面来创建项目，因为我不怎么用，这里也不再赘述。&lt;/p&gt;
+&lt;p&gt;创建的过程中有很多配置项可以选择，看个人选择。要注意的是vue版本要选择3.x。&lt;/p&gt;
+&lt;h2 id=&#34;使用vite&#34;&gt;使用vite&lt;/h2&gt;
+&lt;p&gt;这个是尤大开发的新工具，目的是以后替代webpack，原理是利用浏览器现在已经支持es6的import了，遇到import会发送一个http请求去加载文件，vite拦截这些请求，做一些预编译，省去了webpack冗长打包的时间，提升开发体验，我个人使用体验是非常不错的，非常的快。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm install -g create-vite-app
+create-vite-app 01-vue3-vite
+cd 01-vue3-vite
+npm install
+npm run dev
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面就是创建的全过程，先安装 vite，然后通过 vite 创建项目，这里 create-vite-app 可以简写成 cva，进入创建好的项目后需要安装 node_modules 文件，然后才可以运行，yarn 同理，这里也不再赘述。&lt;/p&gt;
+&lt;h2 id=&#34;区别&#34;&gt;区别&lt;/h2&gt;
+&lt;p&gt;以上两种方式创建的项目还是有区别的，比如 vite 创建的是&lt;code&gt;&amp;quot;vue&amp;quot;: &amp;quot;^3.0.0-rc.1&amp;quot;&lt;/code&gt;，而 vue-cli 创建的是&lt;code&gt;&amp;quot;vue&amp;quot;: &amp;quot;^3.0.0-0&amp;quot;&lt;/code&gt;，除此之外，因为 vue-cli 创建的过程中还经历了多个选择，所以 package.json 文件中会多出很多 devDependencies。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;devDependencies&amp;quot;: {
+    &amp;quot;@typescript-eslint/eslint-plugin&amp;quot;: &amp;quot;^2.33.0&amp;quot;,
+    &amp;quot;@typescript-eslint/parser&amp;quot;: &amp;quot;^2.33.0&amp;quot;,
+    &amp;quot;@vue/cli-plugin-eslint&amp;quot;: &amp;quot;~4.5.0&amp;quot;,
+    &amp;quot;@vue/cli-plugin-typescript&amp;quot;: &amp;quot;~4.5.0&amp;quot;,
+    &amp;quot;@vue/cli-service&amp;quot;: &amp;quot;~4.5.0&amp;quot;,
+    &amp;quot;@vue/compiler-sfc&amp;quot;: &amp;quot;^3.0.0-0&amp;quot;,
+    &amp;quot;@vue/eslint-config-typescript&amp;quot;: &amp;quot;^5.0.2&amp;quot;,
+    &amp;quot;eslint&amp;quot;: &amp;quot;^6.7.2&amp;quot;,
+    &amp;quot;eslint-plugin-vue&amp;quot;: &amp;quot;^7.0.0-0&amp;quot;,
+    &amp;quot;typescript&amp;quot;: &amp;quot;~3.9.3&amp;quot;
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;vue3目录结构&#34;&gt;vue3目录结构&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;|-node_modules       -- 所有的项目依赖包都放在这个目录下
+|-public             -- 公共文件夹
+---|favicon.ico      -- 网站的显示图标
+---|index.html       -- 入口的html文件
+|-src                -- 源文件目录，编写的代码基本都在这个目录下
+---|assets           -- 放置静态文件的目录，比如logo.pn就放在这里
+---|components       -- Vue的组件文件，自定义的组件都会放到这
+---|App.vue          -- 根组件，这个在Vue2中也有
+---|main.ts          -- 入口文件，因为采用了TypeScript所以是ts结尾
+---|shims-vue.d.ts   -- 类文件(也叫定义文件)，因为.vue结尾的文件在ts中不认可，所以要有定义文件
+|-.browserslistrc    -- 在不同前端工具之间公用目标浏览器和node版本的配置文件，作用是设置兼容性
+|-.eslintrc.js       -- Eslint的配置文件，不用作过多介绍
+|-.gitignore         -- 用来配置那些文件不归git管理
+|-package.json       -- 命令配置和包管理文件
+|-README.md          -- 项目的说明文件，使用markdown语法进行编写
+|-tsconfig.json      -- 关于TypoScript的配置文件
+|-yarn.lock          -- 使用yarn后自动生成的文件，由Yarn管理，安装yarn包时的重要信息存储到yarn.lock文件中
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;setup和ref&#34;&gt;setup和ref&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;setup&lt;/code&gt; 函数的用法，可以代替 Vue2 中的 date 和 methods 属性，直接把逻辑写在 setup 里就可以。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ref&lt;/code&gt; 函数的使用，要在 template 中使用 setup 中的变量，必须用ref包装一下，才能实现响应式，使用前需要引入&lt;code&gt;import { ref } from &amp;quot;vue&amp;quot;;&lt;/code&gt;取值需要用 xxx.value 的形式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;return&lt;/code&gt; 想要在模板中使用&lt;code&gt;setup&lt;/code&gt;中的数据，必须要&lt;code&gt;return&lt;/code&gt;出去才能用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;reactive和torefs&#34;&gt;reactive和toRefs&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;reactive&lt;/code&gt; 首先需要引入&lt;code&gt;import { reactive } from &amp;quot;vue&amp;quot;;&lt;/code&gt;&lt;br&gt;
+reactive可以把响应式数据以对象的形式包裹并&lt;code&gt;return&lt;/code&gt;，在模板中使用就需要对象名.变量名的形式来使用，这种方式可以简化&lt;code&gt;ref&lt;/code&gt;方式的代码，但是在模板中显示较为麻烦。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;toRefs&lt;/code&gt; 可以解决上述的问题，&lt;code&gt;toRefs&lt;/code&gt;可以把对象内的数据变为响应式数据。可以通过使用&lt;code&gt;toRefs&lt;/code&gt;包裹&lt;code&gt;reactive&lt;/code&gt;数据，然后在&lt;code&gt;return&lt;/code&gt;中使用展开运算符，来达到简化模板中使用的效果。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ref&lt;/code&gt;和&lt;code&gt;reactive&lt;/code&gt;这两个函数都可以把数据变成响应式数据。其中，&lt;code&gt;ref&lt;/code&gt;一般用来对简单数据类型进行包装，&lt;code&gt;reactive&lt;/code&gt;对引用数据类型进行包装。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;toRefs总结：先把&lt;code&gt;reactive&lt;/code&gt;包裹的响应式对象变成普通对象，再把普通对象的每一个属性变成响应式数据，也就是和使用&lt;code&gt;ref&lt;/code&gt;包裹的数据一样&lt;/p&gt;
+&lt;h1 id=&#34;vue3的生命周期和钩子函数&#34;&gt;vue3的生命周期和钩子函数&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;setup&lt;/code&gt;：取代vue2的 &lt;code&gt;beforeCreate&lt;/code&gt; 和 &lt;code&gt;created&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onBeforeMount&lt;/code&gt;：取代vue2的 &lt;code&gt;beforeMount&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onMounted&lt;/code&gt;：取代vue2的&lt;code&gt;mounted&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onBeforeUpdate&lt;/code&gt;：取代vue2的&lt;code&gt;beforeUpdate&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onUpdated&lt;/code&gt;：取代vue2的&lt;code&gt;updated&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onBeforeUnmount&lt;/code&gt;：取代vue2的&lt;code&gt;beforeDestroyed&lt;/code&gt;，在卸载绑定元素的父组件之前调用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onUnmounted&lt;/code&gt;：取代vue2的&lt;code&gt;destroyed&lt;/code&gt;，当指令与元素解除绑定且父组件已卸载时，只调用一次&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onActivated&lt;/code&gt;，&lt;code&gt;onDeactivated&lt;/code&gt;：取代vue2的&lt;code&gt;activated&lt;/code&gt;与&lt;code&gt;deactivated&lt;/code&gt;，通过&lt;code&gt;keep-alive&lt;/code&gt;缓存的组件被激活/停用时调用&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;onErrorCaptured&lt;/code&gt;：取代vue2的&lt;code&gt;errorCaptured&lt;/code&gt;，捕获后代组件异常时调用的钩子函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;使用&#34;&gt;使用&lt;/h2&gt;
+&lt;p&gt;vue中使用生命周期函数需要先&lt;code&gt;import&lt;/code&gt;引入&lt;/p&gt;
+&lt;p&gt;vue2的生命周期函数也可以使用，并不需要在&lt;code&gt;setup&lt;/code&gt;中使用&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;setup&lt;/code&gt;中定义的生命周期函数要比 vue2 写法的生命周期函数快一点，实际使用不建议混用，vue3的文档中明确指出，vue3使用新的生命周期函数&lt;/p&gt;
+&lt;p&gt;改名的原因根据尤大的说法是因为语义化&lt;/p&gt;
+&lt;h1 id=&#34;onrendertracked和onrendertriggered&#34;&gt;onRenderTracked和onRenderTriggered&lt;/h1&gt;
+&lt;p&gt;##onRenderTracked（状态跟踪）&lt;br&gt;
+它会跟踪页面上所有响应式变量和方法的状态，也就是我们用return返回去的值，他都会跟踪。只要页面有update的情况，他就会跟踪，然后生成一个event对象，我们通过event对象来查找程序的问题所在。&lt;/p&gt;
+&lt;h3 id=&#34;使用-2&#34;&gt;使用&lt;/h3&gt;
+&lt;p&gt;引入&lt;br&gt;
+&lt;code&gt;import { .... ,onRenderTracked,} from &amp;quot;vue&amp;quot;;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;code&gt;setup&lt;/code&gt;中使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;onRenderTracked((event) =&amp;gt; {
+  console.log(&amp;quot;状态跟踪组件-----------&amp;gt;&amp;quot;);
+  console.log(event);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;##onRenderTriggered（状态触发）&lt;br&gt;
+它与上面的不同，它会把变化的值的信息拿到，并且会详细展示哪个值发生了变化，新值是什么，旧值是什么。&lt;/p&gt;
+&lt;h3 id=&#34;使用-3&#34;&gt;使用&lt;/h3&gt;
+&lt;p&gt;引入&lt;br&gt;
+&lt;code&gt;import { .... ,onRenderTriggered,} from &amp;quot;vue&amp;quot;;&lt;/code&gt;&lt;br&gt;
+在&lt;code&gt;setup&lt;/code&gt;中使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;onRenderTriggered((event) =&amp;gt; {
+      console.log(event);
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;event 对象属性的详细介绍&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;key 哪里的变量发生了变化&lt;/li&gt;
+&lt;li&gt;newValue 更新后变量的值&lt;/li&gt;
+&lt;li&gt;oldValue 更新前变量的值&lt;/li&gt;
+&lt;li&gt;target 目前页面中的响应变量和函数&lt;/li&gt;
+&lt;/ul&gt;
+">vue3学习记录1</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/"" data-c="
+          &lt;h1 id=&#34;命名空间&#34;&gt;命名空间&lt;/h1&gt;
+&lt;h2 id=&#34;没有命名空间时的问题&#34;&gt;没有命名空间时的问题&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;// ts
+class Header {
+    constructor() {
+      const elem = document.createElement(&amp;quot;div&amp;quot;);
+      elem.innerText = &amp;quot;This is Header&amp;quot;;
+      document.body.appendChild(elem);
+    }
+}
+class Page {
+  constructor() {
+    new Header();
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// html
+&amp;lt;script&amp;gt;
+       Page()
+&amp;lt;/script&amp;gt;
+// 这种方式使用，Page和Header都是全局变量
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这种方式会生成多个全局变量，造成全局变量污染&lt;/p&gt;
+&lt;h2 id=&#34;使用命名空间&#34;&gt;使用命名空间&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;namespace Home {
+    class Header {
+        constructor() {
+        const elem = document.createElement(&amp;quot;div&amp;quot;);
+        elem.innerText = &amp;quot;This is Header&amp;quot;;
+        document.body.appendChild(elem);
+        }
+    }
+    class export Page {
+    constructor() {
+        new Header();
+    }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用命名空间的语法非常简单，就是&lt;code&gt;namespace Home&lt;/code&gt;这种形式使用，只要加个&lt;code&gt;namespace XXXX&lt;/code&gt;的关键字就可以了，最后再把需要暴露的变量通过&lt;code&gt;export&lt;/code&gt;暴露出去&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;script&amp;gt;
+        new Home.Page()
+&amp;lt;/script&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样就可以在页面中使用了&lt;/p&gt;
+&lt;h2 id=&#34;子命名空间&#34;&gt;子命名空间&lt;/h2&gt;
+&lt;p&gt;命名空间是可以嵌套的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;namespace Components {
+    // 命名空间内嵌套命名空间
+  export namespace SubComponents {
+      export class Test{}
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;ts使用parcel&#34;&gt;ts使用Parcel&lt;/h1&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;npm i parcel@next
+或
+yarn add --dev parcel@next
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;打包&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 修改 package.json 的配置项，使用 parcel 打包 src 下的 index 文件
+&amp;quot;scripts&amp;quot;: {
+    &amp;quot;test&amp;quot;: &amp;quot;parcel ./src/index.html&amp;quot;
+},
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1601957052531.png&#34; alt=&#34;打包后的结果&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+使用 parcel 会创建一个 dist 文件夹，打包后的内容都在其中，包括 map 文件，相比于 webpack 明显要快捷的多。&lt;/p&gt;
+&lt;h1 id=&#34;在ts中使用jquery&#34;&gt;在ts中使用jquery&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;$(function () {
+  alert(&amp;quot;jujuul&amp;quot;);
+});
+// vscode报错，找不到 $ 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;解决方法：&lt;br&gt;
+一、 安装jquery&lt;br&gt;
+&lt;code&gt;npm i @types/jquery&lt;/code&gt;&lt;br&gt;
+二、declare&lt;br&gt;
+&lt;code&gt;declare var $: any;&lt;/code&gt;&lt;br&gt;
+声明 $ 为any，简单粗暴&lt;/p&gt;
+&lt;h1 id=&#34;感谢&#34;&gt;感谢&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1qV41167VD?p=20&#34;&gt;TypeScript从入门到精通视频教程-2020年新版&lt;/a&gt;[技术胖]&lt;br&gt;
+&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;br&gt;
+&lt;a href=&#34;https://www.tslang.cn/index.html&#34;&gt;TypeScript中文文档&lt;/a&gt;&lt;/p&gt;
+">typescript学习记录5</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/"" data-c="
           &lt;h1 id=&#34;联合类型和类型守护&#34;&gt;联合类型和类型守护&lt;/h1&gt;
 &lt;h2 id=&#34;联合类型&#34;&gt;联合类型&lt;/h2&gt;
@@ -974,10 +1191,87 @@ console.log(Status.dabaojian);  // 3
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;类中的泛型&#34;&gt;类中的泛型&lt;/h2&gt;
+&lt;p&gt;泛型类看上去与泛型接口差不多。 泛型类使用（ &amp;lt;&amp;gt;）括起泛型类型，跟在类名后面。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class GenericNumber&amp;lt;T&amp;gt; {
+    zeroValue: T;
+    add: (x: T, y: T) =&amp;gt; T;
+}
+
+let myGenericNumber = new GenericNumber&amp;lt;number&amp;gt;();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function(x, y) { return x + y; };
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;GenericNumber类的使用是十分直观的，并且你可能已经注意到了，没有什么去限制它只能使用number类型。 也可以使用字符串或其它更复杂的类型。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let stringNumeric = new GenericNumber&amp;lt;string&amp;gt;();
+stringNumeric.zeroValue = &amp;quot;&amp;quot;;
+stringNumeric.add = function(x, y) { return x + y; };
+
+console.log(stringNumeric.add(stringNumeric.zeroValue, &amp;quot;test&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;泛型中的继承&#34;&gt;泛型中的继承&lt;/h2&gt;
+&lt;p&gt;定义一个接口&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;interface Girl {
+  name: string;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;有了接口后用extends关键字实现泛型继承，代码如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class SelectGirl&amp;lt;T extends Girl&amp;gt; {
+ ...
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这句代码的意思是泛型里必须有一个name属性，因为它继承了Girl接口。&lt;/p&gt;
+&lt;h2 id=&#34;泛型约束&#34;&gt;泛型约束&lt;/h2&gt;
+&lt;p&gt;在函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function loggingIdentity&amp;lt;T&amp;gt;(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+// index.ts(2,19): error TS2339: Property &#39;length&#39; does not exist on type &#39;T&#39;.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上例中，泛型 T 不一定包含属性 length，所以编译的时候报错了。&lt;/p&gt;
+&lt;p&gt;这时，我们可以对泛型进行约束，只允许这个函数传入那些包含 length 属性的变量。这就是泛型约束：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;interface Lengthwise {
+    length: number;
+}
+
+function loggingIdentity&amp;lt;T extends Lengthwise&amp;gt;(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上例中，我们使用了 extends 约束了泛型 T 必须符合接口 Lengthwise 的形状，也就是必须包含 length 属性。&lt;/p&gt;
+&lt;p&gt;此时如果调用 loggingIdentity 的时候，传入的 arg 不包含 length，那么在编译阶段就会报错了：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;interface Lengthwise {
+    length: number;
+}
+
+function loggingIdentity&amp;lt;T extends Lengthwise&amp;gt;(arg: T): T {
+    console.log(arg.length);
+    return arg;
+}
+
+loggingIdentity(7);
+
+// index.ts(10,17): error TS2345: Argument of type &#39;7&#39; is not assignable to parameter of type &#39;Lengthwise&#39;.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;多个类型参数之间也可以互相约束：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function copyFields&amp;lt;T extends U, U&amp;gt;(target: T, source: U): T {
+    for (let id in source) {
+        target[id] = (&amp;lt;T&amp;gt;source)[id];
+    }
+    return target;
+}
+
+let x = { a: 1, b: 2, c: 3, d: 4 };
+
+copyFields(x, { b: 10, d: 20 });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上例中，我们使用了两个类型参数，其中要求 T 继承 U，这样就保证了 U 上不会出现 T 中不存在的字段。&lt;/p&gt;
 &lt;h1 id=&#34;感谢&#34;&gt;感谢&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1qV41167VD?p=20&#34;&gt;TypeScript从入门到精通视频教程-2020年新版&lt;/a&gt;[技术胖]&lt;br&gt;
-&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;/p&gt;
+&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;br&gt;
+&lt;a href=&#34;https://www.tslang.cn/index.html&#34;&gt;TypeScript中文文档&lt;/a&gt;&lt;/p&gt;
 ">typescript学习记录4</a>
       </div>
       
@@ -1039,6 +1333,10 @@ export const name = &amp;quot;zx&amp;quot;;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;上面列出了一些常用的配置项，其余的可以去ts官方文档的配置项列表查看&lt;br&gt;
 &lt;a href=&#34;https://www.tslang.cn/docs/handbook/compiler-options.html&#34;&gt;配置项列表地址&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;感谢&#34;&gt;感谢&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1qV41167VD?p=20&#34;&gt;TypeScript从入门到精通视频教程-2020年新版&lt;/a&gt;[技术胖]&lt;br&gt;
+&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;br&gt;
+&lt;a href=&#34;https://www.tslang.cn/index.html&#34;&gt;TypeScript中文文档&lt;/a&gt;&lt;/p&gt;
 ">typescript学习记录3</a>
       </div>
       
@@ -1242,6 +1540,10 @@ class baseTeacher extends Girl {
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;方法可以不同，但是必须要有&lt;/p&gt;
+&lt;h1 id=&#34;感谢&#34;&gt;感谢&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1qV41167VD?p=20&#34;&gt;TypeScript从入门到精通视频教程-2020年新版&lt;/a&gt;[技术胖]&lt;br&gt;
+&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;br&gt;
+&lt;a href=&#34;https://www.tslang.cn/index.html&#34;&gt;TypeScript中文文档&lt;/a&gt;&lt;/p&gt;
 ">typescript学习记录2</a>
       </div>
       
@@ -1428,6 +1730,10 @@ interface Teacher extends Girl {
   teach(): string;
 }
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;感谢&#34;&gt;感谢&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1qV41167VD?p=20&#34;&gt;TypeScript从入门到精通视频教程-2020年新版&lt;/a&gt;[技术胖]&lt;br&gt;
+&lt;a href=&#34;https://ts.xcatliu.com/&#34;&gt;TypeScript 入门教程&lt;/a&gt;[xcatliu]&lt;br&gt;
+&lt;a href=&#34;https://www.tslang.cn/index.html&#34;&gt;TypeScript中文文档&lt;/a&gt;&lt;/p&gt;
 ">typescript学习记录1</a>
       </div>
       
