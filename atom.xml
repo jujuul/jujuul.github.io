@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-06T16:01:22.134Z</updated>
+    <updated>2020-10-07T10:51:23.390Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,34 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[图片懒加载]]></title>
+        <id>https://jujuul.github.io/post/tu-pian-lan-jia-zai/</id>
+        <link href="https://jujuul.github.io/post/tu-pian-lan-jia-zai/">
+        </link>
+        <updated>2020-10-07T04:10:45.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>一直都有听说懒加载，但是还没有实践过，学习webpack的过程中也接触到了懒加载，不过是针对js代码的，所以就想连同图片的一起也学习一下，所以有了这篇文章。</p>
+<h1 id="懒加载的实现">懒加载的实现</h1>
+<p>图片懒加载现在主要有三种方法，第一种是针对<code>img</code>的<code>src</code>，第二种是使用<code>IntersectionObserver</code>api，第三种是使用<code>lazyload</code>属性，后两种比较新，尤其是第三种，可能兼容性还存在问题。</p>
+<h2 id="通过img的src">通过img的src</h2>
+<p>这个方法是最为常用的</p>
+<h2 id="intersectionobserverapi">IntersectionObserverAPI</h2>
+<p>这个api的兼容性还可以<br>
+<img src="https://jujuul.github.io//post-images/1602045393330.png" alt="" loading="lazy"></p>
+<h2 id="lazyload">lazyload</h2>
+<p>这个属性的兼容性比较差<br>
+<img src="https://jujuul.github.io//post-images/1602045454859.png" alt="" loading="lazy"></p>
+<h1 id="后记">后记</h1>
+<p>后面的两个方法才出现没几年，<code>lazyload</code>甚至是去年才出现的，不得不感慨技术的进步，这几天在看张鑫旭的CSS世界，里面说最早网页就是用来显示文字的，连显示图片也是后面的事，所以最早网页的布局使用table，纯粹是方便显示文字，要等到2000年以后才开始广泛使用图片，而现在才过了20年，现在用网站看视频看直播已经是很正常的事了，中间经历了<code>flash</code>的兴衰，现在网页结合svg、canvas等技术，实现的效果早已不是之前所能比拟的了，让人不得不感慨技术进步之快。</p>
+<h1 id="感谢">感谢</h1>
+<p><a href="https://juejin.im/post/6844903688390049800#heading-0">图片懒加载</a><br>
+<a href="https://zhuanlan.zhihu.com/p/55311726">原生js实现图片懒加载（lazyLoad）</a><br>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver">Intersection Observer MDN</a><br>
+<a href="http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html">IntersectionObserver API 使用教程</a><br>
+<a href="https://github.com/ljianshu/Blog/issues/8">懒加载和预加载</a></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[vue3学习记录1]]></title>
         <id>https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/</id>
@@ -951,7 +979,7 @@ interface Teacher extends Girl {
         <content type="html"><![CDATA[<h1 id="hmr">HMR</h1>
 <h3 id="介绍">介绍</h3>
 <p>HMR:  hot module  replacement 热模块替换 / 模块热替换<br>
-开启方式：再devServer中设置hot: true,<br>
+开启方式：在devServer中设置hot: true,<br>
 作用： 一个模块发生变化，只会从新打包这一个模块（而不是打包所有）<br>
 极大提升构建速度<br>
 样式文件：可以使用html功能：因为style-loader内部实现了<br>
@@ -1159,6 +1187,135 @@ import(/* webpackChunkName:'test' */ &quot;./test.js&quot;)
 });
 </code></pre>
 <h1 id="懒加载和预加载">懒加载和预加载</h1>
+<pre><code>document.getElementById(&quot;btn&quot;).onclick = function () {
+  // 懒加载
+  import(/* webpackChunkName:'test'*/ &quot;./test&quot;).then(
+    ({ mul }) =&gt; {
+      console.log(4, 5);
+    }
+  );
+};
+</code></pre>
+<p>通过给dom绑定click事件来触发加载，通过<code>import(&quot;./xxx&quot;).then( //... )</code>的方式实现懒加载，可以加上<code>/* webpackChunkName:'test'*/</code>来规定输出的js文件名</p>
+<pre><code>import(/*webpackPrefetch:true */ &quot;./test&quot;).then(
+   // ...
+  );
+</code></pre>
+<p>可以通过在<code>import</code>中设置<code>/*webpackPrefetch:true */</code>来实现预加载</p>
+<h2 id="懒加载和预加载的区别">懒加载和预加载的区别：</h2>
+<p>预加载会在使用之前加载js文件，懒加载会在文件使用时才加载。</p>
+<p>这样看来预加载和正常加载没有区别，但其实是有的，正常加载可以认为是并行加载（同一时间加载多个文件）；预加载<code>prefetch</code>是等其他资源加载完毕，浏览器空闲了，再加载，这样就避免一开始不需要加载时也被加载，而懒加载的文件一旦较大，使用时会产生延迟，影响体验，所以可以使用预加载先进行加载，这样就能合理利用浏览器的空闲，也避免了使用时加载过慢的问题。预加载的问题在于兼容性较差，只能在pc端高版本浏览器中使用，而低版本浏览器和移动端不建议使用，所欲预加载要慎用。</p>
+<h1 id="pwa渐进式网络开发应用程序">PWA（渐进式网络开发应用程序）</h1>
+<p>PWA：渐进式网络开发应用程序（离线可访问）<br>
+workbox --&gt; workbox-webpack-plugin</p>
+<pre><code>// 在webpack.config.js中下载配置WorkboxWebpackPlugin插件
+new WorkboxWebpackPlugin.GenerateSW({
+      /* 
+        1. 帮助serviceworker快速启动
+        2. 删除旧的serviceworker
+
+        生成一个 serviceworker 配置文件
+      */
+      clientsClaim: true,
+      skipWaiting: true,
+})
+</code></pre>
+<pre><code>// 在入口文件index.js中通过if判断并注册serviceWorker
+
+// 注册servericeworker
+// 处理兼容性问题
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () =&gt; {
+    navigator.serviceWorker
+      .register('./service-worker.js')
+      .then(() =&gt; {
+        console.log('sw注册成功');
+      })
+      .catch(() =&gt; {
+        console.log('sw注册成功');
+      });
+  });
+}
+
+// 注意点
+1. eslint不认识window、navigator全局变量
+    解决：需要修改配置package.json中eslintConfig配置
+    &quot;env&quot;: {
+        &quot;browser&quot;: true // 支持浏览器端全局变量
+     }
+2. sw代码必须运行在服务器上
+</code></pre>
+<h1 id="多进程打包">多进程打包</h1>
+<p>优化打包速度</p>
+<h2 id="安装thread-loader">安装thread-loader</h2>
+<p><code>npm i thread-loader</code><br>
+一般用来优化<code>babel-loader</code></p>
+<pre><code>use: [
+    {
+        {
+            loader: &quot;thread-loader&quot;,
+            options: {
+                workers: 2, // 进程数为2
+            },
+        },
+        options: {
+            presets: [
+                [
+                    &quot;@babel/preset-env&quot;,
+                        {
+                            useBuiltIns: &quot;usage&quot;,
+                            corejs: { version: 3 },
+                            targets: {
+                            chrome: &quot;60&quot;,
+                            firefox: &quot;50&quot;,
+                        },
+                    },
+                ],
+            ],
+            cacheDirectory: true,
+        },
+    },
+],
+</code></pre>
+<p>开启多进程打包</p>
+<p>进程启动大概600ms，进程通信也有开销</p>
+<p>只有工作消耗时间比较长才需要多进程打包</p>
+<h1 id="externals">externals</h1>
+<p><code>externals</code>配置选项提供了「从输出的 bundle 中排除依赖」的方法。通俗来说就是，当你需要的包是通过cdn引入的，能通过配置<code>externals</code>来避免其被打包，从而能够使用cdn。<br>
+使用</p>
+<pre><code>// webpack.config.js
+externals: {
+    // 忽略库名 -- npm包名
+    jquery: &quot;jQuery&quot;,
+},
+</code></pre>
+<pre><code>// 在html中正常引入
+&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<h1 id="dll">dll</h1>
+<p>打包一次，避免将来重复打包，如果是通过<code>cdn</code>引入，建议使用<code>externals</code>，如果是整合打包第三方库，不使用<code>cdn</code>而是使用自己的服务器，推荐使用<code>dll</code></p>
+<h2 id="第一步">第一步</h2>
+<p>定义一个<code>webpack.dll.js</code>的文件，用于单独打包某些库（比如jquery），打包后生成一个<code>jquery.js</code>和<code>manifest.json</code>，其中<code>jquery.js</code>就是单独打包后的<code>jquery</code>，作用是将来构建时不用再重复打包，<code>manifest.json</code>提供和这些库之间的映射关系，用于告诉<code>webpack</code>哪些库不需要重复打包，会包含库的名字、路径。</p>
+<p><code>webpack.dll.js</code>文件构建好后，需<code>cmd</code>运行<code>webpack --config webpack.dll.js</code>来创建打包后文件</p>
+<h2 id="第二步">第二步</h2>
+<p>在<code>webpack.config.js</code>的<code>plugins</code>中定义<code>new webpack.DllReferencePlugin</code></p>
+<pre><code>// 告诉webpack哪些库不参与打包，同时使用时的名称也得改
+new webpack.DllReferencePlugin({
+    manifest: resolve(__dirname, &quot;dll/manifest.json&quot;),
+}),
+</code></pre>
+<p>通过这个插件引入运行<code>webpack.dll.js</code>后生成的<code>manifest.json</code>文件，确定不需要打包的库，</p>
+<h2 id="第三步">第三步</h2>
+<p>因为之前的操作没有将库文件输出出去，所以需要单独输出</p>
+<h3 id="使用插件">使用插件</h3>
+<pre><code>npm i add-asset-html-webpack-plugin
+</code></pre>
+<p>这个插件可以用来输出并在<code>html</code>文件中引入</p>
+<pre><code>// 将某个文件打包输出出去，并在html中自动引入该资源
+new AddAssetHtmlWebpackPlugin({
+    filepath: resolve(__dirname, &quot;dll/jquery.js&quot;),
+}),
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -1414,148 +1571,6 @@ module.exports = {
     },
 }),
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[作用域、作用域链和闭包]]></title>
-        <id>https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/</id>
-        <link href="https://jujuul.github.io/post/zuo-yong-yu-zuo-yong-yu-lian-he-bi-bao/">
-        </link>
-        <updated>2020-09-26T07:50:01.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
-<p>闭包是JS中很重要的一个概念，从一开始学习JS，就听到了闭包的说法，也看了不少的文章，以及MDN上的</p>
-<p>解释，JS高程和你不知道的JS中对于闭包的解释，但是总感觉还是差了点什么，所以打算自己总结一下。</p>
-<h2 id="作用域与作用域链">作用域与作用域链</h2>
-<p>在讲解闭包之前，作用域与作用域链就不得不讲，因为闭包的产生跟他们有莫大的关系。</p>
-<h3 id="作用域">作用域</h3>
-<p>作用域规定了代码运行时变量以及其他对象的可访问性，或者说，作用域决定了代码中变量和其他资源的可见性。<br>
-这里要注意，作用域与执行上下文是不同的概念，以前我也把他们搞混过。</p>
-<blockquote>
-<p>JavaScript代码的整个执行过程，分为两个阶段，代码编译阶段与代码执行阶段。编译阶段由编译器完成，将代码翻译成可执行代码，这个阶段作用域规则会确定。执行阶段由引擎完成，主要任务是执行可执行代码，执行上下文在这个阶段创建。<br>
-作用域又分为全局作用域与函数(局部)作用域，以及ES6新增的块级作用域。<br>
-<img src="https://jujuul.github.io//post-images/1601128145187.png" alt="" loading="lazy"><br>
-下面看几个例子：</p>
-</blockquote>
-<pre><code>// eg1
-function abc() {
-    console.log(a)
-}
-abc()  // ReferenceError: a is not defined
-</code></pre>
-<pre><code>// eg2
-var  a = 123;
-function abc() {
-    console.log(a)
-}
-abc()  // 123
-</code></pre>
-<p>所以，通过第一个例子，我们可以看出，作用域内没有定义的变量是无法访问到的，第二个例子则说明，全局定义的变量，在函数内部也可以访问到。我们将它做个变形。</p>
-<pre><code>// eg3
-function abc() {
-    var a = 123;
-}
-abc()
-console.log(a) // ReferenceError: a is not defined
-</code></pre>
-<p>可以看到如果全局没有定义变量，而只是函数内定义了，那么在全局是无法访问到的。为什么在全局定义的变量函数可以访问，而函数定义的变量全局不可访问呢？这是因为作用域链。</p>
-<h3 id="作用域链">作用域链</h3>
-<pre><code>a = 123;
-b = 456;
-
-function abc() {
-var a = 999;
-function bbb() {
-    console.log(b)
-}
-bbb()
-}
-abc()  // 456
-</code></pre>
-<p>上面的例子中，函数abc内部的bbb函数自身没有定义b变量，外层函数也没有定义，只有全局定义了，而bbb()执行的结果也是输出了全局的b，这样如果自身没有就访问上层作用域，再没有就继续向上，直到找到<br>
-或是全局也找不到，形成的一层一层的关系，就是作用域链。</p>
-<p><strong>作用域链，是由当前环境与上层环境的一系列变量对象组成，它保证了当前执行环境对符合访问权限的变量和函数的有序访问。</strong></p>
-<p>我个人是把它理解为上下堆叠的包含关系的，不过我看有位大佬是认为是链表形式的，这里贴一下他的代码和示意图</p>
-<pre><code>var a = 20;
-function test() {
-    var b = a + 10;
-    function innerTest() {
-        var c = 10;
-        return b + c;
-    }
-    return innerTest();
-}
-test();
-</code></pre>
-<p>在上面的例子中，全局，函数test，函数innerTest的执行上下文先后创建。我们设定他们的变量对象分别为VO(global)，VO(test), VO(innerTest)。而innerTest的作用域链，则同时包含了这三个变量对象，所以innerTest的执行上下文可如下表示。</p>
-<pre><code>innerTestEC = {
-    VO: {...},  // 变量对象
-    scopeChain: [VO(innerTest), VO(test), VO(global)], // 作用域链
-}
-</code></pre>
-<p>我们可以直接用一个数组来表示作用域链，数组的第一项scopeChain[0]为作用域链的最前端，而数组的最后一项，为作用域链的最末端，所有的最末端都为全局变量对象。</p>
-<p>很多人会误解为当前作用域与上层作用域为包含关系，但其实并不是。以最前端为起点，最末端为终点的单方向通道我认为是更加贴切的形容。如图。<br>
-<img src="https://jujuul.github.io//post-images/1601128541903.png" alt="" loading="lazy"></p>
-<h2 id="闭包">闭包</h2>
-<p>接下来就是重头戏闭包。</p>
-<h3 id="什么是闭包">什么是闭包？</h3>
-<p><strong>当函数可以记住并访问所在的词法作用域，即使函数是在当前词法作用域之外执行，这就产生了闭包。</strong>----《你不知道的Javascript上卷》<br>
-我个人对于闭包的理解是，闭包是自身作用域与其可访问作用域的集合。网上一般的说法是闭包就是有权访问另外一个函数作用域中的变量的函数。还有个我看过的最容易理解的说法</p>
-<blockquote>
-<p>通俗地讲就是别人家有某个东西，你想拿到但是因为权限不够（不打死你才怪），但是你可以跟家里的孩子套近乎，通过他拿到！<br>
-这个家就是局部作用域，外部无法访问内部变量，孩子是返回对象，对家里的东西有访问权限，借助返回对象间接访问内部变量！<br>
-当B执行时，如果访问了A中变量对象中的值，那么闭包就会产生。</p>
-</blockquote>
-<p>在大多数理解中，包括许多著名的书籍，文章里都以函数B的名字代指这里生成的闭包。而在chrome中，则以执行上下文A的函数名代指闭包。</p>
-<pre><code>// demo01
-function foo() {
-    var a = 20;
-    var b = 30;
-
-    function bar() {
-        return a + b;
-    }
-
-    return bar;
-}
-
-var bar = foo();
-bar();
-</code></pre>
-<p>上面的例子，首先有执行上下文foo，在foo中定义了函数bar，而通过对外返回bar的方式让bar得以执行。当bar执行时，访问了foo内部的变量a，b。因此这个时候闭包产生。</p>
-<p>我们知道JS拥有垃圾回收机制，而函数的执行上下文在执行完毕后会被回收，闭包的存在，打破了这一过程。</p>
-<pre><code>var fn = null;
-function foo() {
-    var a = 2;
-    function innnerFoo() {
-        console.log(a);
-    }
-    fn = innnerFoo; // 将 innnerFoo的引用，赋值给全局变量中的fn
-}
-
-function bar() {
-    fn(); // 此处的保留的innerFoo的引用
-}
-
-foo();
-bar(); // 2
-</code></pre>
-<p>在上面的例子中，foo()执行完毕之后，按照常理，其执行环境生命周期会结束，所占内存被垃圾收集器释放。但是通过fn = innerFoo，函数innerFoo的引用被保留了下来，复制给了全局变量fn。这个行为，导致了foo的变量对象，也被保留了下来。于是，函数fn在函数bar内部执行时，依然可以访问这个被保留下来的变量对象。所以此刻仍然能够访问到变量a的值。</p>
-<p>我们可以在chrome浏览器的开发者工具中查看这段代码运行时产生的函数调用栈与作用域链的生成情况。如下图。<br>
-<img src="https://jujuul.github.io//post-images/1601129287587.png" alt="" loading="lazy"><br>
-在上面的图中，红色箭头所指的正是闭包。其中Call Stack为当前的函数调用栈，Scope为当前正在被执行的函数的作用域链，Local为当前的局部变量。</p>
-<p><strong>所以，通过闭包，我们可以在其他的执行上下文中，访问到函数的内部变量。</strong></p>
-<h3 id="闭包的应用场景">闭包的应用场景</h3>
-<ul>
-<li>柯里化<br>
-柯里化我还没有深入了解，不过根据大致的介绍，柯里化是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。好像和扁平化差不多？等以后有机会深入了解再补充。</li>
-<li>模块<br>
-我之前的文章有提到过，大致介绍了从最早的模块化截至目前的ES6模块化，<a href="https://jujuul.github.io/post/qian-duan-mo-kuai-hua-jian-jie/">前端模块化简介</a></li>
-</ul>
-<h2 id="后记">后记</h2>
-<p>想要讲明白闭包，就必须要连同作用域与作用域链一起讲，其实除了这些，还需要知道像是执行上下文、垃圾回收机制等知识，就像是之前看到大佬讲述从输入URL到页面加载的过程一样，他能借着这个讲述前端运行的大部分规则，甚至360的一位大佬，更是从硬件开始，一直讲到输出到屏幕的全过程，涵盖了计算机的很多知识。要说这次写作给我的感受，就是学习知识就是不断地把知识串连起来的过程，一点点把学到的零碎的知识拼到一起，就掌握了它。</p>
-<h2 id="参考">参考</h2>
-<p><a href="https://yangbo5207.github.io/wutongluo/ji-chu-jin-jie-xi-lie/si-3001-zuo-yong-yu-lian-yu-bi-bao.html">作用域链与闭包</a><br>
-<a href="https://github.com/ljianshu/Blog/issues/6">深入浅出Javascript闭包</a></p>
 ]]></content>
     </entry>
 </feed>
