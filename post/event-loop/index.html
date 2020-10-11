@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Event loop | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602398750452">
+<link rel="shortcut icon" href="/favicon.ico?v=1602433138557">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -154,7 +154,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">78</span>
+        <span class="site-item-stat-count">80</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1033,6 +1033,214 @@ ps: 其实网上的很多文章都是把浏览器和nodejs放在一起讲的，�
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-2/"" data-c="
+          &lt;h1 id=&#34;react目录结构&#34;&gt;React目录结构&lt;/h1&gt;
+&lt;p&gt;README.md：关于项目的说明文件。&lt;/p&gt;
+&lt;p&gt;package.json：node的包文件，关于项目的一些介绍及一些项目的指令等。&lt;/p&gt;
+&lt;p&gt;public 文件夹下：&lt;/p&gt;
+&lt;p&gt;favicon.ico：项目图标，可以自己制作一个ico图标，取名为favicon.ico，覆盖该文件。&lt;/p&gt;
+&lt;p&gt;index.html：项目的首页。&lt;/p&gt;
+&lt;p&gt;manifest.json：PWA相关的。&lt;/p&gt;
+&lt;p&gt;src目录下：&lt;/p&gt;
+&lt;p&gt;serviceWorker.js ：PWA相关的。&lt;/p&gt;
+&lt;p&gt;App.test.js：项目测试文件。&lt;/p&gt;
+&lt;p&gt;index.js：核心文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 引入react、react-dom
+import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+// 引入css样式
+import &#39;./index.css&#39;;
+import App from &#39;./App&#39;;
+import * as serviceWorker from &#39;./serviceWorker&#39;;
+
+ReactDOM.render(
+    // JSX语法
+  &amp;lt;React.StrictMode&amp;gt;
+    &amp;lt;App /&amp;gt;
+  &amp;lt;/React.StrictMode&amp;gt;,
+  document.getElementById(&#39;root&#39;)
+);
+
+// 用于PWA
+serviceWorker.unregister();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;app.js&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 引入react
+import React from &#39;react&#39;;
+import logo from &#39;./logo.svg&#39;;
+// 引入css样式
+import &#39;./App.css&#39;;
+
+// 函数式组件
+function App() {
+  return (
+    &amp;lt;div className=&amp;quot;App&amp;quot;&amp;gt;
+      &amp;lt;header className=&amp;quot;App-header&amp;quot;&amp;gt;
+        &amp;lt;img src={logo} className=&amp;quot;App-logo&amp;quot; alt=&amp;quot;logo&amp;quot; /&amp;gt;
+        &amp;lt;p&amp;gt;
+          Edit &amp;lt;code&amp;gt;src/App.js&amp;lt;/code&amp;gt; and save to reload.
+        &amp;lt;/p&amp;gt;
+        &amp;lt;a
+          className=&amp;quot;App-link&amp;quot;
+          href=&amp;quot;https://reactjs.org&amp;quot;
+          target=&amp;quot;_blank&amp;quot;
+          rel=&amp;quot;noopener noreferrer&amp;quot;
+        &amp;gt;
+          Learn React
+        &amp;lt;/a&amp;gt;
+      &amp;lt;/header&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+// 最后导出组件，在index.js中使用
+export default App;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;setupTests.js：测试相关的文件&lt;/p&gt;
+&lt;h1 id=&#34;react元素渲染&#34;&gt;React元素渲染&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;let h1 = &amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用JSX的写法，可以创建JS对象&lt;/p&gt;
+&lt;p&gt;注意：JSX元素对象，或者组件对象，必须只有一个根节点。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let h1 = &amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;&amp;lt;span&amp;gt;这是副标题&amp;lt;/span&amp;gt;; // 报错，JSX表达式必须具有一个父元素。
+let h1 = (&amp;lt;h1&amp;gt;hello world&amp;lt;span&amp;gt;这是副标题&amp;lt;/span&amp;gt;&amp;lt;/h1&amp;gt;); // 不会报错
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;function clock() {
+  let time = new Date().toLocaleTimeString();
+  let element = (
+      // 写页面结构
+    &amp;lt;div&amp;gt;
+      &amp;lt;h1&amp;gt;现在的时间是{time}&amp;lt;/h1&amp;gt;
+      &amp;lt;h2&amp;gt;这是副标题&amp;lt;/h2&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+  let root = document.querySelector(&amp;quot;#root&amp;quot;);
+  // 挂载到root上渲染
+  ReactDOM.render(element, root);
+}
+// 每隔1S执行一次
+setInterval(() =&amp;gt; {
+  clock();
+}, 1000);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这段代码初写下来有点懵，主要是创建页面结构的部分，JSX语法确实不同，竟然可以在函数中写结构，感觉跟vue3的语法有类似之处，vue3的组合api是把数据和方法能够以类似的方式书写，而react是把页面结构和数据结合起来书写，我听说vue这点是借鉴的react。&lt;/p&gt;
+&lt;h2 id=&#34;react函数式组件&#34;&gt;React函数式组件&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;function Clock(props) {
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;h1&amp;gt;现在的时间是{props.date.toLocaleTimeString()}&amp;lt;/h1&amp;gt;
+      &amp;lt;h2&amp;gt;这是函数式组件开发&amp;lt;/h2&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 组件传值
+function run() {
+  ReactDOM.render(&amp;lt;Clock date={new Date()} /&amp;gt;, document.querySelector(&amp;quot;#root&amp;quot;));
+}
+
+setInterval(run, 1000);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;react-jsx&#34;&gt;React JSX&lt;/h1&gt;
+&lt;p&gt;优点：&lt;br&gt;
+1、JSX执行更快，编译为JavaScript代码时进行了优化&lt;br&gt;
+2、类型更安全，编译过程如果出错就不能编译，及时发现错误&lt;br&gt;
+3、JSX编写模板更加简单快速&lt;/p&gt;
+&lt;p&gt;注意：&lt;br&gt;
+1、JSX必须要有根节点。&lt;br&gt;
+2、正常的普通HTML元素要小写。如果是大写，默认认为是组件。&lt;/p&gt;
+&lt;p&gt;JSX表达式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 可以使用变量
+let time = new Date().toLocaleTimeString();
+let str = &amp;quot;当前时间是:&amp;quot;;
+let element = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;
+    &amp;lt;h2&amp;gt;{str + time}&amp;lt;/h2&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 可以使用三目运算符
+let man = &amp;quot;eat&amp;quot;;
+let element2 = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1&amp;gt;今天是否吃饭&amp;lt;/h1&amp;gt;
+    &amp;lt;h2&amp;gt;{man == &amp;quot;eat&amp;quot; ? &amp;quot;go&amp;quot; : &amp;quot;down&amp;quot;}&amp;lt;/h2&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 可以在三元中使用HTML
+let man = &amp;quot;eat&amp;quot;;
+let element2 = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1&amp;gt;今天是否吃饭&amp;lt;/h1&amp;gt;
+    &amp;lt;h2&amp;gt;{man == &amp;quot;eat&amp;quot; ? &amp;lt;button&amp;gt;go&amp;lt;/button&amp;gt; : &amp;quot;down&amp;quot;}&amp;lt;/h2&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 可以在三元中使用JSX语法
+let element4 = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;span&amp;gt;横着躺&amp;lt;/span&amp;gt;
+    &amp;lt;span&amp;gt;竖着躺&amp;lt;/span&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+let element3 = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1&amp;gt;今天是否吃饭&amp;lt;/h1&amp;gt;
+    &amp;lt;h2&amp;gt;{man == &amp;quot;eat&amp;quot; ? &amp;lt;button&amp;gt;go&amp;lt;/button&amp;gt; : element4}&amp;lt;/h2&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 带有类名的标签
+let color = &#39;bgRed&#39;
+let element5 = (
+  &amp;lt;div className={color}&amp;gt;
+    红色背景颜色
+  &amp;lt;/div&amp;gt;
+)
+
+// css
+.bgRed {
+  background-color: red;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// JSX中使用图片
+let logo =
+  &amp;quot;https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3942751454,1089199356&amp;amp;fm=26&amp;amp;gp=0.jpg&amp;quot;;
+let element5 = (
+  &amp;lt;div className={color}&amp;gt;
+    &amp;lt;img src={logo} /&amp;gt;
+    红色背景颜色
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;jsx总结&#34;&gt;JSX总结&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;由HTML元素组成&lt;/li&gt;
+&lt;li&gt;插入变量使用&lt;code&gt;{}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{}&lt;/code&gt;中间可以使用表达式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{}&lt;/code&gt;中间表达式可以使用JSX对象&lt;/li&gt;
+&lt;li&gt;属性和HTML内容一样都是用&lt;code&gt;{}&lt;/code&gt;来插入内容&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;jsx-style-样式&#34;&gt;JSX STYLE 样式&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;// 定义样式
+let exampleStyle = {
+  background: &amp;quot;skyBlue&amp;quot;,
+  // 使用大驼峰语法
+  borderBottom: &amp;quot;1px solid red&amp;quot;,
+};
+
+// 通过{}使用样式
+let element = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1 style={exampleStyle}&amp;gt;hello world&amp;lt;/h1&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+&lt;/code&gt;&lt;/pre&gt;
+">React学习记录2</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/tu-pian-lan-jia-zai/"" data-c="

@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>每天一个名词解释—Typescript | Mark</title>
+<title>React学习记录2 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1602433138557">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="每天一个名词解释—Typescript" />
+  <meta name="description" content="React学习记录2" />
   <meta name="keywords" content="" />
 </head>
 
@@ -183,14 +183,18 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#react%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84">React目录结构</a></li>
+<li><a href="#react%E5%85%83%E7%B4%A0%E6%B8%B2%E6%9F%93">React元素渲染</a>
 <ul>
-<li><a href="#%E5%AE%98%E7%BD%91%E4%BB%8B%E7%BB%8D">官网介绍</a></li>
-<li><a href="#%E4%BB%96%E4%BA%BA%E6%80%BB%E7%BB%93">他人总结</a></li>
-<li><a href="#%E4%BC%98%E7%82%B9">优点</a></li>
-<li><a href="#%E7%BC%BA%E7%82%B9">缺点</a></li>
+<li><a href="#react%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BB%84%E4%BB%B6">React函数式组件</a></li>
 </ul>
 </li>
+<li><a href="#react-jsx">React JSX</a>
+<ul>
+<li><a href="#jsx%E6%80%BB%E7%BB%93">JSX总结</a></li>
+</ul>
+</li>
+<li><a href="#jsx-style-%E6%A0%B7%E5%BC%8F">JSX STYLE 样式</a></li>
 </ul>
 
   </div>
@@ -456,8 +460,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/">
-      每天一个名词解释—Typescript
+    <a class="post-title-link" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-2/">
+      React学习记录2
     </a>
   </h1>
   <div class="post-meta">
@@ -465,42 +469,226 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-17 21:49:02">2020-08-17</span>
+      <span class="publish-time" data-t="2020-10-11 16:49:53">2020-10-11</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>6<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>445<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>1158<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <h2 id="官网介绍">官网介绍</h2>
-<p>TypeScript 是 JavaScript 的类型的超集，它可以编译成纯 JavaScript。编译出来的 JavaScript 可以运行在任何浏览器上。TypeScript 编译工具可以运行在任何服务器和任何系统上。TypeScript 是开源的。</p>
-<h2 id="他人总结">他人总结</h2>
-<p>typescript是由微软开发的一个javascript超集，本质是向javascript这门弱类型动态语言添加了静态类型和面向对象。作者是安德斯-海尔斯伯格，C#之父。从发布至今，typescript一直倍受关注，star数直线上升，并且被越来越多的个人和组织认可，首先是默认使用ts的angular系列框架，vue在2.2开始支持ts，2.5版本以后全面支持，包括vux,vue-router，在vue-cli3.0脚手架当中，ts被加入到默认选项当中。react后续也开始支持ts，包括增加jsx式的模板引擎tsx。后续更多的开源库也开始支持，包括element-ui、iView、AntD。</p>
-<h2 id="优点">优点</h2>
-<ul>
-<li>提高代码质量，降低bug率，隐式类型转换带来大量不可预知的类型错误</li>
-<li>静态类型检测，减少编译阶段引起的错误</li>
-<li>模块化，es6已支持</li>
-<li>让代码更加清晰易读</li>
-<li>语法糖 ()=&gt;，接口，枚举，泛型，方法重载</li>
-</ul>
-<h2 id="缺点">缺点</h2>
-<ul>
-<li>有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型（Enums）等前端工程师可能不是很熟悉的概念</li>
-<li>短期可能会增加一些开发成本，毕竟要多写一些类型的定义，不过对于一个需要长期维护的项目，TypeScript 能够减少其维护成本</li>
-<li>集成到构建流程需要一些工作量</li>
-<li>可能和一些库结合的不是很完美</li>
-</ul>
+              <h1 id="react目录结构">React目录结构</h1>
+<p>README.md：关于项目的说明文件。</p>
+<p>package.json：node的包文件，关于项目的一些介绍及一些项目的指令等。</p>
+<p>public 文件夹下：</p>
+<p>favicon.ico：项目图标，可以自己制作一个ico图标，取名为favicon.ico，覆盖该文件。</p>
+<p>index.html：项目的首页。</p>
+<p>manifest.json：PWA相关的。</p>
+<p>src目录下：</p>
+<p>serviceWorker.js ：PWA相关的。</p>
+<p>App.test.js：项目测试文件。</p>
+<p>index.js：核心文件</p>
+<pre><code>// 引入react、react-dom
+import React from 'react';
+import ReactDOM from 'react-dom';
+// 引入css样式
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+    // JSX语法
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;,
+  document.getElementById('root')
+);
+
+// 用于PWA
+serviceWorker.unregister();
+</code></pre>
+<p>app.js</p>
+<pre><code>// 引入react
+import React from 'react';
+import logo from './logo.svg';
+// 引入css样式
+import './App.css';
+
+// 函数式组件
+function App() {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;header className=&quot;App-header&quot;&gt;
+        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
+        &lt;p&gt;
+          Edit &lt;code&gt;src/App.js&lt;/code&gt; and save to reload.
+        &lt;/p&gt;
+        &lt;a
+          className=&quot;App-link&quot;
+          href=&quot;https://reactjs.org&quot;
+          target=&quot;_blank&quot;
+          rel=&quot;noopener noreferrer&quot;
+        &gt;
+          Learn React
+        &lt;/a&gt;
+      &lt;/header&gt;
+    &lt;/div&gt;
+  );
+}
+// 最后导出组件，在index.js中使用
+export default App;
+</code></pre>
+<p>setupTests.js：测试相关的文件</p>
+<h1 id="react元素渲染">React元素渲染</h1>
+<pre><code>let h1 = &lt;h1&gt;hello world&lt;/h1&gt;;
+</code></pre>
+<p>使用JSX的写法，可以创建JS对象</p>
+<p>注意：JSX元素对象，或者组件对象，必须只有一个根节点。</p>
+<pre><code>let h1 = &lt;h1&gt;hello world&lt;/h1&gt;&lt;span&gt;这是副标题&lt;/span&gt;; // 报错，JSX表达式必须具有一个父元素。
+let h1 = (&lt;h1&gt;hello world&lt;span&gt;这是副标题&lt;/span&gt;&lt;/h1&gt;); // 不会报错
+</code></pre>
+<pre><code>function clock() {
+  let time = new Date().toLocaleTimeString();
+  let element = (
+      // 写页面结构
+    &lt;div&gt;
+      &lt;h1&gt;现在的时间是{time}&lt;/h1&gt;
+      &lt;h2&gt;这是副标题&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+  let root = document.querySelector(&quot;#root&quot;);
+  // 挂载到root上渲染
+  ReactDOM.render(element, root);
+}
+// 每隔1S执行一次
+setInterval(() =&gt; {
+  clock();
+}, 1000);
+</code></pre>
+<p>这段代码初写下来有点懵，主要是创建页面结构的部分，JSX语法确实不同，竟然可以在函数中写结构，感觉跟vue3的语法有类似之处，vue3的组合api是把数据和方法能够以类似的方式书写，而react是把页面结构和数据结合起来书写，我听说vue这点是借鉴的react。</p>
+<h2 id="react函数式组件">React函数式组件</h2>
+<pre><code>function Clock(props) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;现在的时间是{props.date.toLocaleTimeString()}&lt;/h1&gt;
+      &lt;h2&gt;这是函数式组件开发&lt;/h2&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<pre><code>// 组件传值
+function run() {
+  ReactDOM.render(&lt;Clock date={new Date()} /&gt;, document.querySelector(&quot;#root&quot;));
+}
+
+setInterval(run, 1000);
+</code></pre>
+<h1 id="react-jsx">React JSX</h1>
+<p>优点：<br>
+1、JSX执行更快，编译为JavaScript代码时进行了优化<br>
+2、类型更安全，编译过程如果出错就不能编译，及时发现错误<br>
+3、JSX编写模板更加简单快速</p>
+<p>注意：<br>
+1、JSX必须要有根节点。<br>
+2、正常的普通HTML元素要小写。如果是大写，默认认为是组件。</p>
+<p>JSX表达式</p>
+<pre><code>// 可以使用变量
+let time = new Date().toLocaleTimeString();
+let str = &quot;当前时间是:&quot;;
+let element = (
+  &lt;div&gt;
+    &lt;h1&gt;hello world&lt;/h1&gt;
+    &lt;h2&gt;{str + time}&lt;/h2&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+<pre><code>// 可以使用三目运算符
+let man = &quot;eat&quot;;
+let element2 = (
+  &lt;div&gt;
+    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
+    &lt;h2&gt;{man == &quot;eat&quot; ? &quot;go&quot; : &quot;down&quot;}&lt;/h2&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+<pre><code>// 可以在三元中使用HTML
+let man = &quot;eat&quot;;
+let element2 = (
+  &lt;div&gt;
+    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
+    &lt;h2&gt;{man == &quot;eat&quot; ? &lt;button&gt;go&lt;/button&gt; : &quot;down&quot;}&lt;/h2&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+<pre><code>// 可以在三元中使用JSX语法
+let element4 = (
+  &lt;div&gt;
+    &lt;span&gt;横着躺&lt;/span&gt;
+    &lt;span&gt;竖着躺&lt;/span&gt;
+  &lt;/div&gt;
+);
+let element3 = (
+  &lt;div&gt;
+    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
+    &lt;h2&gt;{man == &quot;eat&quot; ? &lt;button&gt;go&lt;/button&gt; : element4}&lt;/h2&gt;
+  &lt;/div&gt;
+);
+</code></pre>
+<pre><code>// 带有类名的标签
+let color = 'bgRed'
+let element5 = (
+  &lt;div className={color}&gt;
+    红色背景颜色
+  &lt;/div&gt;
+)
+
+// css
+.bgRed {
+  background-color: red;
+}
+</code></pre>
+<pre><code>// JSX中使用图片
+let logo =
+  &quot;https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3942751454,1089199356&amp;fm=26&amp;gp=0.jpg&quot;;
+let element5 = (
+  &lt;div className={color}&gt;
+    &lt;img src={logo} /&gt;
+    红色背景颜色
+  &lt;/div&gt;
+);
+</code></pre>
+<h2 id="jsx总结">JSX总结</h2>
+<ol>
+<li>由HTML元素组成</li>
+<li>插入变量使用<code>{}</code></li>
+<li><code>{}</code>中间可以使用表达式</li>
+<li><code>{}</code>中间表达式可以使用JSX对象</li>
+<li>属性和HTML内容一样都是用<code>{}</code>来插入内容</li>
+</ol>
+<h1 id="jsx-style-样式">JSX STYLE 样式</h1>
+<pre><code>// 定义样式
+let exampleStyle = {
+  background: &quot;skyBlue&quot;,
+  // 使用大驼峰语法
+  borderBottom: &quot;1px solid red&quot;,
+};
+
+// 通过{}使用样式
+let element = (
+  &lt;div&gt;
+    &lt;h1 style={exampleStyle}&gt;hello world&lt;/h1&gt;
+  &lt;/div&gt;
+);
+</code></pre>
 
             </div>
             
@@ -513,7 +701,7 @@
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/" title="每天一个名词解释—Typescript">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-typescript/</a>
+      <a href="https://jujuul.github.io/post/react-xue-xi-ji-lu-2/" title="React学习记录2">https://jujuul.github.io/post/react-xue-xi-ji-lu-2/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -526,15 +714,11 @@
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="每天一个名词解释—单页应用" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">每天一个名词解释—单页应用</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="每天一个名词解释—单页应用" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-dan-ye-ying-yong/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="每天一个名词解释—可视化" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">每天一个名词解释—可视化</a>
-        <a class="nav-mobile-next" title="每天一个名词解释—可视化" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-ke-shi-hua/">下一篇</a>
+        <a class="nav-pc-next" title="图片懒加载" href="https://jujuul.github.io/post/tu-pian-lan-jia-zai/">图片懒加载</a>
+        <a class="nav-mobile-next" title="图片懒加载" href="https://jujuul.github.io/post/tu-pian-lan-jia-zai/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
