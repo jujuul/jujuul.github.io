@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>typescript学习记录3 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602067761959">
+<link rel="shortcut icon" href="/favicon.ico?v=1602398634440">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -1064,10 +1064,150 @@ export const name = &quot;zx&quot;;
 &lt;p&gt;图片懒加载现在主要有三种方法，第一种是针对&lt;code&gt;img&lt;/code&gt;的&lt;code&gt;src&lt;/code&gt;，第二种是使用&lt;code&gt;IntersectionObserver&lt;/code&gt;api，第三种是使用&lt;code&gt;lazyload&lt;/code&gt;属性，后两种比较新，尤其是第三种，可能兼容性还存在问题。&lt;/p&gt;
 &lt;h2 id=&#34;通过img的src&#34;&gt;通过img的src&lt;/h2&gt;
 &lt;p&gt;这个方法是最为常用的&lt;/p&gt;
+&lt;h3 id=&#34;第一步&#34;&gt;第一步：&lt;/h3&gt;
+&lt;p&gt;不设置需要懒加载的&lt;code&gt;img&lt;/code&gt;标签的&lt;code&gt;src&lt;/code&gt;属性,然后自定义一个属性，属性值为要加载的图片，并且给这个标签设置一个类名，用来标记它是需要懒加载的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// html
+&amp;lt;img class=&amp;quot;lazy-image&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// css
+.lazy-image {
+    // 可以给该类设置一个loading图片作为未加载前的过渡
+    background: url(&#39;./loading.jpg&#39;) no-repeat center;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;第二步&#34;&gt;第二步：&lt;/h3&gt;
+&lt;p&gt;页面加载完后，我们需要获取所有需要懒加载的图片的元素集合，判断是否在可视区域，如果是在可视区域的话，设置元素的src属性值为真正图片的地址。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;inViewShow() {     
+    let imageElements = Array.prototype.slice.call(document.querySelectorAll(&#39;.lazy-image&#39;))    
+    let len = imageElements.length     
+    for(let i = 0; i &amp;lt; len; i++) {         
+        let imageElement = imageElements[i]        
+        const rect = imageElement.getBoundingClientRect() // 出现在视野的时候加载图片         
+        if(rect.top &amp;lt; document.documentElement.clientHeight) {             
+            imageElement.src = imageElement.dataset.src // 移除掉已经显示的             
+            imageElements.splice(i, 1)             
+            len--             
+            i--         
+        }     
+    } 
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里判断是否出现在可视区域内，是通过获取元素的&lt;code&gt;getBoundingClientRect&lt;/code&gt;属性的&lt;code&gt;top&lt;/code&gt;值和页面的&lt;code&gt;clientHeight&lt;/code&gt;进行对比，如果&lt;code&gt;top&lt;/code&gt;值小于&lt;code&gt;clientHeight&lt;/code&gt;，则说明元素出现在可视区域了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;clientHeight：这个属性是只读属性，对于没有定义CSS或者内联布局盒子的元素为0，否则，它是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;getBoundingClientRect()：方法返回元素的大小及其相对于视口的位置。如果是标准盒子模型，元素的尺寸等于width/height + padding + border-width的总和。如果box-sizing: border-box，元素的的尺寸等于 width/height。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三步&#34;&gt;第三步：&lt;/h3&gt;
+&lt;p&gt;当用户滚动窗口的时候，遍历所有需要懒加载的元素，通过每个元素的BoundingClientRect属性来判断元素是否出现在可视区域内，判断方法同第二步一样，可以加个防抖做优化。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function throttle(fn, delay) {
+    var begin = 0;
+    return function () {
+        var cur = new Date().getTime();
+        if (cur - begin &amp;gt; delay) {
+            fn.apply(this, arguments);
+            begin = cur;
+        }
+    }
+}
+document.addEventListener(&#39;scroll&#39;, throttle(inViewShow, 100), false)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;intersectionobserverapi&#34;&gt;IntersectionObserverAPI&lt;/h2&gt;
+&lt;p&gt;第一种方法算然很好，但是因为需要监听&lt;code&gt;scroll&lt;/code&gt;事件，计算量很大，影响性能，所以推出了&lt;br&gt;
+&lt;code&gt;IntersectionObserver&lt;/code&gt;API，可以自动&amp;quot;观察&amp;quot;元素是否可见，Chrome 51+ 已经支持。由于可见（visible）的本质是，目标元素与视口产生一个交叉区，所以这个 API 叫做&amp;quot;交叉观察器&amp;quot;。&lt;/p&gt;
 &lt;p&gt;这个api的兼容性还可以&lt;br&gt;
 &lt;img src=&#34;https://jujuul.github.io//post-images/1602045393330.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;一-api&#34;&gt;一、API&lt;/h3&gt;
+&lt;p&gt;它的用法非常简单&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var io = new IntersectionObserver(callback, option);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面代码中，IntersectionObserver是浏览器原生提供的构造函数，接受两个参数：callback是可见性变化时的回调函数，option是配置对象（该参数可选）。&lt;/p&gt;
+&lt;p&gt;构造函数的返回值是一个观察器实例。实例的observe方法可以指定观察哪个 DOM 节点。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 开始观察
+io.observe(document.getElementById(&#39;example&#39;));
+
+// 停止观察
+io.unobserve(element);
+
+// 关闭观察器
+io.disconnect();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面代码中，observe的参数是一个 DOM 节点对象。如果要观察多个节点，就要多次调用这个方法。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;io.observe(elementA);
+io.observe(elementB);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;二-callback-参数&#34;&gt;二、callback 参数&lt;/h3&gt;
+&lt;p&gt;目标元素的可见性变化时，就会调用观察器的回调函数callback。&lt;/p&gt;
+&lt;p&gt;callback一般会触发两次。一次是目标元素刚刚进入视口（开始可见），另一次是完全离开视口（开始不可见）。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var io = new IntersectionObserver(
+  entries =&amp;gt; {
+    console.log(entries);
+  }
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面代码中，回调函数采用的是箭头函数的写法。callback函数的参数（entries）是一个数组，每个成员都是一个IntersectionObserverEntry对象。举例来说，如果同时有两个被观察的对象的可见性发生变化，entries数组就会有两个成员。&lt;/p&gt;
+&lt;h3 id=&#34;三-intersectionobserverentry-对象&#34;&gt;三、IntersectionObserverEntry 对象&lt;/h3&gt;
+&lt;p&gt;IntersectionObserverEntry对象提供目标元素的信息，一共有六个属性。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  time: 3893.92,
+  rootBounds: ClientRect {
+    bottom: 920,
+    height: 1024,
+    left: 0,
+    right: 1024,
+    top: 0,
+    width: 920
+  },
+  boundingClientRect: ClientRect {
+     // ...
+  },
+  intersectionRect: ClientRect {
+    // ...
+  },
+  intersectionRatio: 0.54,
+  target: element
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;每个属性的含义如下。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
+- target：被观察的目标元素，是一个 DOM 节点对象
+- rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
+- boundingClientRect：目标元素的矩形区域的信息
+- intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
+- intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;代码实现&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function query(tag) {
+    return Array.from(document.getElementsByTagName(tag));
+}
+var observer = new IntersectionObserver(
+    (changes) =&amp;gt; {
+        changes.forEach((change) =&amp;gt; {
+            if (change.intersectionRatio &amp;gt; 0) {
+                var img = change.target;
+                img.src = img.dataset.src;
+                observer.unobserve(img);
+            }
+        })
+    }
+)
+query(&#39;img&#39;).forEach((item) =&amp;gt; {
+    observer.observe(item);
+})
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&#34;lazyload&#34;&gt;lazyload&lt;/h2&gt;
+&lt;p&gt;这个是&lt;code&gt;chrome&lt;/code&gt;浏览器的一个实验性属性，我个人使用中并没有感觉到有做到懒加载。使用时需要先在浏览器地址栏中输入&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;chrome://flags/#enable-lazy-image-loading
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;开启。&lt;br&gt;
+lazyload 支持三种赋值，类似于&lt;code&gt;preload&lt;/code&gt;。&lt;br&gt;
+&lt;strong&gt;新版本&lt;/strong&gt;&lt;code&gt;Chrome&lt;/code&gt;改为&lt;code&gt;loading=&amp;quot;lazy&amp;quot;&lt;/code&gt;详见&lt;strong&gt;Chrome Updates&lt;/strong&gt;。(ps:怪不得我之前使用没效果，原来改了，但是我改了以后依然没效果，不知道是什么原因)&lt;/p&gt;
+&lt;p&gt;别人使用lazyload的gif&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1602398537620.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+&lt;a href=&#34;https://events.jackpu.com/native-layzy-load-image/index.html&#34;&gt;体验地址&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;这个属性的兼容性比较差&lt;br&gt;
 &lt;img src=&#34;https://jujuul.github.io//post-images/1602045454859.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
 &lt;h1 id=&#34;后记&#34;&gt;后记&lt;/h1&gt;
