@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-11T16:19:11.077Z</updated>
+    <updated>2020-10-12T15:00:29.738Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,191 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[ReactRe:0]]></title>
+        <id>https://jujuul.github.io/post/reactre0/</id>
+        <link href="https://jujuul.github.io/post/reactre0/">
+        </link>
+        <updated>2020-10-12T14:07:29.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="jsx语法相关">JSX语法相关</h2>
+<p><code>JSX</code>语法要求return中必须有一个根<code>DOM</code>元素包裹，而不能是多个<code>DOM</code>元素并列</p>
+<pre><code>render() {
+    return (
+        &lt;div&gt;
+            &lt;div&gt;
+                &lt;input /&gt;
+                &lt;button&gt;增加服务&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;ul&gt;
+                &lt;li&gt;头部按摩&lt;/li&gt;
+                &lt;li&gt;精油推背&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre>
+<p>必须如上面代码所示排列，如果去掉最外层的包裹<code>div</code>，则会报错<br>
+<img src="https://jujuul.github.io//post-images/1602513796301.png" alt="" loading="lazy"><br>
+而如果这个时候想要实现没有外层<code>div</code>也能实现效果，就需要引入<code>Fragment</code></p>
+<pre><code>render() {
+    return (
+        &lt;Fragment&gt;
+            &lt;div&gt;
+                &lt;input /&gt;
+                &lt;button&gt;增加服务&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;ul&gt;
+                &lt;li&gt;头部按摩&lt;/li&gt;
+                &lt;li&gt;精油推背&lt;/li&gt;
+            &lt;/ul&gt;
+      &lt;/Fragment&gt;
+    );
+}
+</code></pre>
+<p>可以看到并没有多出那一层的<code>div</code><br>
+<img src="https://jujuul.github.io//post-images/1602514018494.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React学习记录3]]></title>
+        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-3/</id>
+        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-3/">
+        </link>
+        <updated>2020-10-12T08:43:31.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="react组件">React组件</h1>
+<ol>
+<li>函数式组件</li>
+<li>类组件</li>
+</ol>
+<h2 id="函数式组件">函数式组件</h2>
+<p>js函数写的组件就是函数式组件</p>
+<pre><code>function Childcom() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;hello world&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>函数式组件也可以向函数一样传递参数，只需要在渲染的时候将参数传递就可以了</p>
+<pre><code>ReactDOM.render(
+  &lt;Childcom name=&quot;world&quot; /&gt;,
+  document.querySelector(&quot;#root&quot;)
+);
+</code></pre>
+<p>在函数内部写逻辑</p>
+<pre><code>function Childcom(props) {
+  let title = &lt;h2&gt;我是副标题&lt;/h2&gt;;
+  let weather = &quot;rain&quot;;
+  let isGo = weather === &quot;rain&quot; ? &quot;出门&quot; : &quot;不出门&quot;;
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;hello {props.name}&lt;/h1&gt;
+      {title}
+      &lt;div&gt;
+        是否出门?
+        &lt;span&gt;{isGo}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<h2 id="类组件">类组件</h2>
+<p>类组件的定义与渲染</p>
+<pre><code>class HelloWorld extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;类组件定义HelloWorld&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+ReactDOM.render(&lt;HelloWorld /&gt;, document.querySelector(&quot;#root&quot;));
+</code></pre>
+<p>类组件的定于与函数组件稍有不同，继承于<code>React.Component</code>类，并且需要内部写<code>render</code>函数，渲染与函数组件类似。</p>
+<h3 id="组件间传值">组件间传值</h3>
+<pre><code>&lt;HelloWorld weather=&quot;rain&quot; name=&quot;jujuul&quot; /&gt;
+</code></pre>
+<p>在最外层的组件上将值传递出去</p>
+<pre><code>&lt;Childcom weather={this.props.weather} /&gt;
+</code></pre>
+<p>在内层的组件可以通过调用<code>{this.props.xxx}</code>的形式调用外层传递的数据</p>
+<h2 id="组件总结">组件总结</h2>
+<ol>
+<li>函数式比较简单，一般用于静态的没有交互内容的组件页面</li>
+<li>类组件一般称为动态组件，一般会有交互和数据修改</li>
+<li>类组件比函数式组件的功能更多</li>
+<li>组件内可以嵌套多个组件，最外层<code>ReactDOM.render(&lt;HelloWorld /&gt;, document.querySelector(&quot;#root&quot;));</code>则只能有一个组件，这样的组件称为复合组件，里面既可以是函数式组件也可以是类组件，也可以随意搭配嵌套。</li>
+</ol>
+<h1 id="react-state">React State</h1>
+<p>相当于<code>vue</code>的<code>data</code>，但是使用方式不一样。</p>
+<h2 id="在class类组件中添加局部state">在<code>class</code>类组件中添加局部<code>state</code></h2>
+<p>添加一个 class 构造函数，然后在该函数中为 this.state 赋初值：</p>
+<pre><code>class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+<p>通过以下方式将 props 传递到父类的构造函数中：</p>
+<pre><code>constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+}
+</code></pre>
+<p>Class 组件应该始终使用 props 参数来调用父类的构造函数。</p>
+<h2 id="将生命周期方法添加到-class-中">将生命周期方法添加到 Class 中</h2>
+<p>在具有许多组件的应用程序中，当组件被销毁时释放所占用的资源是非常重要的。</p>
+<p>当 Clock 组件第一次被渲染到 DOM 中的时候，就为其设置一个计时器。这在 React 中被称为“挂载（mount）”。</p>
+<p>同时，当 DOM 中 Clock 组件被删除的时候，应该清除计时器。这在 React 中被称为“卸载（unmount）”。</p>
+<p>我们可以为 class 组件声明一些特殊的方法，当组件挂载或卸载时就会去执行这些方法：</p>
+<pre><code>class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Hello, world!&lt;/h1&gt;
+        &lt;h2&gt;It is {this.state.date.toLocaleTimeString()}.&lt;/h2&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+<p>这些方法叫做“生命周期方法”。</p>
+<h2 id="正确地使用-state">正确地使用 State</h2>
+<h3 id="不要直接修改-state">不要直接修改 State</h3>
+<p>例如，此代码不会重新渲染组件：</p>
+<pre><code>// Wrong
+this.state.comment = 'Hello';
+</code></pre>
+<p>而是应该使用 setState():</p>
+<pre><code>// Correct
+this.setState({comment: 'Hello'});
+</code></pre>
+<p>需要使用<code>setState</code>方法修改数据，该方法内部是一个对象，包含当前组件的<code>state</code>数据，只有通过这种方式修改的<code>state</code>内数据才会重新渲染。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[React学习记录2]]></title>
         <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-2/</id>
@@ -204,11 +389,12 @@ let element5 = (
 <li><code>{}</code>中间表达式可以使用JSX对象</li>
 <li>属性和HTML内容一样都是用<code>{}</code>来插入内容</li>
 </ol>
-<h1 id="jsx-style-样式">JSX STYLE 样式</h1>
+<h1 id="jsx-style-样式-和-注释">JSX STYLE 样式 和 注释</h1>
+<h2 id="样式">样式</h2>
 <pre><code>// 定义样式
 let exampleStyle = {
   background: &quot;skyBlue&quot;,
-  // 使用大驼峰语法
+  // 使用小驼峰语法
   borderBottom: &quot;1px solid red&quot;,
 };
 
@@ -219,6 +405,48 @@ let element = (
   &lt;/div&gt;
 );
 </code></pre>
+<pre><code>let element = (
+  &lt;div&gt;
+    &lt;h1 style=&quot;height:200px;&quot; style={exampleStyle}&gt;
+      hello world
+    &lt;/h1&gt;
+  &lt;/div&gt;
+);
+// 以上写法的 style=&quot;height:200px;&quot; 部分无效
+</code></pre>
+<pre><code>&lt;h1 style=&quot;height:200px;&quot;&gt;
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1602476790181.png" alt="" loading="lazy"><br>
+以上写法会报错，style属性必须使用对象的形式</p>
+<pre><code>&lt;h1 className=&quot;abc&quot; className={classStr}&gt;
+// 无法将两个className属性并在一起写
+</code></pre>
+<pre><code>&lt;h1 className={classStr} className={classSStr} &gt;
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1602476751235.png" alt="" loading="lazy"><br>
+如果不是<code>“xx”</code>的形式而是<code>{xx}</code>的形式，则后定义的的会覆盖先定义的</p>
+<pre><code>&lt;h1 className={&quot;abc &quot; + classStr}&gt;hello world&lt;/h1&gt;
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1602476692914.png" alt="" loading="lazy"><br>
+若想像vue一样绑定多个类名，需要在{}内使用字符串拼接的方式，需要注意的是在要拼接的字符串后面需要有空格</p>
+<pre><code>let classStr2 = [&quot;abc2&quot;, &quot;redBg2&quot;];
+&lt;h1 className={classStr2}&gt;hello world&lt;/h1&gt;
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1602477232770.png" alt="" loading="lazy"><br>
+类似于<code>vue</code>的操作也是不行的，如果想用，需要通过<code>join</code>拼接字符串</p>
+<pre><code>let classStr2 = [&quot;abc2&quot;, &quot;redBg2&quot;].join(&quot; &quot;);
+</code></pre>
+<p><img src="https://jujuul.github.io//post-images/1602477318383.png" alt="" loading="lazy"><br>
+通过这种方式拼接的就可以正常使用了</p>
+<h2 id="注释">注释</h2>
+<pre><code>{/* 这里写注释 */}
+</code></pre>
+<h2 id="总结">总结</h2>
+<ol>
+<li>class style 中，不可以存在多个class属性</li>
+<li>style 样式中，如果存在多个变量的属性组合，使用小驼峰语法，或者用引号包裹</li>
+<li>注释需要包裹在<code>{/* 这里写注释 */}</code>中</li>
+</ol>
 ]]></content>
     </entry>
     <entry>
@@ -1173,525 +1401,6 @@ class baseTeacher extends Girl {
 </ol>
 </li>
 </ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[typescript学习记录1]]></title>
-        <id>https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/</id>
-        <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-1/">
-        </link>
-        <updated>2020-10-02T16:31:11.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="前置">前置</h2>
-<h3 id="安装">安装</h3>
-<p><code>npm i typescript -g</code><br>
-<code>yarn global add typescript</code></p>
-<h3 id="允许在终端直接输出">允许在终端直接输出</h3>
-<p><code>npm install -g ts-node</code><br>
-语法<br>
-<code>ts-node demo1.ts</code></p>
-<h2 id="静态类型">静态类型</h2>
-<h3 id="定义静态类型">定义静态类型</h3>
-<p>在变量后面通过  冒号类型  的形式，<br>
-<code>let count: number = 1;</code></p>
-<h3 id="自定义静态类型">自定义静态类型</h3>
-<h2 id="基础静态类型和对象类型">基础静态类型和对象类型</h2>
-<h3 id="基础静态类型">基础静态类型</h3>
-<p>null    undefined   boolean    void    symbol   string  number</p>
-<h3 id="对象类型">对象类型</h3>
-<ol>
-<li>对象类型</li>
-</ol>
-<pre><code>const xiaojiejie: {
-  name: string;
-  age: number;
-} = {
-  name: &quot;大脚&quot;,
-  age: 18,
-};
-</code></pre>
-<ol start="2">
-<li>数组类型<br>
-<code>const xiaojiejies: string[] = [&quot;谢大脚&quot;, &quot;刘英&quot;, &quot;918&quot;];</code><br>
-<code>const xiaojiejies: Array&lt;string&gt; = [&quot;谢大脚&quot;, &quot;刘英&quot;, &quot;918&quot;];</code><br>
-两种数组类型的声明方式</li>
-<li>类类型</li>
-</ol>
-<pre><code>class Person {}
-const dajiao: Person = new Person();
-</code></pre>
-<ol start="4">
-<li>函数类型</li>
-</ol>
-<pre><code>const jianXiaojiejie: () =&gt; string = () =&gt; {
-  return &quot;大脚&quot;;
-};
-</code></pre>
-<h2 id="类型注解与类型推断">类型注解与类型推断</h2>
-<p>type annotation 类型注解<br>
-type inference  类型推断</p>
-<h3 id="类型注解">类型注解</h3>
-<pre><code>let count: number;
-count = 123;
-</code></pre>
-<p>像这样在count后面加上 :number 就是类型注解，就是人为指定变量的类型</p>
-<pre><code>let countInference = 123;
-</code></pre>
-<p>而像这样不指定变量的类型，ts也能知道变量是 number 类型，就是类型推断</p>
-<pre><code>// 能推断出，不需要注解
-const one = 1;
-const two = 2;
-const three = one + two;
-</code></pre>
-<pre><code>// 不能推断出，需要注解
-function getTotal(one: number, two: number) {
-  return one + two;
-}
-const total = getTotal(1, 2);
-</code></pre>
-<p>实际使用中，如果ts能够自动分析出类型的就不需要写注解，不能够自动分析出来的就写注解</p>
-<h2 id="函数参数和返回类型的注解">函数参数和返回类型的注解</h2>
-<pre><code>function getTotal(one: number, two: number): number {
-  return one + two;
-}
-</code></pre>
-<p>可以直接在函数的参数后添加注解，指定参数的类型；在 {} 之前添加注解，指定函数的返回值的类型</p>
-<pre><code>function sayHello(): void {
-  console.log(&quot;hello world&quot;);
-}
-</code></pre>
-<p>当不需要函数有返回值时，可以使用 void</p>
-<p>never</p>
-<pre><code>function add({ one, two }: { one: number; two: number }) {
-  return one + two;
-}
-</code></pre>
-<p>当函数参数为对象时想要确定它的属性类型，可以在参数对象后面再写一个对象，里面写上其中的参数，后面写注解</p>
-<h2 id="数组类型的注解">数组类型的注解</h2>
-<pre><code>// 数字数组
-const numberArr: number[] = [1, 2, 3];
-</code></pre>
-<pre><code>// 字符串数组
-const stringArr: string[] = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;];
-</code></pre>
-<pre><code>// undefined数组
-const undefinedArr: undefined[] = [undefined, undefined, undefined];
-</code></pre>
-<pre><code>const arr: (number | string)[] = [1, &quot;string&quot;, 2];
-</code></pre>
-<p>有不同类型值的数组</p>
-<pre><code>const xiaojiejies: { name: string; age: number }[] = [
-  { name: &quot;刘英&quot;, age: 18 },
-  { name: &quot;谢大脚&quot;, age: 28 },
-];
-</code></pre>
-<p>对象数组的注解</p>
-<pre><code>type Lady = { name: string; age: number };
-const xiaojiejies: Lady[] = [
-  { name: &quot;刘英&quot;, age: 18 },
-  { name: &quot;谢大脚&quot;, age: 28 },
-];
-</code></pre>
-<p>类型别名（type alias）<br>
-类型别名1（对象形式）</p>
-<pre><code>class Madam {
-  name: string;
-  age: number;
-}
-const xiaojiejies: Madam[] = [
-  { name: &quot;刘英&quot;, age: 18 },
-  { name: &quot;谢大脚&quot;, age: 28 },
-];
-</code></pre>
-<p>类型别名2（类形式）</p>
-<h2 id="元组的使用和类型约束">元组的使用和类型约束</h2>
-<p>元组可以看作是数组的加强版，数组plus = 元组<br>
-元组不常用，一般用于csv文件</p>
-<pre><code>const xiaojiejie: (string | number)[] = [&quot;dajiao&quot;, 28, &quot;teacher&quot;];
-</code></pre>
-<p>虽然代码上没有错，也没有报错，但是逻辑上错误了</p>
-<pre><code>// 使用元组
-const xiaojiejie: [string, string, number] = [&quot;dajiao&quot;, 28, &quot;teacher&quot;];
-</code></pre>
-<p>这样会报错，因为它要求数组第二位是字符串，第三位是数字</p>
-<pre><code>const xiaojiejie: [string, string, number] = [&quot;dajiao&quot;, &quot;teacher&quot;, 28];
-</code></pre>
-<p>正确，注解与值相对应</p>
-<p>访问元组中元素和长度与js语法一致</p>
-<h2 id="interface接口">interface（接口）</h2>
-<h3 id="可选值">可选值</h3>
-<pre><code>waistline?: number;
-</code></pre>
-<p>在注解前加 ? 问号，值就为可选值，可以有也可以没有</p>
-<h3 id="允许任意类型的值">允许任意类型的值</h3>
-<pre><code>// 属性名为字符串类型，属性值可以为任意类型
-[propname: string]: any;
-</code></pre>
-<h3 id="接口里定义方法">接口里定义方法</h3>
-<pre><code>// 接口里定义的方法，限制返回值必须为string类型
-say(): string;
-</code></pre>
-<h3 id="接口和类的约束">接口和类的约束</h3>
-<pre><code>// 定义时添加 implements 字段，约束类内部的数据格式需要和接口相同
-class XiaoJieJie implements Girl
-</code></pre>
-<h3 id="接口间的继承">接口间的继承</h3>
-<pre><code>// 
-interface Teacher extends Girl {
-  teach(): string;
-}
-</code></pre>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
-<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
-<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[webpack优化]]></title>
-        <id>https://jujuul.github.io/post/webpack-you-hua/</id>
-        <link href="https://jujuul.github.io/post/webpack-you-hua/">
-        </link>
-        <updated>2020-10-02T12:59:47.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="hmr">HMR</h1>
-<h3 id="介绍">介绍</h3>
-<p>HMR:  hot module  replacement 热模块替换 / 模块热替换<br>
-开启方式：在devServer中设置hot: true,<br>
-作用： 一个模块发生变化，只会从新打包这一个模块（而不是打包所有）<br>
-极大提升构建速度<br>
-样式文件：可以使用html功能：因为style-loader内部实现了<br>
-js文件：默认不能使用HMR功能 --&gt; 需要修改js代码，添加支持HMR功能的代码</p>
-<ul>
-<li>注意：HMR功能对js的处理，只能处理非入口js文件的其他文件<br>
-html文件：默认不能使用HMR功能，同时会导致问题：html文件不能热更新了（不用做HMR功能）</li>
-<li>解决：修改entry入口，将html文件引入</li>
-</ul>
-<h3 id="用法">用法</h3>
-<pre><code>devServer: {
-    contentBase: resolve(__dirname, &quot;build&quot;),
-    compress: true,
-    port: 3000,
-    open: true,
-    // 开启HMR功能
-    // 当修改了webpack配置，新配置想要生效，必须重启webpack服务
-    hot: true,
-},
-</code></pre>
-<pre><code>if (module.hot) {
-  // 一旦 module.hot为true，说明开启了HMR功能。  --&gt; 让HMR功能代码生效
-  module.hot.accept(&quot;./print.js&quot;, function () {
-    // 方法会监听print.js文件的变化，一旦发生变化，其他模块不会重新打包构建。
-    // 会执行后面的回调函数
-    print();
-  });
-}
-</code></pre>
-<h1 id="source-map">source-map</h1>
-<h3 id="介绍-2">介绍</h3>
-<p>source-map一种提供源代码到构建后代码映射 技术（如果构建后代码出错了，通过映射关系可以追踪到源代码错误）<br>
-[inline-|hidden-|eval][nosources-][cheap-[module-]]source-map</p>
-<pre><code>source-map          外部
-错误代码的准确信息 和 源代码的错误位置
-inline-source-map   内联
-生成一个内联source-map
-错误代码的准确信息 和 源代码的错误位置
-hidden-source-map   外部
-错误代码错误原因，但是没有错误位置
-不能追踪到源代码的错误，只能提示到构建后代码的错误位置
-eval-source-map     内联
-每一个文件都生成对应的source-map，都在eval
-错误代码的准确信息 和 源代码的错误位置
-nosources-source-map  外部
-错误代码的准确信息，但是没有任何源代码信息
-cheap-source-map    外部
-错误代码的准确信息 和 源代码的错误位置，但是只能精确到行
-cheap-module-source-map   外部
-错误代码的准确信息 和 源代码的错误位置
-module会将loader的source map加入
-
-内联和外部的区别：1.外部生成了文件，内联没有  2.内联构建速度更快
-
-开发环境：速度快，调试更友好
-速度快（eavl&gt;inline&gt;cheap&gt;...）
-eval-cheap-source-map
-eval-source-map
-调试更友好
-source-map
-cheap-module-source-map
-cheap-source-map
-折中选择：eval-source-map &gt;   eval-cheap/module-source-map  
-脚手架默认使用eval-source-map
-生产环境：源代码要不要隐藏？调试要不要更友好？
-内联会让代码体积变大，所以在生产环境不用内联
-nosources-source-map  全部隐藏
-hidden-source-map     只隐藏源代码，会提示构建后代码错误
-
-折中选择 source-map  &gt;  cheap-module-source-map
-</code></pre>
-<h3 id="使用方法">使用方法</h3>
-<p>在webpack.config.js中添加<code>devtool: &quot;source-map&quot;,</code></p>
-<h1 id="oneof">oneOf</h1>
-<h3 id="介绍-3">介绍</h3>
-<p>webpack原本的loader是将每个文件都过一遍，比如有一个js文件 rules中有10个loader，第一个是处理js文件的loader，当第一个loader处理完成后webpack不会自动跳出，而是会继续拿着这个js文件去尝试匹配剩下的9个loader，相当于没有break。<br>
-而oneOf就相当于这个break</p>
-<h3 id="使用方法-2">使用方法</h3>
-<p>创建一个oneOf的数组，把要处理的规则放入oneOf中，如果一个文件类型需要多种处理，可以将其放在oneOf数组外</p>
-<pre><code>{
-    test: /\.js$/,
-    exclude: /node_modules/,
-    enforcement: &quot;pre&quot;,
-    loader: &quot;eslint-loader&quot;,
-    options: {
-        fix: true,
-    },
-},
-oneOf: [
-    {
-       test: /\.js$/,
-            exclude: /node_modules/,
-            loader: &quot;babel-loader&quot;,
-            options: {
-              presets: [
-                &quot;@babel/preset-env&quot;,
-                {
-                  useBuiltIns: &quot;usage&quot;,
-                  corejs: {
-                    version: 3,
-                  },
-                  targets: {
-                    chrome: &quot;60&quot;,
-                    firefox: &quot;60&quot;,
-                    ie: &quot;9&quot;,
-                    safari: &quot;10&quot;,
-                    edge: &quot;17&quot;,
-                    },
-                },
-            ],
-        },
-    }
-]
-</code></pre>
-<h1 id="缓存">缓存</h1>
-<p>缓存优化可以从babel和资源两方面入手</p>
-<h2 id="babel">babel</h2>
-<pre><code>{
- {
-    test: /\.js$/,
-    exclude: /node_modules/,
-    loader: 'babel-loader',
-    options: {
-      presets: [
-      ...
-      ],
-      //开启babelh缓存
-      // 第二次构建时，会读取之前的缓存
-     cacheDirectory: true
-    }
-}           
-</code></pre>
-<h2 id="文件资源缓存">文件资源缓存</h2>
-<pre><code>// 开启hash缓存
-output: {
-    filename: 'js/built.[chunkhash:10].js',
-    path: resolve(__dirname, 'build')
-  },
-</code></pre>
-<p>hash: 每次wepack构建时会生成一个唯一的hash值。<br>
-问题: 因为js和css同时使用一个hash值。<br>
-如果重新打包，会导致所有缓存失效。（可能我却只改动一个文件）<br>
-chunkhash：根据chunk生成的hash值。如果打包来源于同一个chunk，那么hash值就一样<br>
-问题: js和css的hash值还是一样的<br>
-因为css是在js中被引入的，所以同属于一个chunk</p>
-<pre><code>// contenthash
-output: {
-    filename: 'js/built.[contenthash:10].js',
-    path: resolve(__dirname, 'build')
-  },
-</code></pre>
-<p>contenthash: 根据文件的内容生成hash值。不同文件hash值一定不一样<br>
---&gt; 让代码上线运行缓存更好使用</p>
-<h1 id="tree-shaking">tree shaking</h1>
-<p>去除程序中未使用的代码，来使代码体积更小<br>
-前提：1.必须使用ES6模块化   2.开启production<br>
-作用：减少代码体积</p>
-<pre><code>在package.json中配置 
-  &quot;sideEffects&quot;:false 所有代码都没有副作用（都可以进行tree shaking）
-  问题：可能会把 css / @babel/polyfill等文件干掉
-  解决：
-  &quot;sideEffects&quot;: [
-    &quot;*.css&quot;
-  ]
-  这样可以把 css 标记出来，避免被干掉
-</code></pre>
-<h1 id="code-split">code split</h1>
-<p>代码分割</p>
-<h2 id="方法一">方法一</h2>
-<pre><code>entry: {
-    // 多入口，将入口配置为一个对象
-    main: &quot;./src/js/index.js&quot;,
-    test: &quot;./src/js/test.js&quot;,
-},
-</code></pre>
-<pre><code>output: {
-    // 取文件名，通过 [name] 这样写可以在打包时连同文件名一起打包，取名根据 entry 中的设置来取
-    filename: &quot;js/[name].[contenthash:10].js&quot;,
-    path: resolve(__dirname, &quot;build&quot;),
-},
-</code></pre>
-<h2 id="方法二">方法二</h2>
-<p>splitChunks</p>
-<pre><code>// 跟 entry、mode 等同级别
-optimization: {
-    // 1. 可以将 node_modules 中代码单独打包成一个 chunk 最终输出
-    // 2. 它会自动分析多入口文件中有没有公共的文件，如果有会打包成单独的一个 chunk 
-    splitChunks: {
-      chunks: &quot;all&quot;,
-    },
-}
-</code></pre>
-<h2 id="方法三">方法三</h2>
-<p>通过index.js</p>
-<pre><code>// 使用 import 引入文件
-// 可以通过 /* webpackChunkName:'test' */ 的方式设置引入文件被打包的名字
-import(/* webpackChunkName:'test' */ &quot;./test.js&quot;)
-  .then((res) =&gt; {
-    // eslint-disable-next-line
-    console.log(res);
-  })
-  .catch(() =&gt; {
-    // eslint-disable-next-line
-    console.log(&quot;文件加载失败&quot;);
-});
-</code></pre>
-<h1 id="懒加载和预加载">懒加载和预加载</h1>
-<pre><code>document.getElementById(&quot;btn&quot;).onclick = function () {
-  // 懒加载
-  import(/* webpackChunkName:'test'*/ &quot;./test&quot;).then(
-    ({ mul }) =&gt; {
-      console.log(4, 5);
-    }
-  );
-};
-</code></pre>
-<p>通过给dom绑定click事件来触发加载，通过<code>import(&quot;./xxx&quot;).then( //... )</code>的方式实现懒加载，可以加上<code>/* webpackChunkName:'test'*/</code>来规定输出的js文件名</p>
-<pre><code>import(/*webpackPrefetch:true */ &quot;./test&quot;).then(
-   // ...
-  );
-</code></pre>
-<p>可以通过在<code>import</code>中设置<code>/*webpackPrefetch:true */</code>来实现预加载</p>
-<h2 id="懒加载和预加载的区别">懒加载和预加载的区别：</h2>
-<p>预加载会在使用之前加载js文件，懒加载会在文件使用时才加载。</p>
-<p>这样看来预加载和正常加载没有区别，但其实是有的，正常加载可以认为是并行加载（同一时间加载多个文件）；预加载<code>prefetch</code>是等其他资源加载完毕，浏览器空闲了，再加载，这样就避免一开始不需要加载时也被加载，而懒加载的文件一旦较大，使用时会产生延迟，影响体验，所以可以使用预加载先进行加载，这样就能合理利用浏览器的空闲，也避免了使用时加载过慢的问题。预加载的问题在于兼容性较差，只能在pc端高版本浏览器中使用，而低版本浏览器和移动端不建议使用，所欲预加载要慎用。</p>
-<h1 id="pwa渐进式网络开发应用程序">PWA（渐进式网络开发应用程序）</h1>
-<p>PWA：渐进式网络开发应用程序（离线可访问）<br>
-workbox --&gt; workbox-webpack-plugin</p>
-<pre><code>// 在webpack.config.js中下载配置WorkboxWebpackPlugin插件
-new WorkboxWebpackPlugin.GenerateSW({
-      /* 
-        1. 帮助serviceworker快速启动
-        2. 删除旧的serviceworker
-
-        生成一个 serviceworker 配置文件
-      */
-      clientsClaim: true,
-      skipWaiting: true,
-})
-</code></pre>
-<pre><code>// 在入口文件index.js中通过if判断并注册serviceWorker
-
-// 注册servericeworker
-// 处理兼容性问题
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () =&gt; {
-    navigator.serviceWorker
-      .register('./service-worker.js')
-      .then(() =&gt; {
-        console.log('sw注册成功');
-      })
-      .catch(() =&gt; {
-        console.log('sw注册成功');
-      });
-  });
-}
-
-// 注意点
-1. eslint不认识window、navigator全局变量
-    解决：需要修改配置package.json中eslintConfig配置
-    &quot;env&quot;: {
-        &quot;browser&quot;: true // 支持浏览器端全局变量
-     }
-2. sw代码必须运行在服务器上
-</code></pre>
-<h1 id="多进程打包">多进程打包</h1>
-<p>优化打包速度</p>
-<h2 id="安装thread-loader">安装thread-loader</h2>
-<p><code>npm i thread-loader</code><br>
-一般用来优化<code>babel-loader</code></p>
-<pre><code>use: [
-    {
-        {
-            loader: &quot;thread-loader&quot;,
-            options: {
-                workers: 2, // 进程数为2
-            },
-        },
-        options: {
-            presets: [
-                [
-                    &quot;@babel/preset-env&quot;,
-                        {
-                            useBuiltIns: &quot;usage&quot;,
-                            corejs: { version: 3 },
-                            targets: {
-                            chrome: &quot;60&quot;,
-                            firefox: &quot;50&quot;,
-                        },
-                    },
-                ],
-            ],
-            cacheDirectory: true,
-        },
-    },
-],
-</code></pre>
-<p>开启多进程打包</p>
-<p>进程启动大概600ms，进程通信也有开销</p>
-<p>只有工作消耗时间比较长才需要多进程打包</p>
-<h1 id="externals">externals</h1>
-<p><code>externals</code>配置选项提供了「从输出的 bundle 中排除依赖」的方法。通俗来说就是，当你需要的包是通过cdn引入的，能通过配置<code>externals</code>来避免其被打包，从而能够使用cdn。<br>
-使用</p>
-<pre><code>// webpack.config.js
-externals: {
-    // 忽略库名 -- npm包名
-    jquery: &quot;jQuery&quot;,
-},
-</code></pre>
-<pre><code>// 在html中正常引入
-&lt;script src=&quot;https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<h1 id="dll">dll</h1>
-<p>打包一次，避免将来重复打包，如果是通过<code>cdn</code>引入，建议使用<code>externals</code>，如果是整合打包第三方库，不使用<code>cdn</code>而是使用自己的服务器，推荐使用<code>dll</code></p>
-<h2 id="第一步">第一步</h2>
-<p>定义一个<code>webpack.dll.js</code>的文件，用于单独打包某些库（比如jquery），打包后生成一个<code>jquery.js</code>和<code>manifest.json</code>，其中<code>jquery.js</code>就是单独打包后的<code>jquery</code>，作用是将来构建时不用再重复打包，<code>manifest.json</code>提供和这些库之间的映射关系，用于告诉<code>webpack</code>哪些库不需要重复打包，会包含库的名字、路径。</p>
-<p><code>webpack.dll.js</code>文件构建好后，需<code>cmd</code>运行<code>webpack --config webpack.dll.js</code>来创建打包后文件</p>
-<h2 id="第二步">第二步</h2>
-<p>在<code>webpack.config.js</code>的<code>plugins</code>中定义<code>new webpack.DllReferencePlugin</code></p>
-<pre><code>// 告诉webpack哪些库不参与打包，同时使用时的名称也得改
-new webpack.DllReferencePlugin({
-    manifest: resolve(__dirname, &quot;dll/manifest.json&quot;),
-}),
-</code></pre>
-<p>通过这个插件引入运行<code>webpack.dll.js</code>后生成的<code>manifest.json</code>文件，确定不需要打包的库，</p>
-<h2 id="第三步">第三步</h2>
-<p>因为之前的操作没有将库文件输出出去，所以需要单独输出</p>
-<h3 id="使用插件">使用插件</h3>
-<pre><code>npm i add-asset-html-webpack-plugin
-</code></pre>
-<p>这个插件可以用来输出并在<code>html</code>文件中引入</p>
-<pre><code>// 将某个文件打包输出出去，并在html中自动引入该资源
-new AddAssetHtmlWebpackPlugin({
-    filepath: resolve(__dirname, &quot;dll/jquery.js&quot;),
-}),
-</code></pre>
 ]]></content>
     </entry>
 </feed>

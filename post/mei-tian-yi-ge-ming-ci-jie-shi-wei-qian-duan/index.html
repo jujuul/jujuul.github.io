@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>每天一个名词解释—微前端 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602433138557">
+<link rel="shortcut icon" href="/favicon.ico?v=1602514821959">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -154,7 +154,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">80</span>
+        <span class="site-item-stat-count">82</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -1013,6 +1013,185 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/reactre0/"" data-c="
+          &lt;h2 id=&#34;jsx语法相关&#34;&gt;JSX语法相关&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;JSX&lt;/code&gt;语法要求return中必须有一个根&lt;code&gt;DOM&lt;/code&gt;元素包裹，而不能是多个&lt;code&gt;DOM&lt;/code&gt;元素并列&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render() {
+    return (
+        &amp;lt;div&amp;gt;
+            &amp;lt;div&amp;gt;
+                &amp;lt;input /&amp;gt;
+                &amp;lt;button&amp;gt;增加服务&amp;lt;/button&amp;gt;
+            &amp;lt;/div&amp;gt;
+            &amp;lt;ul&amp;gt;
+                &amp;lt;li&amp;gt;头部按摩&amp;lt;/li&amp;gt;
+                &amp;lt;li&amp;gt;精油推背&amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+        &amp;lt;/div&amp;gt;
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;必须如上面代码所示排列，如果去掉最外层的包裹&lt;code&gt;div&lt;/code&gt;，则会报错&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1602513796301.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+而如果这个时候想要实现没有外层&lt;code&gt;div&lt;/code&gt;也能实现效果，就需要引入&lt;code&gt;Fragment&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;render() {
+    return (
+        &amp;lt;Fragment&amp;gt;
+            &amp;lt;div&amp;gt;
+                &amp;lt;input /&amp;gt;
+                &amp;lt;button&amp;gt;增加服务&amp;lt;/button&amp;gt;
+            &amp;lt;/div&amp;gt;
+            &amp;lt;ul&amp;gt;
+                &amp;lt;li&amp;gt;头部按摩&amp;lt;/li&amp;gt;
+                &amp;lt;li&amp;gt;精油推背&amp;lt;/li&amp;gt;
+            &amp;lt;/ul&amp;gt;
+      &amp;lt;/Fragment&amp;gt;
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可以看到并没有多出那一层的&lt;code&gt;div&lt;/code&gt;&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1602514018494.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+">ReactRe:0</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-3/"" data-c="
+          &lt;h1 id=&#34;react组件&#34;&gt;React组件&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;函数式组件&lt;/li&gt;
+&lt;li&gt;类组件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;函数式组件&#34;&gt;函数式组件&lt;/h2&gt;
+&lt;p&gt;js函数写的组件就是函数式组件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function Childcom() {
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;h1&amp;gt;hello world&amp;lt;/h1&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;函数式组件也可以向函数一样传递参数，只需要在渲染的时候将参数传递就可以了&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ReactDOM.render(
+  &amp;lt;Childcom name=&amp;quot;world&amp;quot; /&amp;gt;,
+  document.querySelector(&amp;quot;#root&amp;quot;)
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在函数内部写逻辑&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function Childcom(props) {
+  let title = &amp;lt;h2&amp;gt;我是副标题&amp;lt;/h2&amp;gt;;
+  let weather = &amp;quot;rain&amp;quot;;
+  let isGo = weather === &amp;quot;rain&amp;quot; ? &amp;quot;出门&amp;quot; : &amp;quot;不出门&amp;quot;;
+  return (
+    &amp;lt;div&amp;gt;
+      &amp;lt;h1&amp;gt;hello {props.name}&amp;lt;/h1&amp;gt;
+      {title}
+      &amp;lt;div&amp;gt;
+        是否出门?
+        &amp;lt;span&amp;gt;{isGo}&amp;lt;/span&amp;gt;
+      &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;类组件&#34;&gt;类组件&lt;/h2&gt;
+&lt;p&gt;类组件的定义与渲染&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class HelloWorld extends React.Component {
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;h1&amp;gt;类组件定义HelloWorld&amp;lt;/h1&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+
+ReactDOM.render(&amp;lt;HelloWorld /&amp;gt;, document.querySelector(&amp;quot;#root&amp;quot;));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;类组件的定于与函数组件稍有不同，继承于&lt;code&gt;React.Component&lt;/code&gt;类，并且需要内部写&lt;code&gt;render&lt;/code&gt;函数，渲染与函数组件类似。&lt;/p&gt;
+&lt;h3 id=&#34;组件间传值&#34;&gt;组件间传值&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;HelloWorld weather=&amp;quot;rain&amp;quot; name=&amp;quot;jujuul&amp;quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在最外层的组件上将值传递出去&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Childcom weather={this.props.weather} /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在内层的组件可以通过调用&lt;code&gt;{this.props.xxx}&lt;/code&gt;的形式调用外层传递的数据&lt;/p&gt;
+&lt;h2 id=&#34;组件总结&#34;&gt;组件总结&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;函数式比较简单，一般用于静态的没有交互内容的组件页面&lt;/li&gt;
+&lt;li&gt;类组件一般称为动态组件，一般会有交互和数据修改&lt;/li&gt;
+&lt;li&gt;类组件比函数式组件的功能更多&lt;/li&gt;
+&lt;li&gt;组件内可以嵌套多个组件，最外层&lt;code&gt;ReactDOM.render(&amp;lt;HelloWorld /&amp;gt;, document.querySelector(&amp;quot;#root&amp;quot;));&lt;/code&gt;则只能有一个组件，这样的组件称为复合组件，里面既可以是函数式组件也可以是类组件，也可以随意搭配嵌套。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;react-state&#34;&gt;React State&lt;/h1&gt;
+&lt;p&gt;相当于&lt;code&gt;vue&lt;/code&gt;的&lt;code&gt;data&lt;/code&gt;，但是使用方式不一样。&lt;/p&gt;
+&lt;h2 id=&#34;在class类组件中添加局部state&#34;&gt;在&lt;code&gt;class&lt;/code&gt;类组件中添加局部&lt;code&gt;state&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;添加一个 class 构造函数，然后在该函数中为 this.state 赋初值：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;It is {this.state.date.toLocaleTimeString()}.&amp;lt;/h2&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过以下方式将 props 传递到父类的构造函数中：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Class 组件应该始终使用 props 参数来调用父类的构造函数。&lt;/p&gt;
+&lt;h2 id=&#34;将生命周期方法添加到-class-中&#34;&gt;将生命周期方法添加到 Class 中&lt;/h2&gt;
+&lt;p&gt;在具有许多组件的应用程序中，当组件被销毁时释放所占用的资源是非常重要的。&lt;/p&gt;
+&lt;p&gt;当 Clock 组件第一次被渲染到 DOM 中的时候，就为其设置一个计时器。这在 React 中被称为“挂载（mount）”。&lt;/p&gt;
+&lt;p&gt;同时，当 DOM 中 Clock 组件被删除的时候，应该清除计时器。这在 React 中被称为“卸载（unmount）”。&lt;/p&gt;
+&lt;p&gt;我们可以为 class 组件声明一些特殊的方法，当组件挂载或卸载时就会去执行这些方法：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  }
+
+  render() {
+    return (
+      &amp;lt;div&amp;gt;
+        &amp;lt;h1&amp;gt;Hello, world!&amp;lt;/h1&amp;gt;
+        &amp;lt;h2&amp;gt;It is {this.state.date.toLocaleTimeString()}.&amp;lt;/h2&amp;gt;
+      &amp;lt;/div&amp;gt;
+    );
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这些方法叫做“生命周期方法”。&lt;/p&gt;
+&lt;h2 id=&#34;正确地使用-state&#34;&gt;正确地使用 State&lt;/h2&gt;
+&lt;h3 id=&#34;不要直接修改-state&#34;&gt;不要直接修改 State&lt;/h3&gt;
+&lt;p&gt;例如，此代码不会重新渲染组件：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Wrong
+this.state.comment = &#39;Hello&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而是应该使用 setState():&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// Correct
+this.setState({comment: &#39;Hello&#39;});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;需要使用&lt;code&gt;setState&lt;/code&gt;方法修改数据，该方法内部是一个对象，包含当前组件的&lt;code&gt;state&lt;/code&gt;数据，只有通过这种方式修改的&lt;code&gt;state&lt;/code&gt;内数据才会重新渲染。&lt;/p&gt;
+">React学习记录3</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-2/"" data-c="
           &lt;h1 id=&#34;react目录结构&#34;&gt;React目录结构&lt;/h1&gt;
 &lt;p&gt;README.md：关于项目的说明文件。&lt;/p&gt;
@@ -1202,11 +1381,12 @@ let element5 = (
 &lt;li&gt;&lt;code&gt;{}&lt;/code&gt;中间表达式可以使用JSX对象&lt;/li&gt;
 &lt;li&gt;属性和HTML内容一样都是用&lt;code&gt;{}&lt;/code&gt;来插入内容&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h1 id=&#34;jsx-style-样式&#34;&gt;JSX STYLE 样式&lt;/h1&gt;
+&lt;h1 id=&#34;jsx-style-样式-和-注释&#34;&gt;JSX STYLE 样式 和 注释&lt;/h1&gt;
+&lt;h2 id=&#34;样式&#34;&gt;样式&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;// 定义样式
 let exampleStyle = {
   background: &amp;quot;skyBlue&amp;quot;,
-  // 使用大驼峰语法
+  // 使用小驼峰语法
   borderBottom: &amp;quot;1px solid red&amp;quot;,
 };
 
@@ -1217,6 +1397,48 @@ let element = (
   &amp;lt;/div&amp;gt;
 );
 &lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;let element = (
+  &amp;lt;div&amp;gt;
+    &amp;lt;h1 style=&amp;quot;height:200px;&amp;quot; style={exampleStyle}&amp;gt;
+      hello world
+    &amp;lt;/h1&amp;gt;
+  &amp;lt;/div&amp;gt;
+);
+// 以上写法的 style=&amp;quot;height:200px;&amp;quot; 部分无效
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1 style=&amp;quot;height:200px;&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602476790181.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+以上写法会报错，style属性必须使用对象的形式&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1 className=&amp;quot;abc&amp;quot; className={classStr}&amp;gt;
+// 无法将两个className属性并在一起写
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1 className={classStr} className={classSStr} &amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602476751235.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+如果不是&lt;code&gt;“xx”&lt;/code&gt;的形式而是&lt;code&gt;{xx}&lt;/code&gt;的形式，则后定义的的会覆盖先定义的&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;h1 className={&amp;quot;abc &amp;quot; + classStr}&amp;gt;hello world&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602476692914.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+若想像vue一样绑定多个类名，需要在{}内使用字符串拼接的方式，需要注意的是在要拼接的字符串后面需要有空格&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let classStr2 = [&amp;quot;abc2&amp;quot;, &amp;quot;redBg2&amp;quot;];
+&amp;lt;h1 className={classStr2}&amp;gt;hello world&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602477232770.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+类似于&lt;code&gt;vue&lt;/code&gt;的操作也是不行的，如果想用，需要通过&lt;code&gt;join&lt;/code&gt;拼接字符串&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let classStr2 = [&amp;quot;abc2&amp;quot;, &amp;quot;redBg2&amp;quot;].join(&amp;quot; &amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602477318383.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+通过这种方式拼接的就可以正常使用了&lt;/p&gt;
+&lt;h2 id=&#34;注释&#34;&gt;注释&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;{/* 这里写注释 */}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;class style 中，不可以存在多个class属性&lt;/li&gt;
+&lt;li&gt;style 样式中，如果存在多个变量的属性组合，使用小驼峰语法，或者用引号包裹&lt;/li&gt;
+&lt;li&gt;注释需要包裹在&lt;code&gt;{/* 这里写注释 */}&lt;/code&gt;中&lt;/li&gt;
+&lt;/ol&gt;
 ">React学习记录2</a>
       </div>
       
