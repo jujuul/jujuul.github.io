@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>我自用的一些vscode插件分享 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602514821959">
+<link rel="shortcut icon" href="/favicon.ico?v=1602597480580">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -153,7 +153,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">82</span>
+        <span class="site-item-stat-count">83</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -826,9 +826,113 @@ JS代码检测工具，配合之前的几个代码检测，写出的代码将无
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-4/"" data-c="
+          &lt;h1 id=&#34;事件&#34;&gt;事件&lt;/h1&gt;
+&lt;p&gt;React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上的不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;React 事件的命名采用小驼峰式（camelCase），而不是纯小写。&lt;/li&gt;
+&lt;li&gt;使用 JSX 语法时你需要传入一个函数作为事件处理函数，而不是一个字符串。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如，传统的 HTML：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;button onclick=&amp;quot;activateLasers()&amp;quot;&amp;gt;
+  Activate Lasers
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 React 中略微不同：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;button onClick={activateLasers}&amp;gt;
+  Activate Lasers
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 React 中另一个不同点是你不能通过返回 false 的方式阻止默认行为。你必须显式的使用 preventDefault 。例如，传统的 HTML 中阻止链接默认打开一个新页面，你可以这样写：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;a href=&amp;quot;#&amp;quot; onclick=&amp;quot;console.log(&#39;The link was clicked.&#39;); return false&amp;quot;&amp;gt;
+  Click me
+&amp;lt;/a&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在 React 中，可能是这样的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(&#39;The link was clicked.&#39;);
+  }
+
+  return (
+    &amp;lt;a href=&amp;quot;#&amp;quot; onClick={handleClick}&amp;gt;
+      Click me
+    &amp;lt;/a&amp;gt;
+  );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在这里，e 是一个合成事件。React 根据 W3C 规范来定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题。&lt;/p&gt;
+&lt;p&gt;使用 React 时，你一般不需要使用 addEventListener 为已创建的 DOM 元素添加监听器。事实上，你只需要在该元素初始渲染的时候添加监听器即可。&lt;/p&gt;
+&lt;p&gt;当你使用 ES6 class 语法定义一个组件的时候，通常的做法是将事件处理函数声明为 class 中的方法。例如，下面的 Toggle 组件会渲染一个让用户切换开关状态的按钮：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state =&amp;gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      &amp;lt;button onClick={this.handleClick}&amp;gt;
+        {this.state.isToggleOn ? &#39;ON&#39; : &#39;OFF&#39;}
+      &amp;lt;/button&amp;gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &amp;lt;Toggle /&amp;gt;,
+  document.getElementById(&#39;root&#39;)
+);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;你必须谨慎对待 JSX 回调函数中的 this，在 JavaScript 中，class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined。&lt;/p&gt;
+&lt;h1 id=&#34;props&#34;&gt;Props&lt;/h1&gt;
+&lt;p&gt;父传递给子组件数据，单向流动，不能子传递给父组件&lt;/p&gt;
+&lt;p&gt;props的传值，可以是任意的类型。&lt;/p&gt;
+&lt;p&gt;props可以设置默认值&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HelloMessage.defaultProps = { name:&amp;quot;jujuul&amp;quot;, msg:&amp;quot;helloworld&amp;quot; }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;父组件传值给子组件&#34;&gt;父组件传值给子组件&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;XiaojiejieItem content={item} /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;其中 {item} 值来源于&lt;code&gt;this.state.list.map((item, index) =&amp;gt; { //... }&lt;/code&gt;中的 item&lt;/p&gt;
+&lt;p&gt;在子组件中接收&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;li&amp;gt;{this.props.content}&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;使用&lt;code&gt;this.props&lt;/code&gt;的方式接收，父组件传值时用的什么属性名，这里就用相同的属性名接收&lt;/p&gt;
+&lt;h2 id=&#34;子组件传值给父组件&#34;&gt;子组件传值给父组件&lt;/h2&gt;
+&lt;p&gt;子组件想要改变父组件的值，需要父组件自己将更改自身的方法传递给子组件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;XiaojiejieItem
+    content={item}
+    key={index + item}
+    index={index}
+    deleteItem={this.deleteItem.bind(this)}
+/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如上，子组件上挂载了父组件的 deleteItem 方法，子组件在自身的类中定义了一个 click 事件方法&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;li onClick={this.handleClick}&amp;gt;{this.props.content}&amp;lt;/li&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;handleClick() {
+    this.props.deleteItem(this.props.index);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;而该方法则通过 this.props 的方式调用了父组件传递来的 deleteItem 方法，再把父组件传递来的 index 通过 &lt;code&gt;this.props&lt;/code&gt; 的方式做为参数，完成子组件内 click 事件调用父组件的操作&lt;/p&gt;
+">React学习记录4</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/reactre0/"" data-c="
-          &lt;h2 id=&#34;jsx语法相关&#34;&gt;JSX语法相关&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;JSX&lt;/code&gt;语法要求return中必须有一个根&lt;code&gt;DOM&lt;/code&gt;元素包裹，而不能是多个&lt;code&gt;DOM&lt;/code&gt;元素并列&lt;/p&gt;
+          &lt;h1 id=&#34;jsx语法相关&#34;&gt;JSX语法相关&lt;/h1&gt;
+&lt;h2 id=&#34;jsx语法要求return中必须有一个根dom元素包裹而不能是多个dom元素并列&#34;&gt;&lt;code&gt;JSX&lt;/code&gt;语法要求return中必须有一个根&lt;code&gt;DOM&lt;/code&gt;元素包裹，而不能是多个&lt;code&gt;DOM&lt;/code&gt;元素并列&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;render() {
     return (
         &amp;lt;div&amp;gt;
@@ -864,6 +968,48 @@ JS代码检测工具，配合之前的几个代码检测，写出的代码将无
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;可以看到并没有多出那一层的&lt;code&gt;div&lt;/code&gt;&lt;br&gt;
 &lt;img src=&#34;https://jujuul.github.io//post-images/1602514018494.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;能够不转义输入的html标签&#34;&gt;能够不转义输入的HTML标签&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;dangerouslySetInnerHTML={{ __html: item }}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在&lt;code&gt;html&lt;/code&gt;标签中输入这段代码，就可以使&lt;code&gt;React&lt;/code&gt;不自动转义 HTML 代码&lt;/p&gt;
+&lt;h2 id=&#34;label标签的for属性&#34;&gt;label标签的for属性&lt;/h2&gt;
+&lt;p&gt;在 react 中，label标签的for属性需要改成 htmlFor 才能使用&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;label htmlFor=&amp;quot;jujuul&amp;quot;&amp;gt;增加服务:&amp;lt;/label&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;绑定事件相关&#34;&gt;绑定事件相关&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;input
+    value={this.state.inputValue}
+    onChange={this.inputChange.bind(this)}
+/&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在&lt;code&gt;onChange&lt;/code&gt;事件中，需要通过&lt;code&gt;bind&lt;/code&gt;方法绑定&lt;code&gt;this&lt;/code&gt;，这样才能在&lt;code&gt;inputChange&lt;/code&gt;函数中确定&lt;code&gt;this&lt;/code&gt;指向&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;inputChange(e) {
+    console.log(this);  // 指向bind绑定的Xiaojiejie对象
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果不绑定，则函数内部的&lt;code&gt;this&lt;/code&gt;指向为&lt;code&gt;undefined&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;绑定this的几种方法&#34;&gt;绑定this的几种方法&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在render函数内绑定&lt;br&gt;
+&lt;code&gt;&amp;lt;li onClick={this.handleClick.bind(this)}&amp;gt;&amp;lt;/li&amp;gt;&lt;/code&gt;&lt;br&gt;
+比较常规的方法，缺点在于每次渲染都要重新绑定，不利于优化&lt;/li&gt;
+&lt;li&gt;在构造函数中绑定&lt;pre&gt;&lt;code&gt;constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;算是第一种的进阶版，避免了重新绑定的问题，比较推荐，需要注意的是，绑定的方式为赋值的绑定，不能写错&lt;br&gt;
+3. 使用箭头函数&lt;/p&gt;
+&lt;h1 id=&#34;更改state相关&#34;&gt;更改state相关&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;更改&lt;code&gt;state&lt;/code&gt;必须使用&lt;code&gt;setState&lt;/code&gt;的方式&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;inputChange(e) {
+    this.setState({
+      inputValue: e.target.value,
+    });
+}
+&lt;/code&gt;&lt;/pre&gt;
 ">ReactRe:0</a>
       </div>
       

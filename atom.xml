@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-12T15:00:29.738Z</updated>
+    <updated>2020-10-13T13:58:13.472Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -11,13 +11,120 @@
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
     <entry>
+        <title type="html"><![CDATA[React学习记录4]]></title>
+        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-4/</id>
+        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-4/">
+        </link>
+        <updated>2020-10-13T04:56:43.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="事件">事件</h1>
+<p>React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上的不同：</p>
+<ul>
+<li>React 事件的命名采用小驼峰式（camelCase），而不是纯小写。</li>
+<li>使用 JSX 语法时你需要传入一个函数作为事件处理函数，而不是一个字符串。</li>
+</ul>
+<p>例如，传统的 HTML：</p>
+<pre><code>&lt;button onclick=&quot;activateLasers()&quot;&gt;
+  Activate Lasers
+&lt;/button&gt;
+</code></pre>
+<p>在 React 中略微不同：</p>
+<pre><code>&lt;button onClick={activateLasers}&gt;
+  Activate Lasers
+&lt;/button&gt;
+</code></pre>
+<p>在 React 中另一个不同点是你不能通过返回 false 的方式阻止默认行为。你必须显式的使用 preventDefault 。例如，传统的 HTML 中阻止链接默认打开一个新页面，你可以这样写：</p>
+<pre><code>&lt;a href=&quot;#&quot; onclick=&quot;console.log('The link was clicked.'); return false&quot;&gt;
+  Click me
+&lt;/a&gt;
+</code></pre>
+<p>在 React 中，可能是这样的：</p>
+<pre><code>function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return (
+    &lt;a href=&quot;#&quot; onClick={handleClick}&gt;
+      Click me
+    &lt;/a&gt;
+  );
+}
+</code></pre>
+<p>在这里，e 是一个合成事件。React 根据 W3C 规范来定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题。</p>
+<p>使用 React 时，你一般不需要使用 addEventListener 为已创建的 DOM 元素添加监听器。事实上，你只需要在该元素初始渲染的时候添加监听器即可。</p>
+<p>当你使用 ES6 class 语法定义一个组件的时候，通常的做法是将事件处理函数声明为 class 中的方法。例如，下面的 Toggle 组件会渲染一个让用户切换开关状态的按钮：</p>
+<pre><code>class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state =&gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.handleClick}&gt;
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      &lt;/button&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Toggle /&gt;,
+  document.getElementById('root')
+);
+</code></pre>
+<p>你必须谨慎对待 JSX 回调函数中的 this，在 JavaScript 中，class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined。</p>
+<h1 id="props">Props</h1>
+<p>父传递给子组件数据，单向流动，不能子传递给父组件</p>
+<p>props的传值，可以是任意的类型。</p>
+<p>props可以设置默认值</p>
+<pre><code>HelloMessage.defaultProps = { name:&quot;jujuul&quot;, msg:&quot;helloworld&quot; }
+</code></pre>
+<h2 id="父组件传值给子组件">父组件传值给子组件</h2>
+<pre><code>&lt;XiaojiejieItem content={item} /&gt;
+</code></pre>
+<p>其中 {item} 值来源于<code>this.state.list.map((item, index) =&gt; { //... }</code>中的 item</p>
+<p>在子组件中接收</p>
+<pre><code>&lt;li&gt;{this.props.content}&lt;/li&gt;
+</code></pre>
+<p>使用<code>this.props</code>的方式接收，父组件传值时用的什么属性名，这里就用相同的属性名接收</p>
+<h2 id="子组件传值给父组件">子组件传值给父组件</h2>
+<p>子组件想要改变父组件的值，需要父组件自己将更改自身的方法传递给子组件</p>
+<pre><code>&lt;XiaojiejieItem
+    content={item}
+    key={index + item}
+    index={index}
+    deleteItem={this.deleteItem.bind(this)}
+/&gt;
+</code></pre>
+<p>如上，子组件上挂载了父组件的 deleteItem 方法，子组件在自身的类中定义了一个 click 事件方法</p>
+<pre><code>&lt;li onClick={this.handleClick}&gt;{this.props.content}&lt;/li&gt;
+</code></pre>
+<pre><code>handleClick() {
+    this.props.deleteItem(this.props.index);
+}
+</code></pre>
+<p>而该方法则通过 this.props 的方式调用了父组件传递来的 deleteItem 方法，再把父组件传递来的 index 通过 <code>this.props</code> 的方式做为参数，完成子组件内 click 事件调用父组件的操作</p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[ReactRe:0]]></title>
         <id>https://jujuul.github.io/post/reactre0/</id>
         <link href="https://jujuul.github.io/post/reactre0/">
         </link>
         <updated>2020-10-12T14:07:29.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="jsx语法相关">JSX语法相关</h2>
-<p><code>JSX</code>语法要求return中必须有一个根<code>DOM</code>元素包裹，而不能是多个<code>DOM</code>元素并列</p>
+        <content type="html"><![CDATA[<h1 id="jsx语法相关">JSX语法相关</h1>
+<h2 id="jsx语法要求return中必须有一个根dom元素包裹而不能是多个dom元素并列"><code>JSX</code>语法要求return中必须有一个根<code>DOM</code>元素包裹，而不能是多个<code>DOM</code>元素并列</h2>
 <pre><code>render() {
     return (
         &lt;div&gt;
@@ -53,6 +160,48 @@
 </code></pre>
 <p>可以看到并没有多出那一层的<code>div</code><br>
 <img src="https://jujuul.github.io//post-images/1602514018494.png" alt="" loading="lazy"></p>
+<h2 id="能够不转义输入的html标签">能够不转义输入的HTML标签</h2>
+<pre><code>dangerouslySetInnerHTML={{ __html: item }}
+</code></pre>
+<p>在<code>html</code>标签中输入这段代码，就可以使<code>React</code>不自动转义 HTML 代码</p>
+<h2 id="label标签的for属性">label标签的for属性</h2>
+<p>在 react 中，label标签的for属性需要改成 htmlFor 才能使用</p>
+<pre><code>&lt;label htmlFor=&quot;jujuul&quot;&gt;增加服务:&lt;/label&gt;
+</code></pre>
+<h1 id="绑定事件相关">绑定事件相关</h1>
+<pre><code>&lt;input
+    value={this.state.inputValue}
+    onChange={this.inputChange.bind(this)}
+/&gt;
+</code></pre>
+<p>在<code>onChange</code>事件中，需要通过<code>bind</code>方法绑定<code>this</code>，这样才能在<code>inputChange</code>函数中确定<code>this</code>指向</p>
+<pre><code>inputChange(e) {
+    console.log(this);  // 指向bind绑定的Xiaojiejie对象
+}
+</code></pre>
+<p>如果不绑定，则函数内部的<code>this</code>指向为<code>undefined</code></p>
+<h2 id="绑定this的几种方法">绑定this的几种方法</h2>
+<ol>
+<li>在render函数内绑定<br>
+<code>&lt;li onClick={this.handleClick.bind(this)}&gt;&lt;/li&gt;</code><br>
+比较常规的方法，缺点在于每次渲染都要重新绑定，不利于优化</li>
+<li>在构造函数中绑定<pre><code>constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+}
+</code></pre>
+</li>
+</ol>
+<p>算是第一种的进阶版，避免了重新绑定的问题，比较推荐，需要注意的是，绑定的方式为赋值的绑定，不能写错<br>
+3. 使用箭头函数</p>
+<h1 id="更改state相关">更改state相关</h1>
+<p><strong>更改<code>state</code>必须使用<code>setState</code>的方式</strong></p>
+<pre><code>inputChange(e) {
+    this.setState({
+      inputValue: e.target.value,
+    });
+}
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -1376,31 +1525,6 @@ class baseTeacher extends Girl {
 <p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
 <a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
 <a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[React学习记录1]]></title>
-        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-1/</id>
-        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-1/">
-        </link>
-        <updated>2020-10-04T01:49:08.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="安装">安装</h2>
-<ol>
-<li>通过script引入使用，仅用于学习调试</li>
-</ol>
-<pre><code>&lt;script crossorigin src=&quot;https://unpkg.com/react@16/umd/react.development.js&quot;&gt;&lt;/script&gt;
-&lt;script crossorigin src=&quot;https://unpkg.com/react-dom@16/umd/react-dom.development.js&quot;&gt;&lt;/script&gt;
-</code></pre>
-<ol start="2">
-<li>通过react的脚手架，创建项目
-<ol>
-<li>安装脚手架 Crate React App<br>
-<code>npm i -g create-React-app</code>或者<code>npx create-react-app my-app</code>（不需再创建项目）</li>
-<li>创建项目<br>
-<code>create-react-app my-app</code></li>
-</ol>
-</li>
-</ol>
 ]]></content>
     </entry>
 </feed>

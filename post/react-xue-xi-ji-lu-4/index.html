@@ -8,7 +8,7 @@
 <meta name="keywords" content="jujuul">
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
-<title>每天一个名词解释—Nuxt.js | Mark</title>
+<title>React学习记录4 | Mark</title>
 <link rel="shortcut icon" href="/favicon.ico?v=1602597480580">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
@@ -38,7 +38,7 @@
 
 
 
-  <meta name="description" content="每天一个名词解释—Nuxt.js" />
+  <meta name="description" content="React学习记录4" />
   <meta name="keywords" content="" />
 </head>
 
@@ -183,9 +183,11 @@
   <div class="toc-wrapper auto-number auto"
     id="toc_wrapper">
     <ul class="markdownIt-TOC">
-<li>
+<li><a href="#%E4%BA%8B%E4%BB%B6">事件</a></li>
+<li><a href="#props">Props</a>
 <ul>
-<li><a href="#%E7%89%B9%E6%80%A7">特性</a></li>
+<li><a href="#%E7%88%B6%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC%E7%BB%99%E5%AD%90%E7%BB%84%E4%BB%B6">父组件传值给子组件</a></li>
+<li><a href="#%E5%AD%90%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC%E7%BB%99%E7%88%B6%E7%BB%84%E4%BB%B6">子组件传值给父组件</a></li>
 </ul>
 </li>
 </ul>
@@ -453,8 +455,8 @@
           <div class="section bg-color post post-page">
             <section class="post-header">
   <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/">
-      每天一个名词解释—Nuxt.js
+    <a class="post-title-link" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-4/">
+      React学习记录4
     </a>
   </h1>
   <div class="post-meta">
@@ -462,50 +464,122 @@
     <span class="meta-item pc-show">
       <i class="fa fa-calendar-o"></i>
       <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-12 13:25:33">2020-08-12</span>
+      <span class="publish-time" data-t="2020-10-13 12:56:43">2020-10-13</span>
       <span class="post-meta-divider pc-show">|</span>
     </span>
     
     <span class="meta-item">
       <i class="fa fa-clock-o"></i>
-      <span>2<span class="language" data-lan="minute">分钟</span></span>
+      <span>4<span class="language" data-lan="minute">分钟</span></span>
     </span>
     <span class="meta-item">
       <span class="post-meta-divider">|</span>
       <i class="fa fa-file-word-o"></i>
-      <span>438<span class="pc-show language" data-lan="words">字数</span></span>
+      <span>831<span class="pc-show language" data-lan="words">字数</span></span>
     </span>
     
   </div>
 </section>
             <div class="post-body next-md-body" id="post_body">
-              <p>Nuxt.js 是一个基于 Vue.js 的通用应用框架。<br>
-通过对客户端/服务端基础架构的抽象组织，Nuxt.js 主要关注的是应用的 UI 渲染。<br>
-Vue 开发一个单页面应用，相信很多前端工程师都已经学会了，但是单页面应用有一个致命的缺点，就是 SEO 极不友好。除非，vue 能在服务端渲染（ssr）并直接返回已经渲染好的页面，而并非只是一个单纯的 <code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>。<br>
-Nuxt.js 就是一个极简的 vue 版的 ssr 框架。基于它，我们可以快速开发一个基于 vue 的 ssr 单页面应用。<br>
-Nuxt.js 集成了以下组件/框架，用于开发完整而强大的 Web 应用：<br>
-Vue 2<br>
-Vue-Router<br>
-Vuex (当配置了 Vuex 状态树配置项 时才会引入)<br>
-Vue 服务器端渲染 (排除使用 mode: 'spa')<br>
-Vue-Meta<br>
-压缩并 gzip 后，总代码大小为：57kb （如果使用了 Vuex 特性的话为 60kb）。<br>
-另外，Nuxt.js 使用 Webpack 和 vue-loader 、 babel-loader 来处理代码的自动化构建工作（如打包、代码分层、压缩等等）。</p>
-<h2 id="特性">特性</h2>
-<p>基于 Vue.js<br>
-自动代码分层<br>
-服务端渲染<br>
-强大的路由功能，支持异步数据<br>
-静态文件服务<br>
-ES2015+ 语法支持<br>
-打包和压缩 JS 和 CSS<br>
-HTML 头部标签管理<br>
-本地开发支持热加载<br>
-集成 ESLint<br>
-支持各种样式预处理器： SASS、LESS、 Stylus 等等<br>
-支持 HTTP/2 推送<br>
-以上内容来源网络<br>
-总结:大致在网络上浏览了一下，了解了Nuxt.js的作用，服务端渲染，与其同作用的还有React的Next.js，目的就是利于SEO</p>
+              <h1 id="事件">事件</h1>
+<p>React 元素的事件处理和 DOM 元素的很相似，但是有一点语法上的不同：</p>
+<ul>
+<li>React 事件的命名采用小驼峰式（camelCase），而不是纯小写。</li>
+<li>使用 JSX 语法时你需要传入一个函数作为事件处理函数，而不是一个字符串。</li>
+</ul>
+<p>例如，传统的 HTML：</p>
+<pre><code>&lt;button onclick=&quot;activateLasers()&quot;&gt;
+  Activate Lasers
+&lt;/button&gt;
+</code></pre>
+<p>在 React 中略微不同：</p>
+<pre><code>&lt;button onClick={activateLasers}&gt;
+  Activate Lasers
+&lt;/button&gt;
+</code></pre>
+<p>在 React 中另一个不同点是你不能通过返回 false 的方式阻止默认行为。你必须显式的使用 preventDefault 。例如，传统的 HTML 中阻止链接默认打开一个新页面，你可以这样写：</p>
+<pre><code>&lt;a href=&quot;#&quot; onclick=&quot;console.log('The link was clicked.'); return false&quot;&gt;
+  Click me
+&lt;/a&gt;
+</code></pre>
+<p>在 React 中，可能是这样的：</p>
+<pre><code>function ActionLink() {
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
+  return (
+    &lt;a href=&quot;#&quot; onClick={handleClick}&gt;
+      Click me
+    &lt;/a&gt;
+  );
+}
+</code></pre>
+<p>在这里，e 是一个合成事件。React 根据 W3C 规范来定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题。</p>
+<p>使用 React 时，你一般不需要使用 addEventListener 为已创建的 DOM 元素添加监听器。事实上，你只需要在该元素初始渲染的时候添加监听器即可。</p>
+<p>当你使用 ES6 class 语法定义一个组件的时候，通常的做法是将事件处理函数声明为 class 中的方法。例如，下面的 Toggle 组件会渲染一个让用户切换开关状态的按钮：</p>
+<pre><code>class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state =&gt; ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      &lt;button onClick={this.handleClick}&gt;
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      &lt;/button&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;Toggle /&gt;,
+  document.getElementById('root')
+);
+</code></pre>
+<p>你必须谨慎对待 JSX 回调函数中的 this，在 JavaScript 中，class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined。</p>
+<h1 id="props">Props</h1>
+<p>父传递给子组件数据，单向流动，不能子传递给父组件</p>
+<p>props的传值，可以是任意的类型。</p>
+<p>props可以设置默认值</p>
+<pre><code>HelloMessage.defaultProps = { name:&quot;jujuul&quot;, msg:&quot;helloworld&quot; }
+</code></pre>
+<h2 id="父组件传值给子组件">父组件传值给子组件</h2>
+<pre><code>&lt;XiaojiejieItem content={item} /&gt;
+</code></pre>
+<p>其中 {item} 值来源于<code>this.state.list.map((item, index) =&gt; { //... }</code>中的 item</p>
+<p>在子组件中接收</p>
+<pre><code>&lt;li&gt;{this.props.content}&lt;/li&gt;
+</code></pre>
+<p>使用<code>this.props</code>的方式接收，父组件传值时用的什么属性名，这里就用相同的属性名接收</p>
+<h2 id="子组件传值给父组件">子组件传值给父组件</h2>
+<p>子组件想要改变父组件的值，需要父组件自己将更改自身的方法传递给子组件</p>
+<pre><code>&lt;XiaojiejieItem
+    content={item}
+    key={index + item}
+    index={index}
+    deleteItem={this.deleteItem.bind(this)}
+/&gt;
+</code></pre>
+<p>如上，子组件上挂载了父组件的 deleteItem 方法，子组件在自身的类中定义了一个 click 事件方法</p>
+<pre><code>&lt;li onClick={this.handleClick}&gt;{this.props.content}&lt;/li&gt;
+</code></pre>
+<pre><code>handleClick() {
+    this.props.deleteItem(this.props.index);
+}
+</code></pre>
+<p>而该方法则通过 this.props 的方式调用了父组件传递来的 deleteItem 方法，再把父组件传递来的 index 通过 <code>this.props</code> 的方式做为参数，完成子组件内 click 事件调用父组件的操作</p>
 
             </div>
             
@@ -518,7 +592,7 @@ HTML 头部标签管理<br>
     </li>
     <li class="post-copyright-link">
       <strong class="language" data-lan="link">本文链接：</strong>
-      <a href="https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/" title="每天一个名词解释—Nuxt.js">https://jujuul.github.io/post/mei-tian-yi-ge-ming-ci-jie-shi-nuxtjs/</a>
+      <a href="https://jujuul.github.io/post/react-xue-xi-ji-lu-4/" title="React学习记录4">https://jujuul.github.io/post/react-xue-xi-ji-lu-4/</a>
     </li>
     <li class="post-copyright-license">
       <strong class="language" data-lan="copyright">版权声明： </strong>
@@ -531,15 +605,11 @@ HTML 头部标签管理<br>
   <div class="nav">
     <div class="nav-prev">
       
-        <i class="fa fa-chevron-left"></i>
-        <a class="nav-pc-next" title="字母换行失败问题" href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">字母换行失败问题</a class="nav-pc-next">
-        <a class="nav-mobile-prev" title="字母换行失败问题" href="https://jujuul.github.io/post/zi-mu-huan-xing-shi-bai-wen-ti/">上一篇</a>
-      
     </div>
     <div class="nav-next">
       
-        <a class="nav-pc-next" title="ES6中的Symbol" href="https://jujuul.github.io/post/es6-zhong-de-symbol/">ES6中的Symbol</a>
-        <a class="nav-mobile-next" title="ES6中的Symbol" href="https://jujuul.github.io/post/es6-zhong-de-symbol/">下一篇</a>
+        <a class="nav-pc-next" title="ReactRe:0" href="https://jujuul.github.io/post/reactre0/">ReactRe:0</a>
+        <a class="nav-mobile-next" title="ReactRe:0" href="https://jujuul.github.io/post/reactre0/">下一篇</a>
         <i class="fa fa-chevron-right"></i>
       
     </div>
