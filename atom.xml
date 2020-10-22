@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-13T13:58:13.472Z</updated>
+    <updated>2020-10-22T16:02:43.298Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,524 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[Vuex原理]]></title>
+        <id>https://jujuul.github.io/post/vuex-yuan-li/</id>
+        <link href="https://jujuul.github.io/post/vuex-yuan-li/">
+        </link>
+        <updated>2020-10-22T14:38:39.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>在</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Vue响应式原理]]></title>
+        <id>https://jujuul.github.io/post/vue-xiang-ying-shi-yuan-li/</id>
+        <link href="https://jujuul.github.io/post/vue-xiang-ying-shi-yuan-li/">
+        </link>
+        <updated>2020-10-19T15:56:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>随着对于 vue 的学习，对于其原理的掌握也是非常必要的，因此我也买了一本网上很多人推荐的《深入浅出Vue.js》，还在掘金上买了一本《剖析 Vue.js 内部运行机制》的小册，虽然还都没有读完，不过收获却是不少，这篇文章也是对于这两本书中关于 vue 响应式原理部分的总结。</p>
+<h1 id="追踪变化">追踪变化</h1>
+<p>想要实现响应式，就需要能够检测到哪个数据发生了变化，而 vue2 的实现方式是通过 Object.defineReactive 函数, vue 能实现响应式就是因为有这个方法，当然，在最新的 vue3.0 版本中，通过 proxy 取代了 Object.defineProperty，不过它们的原理是相同的。<br>
+Object.defineProperty 的作用是侦测对象的变化，因此我们可以写出下面的代码</p>
+<pre><code>function defineReactive(data, key, val){
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function(){
+            return val
+        },
+        set: function(newVal){
+            if(val == newVale){
+                return
+            }
+            val = newVal
+        }
+    })
+}
+</code></pre>
+<p>上面的函数 defineReactive 是对 Object.defineReactive 进行封装。函数的作用是定义一个响应式数据，封装后只需要传递 data、key 和 val 就行了。</p>
+<p>封装好之后，每当从 data 的 key 中读取数据时，get 函数被触发；每当往 data 的 key 中设置数据时，set 函数会被触发。</p>
+<h1 id="收集依赖">收集依赖</h1>
+<p>理解了前面的代码，就会发现，这并没有什么用，因为这里只是将数据转变为响应式数据，却没有做另外的处理，所以这里就要引入一些其他的东西，首先就是收集依赖。</p>
+<p>我们观察数据的目的就是为了当数据属性发生改变时，可以通知那些使用了该数据的地方<br>
+举个🌰</p>
+<pre><code>&lt;template&gt;
+    &lt;h1&gt;{{ name }}
+&lt;/template&gt;
+</code></pre>
+<p>该模板中使用了数据 name，所以当它发生改变时，要向使用了它的地方发送通知。所以收集依赖就是先收集依赖，把用到数据 name 的地方收集起来，当数据发生变化时，把之前收集过的依赖循环触发一边就可以了。</p>
+<p>总结来说，就是在 getter 中收集依赖，在 setter 中触发依赖。</p>
+<h1 id="收集在哪里">收集在哪里？</h1>
+<h1 id="收集的依赖到底是什么">收集的依赖到底是什么?</h1>
+<h1 id="watch是什么">Watch是什么？</h1>
+<h1 id="总结">总结</h1>
+<h1 id="尾声">尾声</h1>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[高质量代码]]></title>
+        <id>https://jujuul.github.io/post/gao-zhi-liang-dai-ma/</id>
+        <link href="https://jujuul.github.io/post/gao-zhi-liang-dai-ma/">
+        </link>
+        <updated>2020-10-17T02:40:12.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="判断是否为空">判断是否为空</h2>
+<pre><code>//普通写法
+if (a == undefined) a = [];
+
+// 优雅写法
+a = a || [];
+
+//普通写法
+if (params.success) {
+    params.success(res)
+}
+// 优雅写法
+params.success &amp;&amp; params.success(res)
+</code></pre>
+<h2 id="多条件判断">多条件判断</h2>
+<pre><code>//普通写法
+var Statistics = function () {
+    console.log('执行')
+}
+switch (currentTab) {
+    case 0:
+        Statistics();
+        break;
+    case 1:
+        Statistics();
+        break;
+    case 2:
+        Statistics();
+        break;
+    case 3:
+        Statistics();
+        break;
+}
+</code></pre>
+<pre><code>// 优雅写法
+// 将判断条件作为对象的属性名，将处理逻辑作为对象的属性值
+var Statistics = function () {
+    console.log('执行')
+}
+const comparativeToles = new Map([
+    [0, Statistics],
+    [1, Statistics],
+    [2, Statistics],
+    [3, Statistics],
+])
+comparativeToles.get(1) &amp;&amp; comparativeToles.get(1)()
+
+// 可以使用 Map 或者是对象的形式来处理，下面的判断语句判断是否符合条件，如不符合则不操作，符合则调用
+</code></pre>
+<h2 id="匿名函数调用">匿名函数调用</h2>
+<pre><code>// 普通写法
+(function () {})();
+
+// 优雅写法
+!function(){}()
++function(){}()
+
+// 通过这种方法可以隔绝函数，避免前面未写 ；结束造成的调用错误
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React学习记录6]]></title>
+        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-6/</id>
+        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-6/">
+        </link>
+        <updated>2020-10-15T14:12:15.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="生命周期函数">生命周期函数</h1>
+<p>在某一时刻可以自动执行的函数，就是生命周期函数</p>
+<h2 id="initialization">Initialization</h2>
+<h2 id="mounting">Mounting</h2>
+<h2 id="updation">Updation</h2>
+<h2 id="unmounting">Unmounting</h2>
+<h2 id="react15组件生命周期">react15组件生命周期</h2>
+<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1602856889263.png" alt="" loading="lazy"></figure>
+<h2 id="为什么-react-16-要更改组件的生命周期">为什么 React 16 要更改组件的生命周期？</h2>
+<h3 id="虚拟-dom-的流程">虚拟 DOM 的流程</h3>
+<p>组件在初始化时，通过调用 render 方法生成虚拟 DOM，再通过调用 ReactDOM.render 方法实现虚拟 DOM 到真实 DOM 的转换，当组件更新时，会通过调用 render 方法生成新的虚拟 DOM，然后借助 diff 算法，定位出两次虚拟 DOM 的差异，针对发生变化的真实 DOM 做定向更新</p>
+<h3 id="组件化">组件化</h3>
+<h1 id="react用axios请求远程数据">React用axios请求远程数据</h1>
+<p>推荐在 componentDidMount 生命周期内使用 axios</p>
+<h2 id="获取并更改当前数据">获取并更改当前数据</h2>
+<pre><code>.get(
+        &quot;https://www.easy-mock.com/mock/5f8a71ff4dc90c664451515e/ReactDemo01/xiaojiejie&quot;
+      )
+      .then((res) =&gt; {
+        console.log(res.data.data);
+        this.setState({
+          list: res.data.data,
+        });
+      })
+      .catch((error) =&gt; {
+        console.log(&quot;axios 获取数据失败&quot; + error);
+      });
+</code></pre>
+<p>主要在于 setState 的使用，要变更组件的数据必须使用 setState 的方式，至于 axios 的用法和在 Vue 中使用没有什么区别，还有就是在 componentDidMount 这个生命周期中使用，听说 最新版本的 react 在其他生命周期获取更适合，等以后学到了再说了</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载：来，让我们谈一谈 Normalize.css]]></title>
+        <id>https://jujuul.github.io/post/zhuan-zai/</id>
+        <link href="https://jujuul.github.io/post/zhuan-zai/">
+        </link>
+        <updated>2020-10-15T12:08:28.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>本文译自Normalize.css官网: <a href="http://nicolasgallagher.com/about-normalize-css/">http://nicolasgallagher.com/about-normalize-css/</a></p>
+</blockquote>
+<p>    Normalize.css 只是一个很小的CSS文件，但它在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS reset，Normalize.css是一种现代的、为HTML5准备的优质替代方案。Normalize.css现在已经被用于Twitter Bootstrap、HTML5 Boilerplate、GOV.UK、Rdio、CSS Tricks 以及许许多多其他框架、工具和网站上。</p>
+<ul>
+<li><a href="http://necolas.github.io/normalize.css/">Normalize.css 项目地址</a></li>
+<li><a href="https://github.com/necolas/normalize.css">Normalize.css 在GitHub上的源码</a></li>
+</ul>
+<h1 id="综述">综述</h1>
+<p>    Normalize.css是一种CSS reset的替代方案。经过@necolas和@jon_neal花了几百个小时来努力研究不同浏览器的默认样式的差异，这个项目终于变成了现在这样。</p>
+<p>    我们创造normalize.css有下面这几个目的：</p>
+<ul>
+<li>保护有用的浏览器默认样式而不是完全去掉它们</li>
+<li>一般化的样式：为大部分HTML元素提供</li>
+<li>修复浏览器自身的bug并保证各浏览器的一致性</li>
+<li>优化CSS可用性：用一些小技巧</li>
+<li>解释代码：用注释和详细的文档来</li>
+</ul>
+<p>    Normalize.css支持包括手机浏览器在内的超多浏览器，同时对HTML5元素、排版、列表、嵌入的内容、表单和表格都进行了一般化。尽管这个项目基于一般化的原则，但我们还是在合适的地方使用了更实用的默认值。</p>
+<h1 id="normalize-vs-reset">Normalize vs Reset</h1>
+<p>    知道Normalize.css和传统Reset的区别是非常有价值的。</p>
+<ol>
+<li>Normalize.css 保护了有价值的默认值<br>
+    Reset通过为几乎所有的元素施加默认样式，强行使得元素有相同的视觉效果。相比之下，Normalize.css保持了许多默认的浏览器样式。这就意味着你不用再为所有公共的排版元素重新设置样式。当一个元素在不同的浏览器中有不同的默认值时，Normalize.css会力求让这些样式保持一致并尽可能与现代标准相符合。</li>
+<li>Normalize.css 修复了浏览器的bug<br>
+    它修复了常见的桌面端和移动端浏览器的bug。这往往超出了Reset所能做到的范畴。关于这一点，Normalize.css修复的问题包含了HTML5元素的显示设置、预格式化文字的font-size问题、在IE9中SVG的溢出、许多出现在各浏览器和操作系统中的与表单相关的bug。<br>
+    可以看以下这个例子，看看对于HTML5中新出现的input类型search，Normalize.css是如何保证跨浏览器的一致性的。</li>
+</ol>
+<pre><code> * 1. Addresses appearance set to searchfield in S5, Chrome
+ * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
+ */
+
+input[type=&quot;search&quot;] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Removes inner padding and search cancel button in S5, Chrome on OS X
+ */
+
+input[type=&quot;search&quot;]::-webkit-search-decoration,
+input[type=&quot;search&quot;]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+</code></pre>
+<ol start="3">
+<li>Normalize.css 不会让你的调试工具变的杂乱<br>
+    使用Reset最让人困扰的地方莫过于在浏览器调试工具中大段大段的继承链，如下图所示。在Normalize.css中就不会有这样的问题，因为在我们的准则中对多选择器的使用时非常谨慎的，我们仅会有目的地对目标元素设置样式。<br>
+<img src="https://jujuul.github.io//post-images/1602764259478.png" alt="" loading="lazy"></li>
+<li>Normalize.css 是模块化的<br>
+    这个项目已经被拆分为多个相关却又独立的部分，这使得你能够很容易也很清楚地知道哪些元素被设置了特定的值。因此这能让你自己选择性地移除掉某些永远不会用到部分（比如表单的一般化）。</li>
+<li>Normalize.css 拥有详细的文档<br>
+    Normalize.css的代码基于详细而全面的跨浏览器研究与测试。这个文件中拥有详细的代码说明并在Github Wiki中有进一步的说明。这意味着你可以找到每一行代码具体完成了什么工作、为什么要写这句代码、浏览器之间的差异，并且你可以更容易地进行自己的测试。<br>
+    这个项目的目标是帮助人们了解浏览器默认是如何渲染元素的，同时也让人们很容易地明白如何改进浏览器渲染。</li>
+</ol>
+<h1 id="如何使用-normalizecss">如何使用 normalize.css</h1>
+<p>    首先，安装或从Github下载Normalize.css，接下来有两种主要途径去使用它。</p>
+<ul>
+<li>策略一：将normalize.css作为你自己项目的基础CSS，自定义样式值以满足设计师的需求。</li>
+<li>策略二：引入normalize.css源码并在此基础上构建，在必要的时候用你自己写的CSS覆盖默认值。</li>
+</ul>
+<h1 id="结语">结语</h1>
+<p>    无论从适用范畴还是实施上，Normalize.css与Reset都有极大的不同。尝试一下这两种方法并看看到底哪种更适合你的开发偏好是非常值得的。这个项目在Github上以开源的形式开发。任何人都能够提交问题报告或者提交补丁。整个项目发展的过程对所有人都是可见的，而每一次改动的原因也都写在commit信息中，这些都是有迹可循的。</p>
+<h1 id="相关阅读">相关阅读</h1>
+<p>    关于更多默认UA样式的详细信息：</p>
+<ul>
+<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints">WHATWG suggestions for rendering HTML documents</a></li>
+<li><a href="http://iecss.com/">Internet Explorer User Agent Style Sheets</a></li>
+<li><a href="http://css-class.com/test/css/defaults/UA-style-sheet-defaults.htm">CSS2.1 User Agent Style Sheet Defaults</a></li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[移动端布局总结]]></title>
+        <id>https://jujuul.github.io/post/yi-dong-duan-bu-ju-zong-jie/</id>
+        <link href="https://jujuul.github.io/post/yi-dong-duan-bu-ju-zong-jie/">
+        </link>
+        <updated>2020-10-15T02:42:42.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="视口">视口</h1>
+<p>视口就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉视口和理想视口</p>
+<h2 id="布局视口-layout-viewport">布局视口 layout viewport</h2>
+<ul>
+<li>一般移动设备的浏览器都默认设置了一个布局视口，用于解决早期的PC端页面在手机上显示的问题。</li>
+<li>IOS、Android基本都将这个视口分辨率设置为980px，所以PC上的网页大多都能在手机上呈现，只不过元素看上去很小，一般默认可以通过手动缩放网页。</li>
+</ul>
+<h2 id="视觉视口-visual-viewport">视觉视口 visual viewport</h2>
+<ul>
+<li>字面意思，它是用户正在看到的网站的区域。注意：是网站的区域。</li>
+<li>我们可以通过缩放去操作视觉视口，但不会影响布局视口，布局视口仍保持yua原来的宽度。</li>
+</ul>
+<h2 id="理想视口-ideal-viewport">理想视口 ideal viewport</h2>
+<ul>
+<li>为了使网站再移动端有最理想的浏览和阅读宽度而设定</li>
+<li>理想视口，对设备来讲，是最理想的视口尺寸</li>
+<li>需要手动填写meta视口标签通知浏览器操作</li>
+<li>meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，简单理解就是该设备有多宽，我们布局的视口就多宽</li>
+</ul>
+<h2 id="meta视口标签">meta视口标签</h2>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0&quot;&gt;
+</code></pre>
+<p>user-scalable：是否允许用户缩放<br>
+initial-scale：初始缩放比，一般是1.0<br>
+maximum-scale：最大缩放比<br>
+minimum-scale：最小缩放比</p>
+<h2 id="标准的viewport设置">标准的viewport设置</h2>
+<ul>
+<li>视口宽度和设备保持一致</li>
+<li>视口的默认缩放比例为1.0</li>
+<li>不允许用户自行缩放</li>
+<li>最大允许的缩放比例为1.0</li>
+<li>最小允许的缩放比例为1.0</li>
+</ul>
+<h1 id="二倍图">二倍图</h1>
+<h2 id="物理像素物理像素比">物理像素&amp;物理像素比</h2>
+<ul>
+<li>物理像素点指的是屏幕显示的最小颗粒，是物理真实存在的。这是厂商在出厂时就设置好了，比如苹果6\7\8是750*1334</li>
+<li>我们开发时候的1px不是一定等于一个物理像素的</li>
+<li>PC端页面，1个px等于一个物理像素的，但是移动端就不尽相同</li>
+<li>一个px的能显示的物理像素点的个数，称为物理像素比或屏幕像素比</li>
+</ul>
+<h2 id="多倍图">多倍图</h2>
+<ul>
+<li>对于一张50px*50px的图片，在手机Retina屏中打开，按照刚才的物理像素比会放大数倍，这样会造成图片模糊</li>
+<li>在标准的viewport设置中，使用倍图来提高图片质量，解决在高清设备中的模糊问题</li>
+<li>通常使用二倍图，因为iPhone6\7\8的影响，但是现在还存在3倍图4倍图的情况，这个看实际开发公司需求</li>
+<li>背景图片 注意缩放问题</li>
+</ul>
+<h2 id="背景缩放-background-size">背景缩放 background-size</h2>
+<p>background-size属性规定背景图像的尺寸</p>
+<pre><code>background-size：背景图片宽度，背景图片高度；
+</code></pre>
+<ul>
+<li>只写一个参数，就是宽度，高度会等比缩放</li>
+<li>可以写%，相对于父盒子</li>
+<li>cover，等比例拉伸，完全覆盖div盒子，会导致部分背景图片显示不全</li>
+<li>contain，高度和宽度等比例拉伸，当高度或宽度其中一个铺满盒子就不再拉伸，可能会导致出现空白区域，因为未填满</li>
+</ul>
+<h1 id="移动端开发选择">移动端开发选择</h1>
+<h2 id="单独制作移动端页面主流">单独制作移动端页面（主流）</h2>
+<h2 id="响应式页面兼容移动端其次">响应式页面兼容移动端（其次）</h2>
+<p>缺点：制作麻烦，需要花很大精力去调兼容性问题</p>
+<h1 id="移动端技术解决方案">移动端技术解决方案</h1>
+<h2 id="移动端浏览器">移动端浏览器</h2>
+<p>移动端浏览器以webkit内核为主，因此主要考虑webkit兼容性问题。</p>
+<p>可以放心使用H5标签和CSS3样式</p>
+<p>同时我们浏览器的私有前缀我们只需要考虑添加webkit即可</p>
+<h2 id="css3盒模型">css3盒模型</h2>
+<p>就是 box-sizing 设置为 border-box</p>
+<h1 id="移动端常见布局">移动端常见布局</h1>
+<h2 id="移动端技术选型">移动端技术选型</h2>
+<ol>
+<li>单独制作移动端页面（主流）
+<ul>
+<li>流式布局（百分比布局）</li>
+<li>flex弹性布局（强烈推荐）</li>
+<li>less+rem+媒体查询布局</li>
+<li>混合布局</li>
+</ul>
+</li>
+<li>响应式页面兼容移动端（其次）
+<ul>
+<li>媒体查询</li>
+<li>bootstrap</li>
+</ul>
+</li>
+</ol>
+<h1 id="流式布局百分比布局">流式布局（百分比布局）</h1>
+<ul>
+<li>流式布局，就是百分比布局，也称非固定像素布局</li>
+<li>通过盒子的宽度设置成百分比来根据屏幕的宽度进行收缩，不受固定像素的限制，内容向两侧填充</li>
+<li>流式布局方式是移动web开发使用的比较常见的布局方式</li>
+</ul>
+<h1 id="flex布局">flex布局</h1>
+<h2 id="传统布局与flex布局对比">传统布局与flex布局对比</h2>
+<h3 id="传统布局">传统布局</h3>
+<ul>
+<li>兼容性好</li>
+<li>布局繁琐</li>
+<li>局限性，在移动端表现不好</li>
+</ul>
+<h3 id="flex弹性布局">flex弹性布局</h3>
+<ul>
+<li>操作方便，布局极为简单，移动端应用广泛</li>
+<li>PC端浏览器支持情况较差</li>
+<li>IE11或更低版本，不支持或仅部分支持</li>
+</ul>
+<p><strong>建议：</strong></p>
+<ol>
+<li>如果是PC端页面布局，可以使用传统布局</li>
+<li>如果是移动端或者不考虑兼容性问题的PC端布局，推荐flex弹性布局</li>
+</ol>
+<h2 id="flex布局原理">flex布局原理</h2>
+<p>flex 是 flexible Box 的缩写，意为“弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为 flex 布局</p>
+<ul>
+<li>当我们为父盒子设置 flex 以后，子元素的 float、clear 和 vertical-align 属性将失效</li>
+<li>伸缩布局 = 弹性布局 = 伸缩弹性盒 = 弹性盒布局 = flex 布局</li>
+</ul>
+<h3 id="布局原理">布局原理</h3>
+<p>通过给父盒子添加 flex 属性，来控制子盒子的位置和排列方式</p>
+<h1 id="rem布局">rem布局</h1>
+<h2 id="rem基础">rem基础</h2>
+<h3 id="rem单位">rem单位</h3>
+<p>rem（root em）是一个相对单位，类似于 em，em 是相对于父元素的字体大小</p>
+<p>不同的是 rem 的基准是相对于根 html 元素的字体大小</p>
+<p>rem 的优点就是可以通过修改根 html 元素的字体大小来改变页面中元素的大小</p>
+<h2 id="媒体查询">媒体查询</h2>
+<h3 id="什么是媒体查询">什么是媒体查询？</h3>
+<p>媒体查询（Media Query）是 CSS3 新语法。</p>
+<ul>
+<li>使用 @media 查询，可以针对不同的媒体类型定义不同的样式</li>
+<li><code>@media 可以针对不同的屏幕尺寸设置不同的样式</code></li>
+<li>当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面</li>
+<li>目前针对很多苹果手机、Android 手机，平板等设备都用得到媒体查询</li>
+</ul>
+<h3 id="语法规范">语法规范</h3>
+<pre><code>@media mediatype and|not|only (media feature) {
+    css-code
+}
+</code></pre>
+<ul>
+<li>用 @media 开头，注意 @ 符号</li>
+<li>mediatype 媒体类型</li>
+<li>关键字 and not only</li>
+<li>media feature 媒体特性，必须有小括号包括</li>
+</ul>
+<h3 id="mediatype-查询类型">mediatype 查询类型</h3>
+<p>将不同的终端设备划分成不同的类型，称为媒体类型</p>
+<ul>
+<li>all：        用于所有设备</li>
+<li>print：     用于打印机和打印预览</li>
+<li>screen：  用于电脑屏幕，平板电脑，智能手机等</li>
+</ul>
+<h3 id="关键字">关键字</h3>
+<p>关键字将媒体类型或多个媒体特性连接到一起作为媒体查询的条件</p>
+<ul>
+<li>and：可以将多个媒体特性连接到一起，相当于“且”的意思</li>
+<li>not：排除某个媒体类型，相当于“非”的意思，可以省略</li>
+<li>only：指定某个特定的媒体类型，可以省略</li>
+</ul>
+<h3 id="媒体特性">媒体特性</h3>
+<p>每种媒体类型都有各自不同的特性，根据不同媒体类型的媒体特性设置不同的展示风格</p>
+<ul>
+<li>width：          定义输出设备中页面可见区域的宽度</li>
+<li>min-width：  定义输出设备中页面最小可见区域宽度</li>
+<li>max-width：  定义输出设备中页面最大可见区域宽度</li>
+</ul>
+<p><strong>为了防止混乱，媒体查询我们要按照从小到大或者从大到小的顺序来写<code>推荐从小到大，代码更简洁</code></strong><br>
+<strong>ps：and 左右一定要有空格，代码格式化插件也没法格式化这里</strong></p>
+<h2 id="引入资源">引入资源</h2>
+<p>当资源比较繁多的时候，我们可以针对不同的媒体使用不同的样式</p>
+<p>原理就是直接在 link 中判断设备的尺寸，然后引入不同的 css 文件</p>
+<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style320.css&quot; media=&quot;screen and (min-width:320px)&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;style640.css&quot; media=&quot;screen and (min-width:640px)&quot;&gt;
+</code></pre>
+<h2 id="rem适配方案">rem适配方案</h2>
+<p>###方案1</p>
+<ul>
+<li>less</li>
+<li>媒体查询</li>
+<li>rem</li>
+</ul>
+<h3 id="方案2">方案2</h3>
+<ul>
+<li>flexibls.js</li>
+<li>rem</li>
+</ul>
+<h2 id="rem实际开发适配方案1">rem实际开发适配方案1</h2>
+<h3 id="动态设置html标签font-size大小">动态设置html标签font-size大小</h3>
+<ol>
+<li>假设设计稿是750px</li>
+<li>假设我们把整个屏幕划分成15等份（也可划分为20或10等份）</li>
+<li>每一份作为html字体大小，这里就是50px</li>
+<li>那么在320px设备的时候，字体大小就是320/15=21.33px</li>
+<li>用我们页面元素的大小除以不同的html字体大小会发现他们比例是相同的</li>
+<li>比如我们以750为标准设计稿</li>
+<li>一个100*100像素的页面元素在750屏幕下，就是100/50转换为rem是2rem × 2rem，比例是1比1</li>
+<li>320屏幕下，html字体大小为21.33px，则2rem=42.66px，此时宽和高都是42.66，但是宽和高的比例还是1比1</li>
+<li>但是已经能实现不同屏幕下的页面盒子等比缩放的效果</li>
+</ol>
+<h3 id="元素大小取值方法">元素大小取值方法</h3>
+<ol>
+<li>最后的公式：页面元素的rem值 = 页面元素值（px）/（屏幕宽度/划分的份数）</li>
+<li>屏幕宽度/划分的份数就是 html 的 font-size 的大小</li>
+<li>或者：页面元素的 rem 值 = 页面元素值（px）/ html 的 font-size字体大小</li>
+</ol>
+<h2 id="rem实际开发适配方案2">rem实际开发适配方案2</h2>
+<h3 id="flexiblejs">flexible.js</h3>
+<p>手淘出的移动端适配库，无需再写媒体查询，库帮忙做了js处理</p>
+<h1 id="响应式布局">响应式布局</h1>
+<h2 id="响应式开发原理">响应式开发原理</h2>
+<p>使用媒体查询针对不同宽度的设备进行布局和样式设置，从而适配不同设备<br>
+尺寸划分</p>
+<ul>
+<li>超小屏幕（手机）              &lt; 768px</li>
+<li>小屏设备（平板）              &gt;= 768px ~ &lt; 992px</li>
+<li>中等屏幕（桌面显示器）    &gt;= 992px ~ &lt; 1200px</li>
+<li>宽屏设备（大桌面显示器）&gt;= 1200px</li>
+</ul>
+<h2 id="响应式布局容器">响应式布局容器</h2>
+<p>响应式需要一个父级作为布局容器，来配合子级元素来实现变化效果</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[React学习记录5]]></title>
+        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-5/</id>
+        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-5/">
+        </link>
+        <updated>2020-10-14T13:00:19.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="单向数据流">单向数据流</h1>
+<h1 id="proptypes类型检查">PropTypes类型检查</h1>
+<p>PropTypes 提供一系列验证器，可用于确保组件接收到的数据类型是有效的。</p>
+<pre><code>XiaojiejieItem.propTypes = {
+    // 下面都是父组件传递过来的值，通过PropTypes检测值的类型
+  content: PropTypes.string,
+  index: PropTypes.number,
+  deleteItem: PropTypes.func,
+};
+</code></pre>
+<p>除了几个基本的数据类型，还可以设置为</p>
+<pre><code>// 任何可被渲染的元素（包括数字、字符串、元素或数组）
+// (或 Fragment) 也包含这些类型。
+
+optionalNode: PropTypes.node,
+
+// 一个对象可以是几种类型中的任意一个类型
+optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Message)
+]),
+
+// 一个 React 元素。
+optionalElement: PropTypes.element,
+
+// 一个 React 元素类型（即，MyComponent）。
+optionalElementType: PropTypes.elementType,
+
+// 通过 .isRequired 设置该值为父组件必须传递的值
+name: PropTypes.string.isRequired
+
+// 通过 .defaultProps 设置接受值的默认值
+XiaojiejieItem.defaultProps = {
+  name: &quot;zx&quot;,
+};
+</code></pre>
+<p>具体哪些可以查看：<a href="https://react.docschina.org/docs/typechecking-with-proptypes.html">官方文档</a></p>
+<h1 id="ref属性的使用">ref属性的使用</h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[React学习记录4]]></title>
         <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-4/</id>
@@ -342,1189 +860,6 @@ this.state.comment = 'Hello';
 this.setState({comment: 'Hello'});
 </code></pre>
 <p>需要使用<code>setState</code>方法修改数据，该方法内部是一个对象，包含当前组件的<code>state</code>数据，只有通过这种方式修改的<code>state</code>内数据才会重新渲染。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[React学习记录2]]></title>
-        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-2/</id>
-        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-2/">
-        </link>
-        <updated>2020-10-11T08:49:53.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="react目录结构">React目录结构</h1>
-<p>README.md：关于项目的说明文件。</p>
-<p>package.json：node的包文件，关于项目的一些介绍及一些项目的指令等。</p>
-<p>public 文件夹下：</p>
-<p>favicon.ico：项目图标，可以自己制作一个ico图标，取名为favicon.ico，覆盖该文件。</p>
-<p>index.html：项目的首页。</p>
-<p>manifest.json：PWA相关的。</p>
-<p>src目录下：</p>
-<p>serviceWorker.js ：PWA相关的。</p>
-<p>App.test.js：项目测试文件。</p>
-<p>index.js：核心文件</p>
-<pre><code>// 引入react、react-dom
-import React from 'react';
-import ReactDOM from 'react-dom';
-// 引入css样式
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-
-ReactDOM.render(
-    // JSX语法
-  &lt;React.StrictMode&gt;
-    &lt;App /&gt;
-  &lt;/React.StrictMode&gt;,
-  document.getElementById('root')
-);
-
-// 用于PWA
-serviceWorker.unregister();
-</code></pre>
-<p>app.js</p>
-<pre><code>// 引入react
-import React from 'react';
-import logo from './logo.svg';
-// 引入css样式
-import './App.css';
-
-// 函数式组件
-function App() {
-  return (
-    &lt;div className=&quot;App&quot;&gt;
-      &lt;header className=&quot;App-header&quot;&gt;
-        &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
-        &lt;p&gt;
-          Edit &lt;code&gt;src/App.js&lt;/code&gt; and save to reload.
-        &lt;/p&gt;
-        &lt;a
-          className=&quot;App-link&quot;
-          href=&quot;https://reactjs.org&quot;
-          target=&quot;_blank&quot;
-          rel=&quot;noopener noreferrer&quot;
-        &gt;
-          Learn React
-        &lt;/a&gt;
-      &lt;/header&gt;
-    &lt;/div&gt;
-  );
-}
-// 最后导出组件，在index.js中使用
-export default App;
-</code></pre>
-<p>setupTests.js：测试相关的文件</p>
-<h1 id="react元素渲染">React元素渲染</h1>
-<pre><code>let h1 = &lt;h1&gt;hello world&lt;/h1&gt;;
-</code></pre>
-<p>使用JSX的写法，可以创建JS对象</p>
-<p>注意：JSX元素对象，或者组件对象，必须只有一个根节点。</p>
-<pre><code>let h1 = &lt;h1&gt;hello world&lt;/h1&gt;&lt;span&gt;这是副标题&lt;/span&gt;; // 报错，JSX表达式必须具有一个父元素。
-let h1 = (&lt;h1&gt;hello world&lt;span&gt;这是副标题&lt;/span&gt;&lt;/h1&gt;); // 不会报错
-</code></pre>
-<pre><code>function clock() {
-  let time = new Date().toLocaleTimeString();
-  let element = (
-      // 写页面结构
-    &lt;div&gt;
-      &lt;h1&gt;现在的时间是{time}&lt;/h1&gt;
-      &lt;h2&gt;这是副标题&lt;/h2&gt;
-    &lt;/div&gt;
-  );
-  let root = document.querySelector(&quot;#root&quot;);
-  // 挂载到root上渲染
-  ReactDOM.render(element, root);
-}
-// 每隔1S执行一次
-setInterval(() =&gt; {
-  clock();
-}, 1000);
-</code></pre>
-<p>这段代码初写下来有点懵，主要是创建页面结构的部分，JSX语法确实不同，竟然可以在函数中写结构，感觉跟vue3的语法有类似之处，vue3的组合api是把数据和方法能够以类似的方式书写，而react是把页面结构和数据结合起来书写，我听说vue这点是借鉴的react。</p>
-<h2 id="react函数式组件">React函数式组件</h2>
-<pre><code>function Clock(props) {
-  return (
-    &lt;div&gt;
-      &lt;h1&gt;现在的时间是{props.date.toLocaleTimeString()}&lt;/h1&gt;
-      &lt;h2&gt;这是函数式组件开发&lt;/h2&gt;
-    &lt;/div&gt;
-  );
-}
-</code></pre>
-<pre><code>// 组件传值
-function run() {
-  ReactDOM.render(&lt;Clock date={new Date()} /&gt;, document.querySelector(&quot;#root&quot;));
-}
-
-setInterval(run, 1000);
-</code></pre>
-<h1 id="react-jsx">React JSX</h1>
-<p>优点：<br>
-1、JSX执行更快，编译为JavaScript代码时进行了优化<br>
-2、类型更安全，编译过程如果出错就不能编译，及时发现错误<br>
-3、JSX编写模板更加简单快速</p>
-<p>注意：<br>
-1、JSX必须要有根节点。<br>
-2、正常的普通HTML元素要小写。如果是大写，默认认为是组件。</p>
-<p>JSX表达式</p>
-<pre><code>// 可以使用变量
-let time = new Date().toLocaleTimeString();
-let str = &quot;当前时间是:&quot;;
-let element = (
-  &lt;div&gt;
-    &lt;h1&gt;hello world&lt;/h1&gt;
-    &lt;h2&gt;{str + time}&lt;/h2&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<pre><code>// 可以使用三目运算符
-let man = &quot;eat&quot;;
-let element2 = (
-  &lt;div&gt;
-    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
-    &lt;h2&gt;{man == &quot;eat&quot; ? &quot;go&quot; : &quot;down&quot;}&lt;/h2&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<pre><code>// 可以在三元中使用HTML
-let man = &quot;eat&quot;;
-let element2 = (
-  &lt;div&gt;
-    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
-    &lt;h2&gt;{man == &quot;eat&quot; ? &lt;button&gt;go&lt;/button&gt; : &quot;down&quot;}&lt;/h2&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<pre><code>// 可以在三元中使用JSX语法
-let element4 = (
-  &lt;div&gt;
-    &lt;span&gt;横着躺&lt;/span&gt;
-    &lt;span&gt;竖着躺&lt;/span&gt;
-  &lt;/div&gt;
-);
-let element3 = (
-  &lt;div&gt;
-    &lt;h1&gt;今天是否吃饭&lt;/h1&gt;
-    &lt;h2&gt;{man == &quot;eat&quot; ? &lt;button&gt;go&lt;/button&gt; : element4}&lt;/h2&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<pre><code>// 带有类名的标签
-let color = 'bgRed'
-let element5 = (
-  &lt;div className={color}&gt;
-    红色背景颜色
-  &lt;/div&gt;
-)
-
-// css
-.bgRed {
-  background-color: red;
-}
-</code></pre>
-<pre><code>// JSX中使用图片
-let logo =
-  &quot;https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3942751454,1089199356&amp;fm=26&amp;gp=0.jpg&quot;;
-let element5 = (
-  &lt;div className={color}&gt;
-    &lt;img src={logo} /&gt;
-    红色背景颜色
-  &lt;/div&gt;
-);
-</code></pre>
-<h2 id="jsx总结">JSX总结</h2>
-<ol>
-<li>由HTML元素组成</li>
-<li>插入变量使用<code>{}</code></li>
-<li><code>{}</code>中间可以使用表达式</li>
-<li><code>{}</code>中间表达式可以使用JSX对象</li>
-<li>属性和HTML内容一样都是用<code>{}</code>来插入内容</li>
-</ol>
-<h1 id="jsx-style-样式-和-注释">JSX STYLE 样式 和 注释</h1>
-<h2 id="样式">样式</h2>
-<pre><code>// 定义样式
-let exampleStyle = {
-  background: &quot;skyBlue&quot;,
-  // 使用小驼峰语法
-  borderBottom: &quot;1px solid red&quot;,
-};
-
-// 通过{}使用样式
-let element = (
-  &lt;div&gt;
-    &lt;h1 style={exampleStyle}&gt;hello world&lt;/h1&gt;
-  &lt;/div&gt;
-);
-</code></pre>
-<pre><code>let element = (
-  &lt;div&gt;
-    &lt;h1 style=&quot;height:200px;&quot; style={exampleStyle}&gt;
-      hello world
-    &lt;/h1&gt;
-  &lt;/div&gt;
-);
-// 以上写法的 style=&quot;height:200px;&quot; 部分无效
-</code></pre>
-<pre><code>&lt;h1 style=&quot;height:200px;&quot;&gt;
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1602476790181.png" alt="" loading="lazy"><br>
-以上写法会报错，style属性必须使用对象的形式</p>
-<pre><code>&lt;h1 className=&quot;abc&quot; className={classStr}&gt;
-// 无法将两个className属性并在一起写
-</code></pre>
-<pre><code>&lt;h1 className={classStr} className={classSStr} &gt;
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1602476751235.png" alt="" loading="lazy"><br>
-如果不是<code>“xx”</code>的形式而是<code>{xx}</code>的形式，则后定义的的会覆盖先定义的</p>
-<pre><code>&lt;h1 className={&quot;abc &quot; + classStr}&gt;hello world&lt;/h1&gt;
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1602476692914.png" alt="" loading="lazy"><br>
-若想像vue一样绑定多个类名，需要在{}内使用字符串拼接的方式，需要注意的是在要拼接的字符串后面需要有空格</p>
-<pre><code>let classStr2 = [&quot;abc2&quot;, &quot;redBg2&quot;];
-&lt;h1 className={classStr2}&gt;hello world&lt;/h1&gt;
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1602477232770.png" alt="" loading="lazy"><br>
-类似于<code>vue</code>的操作也是不行的，如果想用，需要通过<code>join</code>拼接字符串</p>
-<pre><code>let classStr2 = [&quot;abc2&quot;, &quot;redBg2&quot;].join(&quot; &quot;);
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1602477318383.png" alt="" loading="lazy"><br>
-通过这种方式拼接的就可以正常使用了</p>
-<h2 id="注释">注释</h2>
-<pre><code>{/* 这里写注释 */}
-</code></pre>
-<h2 id="总结">总结</h2>
-<ol>
-<li>class style 中，不可以存在多个class属性</li>
-<li>style 样式中，如果存在多个变量的属性组合，使用小驼峰语法，或者用引号包裹</li>
-<li>注释需要包裹在<code>{/* 这里写注释 */}</code>中</li>
-</ol>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[图片懒加载]]></title>
-        <id>https://jujuul.github.io/post/tu-pian-lan-jia-zai/</id>
-        <link href="https://jujuul.github.io/post/tu-pian-lan-jia-zai/">
-        </link>
-        <updated>2020-10-07T04:10:45.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>一直都有听说懒加载，但是还没有实践过，学习webpack的过程中也接触到了懒加载，不过是针对js代码的，所以就想连同图片的一起也学习一下，所以有了这篇文章。</p>
-<h1 id="懒加载的实现">懒加载的实现</h1>
-<p>图片懒加载现在主要有三种方法，第一种是针对<code>img</code>的<code>src</code>，第二种是使用<code>IntersectionObserver</code>api，第三种是使用<code>lazyload</code>属性，后两种比较新，尤其是第三种，可能兼容性还存在问题。</p>
-<h2 id="通过img的src">通过img的src</h2>
-<p>这个方法是最为常用的</p>
-<h3 id="第一步">第一步：</h3>
-<p>不设置需要懒加载的<code>img</code>标签的<code>src</code>属性,然后自定义一个属性，属性值为要加载的图片，并且给这个标签设置一个类名，用来标记它是需要懒加载的。</p>
-<pre><code>// html
-&lt;img class=&quot;lazy-image&quot; /&gt;
-</code></pre>
-<pre><code>// css
-.lazy-image {
-    // 可以给该类设置一个loading图片作为未加载前的过渡
-    background: url('./loading.jpg') no-repeat center;
-}
-</code></pre>
-<h3 id="第二步">第二步：</h3>
-<p>页面加载完后，我们需要获取所有需要懒加载的图片的元素集合，判断是否在可视区域，如果是在可视区域的话，设置元素的src属性值为真正图片的地址。</p>
-<pre><code>inViewShow() {     
-    let imageElements = Array.prototype.slice.call(document.querySelectorAll('.lazy-image'))    
-    let len = imageElements.length     
-    for(let i = 0; i &lt; len; i++) {         
-        let imageElement = imageElements[i]        
-        const rect = imageElement.getBoundingClientRect() // 出现在视野的时候加载图片         
-        if(rect.top &lt; document.documentElement.clientHeight) {             
-            imageElement.src = imageElement.dataset.src // 移除掉已经显示的             
-            imageElements.splice(i, 1)             
-            len--             
-            i--         
-        }     
-    } 
-}
-</code></pre>
-<p>这里判断是否出现在可视区域内，是通过获取元素的<code>getBoundingClientRect</code>属性的<code>top</code>值和页面的<code>clientHeight</code>进行对比，如果<code>top</code>值小于<code>clientHeight</code>，则说明元素出现在可视区域了。</p>
-<ul>
-<li>
-<p>clientHeight：这个属性是只读属性，对于没有定义CSS或者内联布局盒子的元素为0，否则，它是元素内部的高度(单位像素)，包含内边距，但不包括水平滚动条、边框和外边距。clientHeight 可以通过 CSS height + CSS padding - 水平滚动条高度 (如果存在)来计算。</p>
-</li>
-<li>
-<p>getBoundingClientRect()：方法返回元素的大小及其相对于视口的位置。如果是标准盒子模型，元素的尺寸等于width/height + padding + border-width的总和。如果box-sizing: border-box，元素的的尺寸等于 width/height。</p>
-</li>
-</ul>
-<h3 id="第三步">第三步：</h3>
-<p>当用户滚动窗口的时候，遍历所有需要懒加载的元素，通过每个元素的BoundingClientRect属性来判断元素是否出现在可视区域内，判断方法同第二步一样，可以加个防抖做优化。</p>
-<pre><code>function throttle(fn, delay) {
-    var begin = 0;
-    return function () {
-        var cur = new Date().getTime();
-        if (cur - begin &gt; delay) {
-            fn.apply(this, arguments);
-            begin = cur;
-        }
-    }
-}
-document.addEventListener('scroll', throttle(inViewShow, 100), false)
-</code></pre>
-<h2 id="intersectionobserverapi">IntersectionObserverAPI</h2>
-<p>第一种方法算然很好，但是因为需要监听<code>scroll</code>事件，计算量很大，影响性能，所以推出了<br>
-<code>IntersectionObserver</code>API，可以自动&quot;观察&quot;元素是否可见，Chrome 51+ 已经支持。由于可见（visible）的本质是，目标元素与视口产生一个交叉区，所以这个 API 叫做&quot;交叉观察器&quot;。</p>
-<p>这个api的兼容性还可以<br>
-<img src="https://jujuul.github.io//post-images/1602045393330.png" alt="" loading="lazy"></p>
-<h3 id="一-api">一、API</h3>
-<p>它的用法非常简单</p>
-<pre><code>var io = new IntersectionObserver(callback, option);
-</code></pre>
-<p>上面代码中，IntersectionObserver是浏览器原生提供的构造函数，接受两个参数：callback是可见性变化时的回调函数，option是配置对象（该参数可选）。</p>
-<p>构造函数的返回值是一个观察器实例。实例的observe方法可以指定观察哪个 DOM 节点。</p>
-<pre><code>// 开始观察
-io.observe(document.getElementById('example'));
-
-// 停止观察
-io.unobserve(element);
-
-// 关闭观察器
-io.disconnect();
-</code></pre>
-<p>上面代码中，observe的参数是一个 DOM 节点对象。如果要观察多个节点，就要多次调用这个方法。</p>
-<pre><code>io.observe(elementA);
-io.observe(elementB);
-</code></pre>
-<h3 id="二-callback-参数">二、callback 参数</h3>
-<p>目标元素的可见性变化时，就会调用观察器的回调函数callback。</p>
-<p>callback一般会触发两次。一次是目标元素刚刚进入视口（开始可见），另一次是完全离开视口（开始不可见）。</p>
-<pre><code>var io = new IntersectionObserver(
-  entries =&gt; {
-    console.log(entries);
-  }
-);
-</code></pre>
-<p>上面代码中，回调函数采用的是箭头函数的写法。callback函数的参数（entries）是一个数组，每个成员都是一个IntersectionObserverEntry对象。举例来说，如果同时有两个被观察的对象的可见性发生变化，entries数组就会有两个成员。</p>
-<h3 id="三-intersectionobserverentry-对象">三、IntersectionObserverEntry 对象</h3>
-<p>IntersectionObserverEntry对象提供目标元素的信息，一共有六个属性。</p>
-<pre><code>{
-  time: 3893.92,
-  rootBounds: ClientRect {
-    bottom: 920,
-    height: 1024,
-    left: 0,
-    right: 1024,
-    top: 0,
-    width: 920
-  },
-  boundingClientRect: ClientRect {
-     // ...
-  },
-  intersectionRect: ClientRect {
-    // ...
-  },
-  intersectionRatio: 0.54,
-  target: element
-}
-</code></pre>
-<p>每个属性的含义如下。</p>
-<pre><code>- time：可见性发生变化的时间，是一个高精度时间戳，单位为毫秒
-- target：被观察的目标元素，是一个 DOM 节点对象
-- rootBounds：根元素的矩形区域的信息，getBoundingClientRect()方法的返回值，如果没有根元素（即直接相对于视口滚动），则返回null
-- boundingClientRect：目标元素的矩形区域的信息
-- intersectionRect：目标元素与视口（或根元素）的交叉区域的信息
-- intersectionRatio：目标元素的可见比例，即intersectionRect占boundingClientRect的比例，完全可见时为1，完全不可见时小于等于0
-</code></pre>
-<p>代码实现</p>
-<pre><code>function query(tag) {
-    return Array.from(document.getElementsByTagName(tag));
-}
-var observer = new IntersectionObserver(
-    (changes) =&gt; {
-        changes.forEach((change) =&gt; {
-            if (change.intersectionRatio &gt; 0) {
-                var img = change.target;
-                img.src = img.dataset.src;
-                observer.unobserve(img);
-            }
-        })
-    }
-)
-query('img').forEach((item) =&gt; {
-    observer.observe(item);
-})
-</code></pre>
-<h2 id="lazyload">lazyload</h2>
-<p>这个是<code>chrome</code>浏览器的一个实验性属性，我个人使用中并没有感觉到有做到懒加载。使用时需要先在浏览器地址栏中输入</p>
-<pre><code>chrome://flags/#enable-lazy-image-loading
-</code></pre>
-<p>开启。<br>
-lazyload 支持三种赋值，类似于<code>preload</code>。<br>
-<strong>新版本</strong><code>Chrome</code>改为<code>loading=&quot;lazy&quot;</code>详见<strong>Chrome Updates</strong>。(ps:怪不得我之前使用没效果，原来改了，但是我改了以后依然没效果，不知道是什么原因)</p>
-<p>别人使用lazyload的gif<br>
-<img src="https://jujuul.github.io//post-images/1602398537620.gif" alt="" loading="lazy"><br>
-<a href="https://events.jackpu.com/native-layzy-load-image/index.html">体验地址</a></p>
-<p>这个属性的兼容性比较差<br>
-<img src="https://jujuul.github.io//post-images/1602045454859.png" alt="" loading="lazy"></p>
-<h1 id="后记">后记</h1>
-<p>后面的两个方法才出现没几年，<code>lazyload</code>甚至是去年才出现的，不得不感慨技术的进步，这几天在看张鑫旭的CSS世界，里面说最早网页就是用来显示文字的，连显示图片也是后面的事，所以最早网页的布局使用table，纯粹是方便显示文字，要等到2000年以后才开始广泛使用图片，而现在才过了20年，现在用网站看视频看直播已经是很正常的事了，中间经历了<code>flash</code>的兴衰，现在网页结合svg、canvas等技术，实现的效果早已不是之前所能比拟的了，让人不得不感慨技术进步之快。</p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://juejin.im/post/6844903688390049800#heading-0">图片懒加载</a><br>
-<a href="https://zhuanlan.zhihu.com/p/55311726">原生js实现图片懒加载（lazyLoad）</a><br>
-<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver">Intersection Observer MDN</a><br>
-<a href="http://www.ruanyifeng.com/blog/2016/11/intersectionobserver_api.html">IntersectionObserver API 使用教程</a><br>
-<a href="https://github.com/ljianshu/Blog/issues/8">懒加载和预加载</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[vue3学习记录1]]></title>
-        <id>https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/</id>
-        <link href="https://jujuul.github.io/post/vue3-xue-xi-ji-lu-1/">
-        </link>
-        <updated>2020-10-06T04:40:09.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="安装">安装</h1>
-<h2 id="使用vue-cli">使用vue-cli</h2>
-<p>可以使用<code>npm</code>或者<code>yarn</code>安装，需要先把vue-cli的版本升级到v4.5.6。</p>
-<pre><code>// 创建项目 vue3learn
-vue create vue3learn
-</code></pre>
-<p>创建项目除了使用命令行还可以使用图形页面来创建项目，因为我不怎么用，这里也不再赘述。</p>
-<p>创建的过程中有很多配置项可以选择，看个人选择。要注意的是vue版本要选择3.x。</p>
-<h2 id="使用vite">使用vite</h2>
-<p>这个是尤大开发的新工具，目的是以后替代webpack，原理是利用浏览器现在已经支持es6的import了，遇到import会发送一个http请求去加载文件，vite拦截这些请求，做一些预编译，省去了webpack冗长打包的时间，提升开发体验，我个人使用体验是非常不错的，非常的快。</p>
-<pre><code>npm install -g create-vite-app
-create-vite-app 01-vue3-vite
-cd 01-vue3-vite
-npm install
-npm run dev
-</code></pre>
-<p>上面就是创建的全过程，先安装 vite，然后通过 vite 创建项目，这里 create-vite-app 可以简写成 cva，进入创建好的项目后需要安装 node_modules 文件，然后才可以运行，yarn 同理，这里也不再赘述。</p>
-<h2 id="区别">区别</h2>
-<p>以上两种方式创建的项目还是有区别的，比如 vite 创建的是<code>&quot;vue&quot;: &quot;^3.0.0-rc.1&quot;</code>，而 vue-cli 创建的是<code>&quot;vue&quot;: &quot;^3.0.0-0&quot;</code>，除此之外，因为 vue-cli 创建的过程中还经历了多个选择，所以 package.json 文件中会多出很多 devDependencies。</p>
-<pre><code>&quot;devDependencies&quot;: {
-    &quot;@typescript-eslint/eslint-plugin&quot;: &quot;^2.33.0&quot;,
-    &quot;@typescript-eslint/parser&quot;: &quot;^2.33.0&quot;,
-    &quot;@vue/cli-plugin-eslint&quot;: &quot;~4.5.0&quot;,
-    &quot;@vue/cli-plugin-typescript&quot;: &quot;~4.5.0&quot;,
-    &quot;@vue/cli-service&quot;: &quot;~4.5.0&quot;,
-    &quot;@vue/compiler-sfc&quot;: &quot;^3.0.0-0&quot;,
-    &quot;@vue/eslint-config-typescript&quot;: &quot;^5.0.2&quot;,
-    &quot;eslint&quot;: &quot;^6.7.2&quot;,
-    &quot;eslint-plugin-vue&quot;: &quot;^7.0.0-0&quot;,
-    &quot;typescript&quot;: &quot;~3.9.3&quot;
-  }
-</code></pre>
-<h1 id="vue3目录结构">vue3目录结构</h1>
-<pre><code>|-node_modules       -- 所有的项目依赖包都放在这个目录下
-|-public             -- 公共文件夹
----|favicon.ico      -- 网站的显示图标
----|index.html       -- 入口的html文件
-|-src                -- 源文件目录，编写的代码基本都在这个目录下
----|assets           -- 放置静态文件的目录，比如logo.pn就放在这里
----|components       -- Vue的组件文件，自定义的组件都会放到这
----|App.vue          -- 根组件，这个在Vue2中也有
----|main.ts          -- 入口文件，因为采用了TypeScript所以是ts结尾
----|shims-vue.d.ts   -- 类文件(也叫定义文件)，因为.vue结尾的文件在ts中不认可，所以要有定义文件
-|-.browserslistrc    -- 在不同前端工具之间公用目标浏览器和node版本的配置文件，作用是设置兼容性
-|-.eslintrc.js       -- Eslint的配置文件，不用作过多介绍
-|-.gitignore         -- 用来配置那些文件不归git管理
-|-package.json       -- 命令配置和包管理文件
-|-README.md          -- 项目的说明文件，使用markdown语法进行编写
-|-tsconfig.json      -- 关于TypoScript的配置文件
-|-yarn.lock          -- 使用yarn后自动生成的文件，由Yarn管理，安装yarn包时的重要信息存储到yarn.lock文件中
-</code></pre>
-<h1 id="setup和ref">setup和ref</h1>
-<ul>
-<li>
-<p><code>setup</code> 函数的用法，可以代替 Vue2 中的 date 和 methods 属性，直接把逻辑写在 setup 里就可以。</p>
-</li>
-<li>
-<p><code>ref</code> 函数的使用，要在 template 中使用 setup 中的变量，必须用ref包装一下，才能实现响应式，使用前需要引入<code>import { ref } from &quot;vue&quot;;</code>取值需要用 xxx.value 的形式。</p>
-</li>
-<li>
-<p><code>return</code> 想要在模板中使用<code>setup</code>中的数据，必须要<code>return</code>出去才能用。</p>
-</li>
-</ul>
-<h1 id="reactive和torefs">reactive和toRefs</h1>
-<ul>
-<li>
-<p><code>reactive</code> 首先需要引入<code>import { reactive } from &quot;vue&quot;;</code><br>
-reactive可以把响应式数据以对象的形式包裹并<code>return</code>，在模板中使用就需要对象名.变量名的形式来使用，这种方式可以简化<code>ref</code>方式的代码，但是在模板中显示较为麻烦。</p>
-</li>
-<li>
-<p><code>toRefs</code> 可以解决上述的问题，<code>toRefs</code>可以把对象内的数据变为响应式数据。可以通过使用<code>toRefs</code>包裹<code>reactive</code>数据，然后在<code>return</code>中使用展开运算符，来达到简化模板中使用的效果。</p>
-</li>
-<li>
-<p><code>ref</code>和<code>reactive</code>这两个函数都可以把数据变成响应式数据。其中，<code>ref</code>一般用来对简单数据类型进行包装，<code>reactive</code>对引用数据类型进行包装。</p>
-</li>
-</ul>
-<p>toRefs总结：先把<code>reactive</code>包裹的响应式对象变成普通对象，再把普通对象的每一个属性变成响应式数据，也就是和使用<code>ref</code>包裹的数据一样</p>
-<h1 id="vue3的生命周期和钩子函数">vue3的生命周期和钩子函数</h1>
-<ul>
-<li><code>setup</code>：取代vue2的 <code>beforeCreate</code> 和 <code>created</code></li>
-<li><code>onBeforeMount</code>：取代vue2的 <code>beforeMount</code></li>
-<li><code>onMounted</code>：取代vue2的<code>mounted</code></li>
-<li><code>onBeforeUpdate</code>：取代vue2的<code>beforeUpdate</code></li>
-<li><code>onUpdated</code>：取代vue2的<code>updated</code></li>
-<li><code>onBeforeUnmount</code>：取代vue2的<code>beforeDestroyed</code>，在卸载绑定元素的父组件之前调用</li>
-<li><code>onUnmounted</code>：取代vue2的<code>destroyed</code>，当指令与元素解除绑定且父组件已卸载时，只调用一次</li>
-<li><code>onActivated</code>，<code>onDeactivated</code>：取代vue2的<code>activated</code>与<code>deactivated</code>，通过<code>keep-alive</code>缓存的组件被激活/停用时调用</li>
-<li><code>onErrorCaptured</code>：取代vue2的<code>errorCaptured</code>，捕获后代组件异常时调用的钩子函数</li>
-</ul>
-<h2 id="使用">使用</h2>
-<p>vue中使用生命周期函数需要先<code>import</code>引入</p>
-<p>vue2的生命周期函数也可以使用，并不需要在<code>setup</code>中使用</p>
-<p>在<code>setup</code>中定义的生命周期函数要比 vue2 写法的生命周期函数快一点，实际使用不建议混用，vue3的文档中明确指出，vue3使用新的生命周期函数</p>
-<p>改名的原因根据尤大的说法是因为语义化</p>
-<h1 id="onrendertracked和onrendertriggered">onRenderTracked和onRenderTriggered</h1>
-<p>##onRenderTracked（状态跟踪）<br>
-它会跟踪页面上所有响应式变量和方法的状态，也就是我们用return返回去的值，他都会跟踪。只要页面有update的情况，他就会跟踪，然后生成一个event对象，我们通过event对象来查找程序的问题所在。</p>
-<h3 id="使用-2">使用</h3>
-<p>引入<br>
-<code>import { .... ,onRenderTracked,} from &quot;vue&quot;;</code></p>
-<p>在<code>setup</code>中使用</p>
-<pre><code>onRenderTracked((event) =&gt; {
-  console.log(&quot;状态跟踪组件-----------&gt;&quot;);
-  console.log(event);
-});
-</code></pre>
-<p>##onRenderTriggered（状态触发）<br>
-它与上面的不同，它会把变化的值的信息拿到，并且会详细展示哪个值发生了变化，新值是什么，旧值是什么。</p>
-<h3 id="使用-3">使用</h3>
-<p>引入<br>
-<code>import { .... ,onRenderTriggered,} from &quot;vue&quot;;</code><br>
-在<code>setup</code>中使用</p>
-<pre><code>onRenderTriggered((event) =&gt; {
-      console.log(event);
-});
-</code></pre>
-<p>event 对象属性的详细介绍</p>
-<ul>
-<li>key 哪里的变量发生了变化</li>
-<li>newValue 更新后变量的值</li>
-<li>oldValue 更新前变量的值</li>
-<li>target 目前页面中的响应变量和函数</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[typescript学习记录5]]></title>
-        <id>https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/</id>
-        <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-5/">
-        </link>
-        <updated>2020-10-06T03:12:30.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="命名空间">命名空间</h1>
-<h2 id="没有命名空间时的问题">没有命名空间时的问题</h2>
-<pre><code>// ts
-class Header {
-    constructor() {
-      const elem = document.createElement(&quot;div&quot;);
-      elem.innerText = &quot;This is Header&quot;;
-      document.body.appendChild(elem);
-    }
-}
-class Page {
-  constructor() {
-    new Header();
-  }
-}
-</code></pre>
-<pre><code>// html
-&lt;script&gt;
-       Page()
-&lt;/script&gt;
-// 这种方式使用，Page和Header都是全局变量
-</code></pre>
-<p>这种方式会生成多个全局变量，造成全局变量污染</p>
-<h2 id="使用命名空间">使用命名空间</h2>
-<pre><code>namespace Home {
-    class Header {
-        constructor() {
-        const elem = document.createElement(&quot;div&quot;);
-        elem.innerText = &quot;This is Header&quot;;
-        document.body.appendChild(elem);
-        }
-    }
-    class export Page {
-    constructor() {
-        new Header();
-    }
-    }
-}
-</code></pre>
-<p>使用命名空间的语法非常简单，就是<code>namespace Home</code>这种形式使用，只要加个<code>namespace XXXX</code>的关键字就可以了，最后再把需要暴露的变量通过<code>export</code>暴露出去</p>
-<pre><code>&lt;script&gt;
-        new Home.Page()
-&lt;/script&gt;
-</code></pre>
-<p>这样就可以在页面中使用了</p>
-<h2 id="子命名空间">子命名空间</h2>
-<p>命名空间是可以嵌套的</p>
-<pre><code>namespace Components {
-    // 命名空间内嵌套命名空间
-  export namespace SubComponents {
-      export class Test{}
-  }
-}
-</code></pre>
-<h1 id="ts使用parcel">ts使用Parcel</h1>
-<p>安装</p>
-<pre><code>npm i parcel@next
-或
-yarn add --dev parcel@next
-</code></pre>
-<p>打包</p>
-<pre><code>// 修改 package.json 的配置项，使用 parcel 打包 src 下的 index 文件
-&quot;scripts&quot;: {
-    &quot;test&quot;: &quot;parcel ./src/index.html&quot;
-},
-</code></pre>
-<p><img src="https://jujuul.github.io//post-images/1601957052531.png" alt="打包后的结果" loading="lazy"><br>
-使用 parcel 会创建一个 dist 文件夹，打包后的内容都在其中，包括 map 文件，相比于 webpack 明显要快捷的多。</p>
-<h1 id="在ts中使用jquery">在ts中使用jquery</h1>
-<pre><code>$(function () {
-  alert(&quot;jujuul&quot;);
-});
-// vscode报错，找不到 $ 
-</code></pre>
-<p>解决方法：<br>
-一、 安装jquery<br>
-<code>npm i @types/jquery</code><br>
-二、declare<br>
-<code>declare var $: any;</code><br>
-声明 $ 为any，简单粗暴</p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
-<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
-<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[typescript学习记录4]]></title>
-        <id>https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/</id>
-        <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-4/">
-        </link>
-        <updated>2020-10-05T06:43:21.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="联合类型和类型守护">联合类型和类型守护</h1>
-<h2 id="联合类型">联合类型</h2>
-<p>联合类型就是参数类型有可能是两种或两种以上的类型。</p>
-<pre><code>interface Waiter {
-  anjiao: boolean;
-  say: () =&gt; {};
-}
-interface Teacher {
-  anjiao: boolean;
-  skill: () =&gt; {};
-}
-</code></pre>
-<pre><code>function judgeWho(animal: Waiter | Teacher) {
-    // ...
-}
-</code></pre>
-<p>这里的 animal 就是联合类型，既有可能是 Waiter 也有可能是 Teacher</p>
-<h2 id="类型保护-类型断言">类型保护-类型断言</h2>
-<pre><code>function judgeWho(animal: Waiter | Teacher) {
-    animal.say()    // vscode报错，因为联合类型的原因，这里不确定是 Waiter 还是 Teacher，而say方法是 Waiter才有的，所以会报错
-}
-</code></pre>
-<pre><code>function judgeWho(animal: Waiter | Teacher) {
-    // 类型断言，通过if判断 animal 的类型，再调用响应的方法
-  if (animal.anjiao) {
-    (animal as Teacher).skill();
-  } else {
-    (animal as Waiter).say();
-  }
-}
-</code></pre>
-<h2 id="类型保护-in语法">类型保护-in语法</h2>
-<pre><code>function judgeWhoTwo(animal: Waiter | Teacher) {
-    // 通过in语法来进行判断
-  if (&quot;skill&quot; in animal) {
-    animal.skill();
-  } else {
-    animal.say();
-  }
-}
-</code></pre>
-<h2 id="类型保护-typeof语法">类型保护-typeof语法</h2>
-<pre><code>function add(first: string | number, second: string | number) {
-  return first + second;    // vscode报错，不能识别到底是string类型还是number类型
-}
-</code></pre>
-<pre><code>function add(first: string | number, second: string | number) {
-    // 通过typeof判断数据类型
-  if (typeof first === &quot;string&quot; || typeof second === &quot;string&quot;) {
-    return `${first}${second}`;
-  }
-  return first + second;
-}
-</code></pre>
-<h2 id="类型保护-instanceof语法">类型保护-instanceof语法</h2>
-<pre><code>class NumberObj {
-  count: number;
-}
-</code></pre>
-<pre><code>function addObj(first: object | NumberObj, second: object | NumberObj) {
-  return first.count + second.count;    // 报错，因为如果为object类型，其上没有count属性
-}
-</code></pre>
-<pre><code>function addObj(first: object | NumberObj, second: object | NumberObj) {
-    // 通过instanceof判断数据类型
-  if (first instanceof NumberObj &amp;&amp; second instanceof NumberObj) {
-    return first.count + second.count;
-  }
-}
-</code></pre>
-<ul>
-<li>注：instanceof只能用在类上</li>
-</ul>
-<h1 id="enum枚举">enum（枚举）</h1>
-<p>enum能使程序更加清晰，默认第一位从0开始</p>
-<pre><code>enum Status {
-  massage,
-  spa,
-  dabaojian,
-}
-</code></pre>
-<pre><code>function getServe(status: any) {
-  if (status === Status.massage) {
-    return &quot;massage&quot;;
-  } else if (status === Status.spa) {
-    return &quot;spa&quot;;
-  } else if (status === Status.dabaojian) {
-    return &quot;dabaojian&quot;;
-  }
-}
-const result = getServe(2); // dabaojian
-</code></pre>
-<h2 id="改变初始下标值">改变初始下标值</h2>
-<pre><code>enum Status {
-  massage = 1,
-  spa,
-  dabaojian,
-}
-</code></pre>
-<pre><code>function getServe(status: any) {
-  if (status === Status.massage) {
-    return &quot;massage&quot;;
-  } else if (status === Status.spa) {
-    return &quot;spa&quot;;
-  } else if (status === Status.dabaojian) {
-    return &quot;dabaojian&quot;;
-  }
-}
-const result = getServe(2);     // spa
-console.log(Status.massage);    // 1
-console.log(Status.spa);    // 2
-console.log(Status.dabaojian);  // 3
-</code></pre>
-<h2 id="通过下标反查">通过下标反查</h2>
-<pre><code>console.log(Status[1]); // message
-</code></pre>
-<h1 id="泛型">泛型</h1>
-<p>泛型[generic - 通用、泛指的意思] 是指在定义函数、接口或类的时候，不预先指定具体的类型，而在使用的时候再指定类型的一种特性。<br>
-泛型的定义使用<code>&lt;&gt;</code>（尖角号）进行定义</p>
-<h2 id="函数中的泛型">函数中的泛型</h2>
-<p>下面来创建第一个使用泛型的例子：identity函数。 这个函数会返回任何传入它的值。 你可以把这个函数当成是 <code>echo</code>命令。</p>
-<p>不用泛型的话，这个函数可能是下面这样：</p>
-<pre><code>function identity(arg: number): number {
-    return arg;
-}
-</code></pre>
-<p>或者，我们使用any类型来定义函数：</p>
-<pre><code>function identity(arg: any): any {
-    return arg;
-}
-</code></pre>
-<p>使用any类型会导致这个函数可以接收任何类型的arg参数，这样就丢失了一些信息：传入的类型与返回的类型应该是相同的。如果我们传入一个数字，我们只知道任何类型的值都有可能被返回。</p>
-<p>因此，我们需要一种方法使返回值的类型与传入参数的类型是相同的。 这里，我们使用了 类型变量，它是一种特殊的变量，只用于表示类型而不是值。</p>
-<pre><code>function identity&lt;T&gt;(arg: T): T {
-    return arg;
-}
-</code></pre>
-<p>我们给identity添加了类型变量T。 T帮助我们捕获用户传入的类型（比如：number），之后我们就可以使用这个类型。 之后我们再次使用了 T当做返回值类型。现在我们可以知道参数类型与返回值类型是相同的了。 这允许我们跟踪函数里使用的类型的信息。</p>
-<p>我们把这个版本的identity函数叫做泛型，因为它可以适用于多个类型。 不同于使用 any，它不会丢失信息，像第一个例子那像保持准确性，传入数值类型并返回数值类型。</p>
-<p>我们定义了泛型函数后，可以用两种方法使用。 第一种是，传入所有的参数，包含类型参数：</p>
-<pre><code>let output = identity&lt;string&gt;(&quot;myString&quot;);  // type of output will be 'string'
-</code></pre>
-<p>注意我们没必要使用尖括号（&lt;&gt;）来明确地传入类型；编译器可以查看myString的值，然后把T设置为它的类型。 类型推论帮助我们保持代码精简和高可读性。如果编译器不能够自动地推断出类型的话，只能像上面那样明确的传入T的类型，在一些复杂的情况下，这是可能出现的。</p>
-<h2 id="使用泛型变量">使用泛型变量</h2>
-<p>使用泛型创建像identity这样的泛型函数时，编译器要求你在函数体必须正确的使用这个通用的类型。 换句话说，你必须把这些参数当做是任意或所有类型。</p>
-<p>看下之前identity例子：</p>
-<pre><code>function identity&lt;T&gt;(arg: T): T {
-    return arg;
-}
-</code></pre>
-<p>如果我们想同时打印出arg的长度。 我们很可能会这样做：</p>
-<pre><code>function loggingIdentity&lt;T&gt;(arg: T): T {
-    console.log(arg.length);  // Error: T doesn't have .length
-    return arg;
-}
-</code></pre>
-<p>如果这么做，编译器会报错说我们使用了arg的.length属性，但是没有地方指明arg具有这个属性。 记住，这些类型变量代表的是任意类型，所以使用这个函数的人可能传入的是个数字，而数字是没有 .length属性的。</p>
-<p>现在假设我们想操作T类型的数组而不直接是T。由于我们操作的是数组，所以.length属性是应该存在的。 我们可以像创建其它数组一样创建这个数组：</p>
-<pre><code>function loggingIdentity&lt;T&gt;(arg: T[]): T[] {
-    console.log(arg.length);  // Array has a .length, so no more error
-    return arg;
-}
-</code></pre>
-<p>你可以这样理解loggingIdentity的类型：泛型函数loggingIdentity，接收类型参数T和参数arg，它是个元素类型是T的数组，并返回元素类型是T的数组。 如果我们传入数字数组，将返回一个数字数组，因为此时 T的的类型为number。 这可以让我们把泛型变量T当做类型的一部分使用，而不是整个类型，增加了灵活性。</p>
-<p>我们也可以这样实现上面的例子：</p>
-<pre><code>function loggingIdentity&lt;T&gt;(arg: Array&lt;T&gt;): Array&lt;T&gt; {
-    console.log(arg.length);  // Array has a .length, so no more error
-    return arg;
-}
-</code></pre>
-<h2 id="类中的泛型">类中的泛型</h2>
-<p>泛型类看上去与泛型接口差不多。 泛型类使用（ &lt;&gt;）括起泛型类型，跟在类名后面。</p>
-<pre><code>class GenericNumber&lt;T&gt; {
-    zeroValue: T;
-    add: (x: T, y: T) =&gt; T;
-}
-
-let myGenericNumber = new GenericNumber&lt;number&gt;();
-myGenericNumber.zeroValue = 0;
-myGenericNumber.add = function(x, y) { return x + y; };
-</code></pre>
-<p>GenericNumber类的使用是十分直观的，并且你可能已经注意到了，没有什么去限制它只能使用number类型。 也可以使用字符串或其它更复杂的类型。</p>
-<pre><code>let stringNumeric = new GenericNumber&lt;string&gt;();
-stringNumeric.zeroValue = &quot;&quot;;
-stringNumeric.add = function(x, y) { return x + y; };
-
-console.log(stringNumeric.add(stringNumeric.zeroValue, &quot;test&quot;));
-</code></pre>
-<h2 id="泛型中的继承">泛型中的继承</h2>
-<p>定义一个接口</p>
-<pre><code>interface Girl {
-  name: string;
-}
-</code></pre>
-<p>有了接口后用extends关键字实现泛型继承，代码如下：</p>
-<pre><code>class SelectGirl&lt;T extends Girl&gt; {
- ...
-}
-</code></pre>
-<p>这句代码的意思是泛型里必须有一个name属性，因为它继承了Girl接口。</p>
-<h2 id="泛型约束">泛型约束</h2>
-<p>在函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法：</p>
-<pre><code>function loggingIdentity&lt;T&gt;(arg: T): T {
-    console.log(arg.length);
-    return arg;
-}
-
-// index.ts(2,19): error TS2339: Property 'length' does not exist on type 'T'.
-</code></pre>
-<p>上例中，泛型 T 不一定包含属性 length，所以编译的时候报错了。</p>
-<p>这时，我们可以对泛型进行约束，只允许这个函数传入那些包含 length 属性的变量。这就是泛型约束：</p>
-<pre><code>interface Lengthwise {
-    length: number;
-}
-
-function loggingIdentity&lt;T extends Lengthwise&gt;(arg: T): T {
-    console.log(arg.length);
-    return arg;
-}
-</code></pre>
-<p>上例中，我们使用了 extends 约束了泛型 T 必须符合接口 Lengthwise 的形状，也就是必须包含 length 属性。</p>
-<p>此时如果调用 loggingIdentity 的时候，传入的 arg 不包含 length，那么在编译阶段就会报错了：</p>
-<pre><code>interface Lengthwise {
-    length: number;
-}
-
-function loggingIdentity&lt;T extends Lengthwise&gt;(arg: T): T {
-    console.log(arg.length);
-    return arg;
-}
-
-loggingIdentity(7);
-
-// index.ts(10,17): error TS2345: Argument of type '7' is not assignable to parameter of type 'Lengthwise'.
-</code></pre>
-<p>多个类型参数之间也可以互相约束：</p>
-<pre><code>function copyFields&lt;T extends U, U&gt;(target: T, source: U): T {
-    for (let id in source) {
-        target[id] = (&lt;T&gt;source)[id];
-    }
-    return target;
-}
-
-let x = { a: 1, b: 2, c: 3, d: 4 };
-
-copyFields(x, { b: 10, d: 20 });
-</code></pre>
-<p>上例中，我们使用了两个类型参数，其中要求 T 继承 U，这样就保证了 U 上不会出现 T 中不存在的字段。</p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
-<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
-<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[typescript学习记录3]]></title>
-        <id>https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/</id>
-        <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-3/">
-        </link>
-        <updated>2020-10-05T04:18:06.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="tsconfigjson">tsconfig.json</h1>
-<p>大小写不敏感</p>
-<h2 id="配置文件-初始tsconfigjson文件">配置文件-初始tsconfig.json文件</h2>
-<p>在终端中输入 <code>tsc init</code>生成tsconfig.json文件</p>
-<h3 id="removecomments">removeComments</h3>
-<p>removeComments：生成的文件中是否带有源文件的注释，取值为 true 或 false</p>
-<h3 id="include">include</h3>
-<p>include 配置项，需手动添加，作用是决定哪些文件作为被编译的源文件，键值为数组</p>
-<pre><code>&quot;include&quot;: [&quot;demo.ts&quot;]
-</code></pre>
-<h3 id="exclude">exclude</h3>
-<p>与 include 相反，数组中是不需要编译的文件</p>
-<pre><code>&quot;exclude&quot;: [&quot;demo.ts&quot;]
-</code></pre>
-<h3 id="files">files</h3>
-<p>与 include 基本相同，区别是对于大小写的处理，如果配置中写的是小写，则编译后的文件也是小写，但是如果存在同类型的大写的同名称的文件，就不会编译，反之亦然。</p>
-<pre><code>&quot;files&quot;: [&quot;demo.ts&quot;],
-</code></pre>
-<h3 id="">*</h3>
-<p>通配符，和其他语言效果一致</p>
-<h3 id="target">target</h3>
-<p>指定ECMAScript目标版本 &quot;ES3&quot;（默认）， &quot;ES5&quot;， &quot;ES6&quot;/ &quot;ES2015&quot;， &quot;ES2016&quot;， &quot;ES2017&quot;或 &quot;ESNext&quot;。</p>
-<h3 id="strict">strict</h3>
-<p>启用所有严格类型检查选项。</p>
-<h3 id="noimplicitany">noImplicitAny</h3>
-<p>在表达式和声明上有隐含的 any类型时报错,也就是值类型为隐式any的时候会报错，可以设置为false规避</p>
-<h3 id="strictnullchecks">strictNullChecks</h3>
-<p>在严格的 null检查模式下， null和 undefined值不包含在任何类型里，只允许用它们自己和 any来赋值</p>
-<pre><code>const zx: string = null;  // 报错
-</code></pre>
-<p>设置为false可以规避</p>
-<h3 id="module">module</h3>
-<p>指定生成哪个模块系统代码： &quot;None&quot;， &quot;CommonJS&quot;， &quot;AMD&quot;， &quot;System&quot;， &quot;UMD&quot;， &quot;ES6&quot;或 &quot;ES2015&quot;。</p>
-<h3 id="esmoduleinterop">esModuleInterop</h3>
-<p>允许从没有设置默认导出的模块中默认导入。这并不影响代码的输出，仅为了类型检查。</p>
-<h3 id="skiplibcheck">skipLibCheck</h3>
-<p>忽略所有的声明文件（ *.d.ts）的类型检查。</p>
-<h3 id="forceconsistentcasinginfilenames">forceConsistentCasingInFileNames</h3>
-<p>禁止对同一个文件的不一致的引用。</p>
-<h3 id="rootdir-与-outdir">rootDir 与 outDir</h3>
-<p>设置入口文件与出口文件，类似于webpack的 entry 与 output</p>
-<pre><code>&quot;outDir&quot;: &quot;./build&quot;,
-&quot;rootDir&quot;: &quot;./src&quot;,
-</code></pre>
-<h3 id="sourcemap">sourceMap</h3>
-<p>生成相应的 .map文件。用于排查错误位置，与webpack相近</p>
-<h3 id="nounusedlocals">noUnusedLocals</h3>
-<p>若有未使用的局部变量则抛错。</p>
-<pre><code>const zx: string = null;
-export const name = &quot;zx&quot;; 
-</code></pre>
-<p>抛出错误</p>
-<pre><code>error TS6133: 'zx' is declared but its value is never read.
-</code></pre>
-<p>上面列出了一些常用的配置项，其余的可以去ts官方文档的配置项列表查看<br>
-<a href="https://www.tslang.cn/docs/handbook/compiler-options.html">配置项列表地址</a></p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
-<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
-<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[typescript学习记录2]]></title>
-        <id>https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/</id>
-        <link href="https://jujuul.github.io/post/typescript-xue-xi-ji-lu-2/">
-        </link>
-        <updated>2020-10-04T08:48:22.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="类的概念与使用">类的概念与使用</h1>
-<h2 id="类的基本使用">类的基本使用</h2>
-<pre><code>// 定义父类
-class Lady {
-  content = &quot;hi 帅哥！&quot;;
-  sayHello() {
-    return this.content;
-  }
-}
-</code></pre>
-<h2 id="类的继承">类的继承</h2>
-<pre><code>class Lady {
-  content = &quot;Hi，帅哥&quot;;
-  sayHello() {
-    return this.content;
-  }
-}
-// 继承父类
-class XiaoJieJie extends Lady {
-  sayLove() {
-    return &quot;I love you&quot;;
-  }
-}
-</code></pre>
-<p>ts中类的继承与ES6一致，通过<code>extends</code>关键字实现。</p>
-<h2 id="类的重写">类的重写</h2>
-<pre><code>class Lady {
-  content = &quot;hi 帅哥！&quot;;
-  sayHello() {
-    return this.content;
-  }
-}
-class XiaoJieJie extends Lady {
-    // 重写了父类的sayHello方法
-  sayHello() {
-    return &quot;. 你好!&quot;;
-  }
-  sayLove() {
-    return &quot;i love u&quot;;
-  }
-}
-</code></pre>
-<h2 id="super关键字的使用">super关键字的使用</h2>
-<pre><code>class XiaoJieJie extends Lady {
-  sayHello() {
-      // 通过super关键字能直接调用父类的方法
-    return super.sayHello() + &quot;. 你好!&quot;;
-  }
-  sayLove() {
-    return &quot;i love u&quot;;
-  }
-}
-</code></pre>
-<h1 id="ts中类的访问类型">ts中类的访问类型</h1>
-<ol>
-<li>private（私有的）</li>
-<li>protected（受保护的）</li>
-<li>public（公共的）</li>
-</ol>
-<h2 id="public">public</h2>
-<p>public：未设置的情况下，默认为public类型</p>
-<pre><code>class Person {
-  name: string;
-}
-</code></pre>
-<p>等同于</p>
-<pre><code>class Person {
-  public name: string;
-}
-</code></pre>
-<p>允许在类的内部和类的外部都可以调用</p>
-<pre><code>const person = new Person();
-person.name = &quot;zx&quot;;
-console.log(person.name);
-</code></pre>
-<h2 id="private">private</h2>
-<pre><code>class Person {
-  private name: string;
-  public sayHello() {
-    console.log(this.name + &quot; say Hello&quot;);
-  }
-}
-const person = new Person();
-// person.name 报错
-person.name = &quot;zx&quot;;
-person.sayHello();
-// person.name 报错
-console.log(person.name);
-</code></pre>
-<p>在内部调用不会报错，外部调用就会报错</p>
-<h2 id="protected">protected</h2>
-<pre><code>class Teacher extends Person {
-  public sayBye() {
-    console.log(this.name);
-  }
-}
-</code></pre>
-<p>与 private类似，也是只能内部访问，区别在于可以通过继承的方式传递</p>
-<h1 id="ts类的构造函数">ts类的构造函数</h1>
-<h2 id="类的构造函数">类的构造函数</h2>
-<pre><code>class Person {
-  constructor(public name: string) {}
-}
-const person = new Person(&quot;zx&quot;);
-console.log(person.name); // zx
-</code></pre>
-<p>等价于</p>
-<pre><code>class Person {
-  public name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
-}
-const person = new Person(&quot;zx&quot;);
-console.log(person.name);   // zx
-</code></pre>
-<p>第一种形式为第二种形式的简写</p>
-<h2 id="继承中的写法">继承中的写法</h2>
-<pre><code>class Person {
-  constructor(public name: string) {}
-}
-class Teacher extends Person {
-  constructor(public age: number) {
-    super(&quot;zx&quot;);
-  }
-}
-const teacher = new Teacher(18);
-console.log(teacher.age);
-console.log(teacher.name);
-</code></pre>
-<p>只要子类需要写 constructor 构造函数，就必须写 super</p>
-<h1 id="类的getter和setter-static">类的getter和setter、static</h1>
-<h2 id="类的getter和setter">类的getter和setter</h2>
-<p>可以使内部真正的值和外部取到的值不一致</p>
-<pre><code>class XiaoJieJie {
-  constructor(private _age: number) {}
-  get age() {
-    return this._age - 10;
-  }
-  set age(age: number) {
-    this._age = age + 3;
-  }
-}
-const dajiao = new XiaoJieJie(28);
-dajiao.age = 25;
-console.log(dajiao.age);  // 18
-</code></pre>
-<h2 id="类的static静态类">类的static（静态类）</h2>
-<pre><code>class Girl {
-  static sayLove() {
-    return &quot;i love u&quot;;
-  }
-}
-console.log(Girl.sayLove());  // i love u
-</code></pre>
-<p>可以不实例化，而是通过类名+方法名调用方法</p>
-<h1 id="只读属性和抽象类">只读属性和抽象类</h1>
-<h2 id="只读属性">只读属性</h2>
-<pre><code>class Person {
-  constructor(public name: string) {}
-}
-const person = new Person(&quot;zx&quot;);
-console.log(person.name);   // zx
-person.name = &quot;xz&quot;;
-console.log(person.name);   // xz
-</code></pre>
-<p>正常情况下，对象的属性是可以更改的</p>
-<pre><code>class Person {
-  public readonly _name: string;
-  constructor(name: string) {
-    this._name = name;
-  }
-}
-const person = new Person(&quot;zx&quot;);
-console.log(person._name);
-person._name = &quot;xz&quot;;    // vscode报错，属性为只读
-</code></pre>
-<p>设置为只读以后，无法修改</p>
-<h2 id="抽象类">抽象类</h2>
-<p>通过 abstract 定义抽象类<br>
-抽象类中的抽象方法不用具体实现，通过 abstract 定义就可以了</p>
-<pre><code>abstract class Girl {
-  abstract skill();
-}
-</code></pre>
-<p>继承该类时，子类必须有 skill() 方法</p>
-<pre><code>class Waiter extends Girl {
-  skill() {
-    console.log(&quot;端茶&quot;);
-  }
-}
-class baseTeacher extends Girl {
-  skill() {
-    console.log(&quot;倒水&quot;);
-  }
-}
-</code></pre>
-<p>方法可以不同，但是必须要有</p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://www.bilibili.com/video/BV1qV41167VD?p=20">TypeScript从入门到精通视频教程-2020年新版</a>[技术胖]<br>
-<a href="https://ts.xcatliu.com/">TypeScript 入门教程</a>[xcatliu]<br>
-<a href="https://www.tslang.cn/index.html">TypeScript中文文档</a></p>
 ]]></content>
     </entry>
 </feed>

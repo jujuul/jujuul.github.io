@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Uniapp学习记录day7 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1602597480580">
+<link rel="shortcut icon" href="/favicon.ico?v=1603382541331">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -153,7 +153,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">83</span>
+        <span class="site-item-stat-count">90</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -816,6 +816,687 @@ Gridea写不了，换成飞书写了。</p>
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vuex-yuan-li/"" data-c="
+          &lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;在&lt;/p&gt;
+">Vuex原理</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-xiang-ying-shi-yuan-li/"" data-c="
+          &lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;
+&lt;p&gt;随着对于 vue 的学习，对于其原理的掌握也是非常必要的，因此我也买了一本网上很多人推荐的《深入浅出Vue.js》，还在掘金上买了一本《剖析 Vue.js 内部运行机制》的小册，虽然还都没有读完，不过收获却是不少，这篇文章也是对于这两本书中关于 vue 响应式原理部分的总结。&lt;/p&gt;
+&lt;h1 id=&#34;追踪变化&#34;&gt;追踪变化&lt;/h1&gt;
+&lt;p&gt;想要实现响应式，就需要能够检测到哪个数据发生了变化，而 vue2 的实现方式是通过 Object.defineReactive 函数, vue 能实现响应式就是因为有这个方法，当然，在最新的 vue3.0 版本中，通过 proxy 取代了 Object.defineProperty，不过它们的原理是相同的。&lt;br&gt;
+Object.defineProperty 的作用是侦测对象的变化，因此我们可以写出下面的代码&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;function defineReactive(data, key, val){
+    Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function(){
+            return val
+        },
+        set: function(newVal){
+            if(val == newVale){
+                return
+            }
+            val = newVal
+        }
+    })
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的函数 defineReactive 是对 Object.defineReactive 进行封装。函数的作用是定义一个响应式数据，封装后只需要传递 data、key 和 val 就行了。&lt;/p&gt;
+&lt;p&gt;封装好之后，每当从 data 的 key 中读取数据时，get 函数被触发；每当往 data 的 key 中设置数据时，set 函数会被触发。&lt;/p&gt;
+&lt;h1 id=&#34;收集依赖&#34;&gt;收集依赖&lt;/h1&gt;
+&lt;p&gt;理解了前面的代码，就会发现，这并没有什么用，因为这里只是将数据转变为响应式数据，却没有做另外的处理，所以这里就要引入一些其他的东西，首先就是收集依赖。&lt;/p&gt;
+&lt;p&gt;我们观察数据的目的就是为了当数据属性发生改变时，可以通知那些使用了该数据的地方&lt;br&gt;
+举个🌰&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;template&amp;gt;
+    &amp;lt;h1&amp;gt;{{ name }}
+&amp;lt;/template&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;该模板中使用了数据 name，所以当它发生改变时，要向使用了它的地方发送通知。所以收集依赖就是先收集依赖，把用到数据 name 的地方收集起来，当数据发生变化时，把之前收集过的依赖循环触发一边就可以了。&lt;/p&gt;
+&lt;p&gt;总结来说，就是在 getter 中收集依赖，在 setter 中触发依赖。&lt;/p&gt;
+&lt;h1 id=&#34;收集在哪里&#34;&gt;收集在哪里？&lt;/h1&gt;
+&lt;h1 id=&#34;收集的依赖到底是什么&#34;&gt;收集的依赖到底是什么?&lt;/h1&gt;
+&lt;h1 id=&#34;watch是什么&#34;&gt;Watch是什么？&lt;/h1&gt;
+&lt;h1 id=&#34;总结&#34;&gt;总结&lt;/h1&gt;
+&lt;h1 id=&#34;尾声&#34;&gt;尾声&lt;/h1&gt;
+">Vue响应式原理</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/gao-zhi-liang-dai-ma/"" data-c="
+          &lt;h2 id=&#34;判断是否为空&#34;&gt;判断是否为空&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;//普通写法
+if (a == undefined) a = [];
+
+// 优雅写法
+a = a || [];
+
+//普通写法
+if (params.success) {
+    params.success(res)
+}
+// 优雅写法
+params.success &amp;amp;&amp;amp; params.success(res)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;多条件判断&#34;&gt;多条件判断&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;//普通写法
+var Statistics = function () {
+    console.log(&#39;执行&#39;)
+}
+switch (currentTab) {
+    case 0:
+        Statistics();
+        break;
+    case 1:
+        Statistics();
+        break;
+    case 2:
+        Statistics();
+        break;
+    case 3:
+        Statistics();
+        break;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;// 优雅写法
+// 将判断条件作为对象的属性名，将处理逻辑作为对象的属性值
+var Statistics = function () {
+    console.log(&#39;执行&#39;)
+}
+const comparativeToles = new Map([
+    [0, Statistics],
+    [1, Statistics],
+    [2, Statistics],
+    [3, Statistics],
+])
+comparativeToles.get(1) &amp;amp;&amp;amp; comparativeToles.get(1)()
+
+// 可以使用 Map 或者是对象的形式来处理，下面的判断语句判断是否符合条件，如不符合则不操作，符合则调用
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;匿名函数调用&#34;&gt;匿名函数调用&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;// 普通写法
+(function () {})();
+
+// 优雅写法
+!function(){}()
++function(){}()
+
+// 通过这种方法可以隔绝函数，避免前面未写 ；结束造成的调用错误
+&lt;/code&gt;&lt;/pre&gt;
+">高质量代码</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-6/"" data-c="
+          &lt;h1 id=&#34;生命周期函数&#34;&gt;生命周期函数&lt;/h1&gt;
+&lt;p&gt;在某一时刻可以自动执行的函数，就是生命周期函数&lt;/p&gt;
+&lt;h2 id=&#34;initialization&#34;&gt;Initialization&lt;/h2&gt;
+&lt;h2 id=&#34;mounting&#34;&gt;Mounting&lt;/h2&gt;
+&lt;h2 id=&#34;updation&#34;&gt;Updation&lt;/h2&gt;
+&lt;h2 id=&#34;unmounting&#34;&gt;Unmounting&lt;/h2&gt;
+&lt;h2 id=&#34;react15组件生命周期&#34;&gt;react15组件生命周期&lt;/h2&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602856889263.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h2 id=&#34;为什么-react-16-要更改组件的生命周期&#34;&gt;为什么 React 16 要更改组件的生命周期？&lt;/h2&gt;
+&lt;h3 id=&#34;虚拟-dom-的流程&#34;&gt;虚拟 DOM 的流程&lt;/h3&gt;
+&lt;p&gt;组件在初始化时，通过调用 render 方法生成虚拟 DOM，再通过调用 ReactDOM.render 方法实现虚拟 DOM 到真实 DOM 的转换，当组件更新时，会通过调用 render 方法生成新的虚拟 DOM，然后借助 diff 算法，定位出两次虚拟 DOM 的差异，针对发生变化的真实 DOM 做定向更新&lt;/p&gt;
+&lt;h3 id=&#34;组件化&#34;&gt;组件化&lt;/h3&gt;
+&lt;h1 id=&#34;react用axios请求远程数据&#34;&gt;React用axios请求远程数据&lt;/h1&gt;
+&lt;p&gt;推荐在 componentDidMount 生命周期内使用 axios&lt;/p&gt;
+&lt;h2 id=&#34;获取并更改当前数据&#34;&gt;获取并更改当前数据&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;.get(
+        &amp;quot;https://www.easy-mock.com/mock/5f8a71ff4dc90c664451515e/ReactDemo01/xiaojiejie&amp;quot;
+      )
+      .then((res) =&amp;gt; {
+        console.log(res.data.data);
+        this.setState({
+          list: res.data.data,
+        });
+      })
+      .catch((error) =&amp;gt; {
+        console.log(&amp;quot;axios 获取数据失败&amp;quot; + error);
+      });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;主要在于 setState 的使用，要变更组件的数据必须使用 setState 的方式，至于 axios 的用法和在 Vue 中使用没有什么区别，还有就是在 componentDidMount 这个生命周期中使用，听说 最新版本的 react 在其他生命周期获取更适合，等以后学到了再说了&lt;/p&gt;
+">React学习记录6</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zhuan-zai/"" data-c="
+          &lt;blockquote&gt;
+&lt;p&gt;本文译自Normalize.css官网: &lt;a href=&#34;http://nicolasgallagher.com/about-normalize-css/&#34;&gt;http://nicolasgallagher.com/about-normalize-css/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;    Normalize.css 只是一个很小的CSS文件，但它在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS reset，Normalize.css是一种现代的、为HTML5准备的优质替代方案。Normalize.css现在已经被用于Twitter Bootstrap、HTML5 Boilerplate、GOV.UK、Rdio、CSS Tricks 以及许许多多其他框架、工具和网站上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://necolas.github.io/normalize.css/&#34;&gt;Normalize.css 项目地址&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/necolas/normalize.css&#34;&gt;Normalize.css 在GitHub上的源码&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;综述&#34;&gt;综述&lt;/h1&gt;
+&lt;p&gt;    Normalize.css是一种CSS reset的替代方案。经过@necolas和@jon_neal花了几百个小时来努力研究不同浏览器的默认样式的差异，这个项目终于变成了现在这样。&lt;/p&gt;
+&lt;p&gt;    我们创造normalize.css有下面这几个目的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;保护有用的浏览器默认样式而不是完全去掉它们&lt;/li&gt;
+&lt;li&gt;一般化的样式：为大部分HTML元素提供&lt;/li&gt;
+&lt;li&gt;修复浏览器自身的bug并保证各浏览器的一致性&lt;/li&gt;
+&lt;li&gt;优化CSS可用性：用一些小技巧&lt;/li&gt;
+&lt;li&gt;解释代码：用注释和详细的文档来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;    Normalize.css支持包括手机浏览器在内的超多浏览器，同时对HTML5元素、排版、列表、嵌入的内容、表单和表格都进行了一般化。尽管这个项目基于一般化的原则，但我们还是在合适的地方使用了更实用的默认值。&lt;/p&gt;
+&lt;h1 id=&#34;normalize-vs-reset&#34;&gt;Normalize vs Reset&lt;/h1&gt;
+&lt;p&gt;    知道Normalize.css和传统Reset的区别是非常有价值的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Normalize.css 保护了有价值的默认值&lt;br&gt;
+    Reset通过为几乎所有的元素施加默认样式，强行使得元素有相同的视觉效果。相比之下，Normalize.css保持了许多默认的浏览器样式。这就意味着你不用再为所有公共的排版元素重新设置样式。当一个元素在不同的浏览器中有不同的默认值时，Normalize.css会力求让这些样式保持一致并尽可能与现代标准相符合。&lt;/li&gt;
+&lt;li&gt;Normalize.css 修复了浏览器的bug&lt;br&gt;
+    它修复了常见的桌面端和移动端浏览器的bug。这往往超出了Reset所能做到的范畴。关于这一点，Normalize.css修复的问题包含了HTML5元素的显示设置、预格式化文字的font-size问题、在IE9中SVG的溢出、许多出现在各浏览器和操作系统中的与表单相关的bug。&lt;br&gt;
+    可以看以下这个例子，看看对于HTML5中新出现的input类型search，Normalize.css是如何保证跨浏览器的一致性的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt; * 1. Addresses appearance set to searchfield in S5, Chrome
+ * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
+ */
+
+input[type=&amp;quot;search&amp;quot;] {
+  -webkit-appearance: textfield; /* 1 */
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; /* 2 */
+  box-sizing: content-box;
+}
+
+/**
+ * Removes inner padding and search cancel button in S5, Chrome on OS X
+ */
+
+input[type=&amp;quot;search&amp;quot;]::-webkit-search-decoration,
+input[type=&amp;quot;search&amp;quot;]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;Normalize.css 不会让你的调试工具变的杂乱&lt;br&gt;
+    使用Reset最让人困扰的地方莫过于在浏览器调试工具中大段大段的继承链，如下图所示。在Normalize.css中就不会有这样的问题，因为在我们的准则中对多选择器的使用时非常谨慎的，我们仅会有目的地对目标元素设置样式。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1602764259478.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;li&gt;Normalize.css 是模块化的&lt;br&gt;
+    这个项目已经被拆分为多个相关却又独立的部分，这使得你能够很容易也很清楚地知道哪些元素被设置了特定的值。因此这能让你自己选择性地移除掉某些永远不会用到部分（比如表单的一般化）。&lt;/li&gt;
+&lt;li&gt;Normalize.css 拥有详细的文档&lt;br&gt;
+    Normalize.css的代码基于详细而全面的跨浏览器研究与测试。这个文件中拥有详细的代码说明并在Github Wiki中有进一步的说明。这意味着你可以找到每一行代码具体完成了什么工作、为什么要写这句代码、浏览器之间的差异，并且你可以更容易地进行自己的测试。&lt;br&gt;
+    这个项目的目标是帮助人们了解浏览器默认是如何渲染元素的，同时也让人们很容易地明白如何改进浏览器渲染。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;如何使用-normalizecss&#34;&gt;如何使用 normalize.css&lt;/h1&gt;
+&lt;p&gt;    首先，安装或从Github下载Normalize.css，接下来有两种主要途径去使用它。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;策略一：将normalize.css作为你自己项目的基础CSS，自定义样式值以满足设计师的需求。&lt;/li&gt;
+&lt;li&gt;策略二：引入normalize.css源码并在此基础上构建，在必要的时候用你自己写的CSS覆盖默认值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;结语&#34;&gt;结语&lt;/h1&gt;
+&lt;p&gt;    无论从适用范畴还是实施上，Normalize.css与Reset都有极大的不同。尝试一下这两种方法并看看到底哪种更适合你的开发偏好是非常值得的。这个项目在Github上以开源的形式开发。任何人都能够提交问题报告或者提交补丁。整个项目发展的过程对所有人都是可见的，而每一次改动的原因也都写在commit信息中，这些都是有迹可循的。&lt;/p&gt;
+&lt;h1 id=&#34;相关阅读&#34;&gt;相关阅读&lt;/h1&gt;
+&lt;p&gt;    关于更多默认UA样式的详细信息：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.whatwg.org/specs/web-apps/current-work/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints&#34;&gt;WHATWG suggestions for rendering HTML documents&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://iecss.com/&#34;&gt;Internet Explorer User Agent Style Sheets&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://css-class.com/test/css/defaults/UA-style-sheet-defaults.htm&#34;&gt;CSS2.1 User Agent Style Sheet Defaults&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+">转载：来，让我们谈一谈 Normalize.css</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/yi-dong-duan-bu-ju-zong-jie/"" data-c="
+          &lt;h1 id=&#34;视口&#34;&gt;视口&lt;/h1&gt;
+&lt;p&gt;视口就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉视口和理想视口&lt;/p&gt;
+&lt;h2 id=&#34;布局视口-layout-viewport&#34;&gt;布局视口 layout viewport&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;一般移动设备的浏览器都默认设置了一个布局视口，用于解决早期的PC端页面在手机上显示的问题。&lt;/li&gt;
+&lt;li&gt;IOS、Android基本都将这个视口分辨率设置为980px，所以PC上的网页大多都能在手机上呈现，只不过元素看上去很小，一般默认可以通过手动缩放网页。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;视觉视口-visual-viewport&#34;&gt;视觉视口 visual viewport&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;字面意思，它是用户正在看到的网站的区域。注意：是网站的区域。&lt;/li&gt;
+&lt;li&gt;我们可以通过缩放去操作视觉视口，但不会影响布局视口，布局视口仍保持yua原来的宽度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;理想视口-ideal-viewport&#34;&gt;理想视口 ideal viewport&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;为了使网站再移动端有最理想的浏览和阅读宽度而设定&lt;/li&gt;
+&lt;li&gt;理想视口，对设备来讲，是最理想的视口尺寸&lt;/li&gt;
+&lt;li&gt;需要手动填写meta视口标签通知浏览器操作&lt;/li&gt;
+&lt;li&gt;meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，简单理解就是该设备有多宽，我们布局的视口就多宽&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;meta视口标签&#34;&gt;meta视口标签&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width, user-scalable=no, initial-scale=1.0&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;user-scalable：是否允许用户缩放&lt;br&gt;
+initial-scale：初始缩放比，一般是1.0&lt;br&gt;
+maximum-scale：最大缩放比&lt;br&gt;
+minimum-scale：最小缩放比&lt;/p&gt;
+&lt;h2 id=&#34;标准的viewport设置&#34;&gt;标准的viewport设置&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;视口宽度和设备保持一致&lt;/li&gt;
+&lt;li&gt;视口的默认缩放比例为1.0&lt;/li&gt;
+&lt;li&gt;不允许用户自行缩放&lt;/li&gt;
+&lt;li&gt;最大允许的缩放比例为1.0&lt;/li&gt;
+&lt;li&gt;最小允许的缩放比例为1.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;二倍图&#34;&gt;二倍图&lt;/h1&gt;
+&lt;h2 id=&#34;物理像素物理像素比&#34;&gt;物理像素&amp;amp;物理像素比&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;物理像素点指的是屏幕显示的最小颗粒，是物理真实存在的。这是厂商在出厂时就设置好了，比如苹果6\7\8是750*1334&lt;/li&gt;
+&lt;li&gt;我们开发时候的1px不是一定等于一个物理像素的&lt;/li&gt;
+&lt;li&gt;PC端页面，1个px等于一个物理像素的，但是移动端就不尽相同&lt;/li&gt;
+&lt;li&gt;一个px的能显示的物理像素点的个数，称为物理像素比或屏幕像素比&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;多倍图&#34;&gt;多倍图&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;对于一张50px*50px的图片，在手机Retina屏中打开，按照刚才的物理像素比会放大数倍，这样会造成图片模糊&lt;/li&gt;
+&lt;li&gt;在标准的viewport设置中，使用倍图来提高图片质量，解决在高清设备中的模糊问题&lt;/li&gt;
+&lt;li&gt;通常使用二倍图，因为iPhone6\7\8的影响，但是现在还存在3倍图4倍图的情况，这个看实际开发公司需求&lt;/li&gt;
+&lt;li&gt;背景图片 注意缩放问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;背景缩放-background-size&#34;&gt;背景缩放 background-size&lt;/h2&gt;
+&lt;p&gt;background-size属性规定背景图像的尺寸&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;background-size：背景图片宽度，背景图片高度；
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;只写一个参数，就是宽度，高度会等比缩放&lt;/li&gt;
+&lt;li&gt;可以写%，相对于父盒子&lt;/li&gt;
+&lt;li&gt;cover，等比例拉伸，完全覆盖div盒子，会导致部分背景图片显示不全&lt;/li&gt;
+&lt;li&gt;contain，高度和宽度等比例拉伸，当高度或宽度其中一个铺满盒子就不再拉伸，可能会导致出现空白区域，因为未填满&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;移动端开发选择&#34;&gt;移动端开发选择&lt;/h1&gt;
+&lt;h2 id=&#34;单独制作移动端页面主流&#34;&gt;单独制作移动端页面（主流）&lt;/h2&gt;
+&lt;h2 id=&#34;响应式页面兼容移动端其次&#34;&gt;响应式页面兼容移动端（其次）&lt;/h2&gt;
+&lt;p&gt;缺点：制作麻烦，需要花很大精力去调兼容性问题&lt;/p&gt;
+&lt;h1 id=&#34;移动端技术解决方案&#34;&gt;移动端技术解决方案&lt;/h1&gt;
+&lt;h2 id=&#34;移动端浏览器&#34;&gt;移动端浏览器&lt;/h2&gt;
+&lt;p&gt;移动端浏览器以webkit内核为主，因此主要考虑webkit兼容性问题。&lt;/p&gt;
+&lt;p&gt;可以放心使用H5标签和CSS3样式&lt;/p&gt;
+&lt;p&gt;同时我们浏览器的私有前缀我们只需要考虑添加webkit即可&lt;/p&gt;
+&lt;h2 id=&#34;css3盒模型&#34;&gt;css3盒模型&lt;/h2&gt;
+&lt;p&gt;就是 box-sizing 设置为 border-box&lt;/p&gt;
+&lt;h1 id=&#34;移动端常见布局&#34;&gt;移动端常见布局&lt;/h1&gt;
+&lt;h2 id=&#34;移动端技术选型&#34;&gt;移动端技术选型&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;单独制作移动端页面（主流）
+&lt;ul&gt;
+&lt;li&gt;流式布局（百分比布局）&lt;/li&gt;
+&lt;li&gt;flex弹性布局（强烈推荐）&lt;/li&gt;
+&lt;li&gt;less+rem+媒体查询布局&lt;/li&gt;
+&lt;li&gt;混合布局&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;响应式页面兼容移动端（其次）
+&lt;ul&gt;
+&lt;li&gt;媒体查询&lt;/li&gt;
+&lt;li&gt;bootstrap&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;流式布局百分比布局&#34;&gt;流式布局（百分比布局）&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;流式布局，就是百分比布局，也称非固定像素布局&lt;/li&gt;
+&lt;li&gt;通过盒子的宽度设置成百分比来根据屏幕的宽度进行收缩，不受固定像素的限制，内容向两侧填充&lt;/li&gt;
+&lt;li&gt;流式布局方式是移动web开发使用的比较常见的布局方式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;flex布局&#34;&gt;flex布局&lt;/h1&gt;
+&lt;h2 id=&#34;传统布局与flex布局对比&#34;&gt;传统布局与flex布局对比&lt;/h2&gt;
+&lt;h3 id=&#34;传统布局&#34;&gt;传统布局&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;兼容性好&lt;/li&gt;
+&lt;li&gt;布局繁琐&lt;/li&gt;
+&lt;li&gt;局限性，在移动端表现不好&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;flex弹性布局&#34;&gt;flex弹性布局&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;操作方便，布局极为简单，移动端应用广泛&lt;/li&gt;
+&lt;li&gt;PC端浏览器支持情况较差&lt;/li&gt;
+&lt;li&gt;IE11或更低版本，不支持或仅部分支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;建议：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如果是PC端页面布局，可以使用传统布局&lt;/li&gt;
+&lt;li&gt;如果是移动端或者不考虑兼容性问题的PC端布局，推荐flex弹性布局&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flex布局原理&#34;&gt;flex布局原理&lt;/h2&gt;
+&lt;p&gt;flex 是 flexible Box 的缩写，意为“弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为 flex 布局&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当我们为父盒子设置 flex 以后，子元素的 float、clear 和 vertical-align 属性将失效&lt;/li&gt;
+&lt;li&gt;伸缩布局 = 弹性布局 = 伸缩弹性盒 = 弹性盒布局 = flex 布局&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;布局原理&#34;&gt;布局原理&lt;/h3&gt;
+&lt;p&gt;通过给父盒子添加 flex 属性，来控制子盒子的位置和排列方式&lt;/p&gt;
+&lt;h1 id=&#34;rem布局&#34;&gt;rem布局&lt;/h1&gt;
+&lt;h2 id=&#34;rem基础&#34;&gt;rem基础&lt;/h2&gt;
+&lt;h3 id=&#34;rem单位&#34;&gt;rem单位&lt;/h3&gt;
+&lt;p&gt;rem（root em）是一个相对单位，类似于 em，em 是相对于父元素的字体大小&lt;/p&gt;
+&lt;p&gt;不同的是 rem 的基准是相对于根 html 元素的字体大小&lt;/p&gt;
+&lt;p&gt;rem 的优点就是可以通过修改根 html 元素的字体大小来改变页面中元素的大小&lt;/p&gt;
+&lt;h2 id=&#34;媒体查询&#34;&gt;媒体查询&lt;/h2&gt;
+&lt;h3 id=&#34;什么是媒体查询&#34;&gt;什么是媒体查询？&lt;/h3&gt;
+&lt;p&gt;媒体查询（Media Query）是 CSS3 新语法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 @media 查询，可以针对不同的媒体类型定义不同的样式&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;@media 可以针对不同的屏幕尺寸设置不同的样式&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面&lt;/li&gt;
+&lt;li&gt;目前针对很多苹果手机、Android 手机，平板等设备都用得到媒体查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;语法规范&#34;&gt;语法规范&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;@media mediatype and|not|only (media feature) {
+    css-code
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;用 @media 开头，注意 @ 符号&lt;/li&gt;
+&lt;li&gt;mediatype 媒体类型&lt;/li&gt;
+&lt;li&gt;关键字 and not only&lt;/li&gt;
+&lt;li&gt;media feature 媒体特性，必须有小括号包括&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mediatype-查询类型&#34;&gt;mediatype 查询类型&lt;/h3&gt;
+&lt;p&gt;将不同的终端设备划分成不同的类型，称为媒体类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;all：        用于所有设备&lt;/li&gt;
+&lt;li&gt;print：     用于打印机和打印预览&lt;/li&gt;
+&lt;li&gt;screen：  用于电脑屏幕，平板电脑，智能手机等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键字&#34;&gt;关键字&lt;/h3&gt;
+&lt;p&gt;关键字将媒体类型或多个媒体特性连接到一起作为媒体查询的条件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;and：可以将多个媒体特性连接到一起，相当于“且”的意思&lt;/li&gt;
+&lt;li&gt;not：排除某个媒体类型，相当于“非”的意思，可以省略&lt;/li&gt;
+&lt;li&gt;only：指定某个特定的媒体类型，可以省略&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;媒体特性&#34;&gt;媒体特性&lt;/h3&gt;
+&lt;p&gt;每种媒体类型都有各自不同的特性，根据不同媒体类型的媒体特性设置不同的展示风格&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;width：          定义输出设备中页面可见区域的宽度&lt;/li&gt;
+&lt;li&gt;min-width：  定义输出设备中页面最小可见区域宽度&lt;/li&gt;
+&lt;li&gt;max-width：  定义输出设备中页面最大可见区域宽度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;为了防止混乱，媒体查询我们要按照从小到大或者从大到小的顺序来写&lt;code&gt;推荐从小到大，代码更简洁&lt;/code&gt;&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;ps：and 左右一定要有空格，代码格式化插件也没法格式化这里&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;引入资源&#34;&gt;引入资源&lt;/h2&gt;
+&lt;p&gt;当资源比较繁多的时候，我们可以针对不同的媒体使用不同的样式&lt;/p&gt;
+&lt;p&gt;原理就是直接在 link 中判断设备的尺寸，然后引入不同的 css 文件&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;style320.css&amp;quot; media=&amp;quot;screen and (min-width:320px)&amp;quot;&amp;gt;
+&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;style640.css&amp;quot; media=&amp;quot;screen and (min-width:640px)&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;rem适配方案&#34;&gt;rem适配方案&lt;/h2&gt;
+&lt;p&gt;###方案1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;less&lt;/li&gt;
+&lt;li&gt;媒体查询&lt;/li&gt;
+&lt;li&gt;rem&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;方案2&#34;&gt;方案2&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;flexibls.js&lt;/li&gt;
+&lt;li&gt;rem&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rem实际开发适配方案1&#34;&gt;rem实际开发适配方案1&lt;/h2&gt;
+&lt;h3 id=&#34;动态设置html标签font-size大小&#34;&gt;动态设置html标签font-size大小&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;假设设计稿是750px&lt;/li&gt;
+&lt;li&gt;假设我们把整个屏幕划分成15等份（也可划分为20或10等份）&lt;/li&gt;
+&lt;li&gt;每一份作为html字体大小，这里就是50px&lt;/li&gt;
+&lt;li&gt;那么在320px设备的时候，字体大小就是320/15=21.33px&lt;/li&gt;
+&lt;li&gt;用我们页面元素的大小除以不同的html字体大小会发现他们比例是相同的&lt;/li&gt;
+&lt;li&gt;比如我们以750为标准设计稿&lt;/li&gt;
+&lt;li&gt;一个100*100像素的页面元素在750屏幕下，就是100/50转换为rem是2rem × 2rem，比例是1比1&lt;/li&gt;
+&lt;li&gt;320屏幕下，html字体大小为21.33px，则2rem=42.66px，此时宽和高都是42.66，但是宽和高的比例还是1比1&lt;/li&gt;
+&lt;li&gt;但是已经能实现不同屏幕下的页面盒子等比缩放的效果&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;元素大小取值方法&#34;&gt;元素大小取值方法&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;最后的公式：页面元素的rem值 = 页面元素值（px）/（屏幕宽度/划分的份数）&lt;/li&gt;
+&lt;li&gt;屏幕宽度/划分的份数就是 html 的 font-size 的大小&lt;/li&gt;
+&lt;li&gt;或者：页面元素的 rem 值 = 页面元素值（px）/ html 的 font-size字体大小&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;rem实际开发适配方案2&#34;&gt;rem实际开发适配方案2&lt;/h2&gt;
+&lt;h3 id=&#34;flexiblejs&#34;&gt;flexible.js&lt;/h3&gt;
+&lt;p&gt;手淘出的移动端适配库，无需再写媒体查询，库帮忙做了js处理&lt;/p&gt;
+&lt;h1 id=&#34;响应式布局&#34;&gt;响应式布局&lt;/h1&gt;
+&lt;h2 id=&#34;响应式开发原理&#34;&gt;响应式开发原理&lt;/h2&gt;
+&lt;p&gt;使用媒体查询针对不同宽度的设备进行布局和样式设置，从而适配不同设备&lt;br&gt;
+尺寸划分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;超小屏幕（手机）              &amp;lt; 768px&lt;/li&gt;
+&lt;li&gt;小屏设备（平板）              &amp;gt;= 768px ~ &amp;lt; 992px&lt;/li&gt;
+&lt;li&gt;中等屏幕（桌面显示器）    &amp;gt;= 992px ~ &amp;lt; 1200px&lt;/li&gt;
+&lt;li&gt;宽屏设备（大桌面显示器）&amp;gt;= 1200px&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;响应式布局容器&#34;&gt;响应式布局容器&lt;/h2&gt;
+&lt;p&gt;响应式需要一个父级作为布局容器，来配合子级元素来实现变化效果&lt;/p&gt;
+">移动端布局总结</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-5/"" data-c="
+          &lt;h1 id=&#34;单向数据流&#34;&gt;单向数据流&lt;/h1&gt;
+&lt;h1 id=&#34;proptypes类型检查&#34;&gt;PropTypes类型检查&lt;/h1&gt;
+&lt;p&gt;PropTypes 提供一系列验证器，可用于确保组件接收到的数据类型是有效的。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;XiaojiejieItem.propTypes = {
+    // 下面都是父组件传递过来的值，通过PropTypes检测值的类型
+  content: PropTypes.string,
+  index: PropTypes.number,
+  deleteItem: PropTypes.func,
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;除了几个基本的数据类型，还可以设置为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// 任何可被渲染的元素（包括数字、字符串、元素或数组）
+// (或 Fragment) 也包含这些类型。
+
+optionalNode: PropTypes.node,
+
+// 一个对象可以是几种类型中的任意一个类型
+optionalUnion: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.instanceOf(Message)
+]),
+
+// 一个 React 元素。
+optionalElement: PropTypes.element,
+
+// 一个 React 元素类型（即，MyComponent）。
+optionalElementType: PropTypes.elementType,
+
+// 通过 .isRequired 设置该值为父组件必须传递的值
+name: PropTypes.string.isRequired
+
+// 通过 .defaultProps 设置接受值的默认值
+XiaojiejieItem.defaultProps = {
+  name: &amp;quot;zx&amp;quot;,
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;具体哪些可以查看：&lt;a href=&#34;https://react.docschina.org/docs/typechecking-with-proptypes.html&#34;&gt;官方文档&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;ref属性的使用&#34;&gt;ref属性的使用&lt;/h1&gt;
+">React学习记录5</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-2/"" data-c="
+          &lt;h1 id=&#34;vuex&#34;&gt;Vuex&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1602677540818.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+vuex与组件已经没有强相关的关系了&lt;/p&gt;
+&lt;h2 id=&#34;运行机制&#34;&gt;运行机制：&lt;/h2&gt;
+&lt;p&gt;vuex提供数据，驱动 vue component 视图， vue component 视图通过 dispatch 派发 Actions，在 Actions 中可以做一些异步的操作（如：通过 ajax 获取后端数据），再通过 commit 提交给 Mutations ，通过 Mutations 更改 State ，之所以要经过 Mutations 是因为我们需要在 Devtools（vue的插件，可用于调试） 中记录数据的变化，方便调试，也因此 Mutations 必须是同步操作，如果是异步操作需要现在 Actions 中处理，而如果没有异步操作，可以跳过 Actions 直接由  vue component 组件提交 commit 到 Mutations。&lt;/p&gt;
+&lt;h2 id=&#34;问题vuex的store是如何挂载到每个组件中&#34;&gt;问题：vuex的store是如何挂载到每个组件中？&lt;/h2&gt;
+&lt;p&gt;为什么我们在组件中直接this.$store.xx,就可以对vuex进行操作。&lt;br&gt;
+每次我们在使用vuex的时候需要&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import Vue from &amp;quot;vue&amp;quot;;
+import Vuex from &amp;quot;vuex&amp;quot;;
+Vue.use(Vuex);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Vue.use会执行Vuex对象中的&lt;code&gt;install&lt;/code&gt;方法&lt;/p&gt;
+&lt;h2 id=&#34;核心概念&#34;&gt;核心概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;State——this.$store.state.xxx  取值&lt;/li&gt;
+&lt;li&gt;Getter——this.$store.getters.xxx   取值&lt;/li&gt;
+&lt;li&gt;Mutation——this.$store.commit(&#39;xxx&#39;)   赋值&lt;/li&gt;
+&lt;li&gt;Action——this.$store,dispatch(&#39;xxx&#39;)   赋值&lt;/li&gt;
+&lt;li&gt;Module&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;底层原理&#34;&gt;底层原理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;State：提供一个响应式数据&lt;/li&gt;
+&lt;li&gt;Getter：借助Vue的计算属性computed来实现缓存&lt;/li&gt;
+&lt;li&gt;Mutation：更改state方法&lt;/li&gt;
+&lt;li&gt;Action：触发mutation方法&lt;/li&gt;
+&lt;li&gt;Module：Vue.set动态添加state到响应式数据中&lt;/li&gt;
+&lt;/ul&gt;
+">《vue开发实战》观看总结2</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/wen-ti/"" data-c="
+          &lt;h2 id=&#34;zindex的从父原则&#34;&gt;zindex的从父原则&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;同级别情况下，不存在 z-index 或者 z-index 相等，则后面的覆盖前面的&lt;/li&gt;
+&lt;li&gt;同级别情况下，z-index 越大优先级越高&lt;/li&gt;
+&lt;li&gt;当内层的 z-index 比较时，比较最外层等 z-index，最外层 z-index 越大的，内层 z-index 不管多少都比同级别的优先级高&lt;/li&gt;
+&lt;li&gt;当外层 z-index 设置为 auto 时内层 z-index 与上级 z-index 比较，一个定位元素不设置 z-index 默认为 auto&lt;/li&gt;
+&lt;li&gt;可以通过外层不设置 z-index，内层设置负的 z-index 来达到内层位于外层下面的效果（Y轴）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;如何减少重排&#34;&gt;如何减少重排&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;直接改变元素的className，相当于把多个样式操作合并在一起&lt;/li&gt;
+&lt;li&gt;display先设置为none，然后进行页面布局等操作，设置完后再将display更改为block，减少重排重绘次数&lt;/li&gt;
+&lt;li&gt;将需要多次重排的元素，position设置为absolute或fixed，脱离文档流，不会影响到其他元素&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;content-type&#34;&gt;content-type&lt;/h2&gt;
+&lt;p&gt;content-type可以用来区分文件的格式类型&lt;br&gt;
+常见的文件类型如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;text/html ： HTML格式&lt;/li&gt;
+&lt;li&gt;text/plain ：纯文本格式&lt;/li&gt;
+&lt;li&gt;text/xml ：  XML格式&lt;/li&gt;
+&lt;li&gt;image/gif ：gif图片格式&lt;/li&gt;
+&lt;li&gt;image/jpeg ：jpg图片格式&lt;/li&gt;
+&lt;li&gt;image/png：png图片格式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以application开头的媒体格式类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;application/xhtml+xml ：XHTML格式&lt;/li&gt;
+&lt;li&gt;application/xml     ： XML数据格式&lt;/li&gt;
+&lt;li&gt;application/atom+xml  ：Atom XML聚合格式&lt;/li&gt;
+&lt;li&gt;application/json    ： JSON数据格式&lt;/li&gt;
+&lt;li&gt;application/pdf       ：pdf格式&lt;/li&gt;
+&lt;li&gt;application/msword  ： Word文档格式&lt;/li&gt;
+&lt;li&gt;application/octet-stream ： 二进制流数据（如常见的文件下载）&lt;/li&gt;
+&lt;li&gt;application/x-www-form-urlencoded ： &lt;code&gt;&amp;lt;form encType=””&amp;gt;&lt;/code&gt;中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外一种常见的媒体格式是上传文件之时使用的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式&lt;/li&gt;
+&lt;/ul&gt;
+">问题</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-1/"" data-c="
+          &lt;h1 id=&#34;组件&#34;&gt;组件&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;组件最重要的功能——复用&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;组件中的data为什么是一个函数&#34;&gt;组件中的data为什么是一个函数？&lt;/h2&gt;
+&lt;p&gt;前面提到了组件最重要的功能是复用，复用组件，如果不是函数而是对象的话，就会出现更改一个组件内的数值影响到全部的组件，所以data必须是一个函数，原理就是使用闭包创建了独立的作用域，保证了数据的独立性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;未经声明的变量会自动挂载到组件上&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;组件名全局唯一，不可重复&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;插槽&#34;&gt;插槽&lt;/h1&gt;
+&lt;h2 id=&#34;默认插槽&#34;&gt;默认插槽&lt;/h2&gt;
+&lt;h2 id=&#34;具名插槽&#34;&gt;具名插槽&lt;/h2&gt;
+&lt;p&gt;有名字的插槽，可以定位到具体的位置&lt;/p&gt;
+&lt;h2 id=&#34;作用于插槽&#34;&gt;作用于插槽&lt;/h2&gt;
+&lt;p&gt;可以接收子组件传递的值&lt;br&gt;
+&lt;strong&gt;本质上是一个返回组件的函数&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结&lt;/h2&gt;
+&lt;p&gt;插槽可以看作复杂的属性，因为在属性中无法传递 HTML 标签之类的复杂内容，所以以插槽的形式传递复杂数据。&lt;br&gt;
+插槽是一种传递复杂内容的一种方式，仅仅是因为在模板语法中没有办法使用简单的属性去传递复杂的内容，所以设计了这个 api 用来传递复杂的内容。&lt;/p&gt;
+&lt;h1 id=&#34;数据双向绑定&#34;&gt;数据双向绑定&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;v-model是:value和@input的简写形式&lt;/strong&gt;&lt;br&gt;
+&lt;code&gt;v-model&lt;/code&gt;在内部为不同的输入元素使用不同的 property 并抛出不同的事件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;text 和 textarea 元素使用 &lt;code&gt;value&lt;/code&gt; property 和 &lt;code&gt;input&lt;/code&gt; 事件；&lt;/li&gt;
+&lt;li&gt;checkbox 和 radio 使用 &lt;code&gt;checked&lt;/code&gt; property 和 &lt;code&gt;change&lt;/code&gt; 事件；&lt;/li&gt;
+&lt;li&gt;select 字段将 &lt;code&gt;value&lt;/code&gt; 作为 prop 并将 &lt;code&gt;change&lt;/code&gt; 作为事件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;sync-修饰符&#34;&gt;.sync 修饰符&lt;/h2&gt;
+&lt;p&gt;是一种父组件对子组件赋值并监听子组件事件并操作父组件的方法的简写&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;父组件中
+// v-bind 传值给子组件
+// v-on 监听子组件的事件
+&amp;lt;text-document
+  v-bind:title=&amp;quot;doc.title&amp;quot;
+  v-on:update:title=&amp;quot;doc.title = $event&amp;quot;
+&amp;gt;&amp;lt;/text-document&amp;gt;
+
+子组件中
+子组件中的方法
+this.$emit(&#39;update:title&#39;, newTitle)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过 &lt;code&gt;.sync&lt;/code&gt;可以简化上面的操作&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;text-document v-bind:title.sync=&amp;quot;doc.title&amp;quot;&amp;gt;&amp;lt;/text-document&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;**注意：**该修饰符在vue3.0中被移除&lt;/p&gt;
+&lt;h1 id=&#34;虚拟dom&#34;&gt;虚拟DOM&lt;/h1&gt;
+&lt;p&gt;有 key 与无 key 的区别在于是否能够复用，如果没有 key，那么节点的各个操作都是插入与删除，不考虑复用，如果有 key，那么算法会根据 key 标识匹配 dom 节点，减少 dom 操作&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;使用 index 作为 key，如果要渲染的数据需要增删改，会导致渲染出错&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;dom 的更改会使用 diff 算法对同层级的 dom 进行比较，不会对比不同层级&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1602658843042.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dom改变总结&#34;&gt;dom改变总结&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;节点比较是从最上层一层一层下来的&lt;/li&gt;
+&lt;li&gt;同级别 dom 的位置改变，是通过移动的方式&lt;/li&gt;
+&lt;li&gt;原本同级别的 dom 变为之前兄弟节点的子节点，是先把被移动节点和子节点一并删除，然后在目标节点下面新建节点以及之前的子节点&lt;/li&gt;
+&lt;li&gt;原本的 C 节点变换为 D 节点，需要先删除 C 节点再新建 D 节点，而就算它们的子节点相同，也要先全部删除，再重新创建&lt;/li&gt;
+&lt;li&gt;在没有 key 的情况下，当同层节点是同种类型的节点（如 同是div，或者同是span），当位置移动就不是替换，而是更改，这样导致它们下面的子节点无法复用，当到了子节点那一层就需要删除旧节点下的并在新节点下新建&lt;/li&gt;
+&lt;li&gt;在有 key 的情况下，虚拟dom就跟第二点一样的操作，移动位置后连同子节点一起移动，不需要新建删除之类的&lt;/li&gt;
+&lt;li&gt;在插入节点时，如果无 key ，就会把要新插入节点位置周围的节点更改为新节点，在它后面创建新节点给之前的节点使用；在有 key 时，会直接找到需要插入的位置创建新节点，不影响周围节点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;组件更新&#34;&gt;组件更新&lt;/h1&gt;
+&lt;h2 id=&#34;数据驱动&#34;&gt;数据驱动&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;只有数据改变的时候dom才会改变&lt;/strong&gt;&lt;br&gt;
+&lt;strong&gt;任何直接修改dom的操作都是在作死&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数据来源&#34;&gt;数据来源&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;来自父元素的属性&lt;/li&gt;
+&lt;li&gt;来自组件自身的状态 data&lt;/li&gt;
+&lt;li&gt;来自状态管理器，如vuex，Vue.observable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;计算属性&#34;&gt;计算属性&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;减少模板中计算逻辑&lt;/li&gt;
+&lt;li&gt;做数据缓存&lt;/li&gt;
+&lt;li&gt;依赖响应式的数据类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;侦听器&#34;&gt;侦听器&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;更加灵活、通用&lt;/li&gt;
+&lt;li&gt;watch中可以执行任何逻辑，如函数节流，Ajax异步获取数据，甚至操作DOM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;computed-vs-watch&#34;&gt;computed VS watch&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;computed能做的，watch都能做，反之则不行&lt;/li&gt;
+&lt;li&gt;能用computed的尽量用computed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;函数式组件&#34;&gt;函数式组件&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;functional: true&lt;/li&gt;
+&lt;li&gt;无状态、无实例、没有this上下文、无生命周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;template和jsx的对比以及它们的本质&#34;&gt;template和jsx的对比以及它们的本质&lt;/h1&gt;
+&lt;h2 id=&#34;template&#34;&gt;template&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;模板语法（html的扩展）&lt;/li&gt;
+&lt;li&gt;数据绑定使用Mustache语法（双大括号）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;jsx&#34;&gt;jsx&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;javascript的语法扩展&lt;/li&gt;
+&lt;li&gt;数据绑定使用单括号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总结：template与jsx也只是语法糖&lt;/p&gt;
+">《vue开发实战》观看总结1</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/react-xue-xi-ji-lu-4/"" data-c="
