@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-25T13:59:40.500Z</updated>
+    <updated>2020-10-29T16:24:04.647Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,255 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[什么是物联网]]></title>
+        <id>https://jujuul.github.io/post/shi-me-shi-wu-lian-wang/</id>
+        <link href="https://jujuul.github.io/post/shi-me-shi-wu-lian-wang/">
+        </link>
+        <updated>2020-10-29T11:08:05.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>因为这份工作是物联网公司，所以在入职之前的这段时间里，自己先收集一些物联网相关的知识，在以后的工作中可能多少有点用处。</p>
+<h1 id="物联网介绍">物联网介绍</h1>
+<h2 id="其一">其一</h2>
+<p>物联网其实是互联网的一个延伸，互联网的终端是计算机（PC、服务器），我们运行的所有程序，无非都是计算机和网络中的数据处理和数据传输，除了计算机外，没有涉及任何其他的终端（硬件）。</p>
+<p>物联网的本质还是互联网，只不过终端不再是计算机（PC、服务器），而是嵌入式计算机系统及其配套的传感器。这是计算机科技发展的必然结果，为人类服务的计算机呈现出各种形态，如穿戴设备、环境监控设备、虚拟现实设备等等。只要有硬件或产品连上网，发生数据交互，就叫物联网。</p>
+<p>物联网的技术前景是广阔的，近些年上市的一些空气净化器产品，穿戴设备，家庭环境监控设备，在过去是不曾有的，在目前的消费背景下，正服务着大众。未来还会有更多的新式设备出现，这些正是物联网技术发展的必然结果。</p>
+<p>作者：Karlno<br>
+链接：<a href="https://www.zhihu.com/question/19751763/answer/95871992">https://www.zhihu.com/question/19751763/answer/95871992</a><br>
+来源：知乎</p>
+<h2 id="其二">其二</h2>
+<h3 id="什么是物联网">什么是物联网？</h3>
+<p>物联网的概念最早于1999年被提出来，曾被称为继计算机、互联网之后，世界信息产业发展的第三次浪潮，到现在已经发展了20余年。如今，在日常生活中，我们已经可以接触到非常多的物联网产品，例如各种智能家电、智能门锁等，这些都是物联网技术比较成熟的应用。</p>
+<p>物联网最早的定义是：把所有物品通过射频识别等信息传感设备与互联网连接起来，实现智能化识别和管理。当然，物联网发展到今天，它的定义和范围已经有了扩展与变化，下面是现代物联网具有的特点。</p>
+<h3 id="物联网也是互联网">物联网也是互联网</h3>
+<p>物联网，即物的互联网，属于互联网的一部分。物联网将互联网的基础设施作为信息传递的载体，即现代的物联网产品一定是“物”通过某种方式接入了互联网，而“物”通过互联网上传/下载数据，以及与人进行交互。</p>
+<p>举个通过手机App远程启动汽车的例子，当用户通过App完成启动操作时，指令从已接入互联网的手机发送到云端平台，云端平台找到已接入互联网的车端电脑，然后下发指令，车端电脑执行启动命令，并将执行的结果反馈到云端平台；同时，用户的这次操作被记录在云端，用户可以随时从App上查询远程开锁记录历史。</p>
+<p>这就是一个典型的物联网场景，它是属于互联网应用的一种。“物”接入互联网，数据和信息通过互联网交互，同时数据和其他互联网应用一样汇聚到了云端。</p>
+<h3 id="物联网的主体是物">物联网的主体是“物”</h3>
+<p>前面说现代物联网应用是一种互联网应用，但是物联网应用和传统互联网应用又有一个很大的不同，那就是传统互联网生产和消费数据的主体是人，而现代物联网生产和消费数据的主体是物。</p>
+<p>在现代物联网的应用场景下，数据的生产方是“物”，比如智能设备或者传感器，数据的消费者往往也是“物”。</p>
+<p>在智慧农业的应用中，孵化室中的温度传感器将孵化室中的温度周期性地上传到控制中心。当温度低于一定阈值时，中心按照预设的规则远程打开加温设备。在这一场景中，数据的生产者是温度传感器，数据的消费者是加温设备，二者都是“物”，人并没有直接参与其中。</p>
+<p>物联网和传统互联网最大的不同：数据的生产者和消费者主要是物，数据内容也是和“物”息息相关的。</p>
+<h3 id="物联网的现状与前景">物联网的现状与前景</h3>
+<p>物联网的应用场景非常广泛，包括：</p>
+<ul>
+<li>智慧城市</li>
+<li>智慧建筑</li>
+<li>车联网</li>
+<li>智慧社区</li>
+<li>智能家居</li>
+<li>智慧医疗</li>
+<li>工业物联网</li>
+</ul>
+<p><strong>物联网模式相对于互联网模式来说更“重”一些。物联网的应用总是伴随着前端设备，这也就意味着用户的切换成本相对较高，毕竟拆除设备、重新安装设备比动动手指重新下载一个应用要复杂不少。</strong><br>
+作者：IoT物联网技术<br>
+<a href="https://developer.aliyun.com/article/775393?utm_content=g_1000190078">原文链接</a></p>
+<h1 id="总结">总结</h1>
+<p>物联网属于互联网的一个分支，区别在于终端设备的不同，是“物”接入互联网，链接的方式是通过信息设备，并且这几年物联网属于比较热门的行业，再借着国内新基建的东风，物联网企业在未来几年的发展肯定也是非常不错的。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《Vue.js》组件精讲笔记二]]></title>
+        <id>https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-er/</id>
+        <link href="https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-er/">
+        </link>
+        <updated>2020-10-29T09:19:26.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="什么是provide-inject">什么是provide / inject</h1>
+<p><code>provide / inject</code> 是 Vue.js 2.2.0 版本后新增的 API，在文档中这样介绍 ：</p>
+<blockquote>
+<p>https://cn.vuejs.org/v2/api/#provide-inject<br>
+这对选项需要一起使用，以允许一个祖先组件向其所有子孙后代注入一个依赖，不论组件层次有多深，并在起上下游关系成立的时间里始终生效。如果你熟悉 React，这与 React 的上下文特性很相似。</p>
+</blockquote>
+<p>provide / inject 基本使用：略过</p>
+<p>需要注意的是：</p>
+<blockquote>
+<p>provide 和 inject 绑定并不是可响应的。这是刻意为之的。然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的。</p>
+</blockquote>
+<h1 id="替代vuex">替代Vuex</h1>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    &lt;router-view&gt;&lt;/router-view&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    provide () {
+      return {
+        app: this
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>上面，我们把整个 app.vue 的实例 this 对外提供，命名为 app（这个名字可以自定义，推荐使用 app，使用这个名字后，子组件不能再使用它作为局部属性）。接下来，任何组件（或路由）只要通过 inject 注入 app.vue 的 app 的话，都可以直接通过 this.app.xxx 来访问 app.vue 的 data、computed、methods 等内容。</p>
+<p>app.vue 是整个项目第一个被渲染的组件，而且只会渲染一次（即使切换路由，app.vue 也不会被再次渲染），利用这个特性，很适合做一次性全局的状态数据管理，例如，我们将用户的登录信息保存起来：</p>
+<p>app.vue，部分代码省略：</p>
+<pre><code>&lt;script&gt;
+  export default {
+    provide () {
+      return {
+        app: this
+      }
+    },
+    data () {
+      return {
+        userInfo: null
+      }
+    },
+    methods: {
+      getUserInfo () {
+        // 这里通过 ajax 获取用户信息后，赋值给 this.userInfo，以下为伪代码
+        $.ajax('/user/info', (data) =&gt; {
+          this.userInfo = data;
+        });
+      }
+    },
+    mounted () {
+      this.getUserInfo();
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>这样，任何页面或组件，只要通过 inject 注入 app 后，就可以直接访问 userInfo 的数据了，比如：</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    {{ app.userInfo }}
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    inject: ['app']
+  }
+&lt;/script&gt;
+</code></pre>
+<p>是不是很简单呢。除了直接使用数据，还可以调用方法。比如在某个页面里，修改了个人资料，这时一开始在 app.vue 里获取的 userInfo 已经不是最新的了，需要重新获取。可以这样使用：</p>
+<p>某个页面：</p>
+<pre><code>&lt;template&gt;
+  &lt;div&gt;
+    {{ app.userInfo }}
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+  export default {
+    inject: ['app'],
+    methods: {
+      changeUserInfo () {
+        // 这里修改完用户数据后，通知 app.vue 更新，以下为伪代码
+        $.ajax('/user/update', () =&gt; {
+          // 直接通过 this.app 就可以调用 app.vue 里的方法
+          this.app.getUserInfo();
+        })
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<h1 id="进阶技巧">进阶技巧</h1>
+<p>可以使用 Vue.js 的混合 mixins，将不同的逻辑分开到不同的 js 文件里。</p>
+<p>比如上面的用户信息，就可以放到混合里：</p>
+<p>user.js：</p>
+<pre><code>export default {
+  data () {
+    return {
+      userInfo: null
+    }
+  },
+  methods: {
+    getUserInfo () {
+      // 这里通过 ajax 获取用户信息后，赋值给 this.userInfo，以下为伪代码
+      $.ajax('/user/info', (data) =&gt; {
+        this.userInfo = data;
+      });
+    }
+  },
+  mounted () {
+    this.getUserInfo();
+  }
+}
+</code></pre>
+<p>然后在 app.vue 中混合：</p>
+<p>app.vue：</p>
+<pre><code>&lt;script&gt;
+  import mixins_user from '../mixins/user.js';
+
+  export default {
+    mixins: [mixins_user],
+    data () {
+      return {
+
+      }
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>这样，跟用户信息相关的逻辑，都可以在 user.js 里维护，或者由某个人来维护，app.vue 也就很容易维护了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《Vue.js》组件精讲笔记一]]></title>
+        <id>https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-yi/</id>
+        <link href="https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-yi/">
+        </link>
+        <updated>2020-10-28T15:18:54.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="组件的构成">组件的构成</h1>
+<p><code>一个再复杂的组件，都是由三部分组成的：prop、event、slot，它们构成了 Vue.js 组件的 API。</code>如果你开发的是一个通用组件，那一定要事先设计好这三部分，因为组件一旦发布，后面再修改 API 就很困难了，使用者都是希望不断新增功能，修复 bug，而不是经常变更接口。</p>
+<h2 id="属性prop">属性prop</h2>
+<p>prop 定义了这个组件有哪些可配置的属性，组件的核心功能也都是它来确定的。<code>写通用组件时，props 最好用对象的写法，这样可以针对每个属性设置类型、默认值或自定义校验属性的值</code>。这点在组件开发中很重要，然而很多人却忽视，直接使用 props 的数组用法，这样的组件往往是不严谨的。</p>
+<h2 id="插槽slot">插槽slot</h2>
+<p>slot 部分没有什么特别的，就是注意一下默认插槽以及具名插槽的使用就可以了。</p>
+<h2 id="自定义事件event">自定义事件event</h2>
+<p>自定义事件有两种写法，第一种是 $emit，在父级通过 @on-click 来监听；第二种是直接在父级声明，而为了区分原生事件和自定义事件，要用到<code>.native</code>修饰符，写法如下：</p>
+<pre><code>&lt;i-button @click.native=&quot;handleClick&quot;&gt;&lt;/i-button&gt;
+</code></pre>
+<p>如果不写<code>.native</code>修饰符，那上面的<code>@click</code>就是自定义事件<code>click</code>，而非原生事件<code>click</code>，但我们在组件内只触发了<code>on-click</code>事件，而不是<code>click</code>，所以直接写<code>@click</code>会监听不到。</p>
+<h1 id="组件的通信">组件的通信</h1>
+<p>vue.js 内置的通信手段一般有两种：</p>
+<ul>
+<li><code>ref</code>：给元素或组件注册引用信息；</li>
+<li><code>$parent</code> / <code>@children</code>：访问父 / 子实例<br>
+这两种都可以直接得到组件实例，<code>$parent</code> 和 <code>@children</code>的弊端在于无法在跨级或兄弟间通信。</li>
+</ul>
+<h1 id="结语">结语</h1>
+<p>基于 Vue.js 开发独立组件，本质上还是 JavaScript(js重要性可见一般)。在组件开发中，最难的环节应当是解耦组件的交互逻辑，尽量把复杂的逻辑分发到不同的子组件中，然后彼此建立联系，在这其中，计算属性（computed）和混合（mixins）是两个重要的技术点，合理利用，就能发挥出 Vue.js 语言的最大特点：把状态（数据）的维护交给 Vue.js 处理，我们只专注在交互上。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《vue开发实战》观看总结2]]></title>
+        <id>https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-21/</id>
+        <link href="https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-21/">
+        </link>
+        <updated>2020-10-27T12:21:23.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="vuex">Vuex</h1>
+<p><img src="https://jujuul.github.io//post-images/1602677540818.png" alt="" loading="lazy"><br>
+vuex与组件已经没有强相关的关系了</p>
+<h2 id="运行机制">运行机制：</h2>
+<p>vuex提供数据，驱动 vue component 视图， vue component 视图通过 dispatch 派发 Actions，在 Actions 中可以做一些异步的操作（如：通过 ajax 获取后端数据），再通过 commit 提交给 Mutations ，通过 Mutations 更改 State ，之所以要经过 Mutations 是因为我们需要在 Devtools（vue的插件，可用于调试） 中记录数据的变化，方便调试，也因此 Mutations 必须是同步操作，如果是异步操作需要现在 Actions 中处理，而如果没有异步操作，可以跳过 Actions 直接由  vue component 组件提交 commit 到 Mutations。</p>
+<h2 id="问题vuex的store是如何挂载到每个组件中">问题：vuex的store是如何挂载到每个组件中？</h2>
+<p>为什么我们在组件中直接this.$store.xx,就可以对vuex进行操作。<br>
+每次我们在使用vuex的时候需要</p>
+<pre><code>import Vue from &quot;vue&quot;;
+import Vuex from &quot;vuex&quot;;
+Vue.use(Vuex);
+</code></pre>
+<p>Vue.use会执行Vuex对象中的<code>install</code>方法</p>
+<h2 id="核心概念">核心概念</h2>
+<ul>
+<li>State——this.$store.state.xxx  取值</li>
+<li>Getter——this.$store.getters.xxx   取值</li>
+<li>Mutation——this.$store.commit('xxx')   赋值</li>
+<li>Action——this.$store,dispatch('xxx')   赋值</li>
+<li>Module</li>
+</ul>
+<h2 id="底层原理">底层原理</h2>
+<ul>
+<li>State：提供一个响应式数据</li>
+<li>Getter：借助Vue的计算属性computed来实现缓存</li>
+<li>Mutation：更改state方法</li>
+<li>Action：触发mutation方法</li>
+<li>Module：Vue.set动态添加state到响应式数据中</li>
+</ul>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[《vue开发实战》观看总结1]]></title>
         <id>https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-3/</id>
@@ -510,421 +759,6 @@ methods:{
 <p><a href="https://github.com/ljianshu/Blog/issues/70">深入浅出Vue响应式原理</a><br>
 <a href="https://juejin.im/book/6844733705089449991/section/6844733705211084808">剖析 Vue.js 内部运行机制</a><br>
 <a href="https://book.douban.com/subject/32581281/">深入浅出Vue.js</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[高质量代码]]></title>
-        <id>https://jujuul.github.io/post/gao-zhi-liang-dai-ma/</id>
-        <link href="https://jujuul.github.io/post/gao-zhi-liang-dai-ma/">
-        </link>
-        <updated>2020-10-17T02:40:12.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="判断是否为空">判断是否为空</h2>
-<pre><code>//普通写法
-if (a == undefined) a = [];
-
-// 优雅写法
-a = a || [];
-
-//普通写法
-if (params.success) {
-    params.success(res)
-}
-// 优雅写法
-params.success &amp;&amp; params.success(res)
-</code></pre>
-<h2 id="多条件判断">多条件判断</h2>
-<pre><code>//普通写法
-var Statistics = function () {
-    console.log('执行')
-}
-switch (currentTab) {
-    case 0:
-        Statistics();
-        break;
-    case 1:
-        Statistics();
-        break;
-    case 2:
-        Statistics();
-        break;
-    case 3:
-        Statistics();
-        break;
-}
-</code></pre>
-<pre><code>// 优雅写法
-// 将判断条件作为对象的属性名，将处理逻辑作为对象的属性值
-var Statistics = function () {
-    console.log('执行')
-}
-const comparativeToles = new Map([
-    [0, Statistics],
-    [1, Statistics],
-    [2, Statistics],
-    [3, Statistics],
-])
-comparativeToles.get(1) &amp;&amp; comparativeToles.get(1)()
-
-// 可以使用 Map 或者是对象的形式来处理，下面的判断语句判断是否符合条件，如不符合则不操作，符合则调用
-</code></pre>
-<h2 id="匿名函数调用">匿名函数调用</h2>
-<pre><code>// 普通写法
-(function () {})();
-
-// 优雅写法
-!function(){}()
-+function(){}()
-
-// 通过这种方法可以隔绝函数，避免前面未写 ；结束造成的调用错误
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[React学习记录6]]></title>
-        <id>https://jujuul.github.io/post/react-xue-xi-ji-lu-6/</id>
-        <link href="https://jujuul.github.io/post/react-xue-xi-ji-lu-6/">
-        </link>
-        <updated>2020-10-15T14:12:15.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="生命周期函数">生命周期函数</h1>
-<p>在某一时刻可以自动执行的函数，就是生命周期函数</p>
-<h2 id="initialization">Initialization</h2>
-<h2 id="mounting">Mounting</h2>
-<h2 id="updation">Updation</h2>
-<h2 id="unmounting">Unmounting</h2>
-<h2 id="react15组件生命周期">react15组件生命周期</h2>
-<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1602856889263.png" alt="" loading="lazy"></figure>
-<h2 id="为什么-react-16-要更改组件的生命周期">为什么 React 16 要更改组件的生命周期？</h2>
-<h3 id="虚拟-dom-的流程">虚拟 DOM 的流程</h3>
-<p>组件在初始化时，通过调用 render 方法生成虚拟 DOM，再通过调用 ReactDOM.render 方法实现虚拟 DOM 到真实 DOM 的转换，当组件更新时，会通过调用 render 方法生成新的虚拟 DOM，然后借助 diff 算法，定位出两次虚拟 DOM 的差异，针对发生变化的真实 DOM 做定向更新</p>
-<h3 id="组件化">组件化</h3>
-<h1 id="react用axios请求远程数据">React用axios请求远程数据</h1>
-<p>推荐在 componentDidMount 生命周期内使用 axios</p>
-<h2 id="获取并更改当前数据">获取并更改当前数据</h2>
-<pre><code>.get(
-        &quot;https://www.easy-mock.com/mock/5f8a71ff4dc90c664451515e/ReactDemo01/xiaojiejie&quot;
-      )
-      .then((res) =&gt; {
-        console.log(res.data.data);
-        this.setState({
-          list: res.data.data,
-        });
-      })
-      .catch((error) =&gt; {
-        console.log(&quot;axios 获取数据失败&quot; + error);
-      });
-</code></pre>
-<p>主要在于 setState 的使用，要变更组件的数据必须使用 setState 的方式，至于 axios 的用法和在 Vue 中使用没有什么区别，还有就是在 componentDidMount 这个生命周期中使用，听说 最新版本的 react 在其他生命周期获取更适合，等以后学到了再说了</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[转载：来，让我们谈一谈 Normalize.css]]></title>
-        <id>https://jujuul.github.io/post/zhuan-zai/</id>
-        <link href="https://jujuul.github.io/post/zhuan-zai/">
-        </link>
-        <updated>2020-10-15T12:08:28.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>本文译自Normalize.css官网: <a href="http://nicolasgallagher.com/about-normalize-css/">http://nicolasgallagher.com/about-normalize-css/</a></p>
-</blockquote>
-<p>    Normalize.css 只是一个很小的CSS文件，但它在默认的HTML元素样式上提供了跨浏览器的高度一致性。相比于传统的CSS reset，Normalize.css是一种现代的、为HTML5准备的优质替代方案。Normalize.css现在已经被用于Twitter Bootstrap、HTML5 Boilerplate、GOV.UK、Rdio、CSS Tricks 以及许许多多其他框架、工具和网站上。</p>
-<ul>
-<li><a href="http://necolas.github.io/normalize.css/">Normalize.css 项目地址</a></li>
-<li><a href="https://github.com/necolas/normalize.css">Normalize.css 在GitHub上的源码</a></li>
-</ul>
-<h1 id="综述">综述</h1>
-<p>    Normalize.css是一种CSS reset的替代方案。经过@necolas和@jon_neal花了几百个小时来努力研究不同浏览器的默认样式的差异，这个项目终于变成了现在这样。</p>
-<p>    我们创造normalize.css有下面这几个目的：</p>
-<ul>
-<li>保护有用的浏览器默认样式而不是完全去掉它们</li>
-<li>一般化的样式：为大部分HTML元素提供</li>
-<li>修复浏览器自身的bug并保证各浏览器的一致性</li>
-<li>优化CSS可用性：用一些小技巧</li>
-<li>解释代码：用注释和详细的文档来</li>
-</ul>
-<p>    Normalize.css支持包括手机浏览器在内的超多浏览器，同时对HTML5元素、排版、列表、嵌入的内容、表单和表格都进行了一般化。尽管这个项目基于一般化的原则，但我们还是在合适的地方使用了更实用的默认值。</p>
-<h1 id="normalize-vs-reset">Normalize vs Reset</h1>
-<p>    知道Normalize.css和传统Reset的区别是非常有价值的。</p>
-<ol>
-<li>Normalize.css 保护了有价值的默认值<br>
-    Reset通过为几乎所有的元素施加默认样式，强行使得元素有相同的视觉效果。相比之下，Normalize.css保持了许多默认的浏览器样式。这就意味着你不用再为所有公共的排版元素重新设置样式。当一个元素在不同的浏览器中有不同的默认值时，Normalize.css会力求让这些样式保持一致并尽可能与现代标准相符合。</li>
-<li>Normalize.css 修复了浏览器的bug<br>
-    它修复了常见的桌面端和移动端浏览器的bug。这往往超出了Reset所能做到的范畴。关于这一点，Normalize.css修复的问题包含了HTML5元素的显示设置、预格式化文字的font-size问题、在IE9中SVG的溢出、许多出现在各浏览器和操作系统中的与表单相关的bug。<br>
-    可以看以下这个例子，看看对于HTML5中新出现的input类型search，Normalize.css是如何保证跨浏览器的一致性的。</li>
-</ol>
-<pre><code> * 1. Addresses appearance set to searchfield in S5, Chrome
- * 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
- */
-
-input[type=&quot;search&quot;] {
-  -webkit-appearance: textfield; /* 1 */
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box; /* 2 */
-  box-sizing: content-box;
-}
-
-/**
- * Removes inner padding and search cancel button in S5, Chrome on OS X
- */
-
-input[type=&quot;search&quot;]::-webkit-search-decoration,
-input[type=&quot;search&quot;]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
-}
-</code></pre>
-<ol start="3">
-<li>Normalize.css 不会让你的调试工具变的杂乱<br>
-    使用Reset最让人困扰的地方莫过于在浏览器调试工具中大段大段的继承链，如下图所示。在Normalize.css中就不会有这样的问题，因为在我们的准则中对多选择器的使用时非常谨慎的，我们仅会有目的地对目标元素设置样式。<br>
-<img src="https://jujuul.github.io//post-images/1602764259478.png" alt="" loading="lazy"></li>
-<li>Normalize.css 是模块化的<br>
-    这个项目已经被拆分为多个相关却又独立的部分，这使得你能够很容易也很清楚地知道哪些元素被设置了特定的值。因此这能让你自己选择性地移除掉某些永远不会用到部分（比如表单的一般化）。</li>
-<li>Normalize.css 拥有详细的文档<br>
-    Normalize.css的代码基于详细而全面的跨浏览器研究与测试。这个文件中拥有详细的代码说明并在Github Wiki中有进一步的说明。这意味着你可以找到每一行代码具体完成了什么工作、为什么要写这句代码、浏览器之间的差异，并且你可以更容易地进行自己的测试。<br>
-    这个项目的目标是帮助人们了解浏览器默认是如何渲染元素的，同时也让人们很容易地明白如何改进浏览器渲染。</li>
-</ol>
-<h1 id="如何使用-normalizecss">如何使用 normalize.css</h1>
-<p>    首先，安装或从Github下载Normalize.css，接下来有两种主要途径去使用它。</p>
-<ul>
-<li>策略一：将normalize.css作为你自己项目的基础CSS，自定义样式值以满足设计师的需求。</li>
-<li>策略二：引入normalize.css源码并在此基础上构建，在必要的时候用你自己写的CSS覆盖默认值。</li>
-</ul>
-<h1 id="结语">结语</h1>
-<p>    无论从适用范畴还是实施上，Normalize.css与Reset都有极大的不同。尝试一下这两种方法并看看到底哪种更适合你的开发偏好是非常值得的。这个项目在Github上以开源的形式开发。任何人都能够提交问题报告或者提交补丁。整个项目发展的过程对所有人都是可见的，而每一次改动的原因也都写在commit信息中，这些都是有迹可循的。</p>
-<h1 id="相关阅读">相关阅读</h1>
-<p>    关于更多默认UA样式的详细信息：</p>
-<ul>
-<li><a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/rendering.html#the-css-user-agent-style-sheet-and-presentational-hints">WHATWG suggestions for rendering HTML documents</a></li>
-<li><a href="http://iecss.com/">Internet Explorer User Agent Style Sheets</a></li>
-<li><a href="http://css-class.com/test/css/defaults/UA-style-sheet-defaults.htm">CSS2.1 User Agent Style Sheet Defaults</a></li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[移动端布局总结]]></title>
-        <id>https://jujuul.github.io/post/yi-dong-duan-bu-ju-zong-jie/</id>
-        <link href="https://jujuul.github.io/post/yi-dong-duan-bu-ju-zong-jie/">
-        </link>
-        <updated>2020-10-15T02:42:42.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="视口">视口</h1>
-<p>视口就是浏览器显示页面内容的屏幕区域。视口可以分为布局视口、视觉视口和理想视口</p>
-<h2 id="布局视口-layout-viewport">布局视口 layout viewport</h2>
-<ul>
-<li>一般移动设备的浏览器都默认设置了一个布局视口，用于解决早期的PC端页面在手机上显示的问题。</li>
-<li>IOS、Android基本都将这个视口分辨率设置为980px，所以PC上的网页大多都能在手机上呈现，只不过元素看上去很小，一般默认可以通过手动缩放网页。</li>
-</ul>
-<h2 id="视觉视口-visual-viewport">视觉视口 visual viewport</h2>
-<ul>
-<li>字面意思，它是用户正在看到的网站的区域。注意：是网站的区域。</li>
-<li>我们可以通过缩放去操作视觉视口，但不会影响布局视口，布局视口仍保持yua原来的宽度。</li>
-</ul>
-<h2 id="理想视口-ideal-viewport">理想视口 ideal viewport</h2>
-<ul>
-<li>为了使网站再移动端有最理想的浏览和阅读宽度而设定</li>
-<li>理想视口，对设备来讲，是最理想的视口尺寸</li>
-<li>需要手动填写meta视口标签通知浏览器操作</li>
-<li>meta视口标签的主要目的：布局视口的宽度应该与理想视口的宽度一致，简单理解就是该设备有多宽，我们布局的视口就多宽</li>
-</ul>
-<h2 id="meta视口标签">meta视口标签</h2>
-<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0&quot;&gt;
-</code></pre>
-<p>user-scalable：是否允许用户缩放<br>
-initial-scale：初始缩放比，一般是1.0<br>
-maximum-scale：最大缩放比<br>
-minimum-scale：最小缩放比</p>
-<h2 id="标准的viewport设置">标准的viewport设置</h2>
-<ul>
-<li>视口宽度和设备保持一致</li>
-<li>视口的默认缩放比例为1.0</li>
-<li>不允许用户自行缩放</li>
-<li>最大允许的缩放比例为1.0</li>
-<li>最小允许的缩放比例为1.0</li>
-</ul>
-<h1 id="二倍图">二倍图</h1>
-<h2 id="物理像素物理像素比">物理像素&amp;物理像素比</h2>
-<ul>
-<li>物理像素点指的是屏幕显示的最小颗粒，是物理真实存在的。这是厂商在出厂时就设置好了，比如苹果6\7\8是750*1334</li>
-<li>我们开发时候的1px不是一定等于一个物理像素的</li>
-<li>PC端页面，1个px等于一个物理像素的，但是移动端就不尽相同</li>
-<li>一个px的能显示的物理像素点的个数，称为物理像素比或屏幕像素比</li>
-</ul>
-<h2 id="多倍图">多倍图</h2>
-<ul>
-<li>对于一张50px*50px的图片，在手机Retina屏中打开，按照刚才的物理像素比会放大数倍，这样会造成图片模糊</li>
-<li>在标准的viewport设置中，使用倍图来提高图片质量，解决在高清设备中的模糊问题</li>
-<li>通常使用二倍图，因为iPhone6\7\8的影响，但是现在还存在3倍图4倍图的情况，这个看实际开发公司需求</li>
-<li>背景图片 注意缩放问题</li>
-</ul>
-<h2 id="背景缩放-background-size">背景缩放 background-size</h2>
-<p>background-size属性规定背景图像的尺寸</p>
-<pre><code>background-size：背景图片宽度，背景图片高度；
-</code></pre>
-<ul>
-<li>只写一个参数，就是宽度，高度会等比缩放</li>
-<li>可以写%，相对于父盒子</li>
-<li>cover，等比例拉伸，完全覆盖div盒子，会导致部分背景图片显示不全</li>
-<li>contain，高度和宽度等比例拉伸，当高度或宽度其中一个铺满盒子就不再拉伸，可能会导致出现空白区域，因为未填满</li>
-</ul>
-<h1 id="移动端开发选择">移动端开发选择</h1>
-<h2 id="单独制作移动端页面主流">单独制作移动端页面（主流）</h2>
-<h2 id="响应式页面兼容移动端其次">响应式页面兼容移动端（其次）</h2>
-<p>缺点：制作麻烦，需要花很大精力去调兼容性问题</p>
-<h1 id="移动端技术解决方案">移动端技术解决方案</h1>
-<h2 id="移动端浏览器">移动端浏览器</h2>
-<p>移动端浏览器以webkit内核为主，因此主要考虑webkit兼容性问题。</p>
-<p>可以放心使用H5标签和CSS3样式</p>
-<p>同时我们浏览器的私有前缀我们只需要考虑添加webkit即可</p>
-<h2 id="css3盒模型">css3盒模型</h2>
-<p>就是 box-sizing 设置为 border-box</p>
-<h1 id="移动端常见布局">移动端常见布局</h1>
-<h2 id="移动端技术选型">移动端技术选型</h2>
-<ol>
-<li>单独制作移动端页面（主流）
-<ul>
-<li>流式布局（百分比布局）</li>
-<li>flex弹性布局（强烈推荐）</li>
-<li>less+rem+媒体查询布局</li>
-<li>混合布局</li>
-</ul>
-</li>
-<li>响应式页面兼容移动端（其次）
-<ul>
-<li>媒体查询</li>
-<li>bootstrap</li>
-</ul>
-</li>
-</ol>
-<h1 id="流式布局百分比布局">流式布局（百分比布局）</h1>
-<ul>
-<li>流式布局，就是百分比布局，也称非固定像素布局</li>
-<li>通过盒子的宽度设置成百分比来根据屏幕的宽度进行收缩，不受固定像素的限制，内容向两侧填充</li>
-<li>流式布局方式是移动web开发使用的比较常见的布局方式</li>
-</ul>
-<h1 id="flex布局">flex布局</h1>
-<h2 id="传统布局与flex布局对比">传统布局与flex布局对比</h2>
-<h3 id="传统布局">传统布局</h3>
-<ul>
-<li>兼容性好</li>
-<li>布局繁琐</li>
-<li>局限性，在移动端表现不好</li>
-</ul>
-<h3 id="flex弹性布局">flex弹性布局</h3>
-<ul>
-<li>操作方便，布局极为简单，移动端应用广泛</li>
-<li>PC端浏览器支持情况较差</li>
-<li>IE11或更低版本，不支持或仅部分支持</li>
-</ul>
-<p><strong>建议：</strong></p>
-<ol>
-<li>如果是PC端页面布局，可以使用传统布局</li>
-<li>如果是移动端或者不考虑兼容性问题的PC端布局，推荐flex弹性布局</li>
-</ol>
-<h2 id="flex布局原理">flex布局原理</h2>
-<p>flex 是 flexible Box 的缩写，意为“弹性布局”，用来为盒状模型提供最大的灵活性，任何一个容器都可以指定为 flex 布局</p>
-<ul>
-<li>当我们为父盒子设置 flex 以后，子元素的 float、clear 和 vertical-align 属性将失效</li>
-<li>伸缩布局 = 弹性布局 = 伸缩弹性盒 = 弹性盒布局 = flex 布局</li>
-</ul>
-<h3 id="布局原理">布局原理</h3>
-<p>通过给父盒子添加 flex 属性，来控制子盒子的位置和排列方式</p>
-<h1 id="rem布局">rem布局</h1>
-<h2 id="rem基础">rem基础</h2>
-<h3 id="rem单位">rem单位</h3>
-<p>rem（root em）是一个相对单位，类似于 em，em 是相对于父元素的字体大小</p>
-<p>不同的是 rem 的基准是相对于根 html 元素的字体大小</p>
-<p>rem 的优点就是可以通过修改根 html 元素的字体大小来改变页面中元素的大小</p>
-<h2 id="媒体查询">媒体查询</h2>
-<h3 id="什么是媒体查询">什么是媒体查询？</h3>
-<p>媒体查询（Media Query）是 CSS3 新语法。</p>
-<ul>
-<li>使用 @media 查询，可以针对不同的媒体类型定义不同的样式</li>
-<li><code>@media 可以针对不同的屏幕尺寸设置不同的样式</code></li>
-<li>当你重置浏览器大小的过程中，页面也会根据浏览器的宽度和高度重新渲染页面</li>
-<li>目前针对很多苹果手机、Android 手机，平板等设备都用得到媒体查询</li>
-</ul>
-<h3 id="语法规范">语法规范</h3>
-<pre><code>@media mediatype and|not|only (media feature) {
-    css-code
-}
-</code></pre>
-<ul>
-<li>用 @media 开头，注意 @ 符号</li>
-<li>mediatype 媒体类型</li>
-<li>关键字 and not only</li>
-<li>media feature 媒体特性，必须有小括号包括</li>
-</ul>
-<h3 id="mediatype-查询类型">mediatype 查询类型</h3>
-<p>将不同的终端设备划分成不同的类型，称为媒体类型</p>
-<ul>
-<li>all：        用于所有设备</li>
-<li>print：     用于打印机和打印预览</li>
-<li>screen：  用于电脑屏幕，平板电脑，智能手机等</li>
-</ul>
-<h3 id="关键字">关键字</h3>
-<p>关键字将媒体类型或多个媒体特性连接到一起作为媒体查询的条件</p>
-<ul>
-<li>and：可以将多个媒体特性连接到一起，相当于“且”的意思</li>
-<li>not：排除某个媒体类型，相当于“非”的意思，可以省略</li>
-<li>only：指定某个特定的媒体类型，可以省略</li>
-</ul>
-<h3 id="媒体特性">媒体特性</h3>
-<p>每种媒体类型都有各自不同的特性，根据不同媒体类型的媒体特性设置不同的展示风格</p>
-<ul>
-<li>width：          定义输出设备中页面可见区域的宽度</li>
-<li>min-width：  定义输出设备中页面最小可见区域宽度</li>
-<li>max-width：  定义输出设备中页面最大可见区域宽度</li>
-</ul>
-<p><strong>为了防止混乱，媒体查询我们要按照从小到大或者从大到小的顺序来写<code>推荐从小到大，代码更简洁</code></strong><br>
-<strong>ps：and 左右一定要有空格，代码格式化插件也没法格式化这里</strong></p>
-<h2 id="引入资源">引入资源</h2>
-<p>当资源比较繁多的时候，我们可以针对不同的媒体使用不同的样式</p>
-<p>原理就是直接在 link 中判断设备的尺寸，然后引入不同的 css 文件</p>
-<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style320.css&quot; media=&quot;screen and (min-width:320px)&quot;&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;style640.css&quot; media=&quot;screen and (min-width:640px)&quot;&gt;
-</code></pre>
-<h2 id="rem适配方案">rem适配方案</h2>
-<p>###方案1</p>
-<ul>
-<li>less</li>
-<li>媒体查询</li>
-<li>rem</li>
-</ul>
-<h3 id="方案2">方案2</h3>
-<ul>
-<li>flexibls.js</li>
-<li>rem</li>
-</ul>
-<h2 id="rem实际开发适配方案1">rem实际开发适配方案1</h2>
-<h3 id="动态设置html标签font-size大小">动态设置html标签font-size大小</h3>
-<ol>
-<li>假设设计稿是750px</li>
-<li>假设我们把整个屏幕划分成15等份（也可划分为20或10等份）</li>
-<li>每一份作为html字体大小，这里就是50px</li>
-<li>那么在320px设备的时候，字体大小就是320/15=21.33px</li>
-<li>用我们页面元素的大小除以不同的html字体大小会发现他们比例是相同的</li>
-<li>比如我们以750为标准设计稿</li>
-<li>一个100*100像素的页面元素在750屏幕下，就是100/50转换为rem是2rem × 2rem，比例是1比1</li>
-<li>320屏幕下，html字体大小为21.33px，则2rem=42.66px，此时宽和高都是42.66，但是宽和高的比例还是1比1</li>
-<li>但是已经能实现不同屏幕下的页面盒子等比缩放的效果</li>
-</ol>
-<h3 id="元素大小取值方法">元素大小取值方法</h3>
-<ol>
-<li>最后的公式：页面元素的rem值 = 页面元素值（px）/（屏幕宽度/划分的份数）</li>
-<li>屏幕宽度/划分的份数就是 html 的 font-size 的大小</li>
-<li>或者：页面元素的 rem 值 = 页面元素值（px）/ html 的 font-size字体大小</li>
-</ol>
-<h2 id="rem实际开发适配方案2">rem实际开发适配方案2</h2>
-<h3 id="flexiblejs">flexible.js</h3>
-<p>手淘出的移动端适配库，无需再写媒体查询，库帮忙做了js处理</p>
-<h1 id="响应式布局">响应式布局</h1>
-<h2 id="响应式开发原理">响应式开发原理</h2>
-<p>使用媒体查询针对不同宽度的设备进行布局和样式设置，从而适配不同设备<br>
-尺寸划分</p>
-<ul>
-<li>超小屏幕（手机）              &lt; 768px</li>
-<li>小屏设备（平板）              &gt;= 768px ~ &lt; 992px</li>
-<li>中等屏幕（桌面显示器）    &gt;= 992px ~ &lt; 1200px</li>
-<li>宽屏设备（大桌面显示器）&gt;= 1200px</li>
-</ul>
-<h2 id="响应式布局容器">响应式布局容器</h2>
-<p>响应式需要一个父级作为布局容器，来配合子级元素来实现变化效果</p>
 ]]></content>
     </entry>
 </feed>
