@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-29T16:24:04.647Z</updated>
+    <updated>2020-10-30T07:02:20.704Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,75 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[转载：前端前沿观察，Cookie 居然可以这样整了]]></title>
+        <id>https://jujuul.github.io/post/zhuan-zai-qian-duan-qian-yan-guan-cha-cookie-ju-ran-ke-yi-zhe-yang-zheng-liao/</id>
+        <link href="https://jujuul.github.io/post/zhuan-zai-qian-duan-qian-yan-guan-cha-cookie-ju-ran-ke-yi-zhe-yang-zheng-liao/">
+        </link>
+        <updated>2020-10-30T06:58:03.000Z</updated>
+        <content type="html"><![CDATA[<p>用 JS 操作 Cookie 其实是很麻烦的，并不存在一个简单的 API 能让我们获取或者设置 Cookie。<br>
+唯一一个操作 Cookie 的 API 是 document.cookie，但是这句代码使用起来很难受。如果说我们想要获取一个需要的 Cookie，可能得先写这么一个 utils 函数：</p>
+<pre><code>function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+</code></pre>
+<p>但是在 Chrome 87 版本中我们无需再引入这样的代码了，取而代之的是新的 API：cookieStore。这是一个异步的 API，可以很方便地获取设置以及监听 Cookie 的改变。</p>
+<h1 id="获取-cookie">获取 Cookie</h1>
+<p>刚才在上文中我们已经了解到在之前获取一个需要的 Cookie 是有多麻烦，如今我们只需一句话就可以获取想要的内容了。<br>
+<img src="https://jujuul.github.io//post-images/1604041154350.png" alt="" loading="lazy"><br>
+cookieStore.get 有两种函数签名，前者我们可以通过传入 cookie 的属性去匹配想要的内容，后者则是直接传入 name 获取。API 很符合直觉，比之前的方式不知道好到哪里去了。</p>
+<p>当然除了获取单个 cookie 之外，新的 API 还提供了获取多个 cookie 的方式。比如说现在我想获取所有属于某个 domain 的 cookies，就可以使用如下方式：<br>
+<img src="https://jujuul.github.io//post-images/1604041178871.png" alt="" loading="lazy"></p>
+<h1 id="设置-cookie">设置 Cookie</h1>
+<p>在之前我们如果需要设置 Cookie 的话，应该会写以下类似的代码，还是在操作 document.cookie</p>
+<pre><code>const setCookie = (cookieKey, cookieValue, expirationDays) =&gt; {
+  let expiryDate = '';
+  if (expirationDays) {
+    const date = new Date();
+    date.setTime(`${date.getTime()}${(expirationDays || 30 * 24 * 60 * 60 * 1000)}`);
+    expiryDate = `; expiryDate=&quot; ${date.toUTCString()}`;
+  }
+  document.cookie = `${cookieKey}=${cookieValue || ''}${expiryDate}; path=/`;
+}
+</code></pre>
+<p>现在我们可以通过 cookieStore.set 来很方便的设置 Cookie 了：<br>
+<img src="https://jujuul.github.io//post-images/1604041216786.png" alt="" loading="lazy"><br>
+set 函数支持两种签名，前者可以设置所有 Cookie 上的内容，后者就是 key-value 的形式。</p>
+<h1 id="删除-cookie">删除 Cookie</h1>
+<p>说完获取和删除 Cookie，那么相应的删除操作肯定也是不能少的。</p>
+<p>在这之前如果你想删除一个 Cookie，那么需要把这个 Cookie 的过期时间设置在过去，过期了自然而然就失效了。</p>
+<pre><code>var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+</code></pre>
+<p>看起来很奇怪，想删除一个 Cookie 不是把字段删了，而是把它过期。现在我们有了新的 API 就不需这样做了：<br>
+<img src="https://jujuul.github.io//post-images/1604041259242.png" alt="" loading="lazy"><br>
+同样的，delete API 也有两个函数签名，单纯字符串的时候等同于需要删除 Cookie 的 name，传个对象时签名略有些与之前不同，需要注意签名中可选属性都是有默认值的：</p>
+<pre><code>dictionary CookieStoreDeleteOptions {
+  required USVString name;
+  USVString? domain = null;
+  USVString path = &quot;/&quot;;
+};
+</code></pre>
+<h1 id="监听-cookie-的改变">监听 Cookie 的改变</h1>
+<p>这个功能应该是之前没有的，如今可以通过新的 API 监听 Cookie 的改变及删除。<br>
+<img src="https://jujuul.github.io//post-images/1604041285465.png" alt="" loading="lazy"></p>
+<p>作者：yck<br>
+链接：<a href="https://juejin.im/post/6889231003697709070">https://juejin.im/post/6889231003697709070</a><br>
+来源：掘金</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《Vue.js》组件精讲笔记三]]></title>
+        <id>https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-san/</id>
+        <link href="https://jujuul.github.io/post/lesslessvuejsgreatergreater-zu-jian-jing-jiang-bi-ji-san/">
+        </link>
+        <updated>2020-10-30T02:37:33.000Z</updated>
+        <content type="html"><![CDATA[<p>阿松大</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[什么是物联网]]></title>
         <id>https://jujuul.github.io/post/shi-me-shi-wu-lian-wang/</id>
@@ -427,338 +496,6 @@ this.$emit('update:title', newTitle)
 </ol>
 <p>还有一些衍生的特性，如柯里化与组合，三言两语说不清，就不阐述了，有兴趣的同学可以自己再了解了解。</p>
 <p>ps：部分转载，<a href="https://segmentfault.com/a/1190000009864459">原文链接</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Vuex-router浅析]]></title>
-        <id>https://jujuul.github.io/post/vuex-yuan-li/</id>
-        <link href="https://jujuul.github.io/post/vuex-yuan-li/">
-        </link>
-        <updated>2020-10-22T14:38:39.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>最近看到掘金上不少解析 vue-router 的文章，收获不少，为了加深记忆，所以打算写一篇文章记录一下对于 vue-router 的理解。也方便以后遇到问题来这里能够快速排错解决。</p>
-<h1 id="前端路由定义">前端路由定义</h1>
-<p>关于路由的定义，维基是这样定义的：</p>
-<blockquote>
-<p>路由（routing）就是通过互联的网络把信息从源地址传输到目的地址的活动。路由发生在OSI网络参考模型中的第三层即网络层。路由引导分组转送，经过一些中间的节点后，到它们最后的目的地。作成硬件的话，则称为路由器。路由通常根据路由表——一个存储到各个目的地的最佳路径的表——来引导分组转送</p>
-</blockquote>
-<p>总结来说：</p>
-<ul>
-<li>路由是一种活动，负责将信息从源地址传输到目的地址</li>
-<li>要完成这样一个活动需要一个很重要的东西路由表-源地址和目标地址的映射表</li>
-</ul>
-<p>对于前端来说，路由概念的出现是伴随着spa出现的；在spa出现之前，页面的跳转(导航)都是通过服务端控制的，并且跳转存在一个明显白屏跳转过程；spa出现后，为了更好的体验，就没有再让服务端控制跳转了，于是前端路由出现了，前端可以自由控制组件的渲染，来模拟页面跳转</p>
-<h1 id="前端路由的变迁">前端路由的变迁</h1>
-<p>传统开发模式</p>
-<ul>
-<li>www.xxx.com —— index.html</li>
-<li>www.xxx.com/about —— about.com</li>
-<li>www.xxx.com/xxx —— xxx.html</li>
-</ul>
-<p>缺点：每次访问切换 URL，需要重新加载页面，影响用户体验<br>
-单页面(SPA)开发模式</p>
-<ul>
-<li>www.xxx.com —— index.html</li>
-<li>www.xxx.com/about —— index.com</li>
-<li>www.xxx.com/xxx —— index.html</li>
-</ul>
-<p>只需要一个 index.html 文件，用户在页面上切换 URL 不再是重新加载页面，而是根据 URL 的变化执行相应的逻辑，数据通过接口的形式返回。</p>
-<h1 id="vue-router解决的问题">vue-router解决的问题</h1>
-<ul>
-<li>监听 URL 的变化，并在变化前后执行相应的逻辑</li>
-<li>不同的 URL 对应不同的组件</li>
-<li>提供多种方式改变 URL 的 API( URL 的改变不会导致浏览器刷新)</li>
-</ul>
-<h1 id="vue-router使用方式">vue-router使用方式</h1>
-<ul>
-<li>提供一个路由配置表，不同 URL 对应不同组件的配置</li>
-<li>初始化路由实例 new VueRouter()</li>
-<li>挂载到 Vue 实例上</li>
-<li>提供一个路由占位，用来挂载 URL 匹配到的组件</li>
-</ul>
-<h1 id="如何实现前端路由">如何实现前端路由</h1>
-<p>首先，我们需要一张路由映射表，用来反映 url 和页面之间的关系，而在 vue 中则是通过路由映射表反应 url 和组件之间的关系</p>
-<p>如下图伪代码所示</p>
-<pre><code>// 使用es6 map
-const routeMap=new Map([
-    ['/',首页组件],
-    ['/bar',Bar组件],
-    ['/bar/foo',Foo组件]
-])
-
-// 你也可以用对象字面量
-const routeMap={
-    '/':首页组件,
-    '/bar':Bar组件,
-    '/bar/foo':Foo组件
-}
-</code></pre>
-<p>通过映射表我们就知道了 url 和组件间的映射关系，但仅仅如此是不够的，我们还需要有一个匹配器来实现 url 到组件的匹配工作，但还是不够，因为我们正常的浏览过程中还会有前进、回退的功能，所以我们需要记录访问过的 url。</p>
-<p>对于这种需要有撤销、恢复的功能，我们就需要用到一种数据结构—栈(stack)；每访问一个 url，就将 url push 进栈中，返回时执行 pop 拿到上一次的 url。</p>
-<p>浏览器的 window.history API 已经实现了这个功能。<br>
-下面的图片详细的描述了这一过程<br>
-<img src="https://jujuul.github.io//post-images/1603607999618.png" alt="" loading="lazy"></p>
-<ul>
-<li>当我们访问某个 url 时，匹配器就会通过路由映射表去匹配对应的组件，并且将组件返回并渲染，同时在访问记录栈中推入 url</li>
-<li>当我们通过前进(forward)/后退(back)去访问某个 url 时，会先从历史栈中找到对应的 url，然后重复上面的过程，不过因为是前进/后退的操作，就不需要推入栈中了
-<h2 id="小结">小结</h2>
-</li>
-<li>要实现一个前端路由，需要三个部分
-<ul>
-<li>路由映射表
-<ul>
-<li>一个能表达url和组件关系的映射表，可以使用Map、对象字面量来实现</li>
-</ul>
-</li>
-<li>匹配器
-<ul>
-<li>负责在访问url时，进行匹配，找出对应的组件</li>
-</ul>
-</li>
-<li>历史记录栈
-<ul>
-<li>浏览器平台，已经原生支持，无需实现，直接调用接口</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>现在不用纠结他们的具体实现，你只需要知道有这三个东西，并且他们大概是如何协作的就可以了；</li>
-<li>后面我们将一起看看vue-router如何利用他们实现前端路由的</li>
-</ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Vue响应式原理]]></title>
-        <id>https://jujuul.github.io/post/vue-xiang-ying-shi-yuan-li/</id>
-        <link href="https://jujuul.github.io/post/vue-xiang-ying-shi-yuan-li/">
-        </link>
-        <updated>2020-10-19T15:56:49.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>随着对于 vue 的学习，对于其原理的掌握也是非常必要的，因此我也买了一本网上很多人推荐的《深入浅出Vue.js》，还在掘金上买了一本《剖析 Vue.js 内部运行机制》的小册，虽然还都没有读完，不过收获却是不少，这篇文章也是对于这两本书中关于 vue 响应式原理部分的总结。</p>
-<h1 id="追踪变化">追踪变化</h1>
-<p>想要实现响应式，就需要能够检测到哪个数据发生了变化，而 vue2 的实现方式是通过 Object.defineReactive 函数, vue 能实现响应式就是因为有这个方法，当然，在最新的 vue3.0 版本中，通过 proxy 取代了 Object.defineProperty，不过它们的原理是相同的。<br>
-Object.defineProperty 的作用是侦测对象的变化，因此我们可以写出下面的代码</p>
-<pre><code>function defineReactive(data, key, val){
-    Object.defineProperty(data, key, {
-        enumerable: true,
-        configurable: true,
-        get: function(){
-            return val
-        },
-        set: function(newVal){
-            if(val == newVale){
-                return
-            }
-            val = newVal
-        }
-    })
-}
-</code></pre>
-<p>上面的函数 defineReactive 是对 Object.defineReactive 进行封装。函数的作用是定义一个响应式数据，封装后只需要传递 data、key 和 val 就行了。</p>
-<p>封装好之后，每当从 data 的 key 中读取数据时，get 函数被触发；每当往 data 的 key 中设置数据时，set 函数会被触发。</p>
-<h1 id="收集依赖">收集依赖</h1>
-<p>理解了前面的代码，就会发现，这并没有什么用，因为这里只是将数据转变为响应式数据，却没有做另外的处理，所以这里就要引入一些其他的东西，首先就是收集依赖。</p>
-<p>我们观察数据的目的就是为了当数据属性发生改变时，可以通知那些使用了该数据的地方<br>
-举个🌰</p>
-<pre><code>&lt;template&gt;
-    &lt;h1&gt;{{ name }}
-&lt;/template&gt;
-</code></pre>
-<p>该模板中使用了数据 name，所以当它发生改变时，要向使用了它的地方发送通知。所以收集依赖就是先收集依赖，把用到数据 name 的地方收集起来，当数据发生变化时，把之前收集过的依赖循环触发一边就可以了。</p>
-<p><strong>总结来说，就是在 getter 中收集依赖，在 setter 中触发依赖。</strong></p>
-<h1 id="收集在哪里">收集在哪里？</h1>
-<p>既然要收集依赖，那么要收集到哪里呢?</p>
-<p>这里我们用数组 dep 存储被收集的依赖。</p>
-<p>当 set 被触发时，循环 dep 以触发收集到的依赖。</p>
-<p>为了不耦合，将其封装为 Dep 类，专门用来管理依赖。这个类不仅可以收集依赖、删除依赖还可以向依赖发送通知等。其代码如下：</p>
-<pre><code>export default class Dep{
-    constructor () {
-        this.subs = []
-    }
-    addSub (sub ){
-        this.subs.push(sub)
-    }
-    removeSub (sub) {
-        remove(this.subs,sub)
-    }
-    depend () {
-        if(window.target){
-            this.addSub(window.target)
-        }
-    }
-    notify () {
-        const subs = this.subs.slice()
-        for(let i = 0, l = subs.length; i &lt; l; i++ ){
-            subs[i].update()
-        }
-    }
-}
-
-function remove (arr,item){
-    if (arr.length){
-        const index = arr.indexOf(item)
-        if(index &gt; -1){
-            return arr.splice(index,1)
-        }
-    }
-}
-</code></pre>
-<p>以上代码主要做两件事情：</p>
-<ul>
-<li>用 addSub 方法可以在目前的 Dep 对象中增加一个 Watcher 的订阅操作；</li>
-<li>用 notify 方法通知目前 Dep 对象的 subs 中的所有 Watcher 对象触发更新操作。</li>
-</ul>
-<p>同时我们修改在之前定义的 defineReactive</p>
-<pre><code>function defineReactive(data, key, val){
-    let dep = new Dep()  // 新增
-    Object.defineProperty(data, key, {
-        enumerable: true,
-        configurable: true,
-        get: function(){
-            dep.depend()  // 新增
-            return val
-        },
-        set: function(newVal){
-            if(val == newVale){
-                return
-            }
-            val = newVal
-            dep.notify()  // 新增
-        }
-    })
-}
-</code></pre>
-<h1 id="收集的依赖到底是什么">收集的依赖到底是什么?</h1>
-<p>关于收集谁，我们可以反过来看，收集到依赖后我们做了什么？这里最关键的就是收集后的 notify，也就是通知谁改变？通知数据改变，所以这里收集的就是需要改变的数据。而要用到数据的地方很多，并且数据有着不同的类型，所以这里需要抽象出一个类来集中处理。命名这个类为 Watcher。所以我们收集的依赖就是这个 Watcher，也就是会改变的数据。</p>
-<p>依赖收集的目的是将观察者 Watcher 对象存放到当前闭包中的订阅者 Dep 的 subs 中。形成如下所示的这样一个关系（图参考《剖析 Vue.js 内部运行机制》）。<br>
-<img src="https://jujuul.github.io//post-images/1603595567564.png" alt="" loading="lazy"></p>
-<h1 id="watcher是什么">Watcher是什么？</h1>
-<p>Watcher 是一个中介角色，数据发生变化时通知它，然后它再通知其他地方。<br>
-Watcher 类的代码实现如下</p>
-<pre><code>export default class Watcher{
-    constructor (vm,expOrFn,cb){
-        this.vm = vm
-        this.getter = parsePath(expOrFn)
-        this.cb = cb
-        this.value = this.get()
-    }
-
-    get() {
-        window.target = this
-        let value = this.getter.call(this.vm,this.vm)
-        window.target = undefined
-        return value
-    }
-
-    update(){
-        const oldValue = this.value
-        this.value = this.get()
-        this.cb.call(this.vm,this.value,oldValue)
-    }
-}
-</code></pre>
-<h1 id="递归侦测所有-key">递归侦测所有 key</h1>
-<p>上面我们已经实现了变化侦测功能，但是只能侦测数据中的某一个属性，如果想要侦测所有属性，需要封装一个 Observer 类。这个类能把一个数据内的所有属性（包括子属性）都转换成 getter/setter 的形式，然后去追踪它们的变化：</p>
-<pre><code>/*
-Observer 类会附加到每一个被侦测的 Object 上
-一旦被附加上，Observer 会将 object 的所有属性转换为 getter/setter 的形式
-来收集属性的依赖，并且当属性发生变化时会通知这些依赖
-*/
-export class Observer{
-    constructor (value){
-        this.value = value
-
-        if(!Array.isArray(value)){
-            this.walk(value)
-        }
-    }
-    /*
-    walk 方法会将每一个属性转换成 getter/setter 的形式来侦测变化
-    这个方法只有在数据类型为 Object 时被调用
-    */
-    walk(obj){
-        const keys = Object.key(obj)
-        for (let i = 0 ; i &lt; keys.length ; i++) {
-            defineReactive(obj, keys[i], obj[keys[]i])
-        }
-    }
-}
-</code></pre>
-<p>并且我们需要再次修改 defineReactive 方法</p>
-<pre><code>function defineReactive(data, key, val){
-    // 新增 if 判断
-    if (typeof val === 'object') {
-        new Observer(val)
-    }
-    let dep = new Dep() 
-    Object.defineProperty(data, key, {
-        enumerable: true,
-        configurable: true,
-        get: function(){
-            dep.depend() 
-            return val
-        },
-        set: function(newVal){
-            if(val == newVale){
-                return
-            }
-            val = newVal
-            dep.notify() 
-        }
-    })
-}
-</code></pre>
-<p>上面的代码中，我们通过 Observer 类将正常的 object 转换为能被侦测的 object。</p>
-<p>然后判断数据的类型，只有 Object 类型的数据才会调用 walk 将每个属性转换成 getter/setter 的形式来侦测变化。</p>
-<p>最后，在 defineReact 方法中新增 new Observer(val) 来递归子属性，这样可以把 data 中的所有属性（包括子属性）都转换成 getter/setter 的形式来侦测变化。</p>
-<p>也就是说，只要我们将一个 object 传到 Observer 中，它就被转换成响应式 object。</p>
-<h1 id="object的一些问题">Object的一些问题</h1>
-<p>前面我们讲了 Object 类型数据如何实现变化侦测，了解了数据的变化是通过 getter/setter 来追踪的。也正是因为这种方式，导致因为某些语法产生的数据改变无法被侦测。</p>
-<p>比如，为一个对象新增一个本没有的属性：</p>
-<pre><code>data:{
-    obj:{}
-}
-methods:{
-    action(){
-        this.obj.name = 'jujuul'
-    }
-}
-</code></pre>
-<p>再比如使用 delete 关键字删除一个对象的属性</p>
-<pre><code>data:{
-    obj:{
-        name:'jujuul'
-    }
-}
-methods:{
-    action(){
-        delete this.obj.name
-    }
-}
-</code></pre>
-<p>以上的操作均不会触发 getter/setter，所以无法被侦测，也就不会向依赖发送通知。</p>
-<p>这是因为 Vue.js 通过 Object.defineProperty 来将对象的 key 转换成 getter/setter 的形式来追踪变化，但 getter/setter 只能追踪一个数据是否被修改，无法追踪新增数据和删除数据，所以会出现上面的问题。</p>
-<p>这个缺陷无法避免，因为 ES6 之前，JS 并没有元编程的能力，所以为了解决这个问题，Vue.js 提供了两个 API —— vm.<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>e</mi><mi>t</mi><mi mathvariant="normal">与</mi><mi>v</mi><mi>m</mi><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">set 与 vm.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span><span class="mord mathdefault">t</span><span class="mord cjk_fallback">与</span><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="mord mathdefault">m</span><span class="mord">.</span></span></span></span>delete，这个之后会补充。</p>
-<blockquote>
-<p>名词解释：元编程是用代码在编译期或运行期生成/改变代码。除非程序的运行期的输入数据会被直接或间接转化成代码，否则元编程不会给程序带来新的逻辑。  ——知乎用户：李遥</p>
-<blockquote>
-<p>ps：学习的过程中遇到不知道的名词，先查询了解大概意思能很大程度上帮你降低理解的成本，使看起来晦涩难懂的知识变得好懂</p>
-</blockquote>
-</blockquote>
-<h1 id="总结">总结</h1>
-<p>最后我们依照下图（参考《深入浅出vue.js》），再来回顾下整个过程：<br>
-<img src="https://jujuul.github.io//post-images/1603595598817.png" alt="" loading="lazy"></p>
-<ul>
-<li>在 new Vue() 后，Vue 会调用 _init 函数进行初始化，在这个过程中，Data 通过 Observer 类转换成了 getter/setter 的形式，来追踪数据变化，当被设置的对象读取数据时会执行 getter 方法，而在赋值时会执行 setter 方法。</li>
-<li>当 render function 执行的时候，因为会读取所需对象的值，所以会触发 getter 方法从而将 Watcher 添加到依赖中进行依赖收集。</li>
-<li>当修改对象的值的时候，会触发对应的 setter，setter 会通知之前依赖收集得到的 Dep 中的每一个 Watcher，告诉它们自己的值改变了，需要重新渲染视图。这时这些 Watcher 就开始调用 update 方法来更新视图。</li>
-</ul>
-<h1 id="尾声">尾声</h1>
-<p>通过阅读《深入浅出Vue.js》这本书，确实给了我很多收获，这本书从底层原理开始，详细的讲解了 Vue 的实现，虽然目前仅仅读完了前三篇，但确实让我对 Vue 有了更加深入的了解，再通过其它一些如《剖析 Vue.js 内部运行机制》等资料的补充，让我在写 Vue 代码时遇到问题也能快速排错，可以说是受益匪浅。</p>
-<h1 id="感谢">感谢</h1>
-<p><a href="https://github.com/ljianshu/Blog/issues/70">深入浅出Vue响应式原理</a><br>
-<a href="https://juejin.im/book/6844733705089449991/section/6844733705211084808">剖析 Vue.js 内部运行机制</a><br>
-<a href="https://book.douban.com/subject/32581281/">深入浅出Vue.js</a></p>
 ]]></content>
     </entry>
 </feed>
