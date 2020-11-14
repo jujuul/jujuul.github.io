@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1604041327495">
+<link rel="shortcut icon" href="/favicon.ico?v=1605361607264">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -136,7 +136,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">101</span>
+        <span class="site-item-stat-count">104</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -177,6 +177,237 @@
         <div class="section-box mist">
           <section class="section bg-color posts-expand slide-down-in">
             
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/">
+      Vue同路由跳转传参
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-08-31 11:02:39">2020-08-31</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>377<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><p>之前好像没遇到过这种情况，都是不同路由的传参跳转，比较简单，今天遇到了同路由传参的情况，一开始是打算通过之前的带路由地址和参数的方式跳转，然后重新使用created中的方法，但是并不行，中间学到了一个方法</p>
+<pre><code>const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/vue-tong-lu-you-tiao-zhuan-chuan-can/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/">
+      视频播放器插件的使用
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-08-29 10:44:20">2020-08-29</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>2<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>428<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><p>其实看的好几个demo都是用的原生的Video标签，但是我感觉不是很好看，就去网上找了几个，分别有vue-video和vue-video-player，还有个HTML5的video.js，vue-video已经三年多没更新了，所以直接pass，然后就是vue-video-player与video.js对比，原本我是打算使用vue-video-player的，毕竟github上3.3k的star数，但是发现使用过程中过于繁琐，而且样式也不是很好，声音没法做到改变大小，只能是开启或静音，这样还要额外写一个切换声音的功能，并且它的倍速播放功能也不是很有必要，而且我在github上看到它有29k的star，所以最后选择了video.js。</p>
+<h2 id="安装">安装</h2>
+<p><code>$ npm install video.js</code></p>
+
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/shi-pin-bo-fang-qi-cha-jian-de-shi-yong/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
+  <article class="post-list-box  post box-shadow-wrapper">
+    <div class="article-wrapper bg-color">
+      <section class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/">
+      vue中使用moment.js格式化时间戳
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span class="language" data-lan="publish">发布于</span>
+      <span class="publish-time" data-t="2020-08-28 12:39:09">2020-08-28</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>3<span class="language" data-lan="minute">分钟</span></span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>562<span class="pc-show language" data-lan="words">字数</span></span>
+    </span>
+    
+  </div>
+</section>
+      <div class="post-body">
+        
+        
+          
+            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
+            
+            
+              
+              
+              
+            
+              
+              
+              
+            
+              
+              
+              
+            
+            
+              <p><p>今天在做网易云的demo时，因为要展示创建时间，而API给的数据是时间戳，所以要对时间戳进行格式化，网上发现了一个较moment.js的插件，可以非常方便的处理时间戳，记录一下。</p>
+<h2 id="安装">安装</h2>
+<p><code>npm install moment --save</code>|<code>cnpm install moment --save</code></p>
+
+                
+                  <!-- 自动摘要出来的内容有<code则补上结尾,防止格式错误 -->
+                  </code></pre>
+                
+              <p>
+            
+          
+        
+        
+        <div class="post-button text-center">
+          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/vue-zhong-shi-yong-momentjs-ge-shi-hua-shi-jian-chuo/" rel="contents">
+            阅读全文 »
+          </a>
+        </div>
+        
+      </div>
+      
+        <footer class="post-footer">
+          <div class="post-eof"></div>
+        </footer>
+      
+    </div>
+  </article>
+
   <article class="post-list-box  post box-shadow-wrapper">
     <div class="article-wrapper bg-color">
       <section class="post-header">
@@ -703,206 +934,6 @@ volume ：当前音量<br>
       
     </div>
   </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/">
-      仿网易云demo—day3
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-22 17:08:24">2020-08-22</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>192<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-            
-              <p><p>还是换做客户端了，网页端的界面实在是不好看，而且布局也不够灵活，最终还是换成做客户端，还是先创建项目，引入各种依赖，鉴于首页的跑马灯使用elementUI能直接符合效果，就又引入了elementUI<img src="https://jujuul.github.io//post-images/1598087573125.PNG" alt="" loading="lazy">其实关于封装还不能说是完全弄懂，只能是按照网上的模仿一下，教程里还用到了拦截器，我不知道有什么使用场景，所以就先注释掉了，以我对于封装的理解就是定义各个功能的方法，然后暴露出去，另一个文件调用，然后把不同文件暴露的功能拼接到一起，再暴露给其他页面调用。</p>
-
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day3/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/">
-      仿网易云demo—day2
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-21 19:50:20">2020-08-21</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>226<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <!-- 没有手动摘要切开启了自动摘要,则根据配置筛除摘要内容 -->
-            
-            
-              
-              
-              
-            
-              
-              
-              
-            
-              
-              
-              
-            
-            
-              <p><h1 id="悲报">悲报</h1>
-<p>为了解决一个图片无法加载的问题，在网上随便搜了一些文章，安装了css-loader和vue-loader，然后就爆炸了，样式全无，网上搜不到任何有用的信息，诡异的事情发生了，竟然有一篇今天下午3点42的文章，也提到了这个问题，不过他的解决办法我并不能看懂，只能B计划了。😭😭😭</p>
-<p>我吐了，明明之前删了3词node_modules文件夹了，都没用，结果第四次就成功了，难道是因为之前删除都是通过vscode的原因？</p>
-
-                
-              <p>
-            
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/fang-wang-yi-yun-demo-day2/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
-
-  <article class="post-list-box  post box-shadow-wrapper">
-    <div class="article-wrapper bg-color">
-      <section class="post-header">
-  <h1 class="post-title">
-    <a class="post-title-link" href="https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/">
-      TIOBE - 2020年8月编程语言排行
-    </a>
-  </h1>
-  <div class="post-meta">
-    
-    <span class="meta-item pc-show">
-      <i class="fa fa-calendar-o"></i>
-      <span class="language" data-lan="publish">发布于</span>
-      <span class="publish-time" data-t="2020-08-21 15:09:34">2020-08-21</span>
-      <span class="post-meta-divider pc-show">|</span>
-    </span>
-    
-    <span class="meta-item">
-      <i class="fa fa-clock-o"></i>
-      <span>1<span class="language" data-lan="minute">分钟</span></span>
-    </span>
-    <span class="meta-item">
-      <span class="post-meta-divider">|</span>
-      <i class="fa fa-file-word-o"></i>
-      <span>199<span class="pc-show language" data-lan="words">字数</span></span>
-    </span>
-    
-  </div>
-</section>
-      <div class="post-body">
-        
-        
-          
-            <p>本月 TIOBE 排行榜总体变化不大。R 语言自上个月迎来史无前例的高光时刻后，本月依旧保持增长势头，并有望成为 2020 年的年度编程语言。</p>
-<p>除此之外，Go、Swift、SQL 三种语言在第 10 名这个位置的角逐也十分有趣。其中 Swift 在本月下降 2 个名次，从第 10 名降到了第 12 名。SQL 将其取而代之，成为第 10 名。同样值得注意的是，Groovy 重新进入了排行榜的前 20名，并且 Hack 在第 44 位，也成功进入了前 50 名。</p>
-<h3 id="编程语言排行榜-top-20-榜单">编程语言排行榜 TOP 20 榜单：</h3>
-<figure data-type="image" tabindex="1"><img src="https://jujuul.github.io//post-images/1597993815737.webp" alt="" loading="lazy"></figure>
-<h3 id="前-10-名编程语言长期走势图">前 10 名编程语言长期走势图：</h3>
-<figure data-type="image" tabindex="2"><img src="https://jujuul.github.io//post-images/1597993834133.webp" alt="" loading="lazy"></figure>
-<h3 id="以下是-21-50-编程语言排名">以下是 21-50 编程语言排名：</h3>
-<figure data-type="image" tabindex="3"><img src="https://jujuul.github.io//post-images/1597993848553.webp" alt="" loading="lazy"></figure>
-
-          
-        
-        
-        <div class="post-button text-center">
-          <a class="btn language" data-lan="read-more" href="https://jujuul.github.io/post/tiobe-2020-nian-8-yue-bian-cheng-yu-yan-pai-xing/" rel="contents">
-            阅读全文 »
-          </a>
-        </div>
-        
-      </div>
-      
-        <footer class="post-footer">
-          <div class="post-eof"></div>
-        </footer>
-      
-    </div>
-  </article>
   
             
             
@@ -1186,6 +1217,133 @@ volume ：当前音量<br>
       <hr>
     </div>
     <div class="result" id="result">
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shu-ju-jie-gou-yu-suan-fa/"" data-c="
+          &lt;h1 id=&#34;数据结构主要内容&#34;&gt;数据结构主要内容&lt;/h1&gt;
+&lt;h2 id=&#34;常见的数据结构&#34;&gt;常见的数据结构&lt;/h2&gt;
+&lt;p&gt;数组、栈、队列、表、串、树、图和文件等&lt;/p&gt;
+&lt;h2 id=&#34;数据结构的相关数据&#34;&gt;数据结构的相关数据&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;数据（data）&lt;br&gt;
+所有能被计算机识别的符号的集合。&lt;/li&gt;
+&lt;li&gt;数据元素（Data Element）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;是数组（集合）中的一个“个体”&lt;/li&gt;
+&lt;li&gt;是数据结构中讨论的基本单位&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;数据项（Data Item）&lt;br&gt;
+是数据结构中讨论的最小单位&lt;br&gt;
+数据元素可以是一个或多个数据项的集合&lt;br&gt;
+例如：描述一个运动员的数据元素可以是&lt;br&gt;
+姓名  俱乐部名称  出生日期  参加日期  成绩  名次&lt;/li&gt;
+&lt;li&gt;数据对象&lt;br&gt;
+数据对象是具有相同性质的数据元素的集合，是数据的一个子集&lt;br&gt;
+例如，迷宫数据对象中的数据元素是一个个点；电话簿数据对象中数据元素是每个人的记录；图书馆目录数据对象中数据元素是一张张书目卡片。&lt;br&gt;
+以上之间是包含的关系&lt;/li&gt;
+&lt;li&gt;数据结构&lt;br&gt;
+带结构的数据元素的集合&lt;/li&gt;
+&lt;li&gt;逻辑结构&lt;br&gt;
+归结为以下四类：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1605347938087.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+注：圆圈表示数据元素，连线表示数据之间的关系&lt;/li&gt;
+&lt;li&gt;存储结构&lt;br&gt;
+顺序存储：&lt;br&gt;
+把逻辑上相邻的元素存储在物理位置相邻的存储单元中&lt;br&gt;
+链式存储：&lt;br&gt;
+在数据元素中添加一些地址域或辅助结构，用于存放数据元素之间的关系&lt;/li&gt;
+&lt;li&gt;数据结构的操作（Operation）&lt;br&gt;
+数据元素的查找、插入、删除、遍历和排序&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1605353572094.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
+&lt;li&gt;数据类型（Data Type）&lt;br&gt;
+数据类型：是程序设计语言中用来刻划操作对象的特性的一个值的集合和定义在此集合上的一组操作的总称&lt;/li&gt;
+&lt;/ol&gt;
+">数据结构与算法</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zhuan-zai-da-xia-qing-liu-bu-yao-bu-guo-lai-liao-jie-xia-css-scroll-snap/"" data-c="
+          &lt;h1 id=&#34;一-css-scroll-snap简介&#34;&gt;一、CSS Scroll Snap简介&lt;/h1&gt;
+&lt;p&gt;CSS Scroll Snap是CSS中一个独立的模块，可以让&lt;strong&gt;网页容器滚动停止的时候，自动平滑定位到指定元素的指定位置&lt;/strong&gt;，包含scroll-*以及scroll-snap-*等诸多CSS属性。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;注意：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;虽然Scroll Snap最后的定位效果是平滑的，但是Scroll Snap的作用不是平滑滚动，而是元素定位增强。要想实现平滑滚动，请使用CSS scroll-behavior属性。&lt;/li&gt;
+&lt;li&gt;老的属性是scroll-snap-points-x/scroll-snap-points-y，规范已舍弃，本文不做介绍，本文全程使用新的推荐规范。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;二-scroll-snap效果体验&#34;&gt;二、scroll-snap效果体验&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1604122792610.gif&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+一个块被滚了一部分中途松手之后，页面自动滚回去或着自动滚到下一个块。&lt;/p&gt;
+&lt;h1 id=&#34;三-scroll-snap模块中的css属性简介&#34;&gt;三、Scroll Snap模块中的CSS属性简介&lt;/h1&gt;
+&lt;p&gt;Scroll Snap模块相关CSS属性可以分为两拨，一拨作用在滚动容器上，一拨作用在你希望有滚动定位点的子元素上。具体参见下表：&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1604122855455.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+其中，作用在容器上的&lt;code&gt;scroll-padding&lt;/code&gt;相关属性以及作用在子元素上的&lt;code&gt;scroll-margin&lt;/code&gt;相关属性都是用来调整定位点的位置的，与定位效果没有必然关系，本文不做介绍。因此，我们主要看&lt;code&gt;scroll-snap-type&lt;/code&gt;，&lt;code&gt;scroll-snap-stop&lt;/code&gt;，以及&lt;code&gt;scroll-snap-align&lt;/code&gt;这3个属性。&lt;/p&gt;
+&lt;h2 id=&#34;1-scroll-snap-type&#34;&gt;1. scroll-snap-type&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;scroll-snap-type&lt;/code&gt;作用就是确定是水平滚动定位，还是垂直滚动定位。支持的属性值如下：&lt;/p&gt;
+&lt;p&gt;none&lt;br&gt;
+默认值。表示滚动时候忽略捕捉点，也就是我们平时使用的滚动。&lt;/p&gt;
+&lt;p&gt;x&lt;br&gt;
+捕捉水平定位点。&lt;/p&gt;
+&lt;p&gt;y&lt;br&gt;
+捕捉垂直平定位点。&lt;/p&gt;
+&lt;p&gt;block&lt;br&gt;
+捕捉和块状元素排列一个滚动方向的定位点。默认文档流下指的就是垂直轴。&lt;/p&gt;
+&lt;p&gt;inline&lt;br&gt;
+捕捉和内联元素排列一个滚动方向的定位点。默认文档流下指的就是水平轴。&lt;/p&gt;
+&lt;p&gt;both&lt;br&gt;
+横轴纵轴都捕捉。&lt;/p&gt;
+&lt;p&gt;mandatory&lt;br&gt;
+mandatory表示“强制”，可选参数。强制定位，无论是添加删除元素，或者滚动窗口较小，不足以放下子元素。&lt;/p&gt;
+&lt;p&gt;proximity&lt;br&gt;
+proximity表示“大约”，可选参数。可能会定位。这个值的作用表现比较玄乎，时间有限，我也没有弄透。&lt;/p&gt;
+&lt;p&gt;大家可以对比下面这个demo，感受和mandatory属性值的不同。&lt;/p&gt;
+&lt;p&gt;您可以狠狠地点击这里：&lt;a href=&#34;https://www.zhangxinxu.com/study/201811/css-scroll-snap.php?compare=true&#34;&gt;mandatory和proximity对比demo&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-scroll-snap-stop&#34;&gt;2. scroll-snap-stop&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;scroll-snap-stop&lt;/code&gt;表示是否允许滚动容器忽略捕获位置。&lt;/p&gt;
+&lt;p&gt;其中，支持的属性值：&lt;br&gt;
+normal&lt;br&gt;
+默认值。可以忽略捕获位置。&lt;/p&gt;
+&lt;p&gt;always&lt;br&gt;
+不能忽略捕获位置。且必须定位到第一个捕获元素的位置。&lt;/p&gt;
+&lt;p&gt;这个属性很有用，可以保证我们每次只能滚动一屏，或者一个指定元素，而不会一下子滚多屏或多个元素，只可惜，根据我的测试，还没有浏览器支持（虽然属性合法，但并无行为发生）。&lt;/p&gt;
+&lt;p&gt;下面是一个demo，什么时候有效果了告诉我一声！&lt;/p&gt;
+&lt;p&gt;您可以狠狠地点击这里：&lt;a href=&#34;https://www.zhangxinxu.com/study/201811/css-scroll-snap-stop.php&#34;&gt;scroll-snap-stop不同属性值效果demo&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;3-scroll-snap-align&#34;&gt;3. scroll-snap-align&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;scroll-snap-align&lt;/code&gt;是作用在滚动容器子元素上的，表示捕获点是上边缘，下边缘，还是中间位置。&lt;/p&gt;
+&lt;p&gt;其中，支持的属性值：&lt;/p&gt;
+&lt;p&gt;none&lt;br&gt;
+默认值。不定义位置。&lt;/p&gt;
+&lt;p&gt;start&lt;br&gt;
+起始位置对齐，例如，垂直滚动，子元素和容器同上边缘对齐。&lt;/p&gt;
+&lt;p&gt;end&lt;br&gt;
+结束位置对齐，例如，垂直滚动，子元素和容器同下边缘对齐。&lt;/p&gt;
+&lt;p&gt;center&lt;br&gt;
+居中对齐。子元素中心和滚动容器中心一致。&lt;/p&gt;
+&lt;p&gt;scroll-snap-align还支持同时使用两个属性值，例如：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;scroll-snap-align: start end;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;此时，第一个属性值表示block元素排列方向（通常垂直），第二个属性值表示inline元素的排列方向（通常水平）。&lt;/p&gt;
+&lt;h1 id=&#34;三-别走快结束了&#34;&gt;三、别走，快结束了&lt;/h1&gt;
+&lt;p&gt;别看上面属性，参数啥的说了那么多，我们实际使用，只需要：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;scroll-snap-type: x/y
+scroll-snap-align: start/end/center
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这几个组合就可以了。&lt;/p&gt;
+&lt;p&gt;其他一些属性，等以后羽翼丰满再了解也不迟。&lt;/p&gt;
+&lt;p&gt;虽然目前的兼容性让隔壁小孩都感动哭了，但用在内部实验项目中未尝不可。&lt;/p&gt;
+&lt;p&gt;对了，Scroll Snap有个polyfill：css-scroll-snap-polyfill&lt;/p&gt;
+&lt;p&gt;可以让Chrome 63，Firefox 57，Safari 11浏览器都有效果。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1604123121087.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;br&gt;
+转载自：张鑫旭&lt;a href=&#34;https://www.zhangxinxu.com/wordpress/2018/11/know-css-scroll-snap/&#34;&gt;大侠，请留步，要不过来了解下CSS Scroll Snap？&lt;/a&gt;&lt;/p&gt;
+">转载：大侠，请留步，要不过来了解下CSS Scroll Snap？</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-4/"" data-c="
+          &lt;h1 id=&#34;待更新&#34;&gt;待更新&lt;/h1&gt;
+">《vue开发实战》观看总结3</a>
+      </div>
       
       <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/zhuan-zai-qian-duan-qian-yan-guan-cha-cookie-ju-ran-ke-yi-zhe-yang-zheng-liao/"" data-c="

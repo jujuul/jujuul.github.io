@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://jujuul.github.io/</id>
     <title>Mark</title>
-    <updated>2020-10-30T07:02:20.704Z</updated>
+    <updated>2020-11-14T13:47:06.156Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://jujuul.github.io/"/>
     <link rel="self" href="https://jujuul.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://jujuul.github.io/images/avatar.png</logo>
     <icon>https://jujuul.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Mark</rights>
+    <entry>
+        <title type="html"><![CDATA[数据结构与算法]]></title>
+        <id>https://jujuul.github.io/post/shu-ju-jie-gou-yu-suan-fa/</id>
+        <link href="https://jujuul.github.io/post/shu-ju-jie-gou-yu-suan-fa/">
+        </link>
+        <updated>2020-11-14T09:46:33.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="数据结构主要内容">数据结构主要内容</h1>
+<h2 id="常见的数据结构">常见的数据结构</h2>
+<p>数组、栈、队列、表、串、树、图和文件等</p>
+<h2 id="数据结构的相关数据">数据结构的相关数据</h2>
+<ol>
+<li>数据（data）<br>
+所有能被计算机识别的符号的集合。</li>
+<li>数据元素（Data Element）</li>
+</ol>
+<ul>
+<li>是数组（集合）中的一个“个体”</li>
+<li>是数据结构中讨论的基本单位</li>
+</ul>
+<ol start="3">
+<li>数据项（Data Item）<br>
+是数据结构中讨论的最小单位<br>
+数据元素可以是一个或多个数据项的集合<br>
+例如：描述一个运动员的数据元素可以是<br>
+姓名  俱乐部名称  出生日期  参加日期  成绩  名次</li>
+<li>数据对象<br>
+数据对象是具有相同性质的数据元素的集合，是数据的一个子集<br>
+例如，迷宫数据对象中的数据元素是一个个点；电话簿数据对象中数据元素是每个人的记录；图书馆目录数据对象中数据元素是一张张书目卡片。<br>
+以上之间是包含的关系</li>
+<li>数据结构<br>
+带结构的数据元素的集合</li>
+<li>逻辑结构<br>
+归结为以下四类：<br>
+<img src="https://jujuul.github.io//post-images/1605347938087.png" alt="" loading="lazy"><br>
+注：圆圈表示数据元素，连线表示数据之间的关系</li>
+<li>存储结构<br>
+顺序存储：<br>
+把逻辑上相邻的元素存储在物理位置相邻的存储单元中<br>
+链式存储：<br>
+在数据元素中添加一些地址域或辅助结构，用于存放数据元素之间的关系</li>
+<li>数据结构的操作（Operation）<br>
+数据元素的查找、插入、删除、遍历和排序<br>
+<img src="https://jujuul.github.io//post-images/1605353572094.png" alt="" loading="lazy"></li>
+<li>数据类型（Data Type）<br>
+数据类型：是程序设计语言中用来刻划操作对象的特性的一个值的集合和定义在此集合上的一组操作的总称</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[转载：大侠，请留步，要不过来了解下CSS Scroll Snap？]]></title>
+        <id>https://jujuul.github.io/post/zhuan-zai-da-xia-qing-liu-bu-yao-bu-guo-lai-liao-jie-xia-css-scroll-snap/</id>
+        <link href="https://jujuul.github.io/post/zhuan-zai-da-xia-qing-liu-bu-yao-bu-guo-lai-liao-jie-xia-css-scroll-snap/">
+        </link>
+        <updated>2020-10-31T05:36:17.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="一-css-scroll-snap简介">一、CSS Scroll Snap简介</h1>
+<p>CSS Scroll Snap是CSS中一个独立的模块，可以让<strong>网页容器滚动停止的时候，自动平滑定位到指定元素的指定位置</strong>，包含scroll-*以及scroll-snap-*等诸多CSS属性。</p>
+<p><strong>注意：</strong></p>
+<ol>
+<li>虽然Scroll Snap最后的定位效果是平滑的，但是Scroll Snap的作用不是平滑滚动，而是元素定位增强。要想实现平滑滚动，请使用CSS scroll-behavior属性。</li>
+<li>老的属性是scroll-snap-points-x/scroll-snap-points-y，规范已舍弃，本文不做介绍，本文全程使用新的推荐规范。</li>
+</ol>
+<h1 id="二-scroll-snap效果体验">二、scroll-snap效果体验</h1>
+<p><img src="https://jujuul.github.io//post-images/1604122792610.gif" alt="" loading="lazy"><br>
+一个块被滚了一部分中途松手之后，页面自动滚回去或着自动滚到下一个块。</p>
+<h1 id="三-scroll-snap模块中的css属性简介">三、Scroll Snap模块中的CSS属性简介</h1>
+<p>Scroll Snap模块相关CSS属性可以分为两拨，一拨作用在滚动容器上，一拨作用在你希望有滚动定位点的子元素上。具体参见下表：<br>
+<img src="https://jujuul.github.io//post-images/1604122855455.png" alt="" loading="lazy"><br>
+其中，作用在容器上的<code>scroll-padding</code>相关属性以及作用在子元素上的<code>scroll-margin</code>相关属性都是用来调整定位点的位置的，与定位效果没有必然关系，本文不做介绍。因此，我们主要看<code>scroll-snap-type</code>，<code>scroll-snap-stop</code>，以及<code>scroll-snap-align</code>这3个属性。</p>
+<h2 id="1-scroll-snap-type">1. scroll-snap-type</h2>
+<p><code>scroll-snap-type</code>作用就是确定是水平滚动定位，还是垂直滚动定位。支持的属性值如下：</p>
+<p>none<br>
+默认值。表示滚动时候忽略捕捉点，也就是我们平时使用的滚动。</p>
+<p>x<br>
+捕捉水平定位点。</p>
+<p>y<br>
+捕捉垂直平定位点。</p>
+<p>block<br>
+捕捉和块状元素排列一个滚动方向的定位点。默认文档流下指的就是垂直轴。</p>
+<p>inline<br>
+捕捉和内联元素排列一个滚动方向的定位点。默认文档流下指的就是水平轴。</p>
+<p>both<br>
+横轴纵轴都捕捉。</p>
+<p>mandatory<br>
+mandatory表示“强制”，可选参数。强制定位，无论是添加删除元素，或者滚动窗口较小，不足以放下子元素。</p>
+<p>proximity<br>
+proximity表示“大约”，可选参数。可能会定位。这个值的作用表现比较玄乎，时间有限，我也没有弄透。</p>
+<p>大家可以对比下面这个demo，感受和mandatory属性值的不同。</p>
+<p>您可以狠狠地点击这里：<a href="https://www.zhangxinxu.com/study/201811/css-scroll-snap.php?compare=true">mandatory和proximity对比demo</a></p>
+<h2 id="2-scroll-snap-stop">2. scroll-snap-stop</h2>
+<p><code>scroll-snap-stop</code>表示是否允许滚动容器忽略捕获位置。</p>
+<p>其中，支持的属性值：<br>
+normal<br>
+默认值。可以忽略捕获位置。</p>
+<p>always<br>
+不能忽略捕获位置。且必须定位到第一个捕获元素的位置。</p>
+<p>这个属性很有用，可以保证我们每次只能滚动一屏，或者一个指定元素，而不会一下子滚多屏或多个元素，只可惜，根据我的测试，还没有浏览器支持（虽然属性合法，但并无行为发生）。</p>
+<p>下面是一个demo，什么时候有效果了告诉我一声！</p>
+<p>您可以狠狠地点击这里：<a href="https://www.zhangxinxu.com/study/201811/css-scroll-snap-stop.php">scroll-snap-stop不同属性值效果demo</a></p>
+<h2 id="3-scroll-snap-align">3. scroll-snap-align</h2>
+<p><code>scroll-snap-align</code>是作用在滚动容器子元素上的，表示捕获点是上边缘，下边缘，还是中间位置。</p>
+<p>其中，支持的属性值：</p>
+<p>none<br>
+默认值。不定义位置。</p>
+<p>start<br>
+起始位置对齐，例如，垂直滚动，子元素和容器同上边缘对齐。</p>
+<p>end<br>
+结束位置对齐，例如，垂直滚动，子元素和容器同下边缘对齐。</p>
+<p>center<br>
+居中对齐。子元素中心和滚动容器中心一致。</p>
+<p>scroll-snap-align还支持同时使用两个属性值，例如：</p>
+<pre><code>scroll-snap-align: start end;
+</code></pre>
+<p>此时，第一个属性值表示block元素排列方向（通常垂直），第二个属性值表示inline元素的排列方向（通常水平）。</p>
+<h1 id="三-别走快结束了">三、别走，快结束了</h1>
+<p>别看上面属性，参数啥的说了那么多，我们实际使用，只需要：</p>
+<pre><code>scroll-snap-type: x/y
+scroll-snap-align: start/end/center
+</code></pre>
+<p>这几个组合就可以了。</p>
+<p>其他一些属性，等以后羽翼丰满再了解也不迟。</p>
+<p>虽然目前的兼容性让隔壁小孩都感动哭了，但用在内部实验项目中未尝不可。</p>
+<p>对了，Scroll Snap有个polyfill：css-scroll-snap-polyfill</p>
+<p>可以让Chrome 63，Firefox 57，Safari 11浏览器都有效果。<br>
+<img src="https://jujuul.github.io//post-images/1604123121087.png" alt="" loading="lazy"><br>
+转载自：张鑫旭<a href="https://www.zhangxinxu.com/wordpress/2018/11/know-css-scroll-snap/">大侠，请留步，要不过来了解下CSS Scroll Snap？</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[《vue开发实战》观看总结3]]></title>
+        <id>https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-4/</id>
+        <link href="https://jujuul.github.io/post/lesslessvue-kai-fa-shi-zhan-greatergreater-guan-kan-zong-jie-4/">
+        </link>
+        <updated>2020-10-30T10:34:42.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="待更新">待更新</h1>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[转载：前端前沿观察，Cookie 居然可以这样整了]]></title>
         <id>https://jujuul.github.io/post/zhuan-zai-qian-duan-qian-yan-guan-cha-cookie-ju-ran-ke-yi-zhe-yang-zheng-liao/</id>
@@ -434,68 +570,6 @@ this.$emit('update:title', newTitle)
 <li>数据绑定使用单括号</li>
 </ul>
 <p>总结：template与jsx也只是语法糖</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Tiobe： 2020年10月份编程语言调查]]></title>
-        <id>https://jujuul.github.io/post/tiobe-2020-nian-10-yue-fen-bian-cheng-yu-yan-diao-cha/</id>
-        <link href="https://jujuul.github.io/post/tiobe-2020-nian-10-yue-fen-bian-cheng-yu-yan-diao-cha/">
-        </link>
-        <updated>2020-10-25T04:00:37.000Z</updated>
-        <content type="html"><![CDATA[<p>调研机构 Tiobe 本周发布了 2020 年 10 月份的分析报告，结果显示，榜单前十位没有大的变化，C 语言连续第三个月蝉联第一，Java 和 Python 仍紧随其后。</p>
-<p>Python 今年在 TIOBE 指数中依然排名第三，但评级稳定上涨中，Tiobe 认为 Python 将很快超越 Java；Python 和 Java 的评级已经非常接近，差距现在不到 1.3%；R 语言和 PHP 再次对换。<br>
-<img src="https://jujuul.github.io//post-images/1603598458506.jpg" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[虚拟DOM]]></title>
-        <id>https://jujuul.github.io/post/xu-ni-dom/</id>
-        <link href="https://jujuul.github.io/post/xu-ni-dom/">
-        </link>
-        <updated>2020-10-25T02:00:01.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
-<p>之前介绍了一下 Vue.js 最重要的响应式原理，接下来我们继续深入，介绍一下虚拟 DOM 相关的一些东西。虚拟 DOM 这个概念不止在 Vue 中，在 React 中也是使用的虚拟 DOM，所以也是学习前端必须要掌握的知识点。</p>
-<h1 id="什么是虚拟dom">什么是虚拟DOM</h1>
-<p>虚拟 DOM 是与真实 DOM 相对的，</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[转载：JavaScript 函数式编程到底是个啥]]></title>
-        <id>https://jujuul.github.io/post/zhuan-zai-javascript-han-shu-shi-bian-cheng-dao-di-shi-ge-sha/</id>
-        <link href="https://jujuul.github.io/post/zhuan-zai-javascript-han-shu-shi-bian-cheng-dao-di-shi-ge-sha/">
-        </link>
-        <updated>2020-10-25T01:55:57.000Z</updated>
-        <content type="html"><![CDATA[<p>随着大前端时代的到来，在产品开发过程中，前端所占业务比重越来越大、交互越来越重。传统的老夫拿起JQuery就是一把梭应付当下重交互页面已经十分乏力。于是乎有了Angular，React，Vue这些现代框架。</p>
-<p>但随之而来的还有大量的新知识新名词，如MVC，MVVM，Flux这些设计模式就弄得很多同学傻傻分不清。这时候又见到别人讨论什么函数式编程，更是一脸懵逼了。</p>
-<p>我们大多听过面向对象编程，面向过程编程，那啥又是函数式编程呢？在我们前端开发中又有哪些应用场景？我抱着这个疑惑，初步的学习了下。（此文仅是学习，无甚干货）。</p>
-<h1 id="函数式编程">函数式编程</h1>
-<h2 id="定义">定义</h2>
-<p>函数式编程（Functional Programming，后面简称FP），维基百科的定义是：</p>
-<blockquote>
-<p>是一种编程范型，它将电脑运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。函数编程语言最重要的基础是λ演算（lambda calculus）。而且λ演算的函数可以接受函数当作输入（引数）和输出（传出值）。比起命令式编程，函数式编程更加强调程序执行的结果而非执行的过程，倡导利用若干简单的执行单元让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。</p>
-</blockquote>
-<p>我来尝试理解下这个定义，好像就是说，在敲代码的时候，我要把过程逻辑写成函数，定义好输入参数，只关心它的输出结果。而且可以把函数作为输入输出。感觉好像平常写js时，就是这样的嘛！</p>
-<h2 id="特性">特性</h2>
-<p>网上FP的定义与特性琳琅满目。各种百科、博客、一些老师的网站上都有大同小异的介绍。为了方便阅读，我列下几个好像比较重要的特性，并附上我的第一眼理解。</p>
-<ol>
-<li>
-<p>函数是一等公民。就是说函数可以跟其他变量一样，可以作为其他函数的输入输出。喔，回调函数就是典型应用。</p>
-</li>
-<li>
-<p>不可变量。就是说，不能用var跟let咯。按这要求，我似乎有点难写代码。</p>
-</li>
-<li>
-<p>纯函数。就是没有副作用的函数。这个好理解，就是不修改函数外部的变量。</p>
-</li>
-<li>
-<p>引用透明。这个也好理解，就是说同样的输入，必定是同样的输出。函数内部不依赖外部状态，如一些全局变量。</p>
-</li>
-<li>
-<p>惰性计算。大意就是：一个表达式绑定的变量，不是声明的时候就计算出来，而是真正用到它的时候才去计算。</p>
-</li>
-</ol>
-<p>还有一些衍生的特性，如柯里化与组合，三言两语说不清，就不阐述了，有兴趣的同学可以自己再了解了解。</p>
-<p>ps：部分转载，<a href="https://segmentfault.com/a/1190000009864459">原文链接</a></p>
 ]]></content>
     </entry>
 </feed>
