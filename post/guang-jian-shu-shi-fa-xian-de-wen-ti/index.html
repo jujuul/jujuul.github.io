@@ -9,7 +9,7 @@
 <meta name="description" content="温故而知新">
 <meta name="theme-color" content="#000">
 <title>逛简书时发现的问题 | Mark</title>
-<link rel="shortcut icon" href="/favicon.ico?v=1605361607264">
+<link rel="shortcut icon" href="/favicon.ico?v=1611061981044">
 <link rel="stylesheet" href="/media/css/mist.css">
 <link rel="stylesheet" href="/media/fonts/font-awesome.css">
 <link
@@ -153,7 +153,7 @@
     <div class="sidebar-item-box">
       <a href="/archives/">
         
-        <span class="site-item-stat-count">104</span>
+        <span class="site-item-stat-count">108</span>
         <span class="site-item-stat-name language" data-lan="article">文章</span>
       </a>
     </div>
@@ -788,6 +788,78 @@
     <div class="result" id="result">
       
       <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue-duo-xiang-mu-ru-kou-huan-jing-bian-liang-pei-zhi-ru-kou/"" data-c="
+          &lt;h2 id=&#34;多页面入口&#34;&gt;多页面入口&lt;/h2&gt;
+&lt;p&gt;在项目的&lt;code&gt;src&lt;/code&gt;问价夹下建立新的项目文件夹，在最外层项目中新建&lt;code&gt;vue.config.js&lt;/code&gt;文件，具体使用参考&lt;a href=&#34;https://cli.vuejs.org/zh/config/&#34;&gt;官方文档&lt;/a&gt;，接下来在&lt;code&gt;vue.config.js&lt;/code&gt;中写入&lt;code&gt;pages&lt;/code&gt;，将其下&lt;code&gt;index&lt;/code&gt;属性的&lt;code&gt;entry&lt;/code&gt;路径改为&lt;code&gt;project&lt;/code&gt;文件夹下子文件夹中的&lt;code&gt;main.js&lt;/code&gt;路径即可。&lt;/p&gt;
+&lt;h2 id=&#34;配置环境变量&#34;&gt;配置环境变量&lt;/h2&gt;
+&lt;p&gt;建议参考&lt;a href=&#34;https://cli.vuejs.org/zh/guide/mode-and-env.html&#34;&gt;官方文档&lt;/a&gt;，环境变量开头必须是&lt;code&gt;VUE_APP_&lt;/code&gt;，后面可以接自己定义的东西，如&lt;code&gt;VUE_APP_XXX&lt;/code&gt;，配置好后可以通过&lt;code&gt;console.log(process.env.VUE_APP_XXX)&lt;/code&gt;，打印结果可以在终端的输出中看到，然后我们可以通过在&lt;code&gt;vue.config.js&lt;/code&gt;中配置&lt;code&gt;pages&lt;/code&gt;对象下子对象&lt;code&gt;index&lt;/code&gt;的属性&lt;code&gt;entry&lt;/code&gt;的值为&lt;code&gt;xx/xxx/${process.env.VUE_APP_XXX}/main.js&lt;/code&gt;来做多页面。&lt;/p&gt;
+&lt;h2 id=&#34;配置全局样式&#34;&gt;配置全局样式&lt;/h2&gt;
+&lt;p&gt;这里也需要参考&lt;a href=&#34;https://cli.vuejs.org/zh/guide/css.html#css-modules&#34;&gt;官方文档&lt;/a&gt;，在&lt;code&gt;src&lt;/code&gt;文件夹下新建&lt;code&gt;styles&lt;/code&gt;文件夹，在其中新建&lt;code&gt;main.scss&lt;/code&gt;(我这里使用的是scss，也可自行选择less或stylus)，作为全局的样式文件&lt;/p&gt;
+">vue多项目入口，环境变量配置入口</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/vue3/"" data-c="
+          &lt;h1 id=&#34;setup&#34;&gt;setup&lt;/h1&gt;
+&lt;p&gt;setup 函数是一个组件选项，在创建组件之前执行，是组合式 API 的入口，setup&lt;/p&gt;
+">Vue3</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/suan-fa-fu-za-du-fen-xi/"" data-c="
+          &lt;h1 id=&#34;一-时间复杂度&#34;&gt;一、时间复杂度&lt;/h1&gt;
+&lt;h2 id=&#34;大o表示法&#34;&gt;大O表示法&lt;/h2&gt;
+&lt;p&gt;加法规则：多项相加，只保留最高阶的项，且系数变为1&lt;br&gt;
+乘法规则：多项相乘，都保留&lt;/p&gt;
+">算法复杂度分析</a>
+      </div>
+      
+      <div class="item">
+        <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/wang-dao-shu-ju-jie-gou/"" data-c="
+          &lt;h1 id=&#34;数据结构的基本概念&#34;&gt;数据结构的基本概念&lt;/h1&gt;
+&lt;h2 id=&#34;知识总览&#34;&gt;知识总览&lt;/h2&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;1&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605362826201.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;数据&#34;&gt;数据&lt;/h3&gt;
+&lt;p&gt;数据是信息的载体，是描述客观事物属性的数、字符及所有能输入到计算机中并被计算机程序识别和处理的符号的集合。数据是计算机程序加工的原料。&lt;/p&gt;
+&lt;h3 id=&#34;数据元素-数据项&#34;&gt;数据元素、数据项&lt;/h3&gt;
+&lt;p&gt;数据元素是数据的基本单位，通常作为一个整体进行考虑和处理。&lt;br&gt;
+一个数据元素可由若干个数据项组成，数据项是构成数据元素的不可分割的最小单位。&lt;/p&gt;
+&lt;h2 id=&#34;数据结构-数据对象&#34;&gt;数据结构、数据对象&lt;/h2&gt;
+&lt;p&gt;数据结构是相互之间存在的一种或多种特定&lt;code&gt;关系&lt;/code&gt;的数据元素的集合。&lt;br&gt;
+数据对象是具有&lt;code&gt;相同性质&lt;/code&gt;的数据元素的集合，是数据的一个子集。&lt;/p&gt;
+&lt;h2 id=&#34;数据结构的三要素&#34;&gt;数据结构的三要素&lt;/h2&gt;
+&lt;h3 id=&#34;逻辑结构&#34;&gt;逻辑结构&lt;/h3&gt;
+&lt;p&gt;数据元素之间的逻辑关系是什么？&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1605366675381.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;集合&#34;&gt;集合&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;2&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605366744362.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;线性结构&#34;&gt;线性结构&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;3&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605366799779.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;树形结构&#34;&gt;树形结构&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;4&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605366891824.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;图结构&#34;&gt;图结构&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;5&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605366967094.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;汇总&#34;&gt;汇总&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;6&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367015443.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h3 id=&#34;物理结构&#34;&gt;物理结构&lt;/h3&gt;
+&lt;p&gt;如何用计算机表示数据元素的逻辑关系?&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1605367157361.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;顺序存储&#34;&gt;顺序存储&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;7&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367218361.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;链式存储&#34;&gt;链式存储&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;8&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367270917.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;索引存储&#34;&gt;索引存储&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;9&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367366079.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;散列存储哈希存储&#34;&gt;散列存储（哈希存储）&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;10&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367452580.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h4 id=&#34;汇总-2&#34;&gt;汇总&lt;/h4&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;11&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367503862.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+&lt;h1 id=&#34;本章总结&#34;&gt;本章总结&lt;/h1&gt;
+&lt;figure data-type=&#34;image&#34; tabindex=&#34;12&#34;&gt;&lt;img src=&#34;https://jujuul.github.io//post-images/1605367997947.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/figure&gt;
+">王道数据结构</a>
+      </div>
+      
+      <div class="item">
         <a class="result-title" style="opacity: 0;" href="https://jujuul.github.io/post/shu-ju-jie-gou-yu-suan-fa/"" data-c="
           &lt;h1 id=&#34;数据结构主要内容&#34;&gt;数据结构主要内容&lt;/h1&gt;
 &lt;h2 id=&#34;常见的数据结构&#34;&gt;常见的数据结构&lt;/h2&gt;
@@ -828,6 +900,20 @@
 &lt;img src=&#34;https://jujuul.github.io//post-images/1605353572094.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/li&gt;
 &lt;li&gt;数据类型（Data Type）&lt;br&gt;
 数据类型：是程序设计语言中用来刻划操作对象的特性的一个值的集合和定义在此集合上的一组操作的总称&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;算法主要内容&#34;&gt;算法主要内容&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;算法用途：&lt;/strong&gt;&lt;br&gt;
+设计并实现一种计算机来解决问题的方法。&lt;br&gt;
+**算法：**是满足下述性质的指令序列。&lt;br&gt;
+&lt;img src=&#34;https://jujuul.github.io//post-images/1605532720682.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;人用计算机解决问题的过程&#34;&gt;人用计算机解决问题的过程&lt;/h2&gt;
+&lt;p&gt;计算机问题求解5步骤&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;问题的理解：清楚问题的输入、要求和输出；&lt;/li&gt;
+&lt;li&gt;数据结构设计：一方面要选择或设计能有效表示和存储应用问题中所涉及的数据对象的数据结构，同时还要选择或设计能支持算法策略实现的数据结构；&lt;/li&gt;
+&lt;li&gt;算法设计：包括选择算法策略、用适当的方式描述和逐步细化算法步骤；&lt;/li&gt;
+&lt;li&gt;算法分析：发现有改进完善之处，返回第二步，重新选择或设计数据结构、重新设计算法；&lt;/li&gt;
+&lt;li&gt;程序实现：用某种计算机程序设计语言，定义数据结构、编写实现算法的代码，在计算机上调试和运行程序。&lt;/li&gt;
 &lt;/ol&gt;
 ">数据结构与算法</a>
       </div>
